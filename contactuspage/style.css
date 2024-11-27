@@ -1,0 +1,143 @@
+/* General Styles */
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #E3F2FD; /* Light blue background */
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 900px;
+    margin: 20px;
+    padding: 20px;
+}
+
+/* Header Section */
+.header {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.header h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 40px;
+    font-weight: 600;
+    margin: 0;
+    position: relative;
+}
+
+.header h1 .icon {
+    font-size: 36px;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+.header p {
+    font-size: 18px;
+    font-weight: 400;
+    margin-top: 10px;
+}
+
+/* Contact Card */
+.contact-card {
+    background: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    margin-top: 10px;
+    resize: none;
+}
+
+.contact-form fieldset {
+    border: none;
+    margin-bottom: 20px;
+    resize: none;
+}
+
+.contact-form legend {
+    font-size: 20px;
+    font-weight: bold;
+    color: #007BFF;
+    display: flex;
+    align-items: center;
+    resize: none;
+}
+
+.contact-form legend .icon {
+    margin-right: 10px;
+}
+
+/* Form Group */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    font-size: 16px;
+    font-weight: 500;
+    color: #555;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 15px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f8f9fa;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #007BFF;
+    outline: none;
+}
+
+/* Submit Button */
+.submit-btn {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    background: linear-gradient(90deg, #007BFF, #0056b3);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s;
+
+}
+
+.submit-btn:hover {
+    background: linear-gradient(90deg, #0056b3, #003f8a);
+}
+
+/* Footer Section */
+.footer {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 16px;
+    color: #555;
+}
+
+.footer a {
+    color: #007BFF;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}

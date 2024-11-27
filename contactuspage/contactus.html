@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Device Direct</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header class="header">
+            <h1><span class="icon">&#9993;</span> Contact Us</h1>
+            <p>We’re here to assist you. Fill out the form below, and we’ll get back to you promptly!</p>
+        </header>
+
+        <!-- Contact Form Section -->
+        <main class="contact-card">
+            <form action="#" method="POST" class="contact-form">
+                <!-- Personal Details -->
+                <fieldset>
+                    <legend><span class="icon">&#128100;</span> Personal Details</legend>
+                    <div class="form-group">
+                        <label for="fullName">Full Name <span>(Optional)</span></label>
+                        <input type="text" id="fullName" name="fullName" placeholder="John Doe">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address <span class="required">*</span></label>
+                        <input type="email" id="email" name="email" placeholder="example@domain.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number <span>(Optional)</span></label>
+                        <input type="tel" id="phone" name="phone" placeholder="+44 1234 567890">
+                    </div>
+                    <div class="form-group">
+                        <label for="orderNumber">Order Number <span>(Required for order-related issues)</span></label>
+                        <input type="text" id="orderNumber" name="orderNumber" placeholder="ORD123456">
+                    </div>
+                </fieldset>
+
+                <!-- Inquiry Details -->
+                <fieldset>
+                    <legend><span class="icon">&#128172;</span> Inquiry Details</legend>
+                    <div class="form-group">
+                        <label for="subject">Subject/Topic <span class="required">*</span></label>
+                        <select id="subject" name="subject" required>
+                            <option value="" disabled selected>Select a topic</option>
+                            <option value="general-inquiry">General Inquiry</option>
+                            <option value="order-issue">Order Issue</option>
+                            <option value="technical-support">Technical Support</option>
+                            <option value="returns-refunds">Returns/Refunds</option>
+                            <option value="warranty-claim">Warranty Claim</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message <span class="required">*</span></label>
+                        <textarea id="message" name="message" placeholder="Please describe your issue or inquiry in detail." required></textarea>
+                    </div>
+                </fieldset>
+
+                <!-- Submit Button -->
+                <button type="submit" class="submit-btn">Send Inquiry</button>
+            </form>
+        </main>
+
+        <!-- Footer Section -->
+        <footer class="footer">
+            <p>Need further assistance?</p>
+            <p><strong>Email:</strong> <a href="mailto:support@devicedirect.com">support@devicedirect.com</a></p>
+            <p><strong>Phone:</strong> +44 771234567</p>
+        </footer>
+    </div>
+</body>
+</html>
