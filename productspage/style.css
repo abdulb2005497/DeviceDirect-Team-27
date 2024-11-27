@@ -115,7 +115,7 @@ transition: 0.4s ease;
 #Navbar li a:hover:after{
     opacity:1;
 }
-/*product slider* made by abdul basit*/
+
 footer{
     display:flex;
     flex:wrap;
