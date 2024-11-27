@@ -115,4 +115,74 @@ transition: 0.4s ease;
 #Navbar li a:hover:after{
     opacity:1;
 }
-/*product slider* made by abdul basit/
+/*product slider* made by abdul basit*/
+footer{
+    display:flex;
+    flex:wrap;
+    justify-content: space-between;
+    background-color: #ffffff;
+    padding:20px,20px;
+    margin:20px;
+}
+
+footer .column {
+    
+    display:flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top:10px;
+
+
+}
+footer .column a{
+    font-size: 14px;
+    text-decoration: none;
+    margin:0;
+    color:#222;
+    
+
+
+}
+footer .faveicon2{
+margin-bottom: 20px;
+}
+
+footer .paymentphoto{
+display: flex;
+flex-direction: row;
+
+}
+footer .paymentmethods {
+    display: flex;
+    gap: 10px;
+    align-items: center; 
+}
+
+footer h4{
+    font-size: 16px;
+    padding-bottom: 20px;;
+
+
+}
+
+footer p{
+
+    font-size:14px;
+    margin:0 0 8px 0;
+}
+
+footer .followus {
+    margin-top: 20px;
+}
+
+footer .followus .icon{
+    margin: 0;
+    display:flex;
+    gap:15px;
+}
+footer .followus .icon i{
+    margin-top:0;
+    font-size:30px;
+}
+
+
