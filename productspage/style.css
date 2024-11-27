@@ -58,6 +58,8 @@ body {
     width: 100%;
 }
 
+/*navbar made by abdul basit*/
+
 #header {
     display: flex;
     align-items: center;
@@ -113,3 +115,4 @@ transition: 0.4s ease;
 #Navbar li a:hover:after{
     opacity:1;
 }
+/*product slider* made by abdul basit/
