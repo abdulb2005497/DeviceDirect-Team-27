@@ -7,59 +7,11 @@
     font-family: 'Spartan', sans-serif;
 }
 
-h1 {
-    font-size: 50px;
-    line-height: 64px;
-    color: #222;
-}
-
-h2 {
-    font-size: 46px;
-    line-height: 54px;
-    color: #222;
-}
-
-h3 {
-    font-size: 30px;
-    line-height: 36px;
-    color: #222;
-}
-
-h4 {
-    font-size: 20px;
-    color: #222;
-}
-
-h5 {
-    font-size: 16px;
-    color: #222;
-}
-
-h6 {
-    font-weight: 700;
-    font-size: 12px;
-}
-
-p {
-    font-size: 16px;
-    color: #465b52;
-    margin: 15px 0 20px 0;
-}
-
-.section-p1 {
-    padding: 40px 80px;
-}
-
-.section-m1 {
-    margin: 40px 0;
-}
-
 body {
     width: 100%;
 }
 
-/*navbar made by abdul basit*/
-
+/* Navbar styles */
 #header {
     display: flex;
     align-items: center;
@@ -69,50 +21,47 @@ body {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     z-index: 999;
     position: sticky;
-    top:0;
-    left:0;
-}
-#Navbar{
-display: flex;
-align-items: center;
-justify-content: center;
-
-
-
+    top: 0;
+    left: 0;
 }
 
-#Navbar li{
+#Navbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#Navbar li {
     list-style: none;
     padding: 0 15px;
 }
 
-#Navbar li a{
-text-decoration: none;
-font-size: 13;
-font-weight:600;
-color:#465b52;
-transition: 0.4s ease;
+#Navbar li a {
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    color: #465b52;
+    transition: 0.4s ease;
+}
 
+#Navbar li a:hover {
+    color: black;
 }
-#Navbar li a:hover{
-    color:black;
-    
-    
-    
+
+#Navbar li a.active {
+    color: black;
 }
-#Navbar li a.active{
-    color:black
-}
-#Navbar li a.active::after{
+
+#Navbar li a.active::after {
     content: '';
     height: 2px;
     width: 100%;
     background: black;
     display: block;
-    opacity:0;
-    transition:all 0.2s;
+    opacity: 0;
+    transition: all 0.2s;
 }
-#Navbar li a:hover:after{
-    opacity:1;
+
+#Navbar li a:hover:after {
+    opacity: 1;
 }
-/*product slider* made by abdul basit/
