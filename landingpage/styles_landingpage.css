@@ -1,0 +1,117 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+/*This css is for the navbar*/
+#header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 20px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  z-index: 999;
+  position: sticky;
+  top: 0;
+  left: 0;
+}
+#Navbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#Navbar li {
+  list-style: none;
+  padding: 0 15px;
+}
+
+#Navbar li a {
+  text-decoration: none;
+  font-size: 13;
+  font-weight: 600;
+  color: #465b52;
+  transition: 0.4s ease;
+}
+#Navbar li a:hover {
+  color: black;
+}
+#Navbar li a.active {
+  color: black;
+}
+#Navbar li a.active::after {
+  content: "";
+  height: 2px;
+  width: 100%;
+  background: black;
+  display: block;
+  opacity: 0;
+  transition: all 0.2s;
+}
+#Navbar li a:hover:after {
+  opacity: 1;
+}
+
+/*write in this section*/
+
+
+
+
+
+
+/*This css is for the footer section*/
+footer {
+  display: flex;
+  flex: wrap;
+  justify-content: space-between;
+  background-color: #ffffff;
+  padding: 20px, 20px;
+  margin: 20px 20px;
+}
+
+footer .column {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 10px;
+}
+footer .column a {
+  font-size: 14px;
+  text-decoration: none;
+  margin: 0;
+  color: #222;
+}
+
+footer .paymentphoto {
+  display: flex;
+  flex-direction: row;
+}
+footer .paymentmethods {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+footer h4 {
+  font-size: 16px;
+  padding-bottom: 20px;
+}
+
+footer p {
+  font-size: 14px;
+  margin: 0 0 8px 0;
+}
+
+footer .followus {
+  margin-top: 20px;
+}
+
+footer .followus .icon {
+  margin: 0;
+  display: flex;
+  gap: 15px;
+}
+footer .followus .icon i {
+  margin-top: 0;
+  font-size: 30px;
+}
