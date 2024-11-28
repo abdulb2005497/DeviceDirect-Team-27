@@ -1,62 +1,215 @@
-/* General Styles */
-body {
+@import url('https://fonts.googleapis.com/css2?family=Spartan:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+* {
     margin: 0;
-    font-family: 'Roboto', sans-serif;
-    background-color: #E3F2FD; /* Light blue background */
-    color: #333;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Spartan', sans-serif;
 }
 
-.container {
-    max-width: 900px;
-    margin: 20px;
-    padding: 20px;
+h1 {
+    font-size: 50px;
+    line-height: 64px;
+    color: #222;
+}
+
+h2 {
+    font-size: 46px;
+    line-height: 54px;
+    color: #222;
+}
+
+h3 {
+    font-size: 30px;
+    line-height: 36px;
+    color: #222;
+}
+
+h4 {
+    font-size: 20px;
+    color: #222;
+}
+
+h5 {
+    font-size: 16px;
+    color: #222;
+}
+
+h6 {
+    font-weight: 700;
+    font-size: 12px;
+}
+
+p {
+    font-size: 16px;
+    color: #465b52;
+    margin: 15px 0 20px 0;
+}
+
+.section-p1 {
+    padding: 40px 80px;
+}
+
+.section-m1 {
+    margin: 40px 0;
+}
+
+body {
+    width: 100%;
+}
+
+/* Navbar Styles */
+#header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 20px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    z-index: 999;
+    position: sticky;
+    top: 0;
+    left: 0;
+}
+
+#Navbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#Navbar li {
+    list-style: none;
+    padding: 0 15px;
+}
+
+#Navbar li a {
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    color: #465b52;
+    transition: 0.4s ease;
+}
+
+#Navbar li a:hover {
+    color: black;
+}
+
+#Navbar li a.active {
+    color: black;
+}
+
+#Navbar li a.active::after {
+    content: '';
+    height: 2px;
+    width: 100%;
+    background: black;
+    display: block;
+    opacity: 0;
+    transition: all 0.2s;
+}
+
+#Navbar li a:hover:after {
+    opacity: 1;
+}
+
+/* Footer Styles */
+footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    background-color: #ffffff;
+    padding: 20px 20px;
+    margin: 20px 20px;
+}
+
+footer .column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 10px;
+}
+
+footer .column a {
+    font-size: 14px;
+    text-decoration: none;
+    margin: 0;
+    color: #222;
+}
+
+footer .paymentphoto {
+    display: flex;
+    flex-direction: row;
+}
+
+footer .paymentmethods {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+footer h4 {
+    font-size: 16px;
+    padding-bottom: 20px;
+}
+
+footer p {
+    font-size: 14px;
+    margin: 0 0 8px 0;
+}
+
+footer .followus {
+    margin-top: 20px;
+}
+
+footer .followus .icon {
+    margin: 0;
+    display: flex;
+    gap: 15px;
+}
+
+footer .followus .icon i {
+    margin-top: 0;
+    font-size: 30px;
 }
 
 /* Header Section */
-.header {
+#header {
     text-align: center;
-    color: #333;
     margin-bottom: 20px;
 }
 
-.header h1 {
-    font-family: 'Poppins', sans-serif;
+#header h1 {
     font-size: 40px;
     font-weight: 600;
     margin: 0;
     position: relative;
 }
 
-.header h1 .icon {
+#header h1 .icon {
     font-size: 36px;
     vertical-align: middle;
     margin-right: 10px;
 }
 
-.header p {
+#header p {
     font-size: 18px;
     font-weight: 400;
     margin-top: 10px;
 }
 
-/* Contact Card */
+/* Contact Form Section */
 .contact-card {
     background: #fff;
     padding: 30px;
     border-radius: 15px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
     margin-top: 10px;
-    resize: none;
 }
 
 .contact-form fieldset {
     border: none;
     margin-bottom: 20px;
-    resize: none;
 }
 
 .contact-form legend {
@@ -65,14 +218,13 @@ body {
     color: #007BFF;
     display: flex;
     align-items: center;
-    resize: none;
 }
 
 .contact-form legend .icon {
     margin-right: 10px;
+    font-size: 25px;
 }
 
-/* Form Group */
 .form-group {
     margin-bottom: 20px;
 }
@@ -104,6 +256,11 @@ body {
     outline: none;
 }
 
+.form-group textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
 /* Submit Button */
 .submit-btn {
     display: block;
@@ -117,27 +274,8 @@ body {
     border-radius: 10px;
     cursor: pointer;
     transition: background 0.3s;
-
 }
 
 .submit-btn:hover {
     background: linear-gradient(90deg, #0056b3, #003f8a);
-}
-
-/* Footer Section */
-.footer {
-    text-align: center;
-    margin-top: 20px;
-    font-size: 16px;
-    color: #555;
-}
-
-.footer a {
-    color: #007BFF;
-    text-decoration: none;
-    font-weight: 500;
-}
-
-.footer a:hover {
-    text-decoration: underline;
 }
