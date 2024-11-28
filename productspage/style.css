@@ -184,6 +184,7 @@ footer .followus .icon i{
 
     display:flex;
     justify-content: center;
+    flex-wrap: wrap;
 
 }
 
@@ -196,6 +197,7 @@ margin:15px;
 border-radius: 35px;
 text-align: center;
 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+transition: transform 0.5s ease-in-out;
 
 
 }
@@ -233,6 +235,11 @@ body{
     background-attachment: fixed;
     background-size: cover;
 }
+.categorycards:hover {
+    cursor:pointer;
+    transform:scale(1.05);
+}
+
 
 
 
