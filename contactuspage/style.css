@@ -46,10 +46,16 @@ p {
     margin: 15px 0 20px 0;
 }
 
+.section-p1 {
+    padding: 40px 80px;
+}
+
+.section-m1 {
+    margin: 40px 0;
+}
+
 body {
     width: 100%;
-    font-family: 'Spartan', sans-serif;
-    background-color: #f4f4f4;
 }
 
 /* Navbar Styles */
@@ -216,9 +222,9 @@ footer .followus .icon i {
 
 .contact-form legend .icon {
     margin-right: 10px;
+    font-size: 25px;
 }
 
-/* Form Group */
 .form-group {
     margin-bottom: 20px;
 }
