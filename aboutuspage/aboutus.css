@@ -63,7 +63,7 @@ body {
     align-items: center;
     justify-content: space-between;
     padding: 20px 20px;
-    background-color: #ffffff;
+    background-color: #f0f8ff;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     z-index: 999;
     position: sticky;
@@ -113,8 +113,6 @@ transition: 0.4s ease;
 #Navbar li a:hover:after{
     opacity:1;
 }
-
-
 footer{
     display:flex;
     flex:wrap;
@@ -180,4 +178,11 @@ footer .followus .icon{
 footer .followus .icon i{
     margin-top:0;
     font-size:30px;
+}
+body{
+    background-image: url(../productspage/categoryimages/background.jpeg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
 }

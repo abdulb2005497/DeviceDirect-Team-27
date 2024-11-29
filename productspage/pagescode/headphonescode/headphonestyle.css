@@ -179,4 +179,67 @@ footer .followus .icon i{
     margin-top:0;
     font-size:30px;
 }
+body{
+    background-image: url(../../categoryimages/background.jpeg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+}
+.headphonesection {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 items per row */
+    gap: 15px; 
+    justify-items: center;
+    align-items: start;
+}
+
+.headphonecards {
+
+background-color:white;
+width:270px;;
+height:290px;
+margin:15px;
+border-radius: 35px;
+text-align: center;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+transition: transform 0.5s ease-in-out;
+
+
+}
+
+
+ .headphoneimages{
+    width:100%;
+    height:250px;
+    margin-bottom:10px;
+    background-size: cover;
+    background-position: center; 
+    border-radius: 30px 30px 0 0; 
+    overflow: hidden; 
+ }
+
+.ineb {
+    background-image: url(Headphones/inearblack.webp);
+}
+.inew {
+    background-image: url(Headphones/inearwhite.webp);
+}
+.ineg {
+    background-image: url(Headphones/ineargrey.webp);
+}
+.oeb {
+    background-image: url(Headphones/overearblack.webp);
+}
+.oew {
+    background-image: url(Headphones/overearwhite.webp);
+}
+.oeg {
+    background-image: url(Headphones/overeargrey.webp);
+}
+
+.headphonecards:hover {
+    cursor:pointer;
+    transform:scale(1.05);
+}
 

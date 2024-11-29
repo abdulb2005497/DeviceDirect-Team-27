@@ -114,64 +114,73 @@ body {
 }
 
 /* Footer Styles */
-footer {
-    display: flex;
-    flex-wrap: wrap;
+footer{
+    display:flex;
+    flex:wrap;
     justify-content: space-between;
     background-color: #ffffff;
-    padding: 20px 20px;
-    margin: 20px 20px;
+    padding:20px,20px;
+    margin:20px;
 }
 
 footer .column {
-    display: flex;
+    
+    display:flex;
     flex-direction: column;
     align-items: flex-start;
-    margin-top: 10px;
-}
+    margin-top:10px;
 
-footer .column a {
+
+}
+footer .column a{
     font-size: 14px;
     text-decoration: none;
-    margin: 0;
-    color: #222;
+    margin:0;
+    color:#222;
+    
+
+
 }
 
-footer .paymentphoto {
-    display: flex;
-    flex-direction: row;
-}
 
+footer .paymentphoto{
+display: flex;
+flex-direction: row;
+
+}
 footer .paymentmethods {
     display: flex;
     gap: 10px;
-    align-items: center;
+    align-items: center; 
 }
 
-footer h4 {
+footer h4{
     font-size: 16px;
-    padding-bottom: 20px;
+    padding-bottom: 20px;;
+
+
 }
 
-footer p {
-    font-size: 14px;
-    margin: 0 0 8px 0;
+footer p{
+
+    font-size:14px;
+    margin:0 0 8px 0;
 }
 
 footer .followus {
     margin-top: 20px;
 }
 
-footer .followus .icon {
+footer .followus .icon{
     margin: 0;
-    display: flex;
-    gap: 15px;
+    display:flex;
+    gap:15px;
+}
+footer .followus .icon i{
+    margin-top:0;
+    font-size:30px;
 }
 
-footer .followus .icon i {
-    margin-top: 0;
-    font-size: 30px;
-}
 
 /* Header Section */
 #header {
