@@ -179,4 +179,69 @@ footer .followus .icon i{
     margin-top:0;
     font-size:30px;
 }
+body{
+    background-image: url(../../categoryimages/background.jpeg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+}
+.consolesection {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 items per row */
+    gap: 15px; 
+    justify-items: center;
+    align-items: start;
+}
+
+.consolecards {
+
+background-color:white;
+width:270px;;
+height:290px;
+margin:15px;
+border-radius: 35px;
+text-align: center;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+transition: transform 0.5s ease-in-out;
+
+
+}
+
+
+ .consoleimages{
+    width:100%;
+    height:250px;
+    margin-bottom:10px;
+    background-size: cover;
+    background-position: center; 
+    border-radius: 30px 30px 0 0; 
+    overflow: hidden; 
+ }
+
+.ps4 {
+    background-image: url(Consoles/PS4/PS4-black.webp);
+}
+.ps5 {
+    background-image: url(Consoles/PS5/s5black.webp);
+}
+.xbox1 {
+    background-image: url(Consoles/xbox/xboxblack.webp);
+}
+.wii {
+    background-image: url(Consoles/wii/wiiblack.webp);
+}
+.wiiu {
+    background-image: url(Consoles/wiiu/wiiublack.webp);
+}
+.switch {
+    background-image: url(Consoles/switch/switchblack.webp);
+}
+
+.consolecards:hover {
+    cursor:pointer;
+    transform:scale(1.05);
+}
+
+
 
