@@ -179,4 +179,11 @@ footer .followus .icon i{
     margin-top:0;
     font-size:30px;
 }
+body{
+    background-image: url(../../categoryimages/background.jpeg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+}
 
