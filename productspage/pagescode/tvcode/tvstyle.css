@@ -243,19 +243,42 @@ transition: transform 0.5s ease-in-out;
     transform:scale(1.05);
 }
 
-#details .mainimage{
-    width:30%;
-    margin-right: 50px;
-    margin-bottom: 20px;
-}
-.secimages {
-    width:27%;
-    display:flex;
-    justify-content: center;
-    align-items: center;
-}
-.secimagescols {
-    width: auto; 
+#details {
     display: flex;
-    justify-content: center; 
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+}
+
+.mainimage {
+    width: 30%;
+    margin: 30px 50px 20px 30px;
+}
+
+.mainimage img{
+    width:100%;
+    border-radius: 30px;
+    border: 5px solid white;
+    cursor: pointer;
+
+
+}
+
+.secimages {
+    display: flex;
+    justify-content: center;
+    margin: 20px auto 0;
+    gap: 15px;
+   
+}
+
+
+.secimagescols{
+    flex-basis: 24%;
+    transition: transform 0.5s ease-in-out;
+}
+
+.secimagescols:hover{
+    cursor:pointer;
+    transform:scale(1.05);
 }
