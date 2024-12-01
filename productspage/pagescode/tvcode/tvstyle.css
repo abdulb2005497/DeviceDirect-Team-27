@@ -36,8 +36,8 @@ h5 {
 }
 
 h6 {
-    font-weight: 700;
     font-size: 12px;
+    color: #222;
 }
 
 p {
@@ -245,21 +245,22 @@ transition: transform 0.5s ease-in-out;
 
 #details {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: flex-start;
-    position: relative;
+    margin: 30px 30px 30px 30px;
+    gap: 20px;
 }
 
 .mainimage {
-    width: 30%;
-    margin: 30px 50px 20px 30px;
+    width:220%;
 }
 
 .mainimage img{
     width:100%;
     border-radius: 30px;
-    border: 5px solid white;
+    border: 5px solid antiquewhite;
     cursor: pointer;
+    margin-right: 40px;
 
 
 }
@@ -274,7 +275,7 @@ transition: transform 0.5s ease-in-out;
 
 .secimagescols{
     flex-basis: 30%;
-    opacity:0.5;
+    opacity:0.5; 
     transition: opacity 0.3s ease, transform 0.5s ease-in-out;
 }
 
@@ -283,3 +284,60 @@ transition: transform 0.5s ease-in-out;
     transform:scale(1.05);
     opacity:1;
 }
+
+#details .maindescirption{
+width:50%;
+
+}
+#details .maindescirption h4{
+    padding: 40px 0 20px 0;
+    
+    }
+    #details .maindescirption h2{
+        padding: 40px 0 20px 0;
+        font-size:28px;
+        }
+
+        #details .maindescription select {
+            padding: 8px 12px;
+            font-size: 16px;
+            color: #333;
+            background-color:antiquewhite;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #details input[type="number"] {
+            padding: 8px 12px;
+            font-size: 16px;
+            color: #333;
+            background-color:antiquewhite;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width:60px
+        }
+
+        #details h2 del {
+            color: #888;
+            opacity: 0.7;
+            margin-left: 5px;
+        }
+
+        #details .cartclass {
+            padding: 8px 12px;
+            font-size: 16px;
+            color: #333;
+            background-color:antiquewhite;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: opacity 0.3s ease, transform 0.5s ease-in-out;
+        }
+        #details .cartclass:hover{
+            cursor:pointer;
+            transform:scale(1.01);
+            opacity:1;
+            background-color:antiquewhite;
+        }
+
+        
