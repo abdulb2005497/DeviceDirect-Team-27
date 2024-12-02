@@ -220,7 +220,7 @@
   .top-navbar p {
     font-size: 13px;
   }
-}
+
 @media screen and (max-width: 320px) {
   .top-navbar a {
     font-size: 10px;
