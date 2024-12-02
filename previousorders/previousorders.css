@@ -54,6 +54,50 @@
     }
 }
 
+/* Progress Bar Styles */
+.progress-bar-container {
+    width: 100%;
+    height: 30px;
+    background-color: #f0f0f0;
+    border-radius: 15px;
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: #4CAF50;
+    transition: width 0.5s ease-in-out;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.progress-marker {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: #888;
+    z-index: 2;
+    width: 25%;
+    text-align: center;
+}
+
+.progress-marker:nth-child(1) { left: 0%; }
+.progress-marker:nth-child(2) { left: 25%; }
+.progress-marker:nth-child(3) { left: 50%; }
+.progress-marker:nth-child(4) { left: 75%; }
+
+.progress-marker.completed {
+    color: #333;
+    font-weight: bold;
+}
+
 /* Footer */
 #footer {
     padding: 30px 0;
