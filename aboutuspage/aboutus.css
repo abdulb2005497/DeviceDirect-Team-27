@@ -245,7 +245,26 @@
     font-weight: bold;
     color: #ffc800;
     text-shadow: 0px 1px 1px black;
+    margin-bottom: 50px;
  }
+
+ #about h4{
+    font-weight: normal;
+    color: #ff8c00;
+    text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
+    font-size: 20px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+ }
+
+ #about p{
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 15px;
+    color: #333;
+ }
+
+ 
  #about button{
     width: 150px;
     height: 36px;
