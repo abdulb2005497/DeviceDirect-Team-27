@@ -188,7 +188,7 @@ body{
 }
 .tvsection {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 items per row */
+    grid-template-columns: repeat(3, 1fr); 
     gap: 15px; 
     justify-items: center;
     align-items: start;

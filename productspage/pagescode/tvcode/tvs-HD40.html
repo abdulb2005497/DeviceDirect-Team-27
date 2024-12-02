@@ -27,17 +27,22 @@
         </div>
     </section>
     <hr>
+    
     <h3 style="text-align: center;font-weight: 600;margin-top: 20px;margin-bottom: 15px;">Select Your Colour</h3>
 
 
 
     <section id="details" class="diffitems">
         <div class="mainimage">
-            <img src="TVs/40inch/HD-40-Black.webp" width ="100%" id="mainimg" alt ="">
+            <img src="TVs/40inch/HD-40-Black.webp" width ="100%" id="mainhd40inchimage" alt ="">
             <div class="secimages">
                 <div class="secimagescols">
-                    <img src="TVs/40inch/HD-40-White.webp" width="100%" class="smallimg">
+                    <img src="TVs/40inch/HD-40-Black.webp" width="100%" class="smallimg" id="black-40-hd-img">
                 </div>
+                <div class="secimagescols">
+                    <img src="TVs/40inch/HD-40-White.webp" width="100%" class="smallimg" id="white-40-hd-img">
+                </div>
+
             </div>
         </div>
         <div class="maindescription">
@@ -46,10 +51,9 @@
            <br>
            <h2><del>£199.99</del> £99.99     </h2>
            <br>
-           <select> 
-            <option>Select Colour</option>
-            <option>Black </option>
-            <option>White</option>
+           <select id="colourselector"> 
+            <option value="Black">Black </option>
+            <option value="White">White</option>
            </select>
            <input type="number" value="1">
            <br>
