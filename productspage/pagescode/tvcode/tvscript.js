@@ -51,6 +51,73 @@ white.addEventListener("click",function(){
 }
 )
 
+const tvData ={
+
+hd40:{
+    black:{
+
+    },
+    white:{
+
+    },
+
+},
+
+hd60:{
+    black:{
+
+    },
+    white:{
+
+    },
+
+},
+
+hd80:{
+    black:{
+
+    },
+    white:{
+
+    },
+
+},
+
+i4k40:{
+    black:{
+
+    },
+    white:{
+
+    },
+
+},
+
+i4k60:{
+    black:{
+
+    },
+    white:{
+
+    },
+
+},
+
+i4k80:{
+    black:{
+
+    },
+    white:{
+
+    },
+
+}
+
+
+
+
+}
+
 
 
 
