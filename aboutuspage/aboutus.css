@@ -69,8 +69,9 @@
  
  /* navbar */
  #navbar{
-    background-color: #e5e7e9
+    background-color: #e5e7e9;
  }
+
  #logo{
     margin-left: 15px;
     color: #212f3d;
@@ -274,4 +275,4 @@
     cursor: pointer;
  }
  /* about */ 
- 
+
