@@ -8,138 +8,69 @@
 }
 
 body {
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: #f9f9f9;
+    background-color: #f4f4f9;
 }
 
-/* Header Section */
 #header {
-    width: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
-    padding: 20px 80px;
-    background-color: #ffffff;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    z-index: 999;
+    justify-content: space-between;
+    padding: 20px 20px;
+    background-color: #f0f8ff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     position: sticky;
     top: 0;
-    text-align: center;
+    z-index: 999;
 }
 
-#header h1 {
-    font-size: 24px;
-}
-
-#header p {
-    font-size: 18px;
-    color: #777;
-}
-
-/* Contact Form Styles */
-.contact-form-wrapper {
+#Navbar {
     display: flex;
+    align-items: center;
     justify-content: center;
-    align-items: center;
-    min-height: 80vh;  /* Center vertically */
+}
+
+#Navbar li {
+    list-style: none;
+    padding: 0 15px;
+}
+
+#Navbar li a {
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    color: #465b52;
+    transition: 0.4s ease;
+}
+
+#Navbar li a:hover {
+    color: black;
+}
+
+#Navbar li a.active {
+    color: black;
+}
+
+#Navbar li a.active::after {
+    content: '';
+    height: 2px;
     width: 100%;
-}
-
-.contact-card {
-    background: #fff;
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-    width: 100%;
-    max-width: 700px;
-}
-
-.contact-form fieldset {
-    border: none;
-    margin-bottom: 20px;
-}
-
-.contact-form legend {
-    font-size: 20px;
-    font-weight: bold;
-    color: #007BFF;
-    display: flex;
-    align-items: center;
-}
-
-.contact-form legend .icon {
-    margin-right: 10px;
-    font-size: 25px;
-}
-
-.form-group {
-    margin-bottom: 20px;
-}
-
-.form-group label {
-    font-size: 16px;
-    font-weight: 500;
-    color: #555;
+    background: black;
     display: block;
-    margin-bottom: 5px;
+    opacity: 0;
+    transition: all 0.2s;
 }
 
-.form-group input,
-.form-group select,
-.form-group textarea {
-    width: 100%;
-    padding: 15px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    background-color: #f8f9fa;
-    transition: border-color 0.3s;
+#Navbar li a:hover:after {
+    opacity: 1;
 }
 
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-    border-color: #007BFF;
-    outline: none;
-}
-
-.form-group textarea {
-    min-height: 100px;
-    resize: vertical;
-}
-
-/* Submit Button */
-.submit-btn {
-    display: block;
-    width: 100%;
-    padding: 15px;
-    font-size: 18px;
-    font-weight: bold;
-    color: #fff;
-    background: linear-gradient(90deg, #007BFF, #0056b3);
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: background 0.3s;
-}
-
-.submit-btn:hover {
-    background: linear-gradient(90deg, #0056b3, #003f8a);
-}
-
-/* Footer Styles */
 footer {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     background-color: #ffffff;
     padding: 20px;
-    margin: 20px;
+    margin-top: 20px;
 }
 
 footer .column {
@@ -156,6 +87,27 @@ footer .column a {
     color: #222;
 }
 
+footer .paymentphoto {
+    display: flex;
+    flex-direction: row;
+}
+
+footer .paymentmethods {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+footer h4 {
+    font-size: 16px;
+    padding-bottom: 20px;
+}
+
+footer p {
+    font-size: 14px;
+    margin: 0 0 8px 0;
+}
+
 footer .followus {
     margin-top: 20px;
 }
@@ -170,3 +122,46 @@ footer .followus .icon i {
     margin-top: 0;
     font-size: 30px;
 }
+
+.contact-section {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.contact-section h2 {
+    margin-bottom: 1rem;
+    color: #333;
+    font-size: 2rem;
+    text-align: center;
+}
+
+.contact-section p {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+form .form-group {
+    margin-bottom: 1.5rem;
+}
+
+form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+form input,
+form textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+form button {
+    display: block;
+    width: 100%;
+    padding: 0.8rem;
+    background: #007
