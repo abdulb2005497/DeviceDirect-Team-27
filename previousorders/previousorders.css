@@ -238,3 +238,53 @@ tbody tr:last-child {
 html {
     scroll-behavior: smooth;
 }
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    background-color: #f8f8f8;
+    padding: 20px;
+    border-top: 1px solid #ccc;
+}
+
+footer .column {
+    flex: 1;
+    margin: 0 10px;
+}
+
+footer h4 {
+    margin-bottom: 10px;
+    color: #333;
+}
+
+footer p, footer a {
+    font-size: 14px;
+    color: #555;
+    text-decoration: none;
+    margin-bottom: 5px;
+    display: block;
+}
+
+footer a:hover {
+    color: #000;
+    text-decoration: underline;
+}
+
+footer .followus .icon a {
+    margin-right: 10px;
+    font-size: 16px;
+    color: #555;
+    text-decoration: none;
+}
+
+footer .followus .icon a:hover {
+    color: #000;
+}
+
+footer .for-installing .row img {
+    margin-right: 10px;
+}
+
+footer .paymentmethods img {
+    margin-right: 10px;
+}
