@@ -242,6 +242,103 @@ transition: transform 0.5s ease-in-out;
     cursor:pointer;
     transform:scale(1.05);
 }
+#details {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    margin: 30px 30px 30px 30px;
+    gap: 20px;
+}
 
+.mainimage {
+    width:220%;
+}
+
+.mainimage img{
+    width:100%;
+    border-radius: 30px;
+    border: 5px solid white;
+    cursor: pointer;
+    margin-right: 40px;
+
+
+}
+
+.secimages {
+    display: flex;
+    justify-content: center;
+    margin: 20px auto 0;
+    gap: 15px;
+   
+}
+
+.secimagescols{
+    flex-basis: 30%;
+    opacity:0.5; 
+    transition: opacity 0.3s ease, transform 0.5s ease-in-out;
+}
+
+.secimagescols:hover{
+    cursor:pointer;
+    transform:scale(1.05);
+    opacity:1;
+}
+
+#details .maindescirption{
+width:50%;
+
+}
+#details .maindescirption h4{
+    padding: 40px 0 20px 0;
+    
+    }
+    #details .maindescirption h2{
+        padding: 40px 0 20px 0;
+        font-size:28px;
+        }
+
+        #details .maindescription select {
+            padding: 8px 12px;
+            font-size: 16px;
+            color: #333;
+            background-color:white;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #details input[type="number"] {
+            padding: 8px 12px;
+            font-size: 16px;
+            color: #333;
+            background-color:white;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width:60px
+        }
+
+        #details h2 del {
+            color: #888;
+            opacity: 0.7;
+            margin-left: 5px;
+        }
+
+        #details .cartclass {
+            padding: 8px 12px;
+            font-size: 16px;
+            color: #333;
+            background-color:white;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: opacity 0.3s ease, transform 0.5s ease-in-out;
+        }
+        #details .cartclass:hover{
+            cursor:pointer;
+            transform:scale(1.01);
+            opacity:1;
+            background-color:white;
+        }
+
+        
 
 

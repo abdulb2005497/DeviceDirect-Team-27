@@ -107,10 +107,7 @@
   color: white;
   transition: 0.5s ease;
 }
-.dropdown-menu li a:hover {
-  background-color: #e5e7e9;
-  color: #e5e7e9;
-}
+
 #search input {
   border-radius: 50px;
   border: none;
@@ -120,6 +117,15 @@
   color: white;
   border: 1px solid #212f3d;
   background-color: #212f3d;
+}
+.cart-btn a i {
+  padding-left: 10px;
+  font-size: 20px;
+  color: #212f3d;
+  transition: color 0.3s ease;
+}
+.cart-btn a i:hover {
+  color: gray;
 }
 /* navbar */
 
@@ -182,15 +188,7 @@
   color: black;
   border: none;
 }
-.cart-btn a i {
-  padding-left: 10px;
-  font-size: 20px;
-  color: #212f3d;
-  transition: color 0.3s ease;
-}
-.cart-btn a i:hover {
-  color: gray;
-}
+
 @media screen and (max-width: 1200px) {
   .home {
     height: 90vh;

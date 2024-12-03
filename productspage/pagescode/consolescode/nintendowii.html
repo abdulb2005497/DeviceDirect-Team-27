@@ -7,7 +7,7 @@
 
     <link rel="stylesheet" href="consolestyle.css">
 </head>
-<body>
+<body data-model="wii">
     <section id="header">
         <a href="#"><img src="Faveicon.jpg"class="logo"height="80"alt="logo"></a>
         <div>
@@ -27,6 +27,50 @@
         </div>
     </section>
     <hr>
+    <h3 style="text-align: center;font-weight: 600;margin-top: 20px;margin-bottom: 15px;">Select Your Colour</h3>
+
+
+
+    <section id="details" class="diffitems">
+        <div class="mainimage">
+            <img src="Consoles/wii/wiiblack.webp" width ="100%" id="normal" alt ="">
+            <div class="secimages">
+                <div class="secimagescols">
+                    <img src="Consoles/wii/wiiblack.webp" width="100%" class="smallimg" id="black">
+                </div>
+                <div class="secimagescols">
+                    <img src="Consoles/wii/Wii white.webp" width="100%" class="smallimg" id="white">
+                </div>
+                <div class="secimagescols">
+                    <img src="Consoles/wii/Wii red.webp" width="100%" class="smallimg" id="red">
+                </div>
+
+            </div>
+        </div>
+        <div class="maindescription">
+            <br>
+           <h4 id="pname">Black Wii</h4>
+           <br>
+           <h2 id="pprice"><del>£199.99</del> £99.99 </h2>
+           <br>
+           <select id="colourselector"> 
+            <option value="Black">Black </option>
+            <option value="White">White</option>
+            <option value="Red">Red</option>
+           </select>
+           <input type="number" value="1">
+           <br>
+           <br>
+           <button class="cartclass">Add to Cart</button>
+           <br>
+           <br>
+           <h4 id="pdescriptionheading" >Product Description: Black Wii</h4>
+           <br>
+           <span id="pdescription">Rediscover the joy of gaming with the iconic black Wii, a console that revolutionized home entertainment with its motion-based gameplay and intuitive controls. The sleek black finish adds a modern and sophisticated touch to any gaming setup, making it a standout addition to your entertainment space. Dive into a vast library of family-friendly games, from action-packed adventures to fitness challenges, all designed to bring people together. Whether you’re hosting a game night or enjoying solo play, the black Wii promises endless hours of fun with immersive and interactive gaming experiences.</span>
+        </div>
+        
+
+    </section>
 
     <hr>
     <footer class="">
@@ -99,6 +143,6 @@
 
 
     </footer>
-    <!--This is a comment -->
+    <script src="consolescript.js"></script>
 </body>
 </html>

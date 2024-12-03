@@ -7,7 +7,7 @@
 
     <link rel="stylesheet" href="laptopstyle.css">
 </head>
-<body>
+<body data-model="c12">
     <section id="header">
         <a href="#"><img src="Faveicon.jpg"class="logo"height="80"alt="logo"></a>
         <div>
@@ -27,7 +27,46 @@
         </div>
     </section>
     <hr>
+    <h3 style="text-align: center;font-weight: 600;margin-top: 20px;margin-bottom: 15px;">Select Your Colour</h3>
 
+
+
+    <section id="details" class="diffitems">
+        <div class="mainimage">
+            <img src="Laptops/12inch/Chromebook-12-Black.webp" width ="100%" id="normal" alt ="">
+            <div class="secimages">
+                <div class="secimagescols">
+                    <img src="Laptops/12inch/Chromebook-12-Black.webp" width="100%" class="smallimg" id="black">
+                </div>
+                <div class="secimagescols">
+                    <img src="Laptops/12inch/Chromebook-12-white.webp" width="100%" class="smallimg" id="white">
+                </div>
+
+            </div>
+        </div>
+        <div class="maindescription">
+            <br>
+           <h4 id="pname">12 inch Black Chromebook</h4>
+           <br>
+           <h2 id="pprice"><del>£449.99</del> £399.99</h2>
+           <br>
+           <select id="colourselector"> 
+            <option value="Black">Black </option>
+            <option value="White">White</option>
+           </select>
+           <input type="number" value="1">
+           <br>
+           <br>
+           <button class="cartclass">Add to Cart</button>
+           <br>
+           <br>
+           <h4 id="pdescriptionheading" >Product Description: 12 inch Black Chromebook</h4>
+           <br>
+           <span id="pdescription">The 12-Inch Chromebook in black offers an affordable yet premium computing experience. Perfect for students or casual users, this lightweight laptop features a fast Chrome OS for seamless web browsing, video streaming, and app usage. The black design is both modern and durable, while the 12-inch display provides crisp visuals for your daily tasks. With long battery life and built-in security, this Chromebook ensures worry-free use on the go.</span>
+        </div>
+        
+
+    </section>
     <hr>
     <footer class="">
 
@@ -99,6 +138,6 @@
 
 
     </footer>
-    <!--This is a comment -->
+    <script src="laptopscript.js"></script>
 </body>
 </html>

@@ -7,7 +7,7 @@
 
     <link rel="stylesheet" href="laptopstyle.css">
 </head>
-<body>
+<body data-model="p12">
     <section id="header">
         <a href="#"><img src="Faveicon.jpg"class="logo"height="80"alt="logo"></a>
         <div>
@@ -26,6 +26,46 @@
         </div>
     </section>
     <hr>
+    <h3 style="text-align: center;font-weight: 600;margin-top: 20px;margin-bottom: 15px;">Select Your Colour</h3>
+
+
+
+    <section id="details" class="diffitems">
+        <div class="mainimage">
+            <img src="Laptops/12inch/Probook-12-black.webp" width ="100%" id="normal" alt ="">
+            <div class="secimages">
+                <div class="secimagescols">
+                    <img src="Laptops/12inch/Probook-12-black.webp" width="100%" class="smallimg" id="black">
+                </div>
+                <div class="secimagescols">
+                    <img src="Laptops/12inch/Probook-12-white.webp" width="100%" class="smallimg" id="white">
+                </div>
+
+            </div>
+        </div>
+        <div class="maindescription">
+            <br>
+           <h4 id="pname">12 inch Black Probook</h4>
+           <br>
+           <h2 id="pprice"><del>£499.99</del> £449.99     </h2>
+           <br>
+           <select id="colourselector"> 
+            <option value="Black">Black </option>
+            <option value="White">White</option>
+           </select>
+           <input type="number" value="1">
+           <br>
+           <br>
+           <button class="cartclass">Add to Cart</button>
+           <br>
+           <br>
+           <h4 id="pdescriptionheading" >Product Description: 12 inch Black Probook</h4>
+           <br>
+           <span id="pdescription">Step into high performance with the 12-Inch Probook in sleek black. Designed for professionals, this powerful laptop features an advanced processor, ample RAM, and fast SSD storage, making it ideal for intensive tasks like programming, graphic design, or data analysis. The compact 12-inch display ensures portability without compromising on quality, delivering sharp visuals and vibrant colors. Encased in a robust black shell, the Probook is the epitome of durability and sophistication.</span>
+        </div>
+        
+
+    </section>
 
     <hr>
     <footer class="">
@@ -98,6 +138,6 @@
 
 
     </footer>
-    <!--This is a comment -->
+    <script src="laptopscript.js"></script>
 </body>
 </html>
