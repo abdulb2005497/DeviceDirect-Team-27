@@ -7,7 +7,7 @@
 
     <link rel="stylesheet" href="laptopstyle.css">
 </head>
-<body>
+<body data-model="w12">
     <section id="header">
         <a href="#"><img src="Faveicon.jpg"class="logo"height="80"alt="logo"></a>
         <div>
@@ -26,6 +26,46 @@
         </div>
     </section>
     <hr>
+    <h3 style="text-align: center;font-weight: 600;margin-top: 20px;margin-bottom: 15px;">Select Your Colour</h3>
+
+
+
+    <section id="details" class="diffitems">
+        <div class="mainimage">
+            <img src="Laptops/12inch/Windows-12-Black.webp" width ="100%" id="normal" alt ="">
+            <div class="secimages">
+                <div class="secimagescols">
+                    <img src="Laptops/12inch/Windows-12-Black.webp" width="100%" class="smallimg" id="black">
+                </div>
+                <div class="secimagescols">
+                    <img src="Laptops/12inch/Windows-12-White.webp" width="100%" class="smallimg" id="white">
+                </div>
+
+            </div>
+        </div>
+        <div class="maindescription">
+            <br>
+           <h4 id="pname">12 inch Black Windows</h4>
+           <br>
+           <h2 id="pprice"><del>£449.99</del> £399.99     </h2>
+           <br>
+           <select id="colourselector"> 
+            <option value="Black">Black </option>
+            <option value="White">White</option>
+           </select>
+           <input type="number" value="1">
+           <br>
+           <br>
+           <button class="cartclass">Add to Cart</button>
+           <br>
+           <br>
+           <h4 id="pdescriptionheading" >Product Description: 12 inch Black Windows</h4>
+           <br>
+           <span id="pdescription">The 12-Inch Windows Laptop in bold black is a compact powerhouse for both work and entertainment. With the familiar Windows OS and efficient hardware, it’s perfect for multitasking, from editing documents to streaming your favorite shows. Its black finish adds a professional edge, while the lightweight design makes it easy to carry wherever you go. Featuring a sharp display and robust connectivity options, this laptop adapts seamlessly to your everyday needs.</span>
+        </div>
+        
+
+    </section>
 
     <hr>
     <footer class="">
@@ -98,6 +138,6 @@
 
 
     </footer>
-    <!--This is a comment -->
+    <script src="laptopscript.js"></script>
 </body>
 </html>
