@@ -7,7 +7,7 @@
 
     <link rel="stylesheet" href="monitorstyle.css">
 </head>
-<body>
+<body model="i2k25">
     <section id="header">
         <a href="#"><img src="Faveicon.jpg"class="logo"height="80"alt="logo"></a>
         <div>
@@ -27,6 +27,44 @@
         </div>
     </section>
     <hr>
+    <h3 style="text-align: center;font-weight: 600;margin-top: 20px;margin-bottom: 15px;">Select Your Colour</h3>
+    <section id="details" class="diffitems">
+        <div class="mainimage">
+            <img src="Monitors/25inch/2k-25-Black.webp" width ="100%" id="normal" alt ="">
+            <div class="secimages">
+                <div class="secimagescols">
+                    <img src="Monitors/25inch/2k-25-Black.webp" width="100%" class="smallimg" id="black">
+                </div>
+                <div class="secimagescols">
+                    <img src="Monitors/25inch/2k-25-White.webp" width="100%" class="smallimg" id="white">
+                </div>
+
+            </div>
+        </div>
+        <div class="maindescription">
+            <br>
+           <h4 id="pname">25 Inch Black Monitor 2K</h4>
+           <br>
+           <h2 id="pprice"><del>£149.99</del> £99.99 </h2>
+           <br>
+           <select id="colourselector"> 
+            <option value="Black">Black </option>
+            <option value="White">White</option>
+           </select>
+           <input type="number" value="1">
+           <br>
+           <br>
+           <button class="cartclass">Add to Cart</button>
+           <br>
+           <br>
+           <h4 id="pdescriptionheading" >Product Description: 25 Inch Black Monitor 2K</h4>
+           <br>
+           <span id="pdescription">Elevate your visual experience with this sleek 25-inch 2K monitor. Boasting a stunning 2560 x 1440 resolution, it delivers sharp, vibrant images for immersive gaming, productivity, or multimedia enjoyment. The monitor's minimalist black design blends seamlessly into any setup, while its ergonomic stand ensures adjustable comfort for long hours of use. Equipped with fast refresh rates and multiple connectivity options, it's perfect for tech enthusiasts and professionals alike.</span>
+        </div>
+        
+
+    </section>
+
 
     <hr>
     <footer class="">
@@ -99,6 +137,6 @@
 
 
     </footer>
-    <!--This is a comment -->
+    <script src="monitorscript.js"></script>
 </body>
 </html>
