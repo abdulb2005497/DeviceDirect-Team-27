@@ -107,10 +107,7 @@
   color: white;
   transition: 0.5s ease;
 }
-.dropdown-menu li a:hover {
-  background-color: #e5e7e9;
-  color: #e5e7e9;
-}
+
 #search input {
   border-radius: 50px;
   border: none;
