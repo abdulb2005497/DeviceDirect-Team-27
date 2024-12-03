@@ -121,6 +121,15 @@
   border: 1px solid #212f3d;
   background-color: #212f3d;
 }
+.cart-btn a i {
+  padding-left: 10px;
+  font-size: 20px;
+  color: #212f3d;
+  transition: color 0.3s ease;
+}
+.cart-btn a i:hover {
+  color: gray;
+}
 /* navbar */
 
 /* home content */
@@ -182,15 +191,7 @@
   color: black;
   border: none;
 }
-.cart-btn a i {
-  padding-left: 10px;
-  font-size: 20px;
-  color: #212f3d;
-  transition: color 0.3s ease;
-}
-.cart-btn a i:hover {
-  color: gray;
-}
+
 @media screen and (max-width: 1200px) {
   .home {
     height: 90vh;
