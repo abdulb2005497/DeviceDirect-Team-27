@@ -7,7 +7,7 @@
 
     <link rel="stylesheet" href="consolestyle.css">
 </head>
-<body>
+<body data-model="xbox1">
     <section id="header">
         <a href="#"><img src="Faveicon.jpg"class="logo"height="80"alt="logo"></a>
         <div>
@@ -27,6 +27,50 @@
         </div>
     </section>
     <hr>
+    <h3 style="text-align: center;font-weight: 600;margin-top: 20px;margin-bottom: 15px;">Select Your Colour</h3>
+
+
+
+    <section id="details" class="diffitems">
+        <div class="mainimage">
+            <img src="Consoles/PS4/PS4-black.webp" width ="100%" id="normal" alt ="">
+            <div class="secimages">
+                <div class="secimagescols">
+                    <img src="Consoles/PS4/PS4-black.webp" width="100%" class="smallimg" id="black">
+                </div>
+                <div class="secimagescols">
+                    <img src="Consoles/PS4/PS4 white.webp" width="100%" class="smallimg" id="white">
+                </div>
+                <div class="secimagescols">
+                    <img src="Consoles/PS4/PS4 red.webp" width="100%" class="smallimg" id="red">
+                </div>
+
+            </div>
+        </div>
+        <div class="maindescription">
+            <br>
+           <h4 id="pname">Black PS4</h4>
+           <br>
+           <h2 id="pprice"><del>£199.99</del> £99.99 </h2>
+           <br>
+           <select id="colourselector"> 
+            <option value="Black">Black </option>
+            <option value="White">White</option>
+            <option value="Red">Red</option>
+           </select>
+           <input type="number" value="1">
+           <br>
+           <br>
+           <button class="cartclass">Add to Cart</button>
+           <br>
+           <br>
+           <h4 id="pdescriptionheading" >Product Description: Black PS4</h4>
+           <br>
+           <span id="pdescription">The black PlayStation 4 delivers cutting-edge graphics and powerful performance in a sleek, modern package. Whether you’re diving into epic single-player campaigns or competing in fast-paced multiplayer matches, the PS4 ensures smooth gameplay and immersive visuals. Its expansive library includes critically acclaimed titles, catering to gamers of all interests. The console’s compact and stylish design fits seamlessly into any setup, while its intuitive interface and robust hardware make it a reliable choice for casual and hardcore gamers alike.</span>
+        </div>
+        
+
+    </section>
 
     <hr>
     <footer class="">
@@ -99,6 +143,6 @@
 
 
     </footer>
-    <!--This is a comment -->
+    <script src="consolescript.js"></script>
 </body>
 </html>
