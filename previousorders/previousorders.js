@@ -3,25 +3,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
     
     const mockOrders = [
-        { product_name: "Wireless Mouse", 
+        { product_name: "Console", 
         quantity: 1, 
-        price: 20.00, 
+        price: 520.00, 
         order_date: "2024-11-15 14:30:00", 
         status: "Delivered",
         stages: ["Ordered", "Processed", "Shipped", "Delivered"]
     },
        
        
-        { product_name: "USB-C Hub", 
+        { product_name: "TV", 
             quantity: 2, 
-            price: 35.00, 
+            price: 935.00, 
             order_date: "2024-11-10 10:15:00", 
             status: "Shipped",
             stages: ["Ordered", "Processed", "Shipped", "Delivered"]
         },
         
         
-        { product_name: "Bluetooth Headphones", 
+        { product_name:  "Headphones", 
             quantity: 1, 
             price: 50.00, 
             order_date: "2024-11-01 09:00:00", 
