@@ -197,7 +197,7 @@
 #footer .footer-top .footer-links ul li a:hover {
   color: #ffc800;
 }
-#footer .footer-top .social-links a {
+#footer .footer-top .socail-links a {
   font-size: 18px;
   display: inline-block;
   text-decoration: none;
@@ -211,7 +211,7 @@
   width: 36px;
   transition: 0.5s ease;
 }
-#footer .footer-top .social-links a:hover {
+#footer .footer-top .socail-links a:hover {
   background-color: #ffc800;
   color: white;
 }
@@ -283,7 +283,7 @@ html {
  }
  
 
- /*about hero*/
+/*about hero*/
 
  #hero {
   flex-shrink: 0;
@@ -303,7 +303,7 @@ html {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index:12;
+  z-index: 12;
 }
 
 /*about hero*/

@@ -30,27 +30,27 @@ const consoleData ={
     
     ps5:{
         black:{
-            image: "TVs/60inch/HD-60-Black.webp",
-            title: "HD 60 Inch Black TV",
-            price: "<del>£249.99</del>£149.99",
-            descriptionHeading: "Product Description: HD 60 Inch Black TV",
-            description:"Elevate your home entertainment experience with the HD 60 Inch Black TV, a stunning blend of size, style, and performance. Featuring crisp high-definition resolution, vivid color reproduction, and a sleek aesthetic, this TV is the centerpiece for any living space. Whether you're watching blockbuster movies or binge-watching your favorite series, the expansive 60-inch display ensures you won’t miss a single detail. With 4D surround sound, HDMI, and USB ports for ultimate connectivity, it's ready to take your viewing experience to the next level. Don't wait—get this incredible HD TV today at an unbeatable price. Upgrade now to experience entertainment like never before!"
+            image: "Consoles/PS5/s5black.webp",
+            title: "Black PS5",
+            price: "<del>£249.99</del> £149.99",
+            descriptionHeading: "Product Description: Black PS5",
+            description:"The black PlayStation 5 is a next-gen powerhouse that redefines gaming with its sleek design and groundbreaking performance. Featuring lightning-fast SSD storage, stunning 4K graphics, and immersive DualSense controller technology, the PS5 delivers unmatched gaming experiences. Its bold black finish adds a professional and modern touch, making it a standout addition to any gaming setup. Whether you’re exploring massive open worlds or engaging in intense multiplayer battles, the black PS5 offers flawless performance for every gamer."
     
         },
         white:{
-            image: "TVs/60inch/HD-60-White.webp",
-            title: "HD 60 Inch White TV",
-            price: "<del>£259.99</del>£159.99",
-            descriptionHeading: "Product Description: HD 60 Inch White TV",
-            description:"Brighten your space with the HD 60 Inch White TV, where high-performance technology meets elegant design. Featuring a sleek white frame that seamlessly blends into modern decor, this TV delivers stunning high-definition visuals and vivid color accuracy on a 60-inch display. Perfect for movie nights, gaming, or your favorite shows, it offers immersive entertainment enhanced by 4D surround sound. With multiple connectivity options, including HDMI and USB, it's ready to elevate your home entertainment setup. Take advantage of this exclusive offer and add sophistication and functionality to your living room today!"
+            image: "Consoles/PS5/PS5 White.webp",
+            title: "White PS5",
+            price: "<del>£259.99</del> £159.99",
+            descriptionHeading: "Product Description: White PS5",
+            description:"The white PlayStation 5 is a futuristic marvel that combines cutting-edge technology with a striking, minimalist design. Its ultra-fast SSD ensures seamless gameplay, while its 4K resolution and ray-tracing capabilities deliver breathtaking visuals. The DualSense controller introduces haptic feedback and adaptive triggers for a truly immersive experience. With a growing library of next-gen titles, the white PS5 is the ultimate console for gamers who demand both performance and style."
     
         },
         red:{
-            image: "TVs/40inch/HD-40-White.webp",
-            title: "40-Inch White TV HD",
-            price: "<del>£209.99</del> £109.99",
-            descriptionHeading: "Product Description: HD 40 Inch White TV – Now at Half Price!",
-            description:"Experience stunning visuals and immersive entertainment with the HD 40 Inch White TV, the perfect addition to any home. Boasting crystal-clear picture quality, vibrant colors, and sleek modern design, this television is designed to enhance your viewing experience, whether you're watching your favorite movies, shows, or gaming. With advanced 4D surround sound technology and multiple connectivity options, including HDMI and USB, it's ready to integrate seamlessly into your setup. Limited Time Offer: Get this incredible HD TV at half the original price! Don't miss this opportunity to upgrade your entertainment system and bring cinematic visuals right to your living room. Click 'Add to Basket' now to make it yours before the deal ends!"
+            image: "Consoles/PS5/PS5 red.webp",
+            title: "Red PS5",
+            price: "<del>£259.99</del> £159.99",
+            descriptionHeading: "Product Description: Red PS5",
+            description:"The red PlayStation 5 brings a bold, eye-catching design to the next generation of gaming. Its vibrant red exterior is paired with advanced hardware that offers lightning-fast load times, realistic 4K visuals, and revolutionary controller features. Whether you’re exploring vast open worlds or competing online, the red PS5 delivers unparalleled performance. Its striking design makes it a centerpiece in any entertainment setup, perfect for gamers who want to make a statement."
     
         },
     
@@ -58,28 +58,28 @@ const consoleData ={
     
     xbox1:{
         black:{
-            image: "TVs/80inch/HD-80-Black.webp",
-            title: "80-Inch Black TV HD",
-            price: "<del>£299.99</del> £199.99 ",
-            descriptionHeading: "Product Description: HD 80 Inch Black TV",
-            description:"Transform your living room into a personal cinema with the HD 80 Inch Black TV. With its massive display and crystal-clear high-definition resolution, this TV delivers a viewing experience that’s larger than life. Designed to impress, it showcases deep contrast, vibrant colors, and fluid motion—perfect for movies, gaming, or sports. Equipped with state-of-the-art audio and versatile connectivity options like HDMI and USB, this TV is built to integrate seamlessly into your setup. For a limited time, seize the chance to own this entertainment powerhouse at an extraordinary discount. Bring home the thrill of immersive visuals today!"
+            image: "Consoles/xbox/xboxblack.webp",
+            title: "Black XBox 1",
+            price: "<del>£199.99</del> £99.99",
+            descriptionHeading: "Product Description: Black XBox 1",
+            description:"The black Xbox is a powerhouse designed for serious gamers, offering next-gen performance and a sleek, modern aesthetic. With support for 4K gaming, lightning-fast load times, and advanced hardware, it delivers an immersive experience across a wide range of titles. Its bold black finish adds a professional touch to any setup, while its seamless online connectivity ensures smooth multiplayer gameplay. Whether you’re streaming, gaming, or exploring expansive open worlds, the black Xbox delivers flawless performance."
     
         },
         white:{
-            image: "TVs/80inch/HD-80-White.webp",
-            title: "80-Inch White TV HD",
-            price: "<del>£309.99</del> £209.99 ",
-            descriptionHeading: "Product Description: HD 80 Inch White TV",
-            description:"Make a bold statement in your entertainment area with the HD 80 Inch White TV. Designed to impress, this TV combines a chic white exterior with expansive high-definition resolution, offering breathtaking visuals and dynamic audio for the ultimate viewing experience. Ideal for cinematic movie nights or adrenaline-pumping gaming sessions, the 80-inch screen brings every detail to life. Equipped with HDMI, USB, and other versatile connections, it integrates effortlessly with your devices. Don't miss this chance to upgrade to a stylish and high-performance centerpiece at an unbeatable price!"
+            image: "Consoles/xbox/white.webp",
+            title: "White XBox 1",
+            price: "<del>£209.99</del> £109.99",
+            descriptionHeading: "Product Description: White XBox 1",
+            description:"The white Xbox combines clean aesthetics with cutting-edge technology, making it an essential choice for modern gamers. With 4K capabilities, ultra-fast load times, and a vast library of games, it delivers a premium gaming experience. The sleek white design fits perfectly into any entertainment space, while its advanced cooling system ensures quiet, reliable performance. Whether you’re battling online or enjoying single-player adventures, the white Xbox has you covered."
     
     
         },
         red:{
-            image: "TVs/40inch/HD-40-White.webp",
-            title: "40-Inch White TV HD",
+            image: "Consoles/xbox/red.webp",
+            title: "Red XBox 1",
             price: "<del>£209.99</del> £109.99",
-            descriptionHeading: "Product Description: HD 40 Inch White TV – Now at Half Price!",
-            description:"Experience stunning visuals and immersive entertainment with the HD 40 Inch White TV, the perfect addition to any home. Boasting crystal-clear picture quality, vibrant colors, and sleek modern design, this television is designed to enhance your viewing experience, whether you're watching your favorite movies, shows, or gaming. With advanced 4D surround sound technology and multiple connectivity options, including HDMI and USB, it's ready to integrate seamlessly into your setup. Limited Time Offer: Get this incredible HD TV at half the original price! Don't miss this opportunity to upgrade your entertainment system and bring cinematic visuals right to your living room. Click 'Add to Basket' now to make it yours before the deal ends!"
+            descriptionHeading: "Product Description: Red XBox 1",
+            description:"The red Xbox stands out with its bold, dynamic design and exceptional performance. Built for gamers who want both style and substance, it offers 4K gaming, smooth load times, and a seamless interface. Its vibrant red exterior adds a pop of color to your setup, while its powerful hardware ensures lag-free performance across all your favorite games. Perfect for casual players and hardcore enthusiasts, the red Xbox is a true gaming icon."
     
         },
     
@@ -87,27 +87,27 @@ const consoleData ={
     
     wii:{
         black:{
-            image: "TVs/40inch/4K-40-Black.webp",
-            title: "40-Inch Black TV 4K",
-            price: "<del>£249.99</del> £149.99 ",
-            descriptionHeading: "Product Description: 4K 40 Inch Black TV",
-            description:"Discover the brilliance of ultra-high definition with the 4K 40 Inch Black TV. Compact yet powerful, this TV combines sleek design with cutting-edge 4K resolution, offering unparalleled clarity and lifelike color details. Perfect for bedrooms, kitchens, or smaller living spaces, this TV ensures every pixel delivers perfection, whether you’re streaming, gaming, or watching live TV. Complete with advanced sound technology and seamless connectivity through HDMI and USB, it’s designed to fit effortlessly into your modern lifestyle. Don’t miss out—upgrade to 4K quality now and enjoy an exclusive offer for a limited time only!"
+            image: "Consoles/wii/wiiblack.webp",
+            title: "Black Wii",
+            price: "<del>£199.99</del> £99.99",
+            descriptionHeading: "Product Description: Black Wii",
+            description:"Rediscover the joy of gaming with the iconic black Wii, a console that revolutionized home entertainment with its motion-based gameplay and intuitive controls. The sleek black finish adds a modern and sophisticated touch to any gaming setup, making it a standout addition to your entertainment space. Dive into a vast library of family-friendly games, from action-packed adventures to fitness challenges, all designed to bring people together. Whether you’re hosting a game night or enjoying solo play, the black Wii promises endless hours of fun with immersive and interactive gaming experiences."
     
         },
         white:{
-            image: "TVs/40inch/4k-40-White.webp",
-            title: "40-Inch White TV 4K",
-            price: "<del>£259.99</del> £159.99 ",
-            descriptionHeading: "Product Description: 4K 40 Inch White TV",
-            description:"Add a touch of elegance to your home with the 4K 40 Inch White TV. Compact yet powerful, this sleek white television delivers the brilliance of ultra-high-definition resolution, ensuring every frame is packed with crisp detail and lifelike colors. Ideal for smaller spaces, it’s the perfect combination of aesthetics and performance. Whether you're streaming, gaming, or catching up on your favorite shows, the 4K clarity is matched by advanced sound technology and convenient HDMI and USB connectivity. Don’t wait—upgrade your entertainment setup today with this stylish and affordable 4K TV!"
+            image: "Consoles/wii/Wii white.webp",
+            title: "White Wii",
+            price: "<del>£209.99</del> £109.99",
+            descriptionHeading: "Product Description: White Wii",
+            description:"The white Wii is a timeless classic that combines innovation and simplicity, making it perfect for gamers of all ages. Its clean and minimalist design fits seamlessly into any home, while the intuitive motion controls bring a new level of interactivity to gaming. From iconic titles like Wii Sports to a wide range of multiplayer and single-player games, the white Wii delivers engaging entertainment for everyone. With its easy setup and family-oriented gameplay, this console is ideal for creating unforgettable memories with loved ones."
     
         },
         red:{
-            image: "TVs/40inch/HD-40-White.webp",
-            title: "40-Inch White TV HD",
+            image: "Consoles/wii/Wii red.webp",
+            title: "Red Wii",
             price: "<del>£209.99</del> £109.99",
-            descriptionHeading: "Product Description: HD 40 Inch White TV – Now at Half Price!",
-            description:"Experience stunning visuals and immersive entertainment with the HD 40 Inch White TV, the perfect addition to any home. Boasting crystal-clear picture quality, vibrant colors, and sleek modern design, this television is designed to enhance your viewing experience, whether you're watching your favorite movies, shows, or gaming. With advanced 4D surround sound technology and multiple connectivity options, including HDMI and USB, it's ready to integrate seamlessly into your setup. Limited Time Offer: Get this incredible HD TV at half the original price! Don't miss this opportunity to upgrade your entertainment system and bring cinematic visuals right to your living room. Click 'Add to Basket' now to make it yours before the deal ends!"
+            descriptionHeading: "Product Description: Red Wii",
+            description:"Add a splash of vibrancy to your gaming setup with the striking red Wii. This console combines bold aesthetics with innovative motion-based gameplay, making it a must-have for any enthusiast. Whether you’re swinging a tennis racket, bowling strikes, or embarking on thrilling adventures, the red Wii delivers unparalleled immersion and fun. Its compact design and colorful exterior make it an eye-catching addition to your home, while its extensive library of games ensures there’s something for everyone. Perfect for fitness enthusiasts, casual players, and families alike, the red Wii is a gaming powerhouse wrapped in a bold package."
     
         },
     
@@ -115,27 +115,27 @@ const consoleData ={
     
     wiiu:{
         black:{
-            image: "TVs/60inch/4k-60-Black.webp",
-            title: "60-Inch Black TV 4K",
-            price: "<del>£299.99</del> £199.99 ",
-            descriptionHeading: "Product Description: 4K 60 Inch Black TV",
-            description:"Experience entertainment in breathtaking clarity with the 4K 60 Inch Black TV. With stunning ultra-high-definition visuals, lifelike colors, and a cinematic 60-inch display, this TV is built for serious viewing pleasure. Ideal for family movie nights or competitive gaming, it immerses you in a world of unparalleled detail and vibrant imagery. Boasting cutting-edge sound technology, along with HDMI and USB ports for easy connectivity, it’s ready to transform your entertainment space. Take advantage of this limited-time deal and bring home the ultimate 4K entertainment upgrade today!"
+            image: "Consoles/wiiu/wiiublack.webp",
+            title: "Black Wii U",
+            price: "<del>£199.99</del> £99.99",
+            descriptionHeading: "Product Description: Black Wii U",
+            description:"Step into the next generation of gaming with the black Wii U, a console that combines high-definition visuals with innovative gameplay. Featuring the groundbreaking GamePad controller with a touchscreen, the Wii U opens up new ways to interact with games, offering dual-screen functionality and enhanced immersion. The sleek black design adds a touch of sophistication, making it a stylish centerpiece for your entertainment setup. Enjoy an extensive library of titles, from family-friendly classics to action-packed adventures, all designed to take advantage of the console’s unique capabilities. Whether you’re playing solo or with friends, the black Wii U is your gateway to unforgettable gaming experiences."
     
         },
         white:{
-            image: "TVs/60inch/4k-60-White.webp",
-            title: "60-Inch White TV 4K",
-            price: "<del>£309.99</del> £209.99 ",
-            descriptionHeading: "Product Description: 4K 60 Inch White TV",
-            description:"Redefine home entertainment with the 4K 60 Inch White TV. Combining a modern white design with stunning ultra-high-definition visuals, this TV is a masterpiece in both form and function. The expansive 60-inch display brings vibrant colors and unparalleled clarity to your favorite movies, shows, and games, while advanced sound technology ensures an immersive audio experience. With versatile connectivity options like HDMI and USB, it’s designed for seamless integration into your home. Take advantage of this limited-time offer to elevate your entertainment with this sophisticated 4K TV!"
+            image: "Consoles/wiiu/Wii U white.webp",
+            title: "White Wii U",
+            price: "<del>£199.99</del> £99.99",
+            descriptionHeading: "Product Description: White Wii U",
+            description:"The white Wii U redefines home gaming with its innovative features and stunning HD graphics. Its elegant white finish adds a fresh and modern aesthetic, making it a great addition to any living room. The GamePad controller allows for intuitive gameplay, offering a second screen for maps, inventories, or even off-TV play. Explore an impressive catalog of games that cater to players of all skill levels, from family-friendly adventures to competitive challenges. With its combination of style and performance, the white Wii U is perfect for gamers seeking a versatile and immersive console."
 
         },
         red:{
-            image: "TVs/40inch/HD-40-White.webp",
-            title: "40-Inch White TV HD",
-            price: "<del>£209.99</del> £109.99",
-            descriptionHeading: "Product Description: HD 40 Inch White TV – Now at Half Price!",
-            description:"Experience stunning visuals and immersive entertainment with the HD 40 Inch White TV, the perfect addition to any home. Boasting crystal-clear picture quality, vibrant colors, and sleek modern design, this television is designed to enhance your viewing experience, whether you're watching your favorite movies, shows, or gaming. With advanced 4D surround sound technology and multiple connectivity options, including HDMI and USB, it's ready to integrate seamlessly into your setup. Limited Time Offer: Get this incredible HD TV at half the original price! Don't miss this opportunity to upgrade your entertainment system and bring cinematic visuals right to your living room. Click 'Add to Basket' now to make it yours before the deal ends!"
+            image: "Consoles/wiiu/Wii U red.webp",
+            title: "Red Wii U",
+            price: "<del>£199.99</del> £99.99",
+            descriptionHeading: "Product Description: Red Wii U",
+            description:"Make a bold statement with the vibrant red Wii U, a console that merges cutting-edge technology with eye-catching design. Its dynamic red exterior sets it apart, while the GamePad controller introduces new possibilities for gameplay with its touchscreen and motion controls. Whether you’re exploring expansive open worlds, engaging in multiplayer battles, or enjoying classic Nintendo titles, the red Wii U delivers an unmatched gaming experience. Its HD graphics and seamless connectivity options ensure smooth performance, making it a perfect choice for gamers who value both style and substance."
     
         },
     
@@ -143,27 +143,27 @@ const consoleData ={
     
     switch:{
         black:{
-            image: "TVs/80inch/4k-80-Black.webp",
-            title: "80-Inch Black TV 4k",
-            price: "<del>£349.99</del> £299.99",
-            descriptionHeading: "Product Description: 4K 80 Inch Black TV",
-            description:"Immerse yourself in cinematic brilliance with the 4K 80 Inch Black TV—the ultimate centerpiece for your entertainment space. Its enormous display paired with stunning 4K resolution ensures every scene comes to life with razor-sharp detail and vivid color accuracy. Whether you’re hosting a movie marathon, gaming tournament, or sports viewing party, this TV delivers a truly immersive experience. With cutting-edge surround sound and versatile connectivity, it’s the perfect combination of technology and design. Limited Time Offer: Take this opportunity to own the pinnacle of home entertainment at a fraction of the cost. Click now to claim yours before it’s gone!"
+            image: "Consoles/switch/switchblack.webp",
+            title: "Black Nintendo Switch",
+            price: "<del>£249.99</del> £149.99",
+            descriptionHeading: "Product Description: Black Nintendo Switch",
+            description:"The black Nintendo Switch combines portability and versatility in a sleek, modern design. Whether you’re playing on the go or docking it for big-screen action, the Switch delivers a seamless gaming experience that adapts to your lifestyle. Its ergonomic Joy-Con controllers provide precision and comfort, while the vibrant display ensures crystal-clear visuals for handheld gaming. With a diverse library of games, including action-packed adventures, puzzles, and party games, the black Switch is perfect for solo players and groups alike. Its stylish black finish adds a professional touch, making it a must-have for gamers who value performance and aesthetics."
     
         },
         white:{
-            image: "TVs/80inch/4k-80-White.webp",
-            title: "80-Inch White TV 4k",
-            price: "<del>£359.99</del> £309.99",
-            descriptionHeading: "Product Description: 4K 80 Inch White TV",
-            description:"Turn your living room into a luxurious entertainment hub with the 4K 80 Inch White TV. Boasting a massive ultra-high-definition display framed in sleek white, this TV combines top-tier technology with modern elegance. Every scene bursts to life with vivid color accuracy and incredible detail, while advanced surround sound completes the cinematic experience. Perfect for hosting movie nights, sports events, or gaming marathons, it’s designed to impress. With HDMI, USB, and seamless connectivity options, it’s the ultimate upgrade for your home. Don’t miss this exclusive chance to own the pinnacle of 4K entertainment—order now before it’s gone!"
+            image: "Consoles/switch/Switch white.webp",
+            title: "White Nintendo Switch",
+            price: "<del>£249.99</del> £149.99",
+            descriptionHeading: "Product Description: White Nintendo Switch",
+            description:"The white Nintendo Switch brings a fresh and elegant look to one of the most versatile consoles ever created. Perfect for gamers of all types, it transitions effortlessly between handheld, tabletop, and docked modes, offering unmatched flexibility. The Joy-Con controllers are comfortable and responsive, while the vibrant screen ensures stunning visuals in handheld mode. Whether you’re exploring vast open worlds, competing in multiplayer battles, or enjoying casual games with friends, the white Switch delivers endless entertainment. Its sleek, minimalist design makes it a stylish addition to any gaming setup."
     
         },
         red:{
-            image: "TVs/40inch/HD-40-White.webp",
-            title: "40-Inch White TV HD",
-            price: "<del>£209.99</del> £109.99",
-            descriptionHeading: "Product Description: HD 40 Inch White TV – Now at Half Price!",
-            description:"Experience stunning visuals and immersive entertainment with the HD 40 Inch White TV, the perfect addition to any home. Boasting crystal-clear picture quality, vibrant colors, and sleek modern design, this television is designed to enhance your viewing experience, whether you're watching your favorite movies, shows, or gaming. With advanced 4D surround sound technology and multiple connectivity options, including HDMI and USB, it's ready to integrate seamlessly into your setup. Limited Time Offer: Get this incredible HD TV at half the original price! Don't miss this opportunity to upgrade your entertainment system and bring cinematic visuals right to your living room. Click 'Add to Basket' now to make it yours before the deal ends!"
+            image: "Consoles/switch/switch red.webp",
+            title: "Red Nintendo Switch",
+            price: "<del>£249.99</del> £149.99",
+            descriptionHeading: "Product Description: Red Nintendo Switch",
+            description:"Stand out with the bold red Nintendo Switch, a console that combines dynamic style with unmatched versatility. Designed for gamers on the go, it transitions seamlessly between handheld and docked modes, ensuring you can play anywhere, anytime. The vibrant red finish makes a striking statement, while the ergonomic Joy-Con controllers and immersive screen elevate your gaming experience. From fast-paced action to cooperative multiplayer games, the red Switch offers a rich library of titles to suit every taste. With its compact design and innovative features, it’s perfect for gamers who want both functionality and flair."
     
         },
     

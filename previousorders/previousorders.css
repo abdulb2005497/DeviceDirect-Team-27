@@ -6,7 +6,6 @@
   outline: none;
   font-family: "Merriweather", serif;
 }
-
 /* top navbar */
 .top-navbar {
   display: flex;
@@ -109,10 +108,7 @@
   color: white;
   transition: 0.5s ease;
 }
-.dropdown-menu li a:hover {
-  background-color: #e5e7e9;
-  color: #e5e7e9;
-}
+
 #search input {
   border-radius: 50px;
   border: none;
@@ -280,7 +276,7 @@ html {
   scroll-behavior: smooth;
 }
 
-/* This is the finalised footer please dont change the code :) */
+/* footer */
 #footer {
   padding: 0 0 30px 0px;
   color: white;
@@ -289,7 +285,7 @@ html {
   margin-top: 100px;
 }
 #footer .footer-top {
-  padding: 30px 0 30px 0;
+  padding: 60px 0 30px 0;
   background-color: #212f3d;
   color: white;
 }
@@ -376,4 +372,4 @@ html {
 #footer .credits a {
   color: #ffc800;
 }
-/* This is the finalised footer please dont change the code :) */
+/* footer */
