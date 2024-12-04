@@ -148,6 +148,7 @@ function updateItems(variant){
 
 
 colourselector.addEventListener("change",function(){
+
     const selectedValue= colourselector.value.toLowerCase();
     updateItems(selectedValue);
 
@@ -160,6 +161,7 @@ black.addEventListener("click",function(){
 )
 
 white.addEventListener("click",function(){
+
 updateItems("white");
  
 }
