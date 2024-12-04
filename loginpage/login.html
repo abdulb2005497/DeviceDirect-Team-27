@@ -1,33 +1,100 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/jpg" href="image/Faveicon.jpg">
-    <title>Navigation Bar and Login</title>
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    
-    <section id="header">
-        <a href="#"><img src="image/Faveicon.jpg" class="logo" height="80" alt="logo"></a>
-        <div>
-            <ul id="Navbar">
-                <li><a class="active" href="#">Contact Us</a></li>
-                <li><a class="active" href="#">Home</a></li>
-                <li><a class="active" href="#">About Us</a></li>
-                <li><a class="active" href="#">Sign Up</a></li>
-                <li><a class="active" href="#">Log in</a></li>
-                <li><a class="active" href="#">Previous Orders</a></li>
-                <li><a class="active" href="#">Checkout</a></li>
-                <li><a class="active" href="index.html">Search</a></li>
-                <li><a href="../checkoutpage/cart.html" class="active"><i class="far fa-shopping-bag"></i></a></li>
+<!-- navbar -->
+<nav class="navbar navbar-expand-lg" id="navbar">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="index.html" id="logo">
+        <img
+          src="/Landing-Page/assests/images/device_direct_logo.png"
+          alt="Device Direct Logo"
+          class="logo-img"
+        />
+        <span id="span1">D</span>evice <span>Direct</span></a
+      >
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span
+          ><img src="./assests/images/menu.png" alt="" width="30px"
+        /></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a
+              class="nav-link active"
+              aria-current="page"
+              href="/Landing-Page/index.html"
+              >Home</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/productspage/index.html">Shop</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/aboutuspage/aboutus.html">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/contactuspage/contactus.html"
+              >Contact</a
+            >
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Account
+            </a>
+            <ul
+              class="dropdown-menu"
+              aria-labelledby="navbarDropdown"
+              style="background-color: rgb(67 0 86)"
+            >
+              <li>
+                <a class="dropdown-item" href="/loginpage/login.html"
+                  >Login</a
+                >
+              </li>
+              <li><a class="dropdown-item" href="#">SignUp</a></li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  href="/previousorders/previousorders.html"
+                  >Previous Orders</a
+                >
+              </li>
             </ul>
+          </li>
+        </ul>
+        <form class="d-flex" id="search">
+          <input
+            class="form-control me-2"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+          />
+          <button class="btn btn-outline-success" type="submit">
+            Search
+          </button>
+        </form>
+        <div class="cart-btn">
+          <a href="/checkoutpage/cart.html"
+            ><i class="fas fa-shopping-bag"></i
+          ></a>
         </div>
-    </section>
-
+      </div>
+    </div>
+  </nav>
+  <!-- navbar -->
     
     <div class="wrapper">
         <form action="">
