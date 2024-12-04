@@ -250,7 +250,7 @@ body{
 
 .searchsection{
     width:500px;
-    height:600px;
+    height:300pxpx;
     background: rgba(220, 220, 220, 0.5);
     backdrop-filter: blur(5px);
     border-radius:40px;
@@ -259,29 +259,34 @@ body{
     padding:25px;
 
 
-
 }
 
 .searchsection img{
-    width:40px;
-    height:40px;
+    width:35px;
+    height:35px;
 }
+
 .searchsection form{
+    display:flex;
+    align-items:center;
     width:100%;
     border-radius: 8px;
 }
 
 .searchsection input{
     width:380px;
-    height:40px;
+    height:50px;
     background: rgba(220, 220, 220, 0.5);
     backdrop-filter: blur(5px);
     border:none;
     border-radius:8px;
+    margin-left:20px;
 }
 
 .searchsection input::placeholder{
     color: white;
+    font-size: 20px;
 }
+
 
 
