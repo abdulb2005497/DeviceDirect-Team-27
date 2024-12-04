@@ -5,6 +5,14 @@
    outline: none;
    font-family: "Merriweather", serif;
  }
+
+ html, body{
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+ }
+
  /* top navbar */
  .top-navbar {
    display: flex;
@@ -238,6 +246,8 @@ html {
 /* about */
 #about {
   margin-top: 30px;
+  display: flex;
+  flex-direction: column;
 }
 #about h3 {
   font-weight: bold;
@@ -271,14 +281,17 @@ html {
     border-radius: 5px;
     cursor: pointer;
  }
- /* about */ 
+ 
 
  /*about hero*/
 
  #hero {
+  flex-shrink: 0;
+  margin-bottom: 20px;
   position: relative;
   text-align: center;
   color: white;
+  margin-bottom: 50px;
 }
 .hero-bg img {
   width: 100%;
@@ -294,3 +307,91 @@ html {
 }
 
 /*about hero*/
+
+
+/*New Improved Slider*/
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+   
+}
+
+.wrapper {
+  flex-grow: 1; 
+  display: flex; 
+  flex-direction: column; 
+  justify-content: center;
+  align-items: center; 
+  background-color: white; 
+  position: relative; 
+  width: 90vw; 
+  max-width: 1000px; 
+  min-height: 25em; 
+  border-radius: 0.6em; 
+  margin: 0 auto 50px auto; 
+  box-shadow: 0 1.8em 3em rgba(1, 17, 39, 0.15);
+  padding: 20px; 
+}
+
+
+.info-slider {
+  color: black; 
+  font-size: 1.2em;
+  text-align: center; 
+  padding: 20px; 
+  overflow-y: auto; 
+  border: 1px solid black; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: white; 
+}
+
+.wrapper button {
+  font-size: 1.8em;
+  height: 2.2em;
+  width: 2.2em;
+  background-color: #ffffff;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  border: none;
+  color: #0a69ed;
+  box-shadow: 0 0 1em rgba(1,17,39,0.25);
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+button#next {
+position: absolute;
+right: 20px;
+bottom: 20px;
+}
+
+button#prev{
+position: absolute;
+left: 20px;
+bottom: 20px;
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    width: 95%; 
+    padding: 10px;
+  }
+
+  .info-slider {
+    width: 100%; 
+  }
+}
+
+
+
+/*New Improved Slider*/
+
+
+
+/*about*/
