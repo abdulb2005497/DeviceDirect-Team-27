@@ -119,51 +119,19 @@
      </div>
    </nav>
 
-    <div class="cart-container">
-        <h1>CART PAGE</h1>
+    <div class="checkout-container">
+        <h1>Checkout</h1>
 
-        <div class="cart-layout">
-          <!-- These are placeholders will later be replaced with php code pulling the data from the database-->
-            <div class="cart-items">
-                <div class="cart-item">
-                    <img src="../productspage/pagescode/tvcode/TVs/40inch/4K-40-Black.webp" alt="">
-                    <div class="cart-details">
-                        <p>4k 40 Inch TV</p>
-                        <p>Black </p>
-                        <p>£99.99</p>
-                        <input type="number" name="quantity" value="1" min="1" style="width: 50px;">
-                        <button type="button" name="button">x</button>
-                    </div>
-                </div>
-                <div class="cart-item">
-                    <img src="../productspage/pagescode/consolescode/Consoles/switch/switch red.webp" alt="">
-                    <div class="cart-details">
-                        <p>Nintendo Switch</p>
-                        <p>Red</p>
-                        <p>£149.99</p>
-                        <input type="number" name="quantity" value="1" min="1" style="width: 50px;">
-                        <button type="button" name="button">x</button>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Placeholder until php is complete -->
-            <div class="checkout-summary">
-                <h2>Checkout Summary</h2>
-                <p>Total: £250.98</p>
-                <p>Shipping: Free</p>
-                <p>Total: £250.98</p>
-                <a href="checkout.html"><button class="checkout-btn">Checkout </button></a>
-                <button class="paypal-btn">Pay with PayPal</button>
-                <h3>Discount code:</h3>
-                <form class="discount-code" action="index.html" method="post">
-                  <input type="text" name="" placeholder="Enter code here">
-                </form>
-            </div>
+        <form action="">
+                <input type="text" placeholder="Name on card" required>
+                <input type="text" placeholder="Card number" required>
+                <input type="text" placeholder="Account number" required>
+                <input type="text" placeholder="Expiry date" required>
+                <input type="text" placeholder="CVC" required>
+        </form>
+
         </div>
-        <a href="wishlist.html">Enter wishlist</a>
-    </div>
-    </form>
     <footer class="">
 
         <footer id="footer">
