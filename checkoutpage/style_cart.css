@@ -187,6 +187,7 @@ img {
 }
 .wishlist-details,
 .cart-details {
+  text-decoration: none;
 }
 
 .cart-details p {
