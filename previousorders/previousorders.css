@@ -1,4 +1,4 @@
-/* Global Reset and Base Styling */
+/* General reset */
 * {
     margin: 0;
     padding: 0;
@@ -7,85 +7,72 @@
     font-family: 'Merriweather', serif;
 }
 
-/* Smooth Scrolling */
-html {
-    scroll-behavior: smooth;
-}
-
-/* Navbar Styling */
 #header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px 50px;
+    padding: 20px 20px;
     background-color: #f0f8ff;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    z-index: 999;
+    position: sticky;
+    top:0;
+    left:0;
 }
 
-/* Logo Styling */
-#header .logo {
-    height: 50px;
-    width: auto;
-    object-fit: contain;
-    transition: transform 0.3s ease;
-}
 
-#header .logo:hover {
-    transform: scale(1.05);
-}
+/* Top Navbar */
 
-/* Navbar Navigation */
-#Navbar {
+#Navbar{
     display: flex;
     align-items: center;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-#Navbar li {
-    margin: 0 10px;
-}
-
-#Navbar li a {
+    justify-content: center;
+    }
+    
+    #Navbar li{
+        list-style: none;
+        padding: 0 15px;
+    }
+    
+    #Navbar li a{
     text-decoration: none;
-    font-size: 14px;
-    font-weight: 500;
-    color: #2c3e50;
-    transition: color 0.3s ease;
-    position: relative;
-}
+    font-size: 13;
+    font-weight:600;
+    color:#465b52;
+    transition: 0.4s ease;
+    
+    }
+    #Navbar li a:hover{
+        color:black;
+        
+        
+        
+    }
+    #Navbar li a.active{
+        color:black
+    }
+    #Navbar li a.active::after{
+        content: '';
+        height: 2px;
+        width: 100%;
+        background: black;
+        display: block;
+        opacity:0;
+        transition:all 0.2s;
+    }
+    #Navbar li a:hover:after{
+        opacity:1;
+    }
 
-#Navbar li a:hover,
-#Navbar li a.active {
-    color: #3498db;
+@media screen and (max-width: 320px) {
+    
 }
-
-#Navbar li a::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: -5px;
-    left: 0;
-    background-color: #3498db;
-    transition: width 0.3s ease;
-}
-
-#Navbar li a:hover::after,
-#Navbar li a.active::after {
-    width: 100%;
-}
-
-/* Top Navbar Responsive Adjustments */
-@media screen and (max-width: 400px) {
     .top-navbar a {
         font-size: 13px;
     }
     .top-navbar p {
         font-size: 13px;
     }
-}
 
 @media screen and (max-width: 320px) {
     .top-navbar a {
@@ -108,7 +95,7 @@ html {
 
 .progress-bar {
     height: 100%;
-    background-color: #108c2b; /* Green color */
+    background-color: #4CAF50;
     transition: width 0.5s ease-in-out;
     position: absolute;
     top: 0;
@@ -140,7 +127,54 @@ html {
     font-weight: bold;
 }
 
-/* Table Styling */
+/* Footer */
+#footer {
+    padding: 30px 0;
+    color: white;
+    font-size: 14px;
+    background-color: #212f3d;
+    margin-top: 50px;
+}
+
+#footer .footer-top {
+    padding: 60px 0;
+    background-color: #212f3d;
+    color: white;
+}
+
+#footer .footer-top .footer-contact h3 {
+    color: #ffc800;
+}
+
+#footer .footer-top .footer-contact p {
+    font-size: 14px;
+    color: white;
+}
+
+#footer .footer-top .footer-links ul li a {
+    color: white;
+    font-weight: bold;
+}
+
+#footer .footer-top .social-links a {
+    font-size: 18px;
+    background-color: #373737;
+    color: white;
+    padding: 8px 0;
+    border-radius: 50%;
+    width: 36px;
+}
+
+#footer .footer-top .social-links a:hover {
+    background-color: #ffc800;
+}
+
+#footer .credits {
+    text-align: center;
+    font-size: 13px;
+}
+
+/* Table layout (vertical) */
 table {
     width: 80%;
     margin: 30px auto;
@@ -165,14 +199,14 @@ td {
     font-size: 16px;
 }
 
-/* Vertical Table Layout */
+/* Make the table vertical (flip rows and columns) */
 tbody {
     display: block;
 }
 
 tbody tr {
     display: flex;
-    flex-direction: column;
+    flex-direction: column;  /* Stack the data vertically */
     margin-bottom: 20px;
     padding: 15px;
     border: 1px solid #ddd;
@@ -184,17 +218,19 @@ tbody tr td {
     font-weight: 500;
     padding: 10px;
     background-color: #f9f9f9;
+
 }
 
 tbody tr td:first-child {
     font-weight: bold;
-    background-color: #f1f1f1;
+    background-color: #f1f1f1; /* Background color for labels */
 }
 
 tbody tr:last-child td {
     border-bottom: 1px solid #ddd;
 }
 
+/* To the labels stand out */
 tbody tr td:nth-child(1) {
     background-color: #f1f1f1;
     color: #212f3d;
@@ -206,6 +242,7 @@ tbody tr td:nth-child(2) {
     font-size: 16px;
 }
 
+/* Add spacing between rows */
 tbody tr {
     margin-bottom: 20px;
 }
@@ -213,6 +250,7 @@ tbody tr {
 tbody tr:last-child {
     margin-bottom: 0;
 }
+
 
 /* Responsive Table */
 @media (max-width: 768px) {
@@ -225,40 +263,57 @@ tbody tr:last-child {
     }
 }
 
-/* Footer Styles (as per your original paste) */
-#footer {
-    padding: 0 0 30px 0px;
-    color: white;
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    background-color: #f8f8f8;
+    padding: 20px;
+    border-top: 1px solid #ccc;
+}
+
+footer .column {
+    flex: 1;
+    margin: 0 10px;
+}
+
+footer h4 {
+    margin-bottom: 10px;
+    color: #333;
+}
+
+footer p, footer a {
     font-size: 14px;
-    background-color: #212f3d;
-    margin-top: 100px;
+    color: #555;
+    text-decoration: none;
+    margin-bottom: 5px;
+    display: block;
 }
 
-#footer .footer-top {
-    padding: 30px 0 30px 0;
-    background-color: #212f3d;
-    color: white;
+footer a:hover {
+    color: #000;
+    text-decoration: underline;
 }
 
-/* Rest of the footer styles remain the same as in your original paste */
-#footer .footer-top .footer-contact h3 {
-    color: #ffc800;
+footer .followus .icon a {
+    margin-right: 10px;
+    font-size: 16px;
+    color: #555;
+    text-decoration: none;
 }
 
-/* Additional responsive design for Navbar */
-@media screen and (max-width: 768px) {
-    #header {
-        flex-direction: column;
-        padding: 15px;
-    }
+footer .followus .icon a:hover {
+    color: #000;
+}
 
-    #Navbar {
-        margin-top: 10px;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
+footer .for-installing .row img {
+    margin-right: 10px;
+}
 
-    #Navbar li {
-        margin: 5px 10px;
-    }
+footer .paymentmethods img {
+    margin-right: 10px;
 }
