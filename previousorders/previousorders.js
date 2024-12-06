@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
         price: 520.00, 
         order_date: "2024-11-15 14:30:00", 
         status: "Delivered",
-        stages: ["Ordered", "Processed", "Shipped", "Delivered"]
+        stages: ["Ordered", "Processed", "Shipped", "Delivered"]  
     },
        
        
