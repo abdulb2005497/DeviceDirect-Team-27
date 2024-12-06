@@ -1,3 +1,18 @@
+<?php
+
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+
+if (!isset($_SESSION['user_id'])) {
+    header("Location: Login_page/login.php");
+    exit();
+}
+
+
+$welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -5,7 +20,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>DeviceDirect</title>
-    <link rel="stylesheet" href="/previousorders/previousorders.css" />
+    <link rel="stylesheet" href="previousorders.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
@@ -29,11 +44,11 @@
   </head>
   <body>
     <!-- navbar -->
-    <nav class="navbar navbar-expand-lg" id="navbar">
+   <nav class="navbar navbar-expand-lg" id="navbar">
       <div class="container-fluid">
-        <a class="navbar-brand" href="index.html" id="logo">
+        <a class="navbar-brand" href="index.php" id="logo">
           <img
-            src="/Landing-Page/assests/images/device_direct_logo.png"
+            src="../assests/images/device_direct_logo.png"
             alt="Device Direct Logo"
             class="logo-img"
           />
@@ -58,18 +73,18 @@
               <a
                 class="nav-link active"
                 aria-current="page"
-                href="/Landing-Page/index.html"
+                href="../index.php"
                 >Home</a
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/productspage/index.html">Shop</a>
+              <a class="nav-link" href="../productspage/index.php">Shop</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/aboutuspage/aboutus.html">About</a>
+              <a class="nav-link" href="../aboutuspage/aboutus.php">About</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/contactuspage/contactus.html"
+              <a class="nav-link" href="../contactuspage/contactus.php"
                 >Contact</a
               >
             </li>
@@ -90,24 +105,25 @@
                 style="background-color: rgb(67 0 86)"
               >
                 <li>
-                  <a class="dropdown-item" href="/Login page/login.html"
+                  <a class="dropdown-item" href=".Login_page/login.php"
                     >Login</a
                   >
                 </li>
                 <li>
-                  <a class="dropdown-item" href="/Login page/signup.html"
+                  <a class="dropdown-item" href="Login_page/signup.php"
                     >SignUp</a
                   >
                 </li>
                 <li>
                   <a
                     class="dropdown-item"
-                    href="/previousorders/previousorders.html"
+                    href="../previousorders/previousorders.php"
                     >Previous Orders</a
                   >
                 </li>
               </ul>
             </li>
+            <li class="nav-item"><a class="nav-link" href="config/logout.php">Logout</a></li>
           </ul>
           <form class="d-flex" id="search">
             <input
@@ -121,7 +137,7 @@
             </button>
           </form>
           <div class="cart-btn">
-            <a href="/checkoutpage/cart.html"
+            <a href="../checkoutpage/cart.php"
               ><i class="fas fa-shopping-bag"></i
             ></a>
           </div>
@@ -207,9 +223,9 @@
             <div class="col-lg-3 col-md-6 footer-links">
               <h4>Our Social</h4>
               <div class="socail-links mt-3">
-                <a href="https://x.com/" target="_blank"><i class="fa-brands fa-twitter"></i></a>
-                <a href="https://facebook.com/" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
-                <a href="https://instagram.com/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
               </div>
             </div>
           </div>
