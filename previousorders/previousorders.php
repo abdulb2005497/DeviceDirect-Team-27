@@ -1,14 +1,9 @@
 <?php
 
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
-
-
-if (!isset($_SESSION['user_id'])) {
+if (session_status() == PHP_SESSION_NONE) 
+{ session_start();}      if (!isset($_SESSION['user_id'])) {
     header("Location: Login_page/login.php");
-    exit();
-}
+    exit(); }
 
 
 $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
