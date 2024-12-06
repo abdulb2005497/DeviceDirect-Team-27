@@ -1,0 +1,5 @@
+<Files db.php>
+Order Allow,Deny
+Deny from all
+</Files>
+DirectoryIndex index.php
