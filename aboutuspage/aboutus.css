@@ -368,7 +368,7 @@ button#next {
   right: 20px;
   top: 50%;
   transform: translateY(-50%);
-  border: 1px solid #ccc;
+  border: 1px solid #ffc800;
   border-radius: 50%;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
 }
@@ -378,7 +378,7 @@ button#prev {
   left: 20px;
   top: 50%;
   transform: translateY(-50%);
-  border: 1px solid #ccc;
+  border: 1px solid #ffc800;
   border-radius: 50%;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
 
