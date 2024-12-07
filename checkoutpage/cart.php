@@ -117,7 +117,7 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
                 </li>
               </ul>
             </li>
-            <li class="nav-item"><a class="nav-link" href="config/logout.php">Logout</a></li>
+            <li class="nav-item"><a class="nav-link" href="../config/logout.php">Logout</a></li>
           </ul>
           <form class="d-flex" id="search">
             <input
