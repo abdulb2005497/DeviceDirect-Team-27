@@ -21,15 +21,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $error_message = "Passwords do not match.";
         }else{
             $hashed_password = password_hash($password, PASSWORD_BCRYPT);
-          try{$stmt = $pdo->prepare("INSERT INTO users (First_name, Last_name, Email, Phone, Address, password, role) VALUES (?, ?, ?, ?, ?, ?, ?)");
+          try{$stmt = $pdo->prepare("INSERT INTO users (First_name,Last_name,Email,Phone,Address,password,role) VALUES (?, ?, ?, ?, ?, ?, ?)");
                 $stmt->execute([$first_name, $last_name, $email, $phone, $address, $hashed_password, $role]);
-                header("Location: login.php");
+                header("Location:login.php");
                 exit();
             }catch (PDOException $e) {
                 if ($e->getCode() == 23000) {
-                    $email_error = true; 
+                    $email_error=true; 
                 } else {
-                    $error_message = "An error occurred. Please try again.";
+                    $error_message ="Error.Please try again.";
                 }
             }
         }
@@ -98,7 +98,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         
         document.addEventListener("DOMContentLoaded", function () {
             const emailInput = document.getElementById("email");
-
             <?php if ($email_error): ?>
             emailInput.setCustomValidity("Email already in use.");
             emailInput.reportValidity(); 
