@@ -226,8 +226,8 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
       ></a>
     </section>
 
-    <!-- footer -->
-    <footer id="footer">
+<!-- footer -->
+<footer id="footer">
       <div class="footer-top">
         <div class="container">
           <div class="row">
@@ -245,13 +245,13 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
             <div class="col-lg-3 col-md-6 footer-links">
               <h4>Usefull Links</h4>
               <ul>
-                <li><a href="/Landing-Page/index.html">Home</a></li>
-                <li><a href="/aboutuspage/aboutus.html">About Us</a></li>
-                <li><a href="/loginpage/login.html">Account</a></li>
+                <li><a href="../index.php">Home</a></li>
+                <li><a href="../aboutuspage/aboutus.php">About Us</a></li>
+                <li><a href="../config/logout.php">Logout</a></li>
                 <li>
-                  <a href="/productspage/index.html">Shop Now</a>
+                  <a href="../productspage/index.php">Shop Now</a>
                 </li>
-                <li><a href="/contactuspage/contactus.html">Contact Us</a></li>
+                <li><a href="../contactuspage/contactus.php">Contact Us</a></li>
               </ul>
             </div>
 
@@ -260,26 +260,26 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
 
               <ul>
                 <li>
-                  <a href="/productspage/pagescode/consolescode/consoles.html"
+                  <a href="productspage\pagescode\consolescode\consoles.php"
                     >Gaming Consoles</a
                   >
                 </li>
                 <li>
-                  <a href="/productspage/pagescode/tvcode/tvs.html">TVs</a>
+                  <a href="productspage\pagescode\tvcode\tvs.php">TVs</a>
                 </li>
                 <li>
-                  <a href="/productspage/pagescode/laptopscode/laptops.html"
+                  <a href="productspage\pagescode\laptopscode\laptops.php"
                     >Laptops</a
                   >
                 </li>
                 <li>
-                  <a href="/productspage/pagescode/monitorscode/monitors.html"
+                  <a href="productspage\pagescode\monitorscode\monitors.php"
                     >Monitors</a
                   >
                 </li>
                 <li>
                   <a
-                    href="/productspage/pagescode/headphonescode/headphones.html"
+                    href="productspage\pagescode\headphonescode\headphones.php"
                     >Headphones</a
                   >
                 </li>
@@ -289,9 +289,9 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
             <div class="col-lg-3 col-md-6 footer-links">
               <h4>Our Social</h4>
               <div class="socail-links mt-3">
-                <a href="https://x.com/" target="_blank"><i class="fa-brands fa-twitter"></i></a>
-                <a href="https://facebook.com/" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
-                <a href="https://instagram.com/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
               </div>
             </div>
           </div>

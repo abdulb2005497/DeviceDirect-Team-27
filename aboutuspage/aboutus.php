@@ -49,8 +49,8 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
     <script src="aboutus.js" defer></script>
   </head>
   <body>
-    <!-- navbar -->
-   <nav class="navbar navbar-expand-lg" id="navbar">
+   <!-- navbar -->
+  <nav class="navbar navbar-expand-lg" id="navbar">
       <div class="container-fluid">
         <a class="navbar-brand" href="index.php" id="logo">
           <img
@@ -129,7 +129,7 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
                 </li>
               </ul>
             </li>
-            <li class="nav-item"><a class="nav-link" href="../config/logout.php">Logout</a></li>
+            <li class="nav-item"><a class="nav-link" href="config/logout.php">Logout</a></li>
           </ul>
           <form class="d-flex" id="search">
             <input
@@ -143,16 +143,14 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
             </button>
           </form>
           <div class="cart-btn">
-            <a href="checkoutpage/cart.php"
+            <a href="../checkoutpage/cart.php"
               ><i class="fas fa-shopping-bag"></i
             ></a>
           </div>
         </div>
       </div>
     </nav>
-    <!-- navbar -->
-
-
+    <!-- navbar -->
     <!--Hero Section-->
 
     <section id="hero">
@@ -182,7 +180,7 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
   
   
   <!-- footer -->
-    <footer id="footer">
+  <footer id="footer">
       <div class="footer-top">
         <div class="container">
           <div class="row">
@@ -200,13 +198,13 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
             <div class="col-lg-3 col-md-6 footer-links">
               <h4>Usefull Links</h4>
               <ul>
-                <li><a href="/Landing-Page/index.php">Home</a></li>
-                <li><a href="/aboutuspage/aboutus.php">About Us</a></li>
-                <li><a href="/Login_page/login.php">Account</a></li>
+                <li><a href="../index.php">Home</a></li>
+                <li><a href="../aboutuspage/aboutus.php">About Us</a></li>
+                <li><a href="../config/logout.php">Logout</a></li>
                 <li>
-                  <a href="/productspage/index.php">Shop Now</a>
+                  <a href="../productspage/index.php">Shop Now</a>
                 </li>
-                <li><a href="/contactuspage/contactus.php">Contact Us</a></li>
+                <li><a href="../contactuspage/contactus.php">Contact Us</a></li>
               </ul>
             </div>
 
@@ -215,26 +213,26 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
 
               <ul>
                 <li>
-                  <a href="/productspage/pagescode/consolescode/consoles.php"
+                  <a href="productspage\pagescode\consolescode\consoles.php"
                     >Gaming Consoles</a
                   >
                 </li>
                 <li>
-                  <a href="/productspage/pagescode/tvcode/tvs.php">TVs</a>
+                  <a href="productspage\pagescode\tvcode\tvs.php">TVs</a>
                 </li>
                 <li>
-                  <a href="/productspage/pagescode/laptopscode/laptops.php"
+                  <a href="productspage\pagescode\laptopscode\laptops.php"
                     >Laptops</a
                   >
                 </li>
                 <li>
-                  <a href="/productspage/pagescode/monitorscode/monitors.php"
+                  <a href="productspage\pagescode\monitorscode\monitors.php"
                     >Monitors</a
                   >
                 </li>
                 <li>
                   <a
-                    href="/productspage/pagescode/headphonescode/headphones.php"
+                    href="productspage\pagescode\headphonescode\headphones.php"
                     >Headphones</a
                   >
                 </li>

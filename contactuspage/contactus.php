@@ -82,6 +82,7 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
   </head>
   <body>
   
+  <!-- navbar -->
   <nav class="navbar navbar-expand-lg" id="navbar">
       <div class="container-fluid">
         <a class="navbar-brand" href="index.php" id="logo">
@@ -161,7 +162,7 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
                 </li>
               </ul>
             </li>
-            <li class="nav-item"><a class="nav-link" href="..\config\logout.php">Logout</a></li>
+            <li class="nav-item"><a class="nav-link" href="config/logout.php">Logout</a></li>
           </ul>
           <form class="d-flex" id="search">
             <input
@@ -182,6 +183,7 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
         </div>
       </div>
     </nav>
+    <!-- navbar -->
     
 
     <main>
@@ -230,7 +232,7 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
     </main>
 
     <!-- footer -->
-    <footer id="footer">
+  <footer id="footer">
       <div class="footer-top">
         <div class="container">
           <div class="row">
@@ -248,13 +250,13 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
             <div class="col-lg-3 col-md-6 footer-links">
               <h4>Usefull Links</h4>
               <ul>
-                <li><a href="/Landing-Page/index.html">Home</a></li>
-                <li><a href="/aboutuspage/aboutus.html">About Us</a></li>
-                <li><a href="/loginpage/login.html">Account</a></li>
+                <li><a href="../index.php">Home</a></li>
+                <li><a href="../aboutuspage/aboutus.php">About Us</a></li>
+                <li><a href="../config/logout.php">Logout</a></li>
                 <li>
-                  <a href="/productspage/index.html">Shop Now</a>
+                  <a href="../productspage/index.php">Shop Now</a>
                 </li>
-                <li><a href="/contactuspage/contactus.html">Contact Us</a></li>
+                <li><a href="../contactuspage/contactus.php">Contact Us</a></li>
               </ul>
             </div>
 
@@ -263,26 +265,26 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
 
               <ul>
                 <li>
-                  <a href="/productspage/pagescode/consolescode/consoles.html"
+                  <a href="productspage\pagescode\consolescode\consoles.php"
                     >Gaming Consoles</a
                   >
                 </li>
                 <li>
-                  <a href="/productspage/pagescode/tvcode/tvs.html">TVs</a>
+                  <a href="productspage\pagescode\tvcode\tvs.php">TVs</a>
                 </li>
                 <li>
-                  <a href="/productspage/pagescode/laptopscode/laptops.html"
+                  <a href="productspage\pagescode\laptopscode\laptops.php"
                     >Laptops</a
                   >
                 </li>
                 <li>
-                  <a href="/productspage/pagescode/monitorscode/monitors.html"
+                  <a href="productspage\pagescode\monitorscode\monitors.php"
                     >Monitors</a
                   >
                 </li>
                 <li>
                   <a
-                    href="/productspage/pagescode/headphonescode/headphones.html"
+                    href="productspage\pagescode\headphonescode\headphones.php"
                     >Headphones</a
                   >
                 </li>
