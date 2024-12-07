@@ -1,12 +1,12 @@
 <?php
 $host = "localhost";         
-$dbname = "devicedirectusercreds"; 
+$dbname = "devicedirect"; 
 $username = "root";          
 $password = "";              
 
 try {
     
-    $pdo = new PDO('mysql:host=localhost;dbname=devicedirectusercreds', $username, $password);
+    $pdo = new PDO('mysql:host=localhost;dbname=devicedirect', $username, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
     
