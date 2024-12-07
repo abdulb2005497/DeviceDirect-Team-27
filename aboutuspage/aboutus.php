@@ -204,9 +204,9 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
                 <li><a href="/aboutuspage/aboutus.php">About Us</a></li>
                 <li><a href="/Login_page/login.php">Account</a></li>
                 <li>
-                  <a href="/productspage/index.html">Shop Now</a>
+                  <a href="/productspage/index.php">Shop Now</a>
                 </li>
-                <li><a href="/contactuspage/contactus.html">Contact Us</a></li>
+                <li><a href="/contactuspage/contactus.php">Contact Us</a></li>
               </ul>
             </div>
 
