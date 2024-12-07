@@ -1,3 +1,11 @@
+<?php
+if (session_status() == PHP_SESSION_NONE) 
+{ session_start();}      if (!isset($_SESSION['user_id'])) {
+    header("Location: Login_page/login.php");
+    exit(); }
+$welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
+?>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -14,7 +22,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
     />
 
-    <link rel="stylesheet" href="/productspage/pagescode/tvcode/tvstyle.css" />
+    <link rel="stylesheet" href="tvstyle.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
@@ -37,105 +45,39 @@
     <!-- fonts links -->
   </head>
   <body data-model="i4k40">
-    <!-- navbar -->
-    <nav class="navbar navbar-expand-lg" id="navbar">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="index.html" id="logo">
-          <img
-            src="/Landing-Page/assests/images/device_direct_logo.png"
-            alt="Device Direct Logo"
-            class="logo-img"
-          />
-          <span id="span1">D</span>evice <span>Direct</span></a
-        >
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span
-            ><img src="./assests/images/menu.png" alt="" width="30px"
-          /></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a
-                class="nav-link active"
-                aria-current="page"
-                href="/Landing-Page/index.html"
-                >Home</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/productspage/index.html">Shop</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/aboutuspage/aboutus.html">About</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/contactuspage/contactus.html"
-                >Contact</a
-              >
-            </li>
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                id="navbarDropdown"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Account
-              </a>
-              <ul
-                class="dropdown-menu"
-                aria-labelledby="navbarDropdown"
-                style="background-color: rgb(67 0 86)"
-              >
-                <li>
-                  <a class="dropdown-item" href="/Login page/login.html"
-                    >Login</a
-                  >
-                </li>
-                <li>
-                  <a class="dropdown-item" href="/Login page/signup.html"
-                    >SignUp</a
-                  >
-                </li>
-                <li>
-                  <a
-                    class="dropdown-item"
-                    href="/previousorders/previousorders.html"
-                    >Previous Orders</a
-                  >
-                </li>
-              </ul>
-            </li>
-          </ul>
-          <form class="d-flex" id="search">
-            <input
-              class="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-            <button class="btn btn-outline-success" type="submit">
-              Search
+   <!-- Navbar -->
+   <nav class="navbar navbar-expand-lg" id="navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.php" id="logo">
+                <img src="assests/images/device_direct_logo.png" alt="Device Direct Logo" class="logo-img">
+                <span id="span1">D</span>evice <span>Direct</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span><img src="assests/images/menu.png" alt="" width="30px"></span>
             </button>
-          </form>
-          <div class="cart-btn">
-            <a href="/checkoutpage/cart.html"
-              ><i class="fas fa-shopping-bag"></i
-            ></a>
-          </div>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="index.php">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="productspage/index.php">Shop</a></li>
+                    <li class="nav-item"><a class="nav-link" href="aboutuspage/aboutus.php">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contactuspage/contactus.php">Contact</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Account</a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: rgb(67 0 86);">
+                            <li><a class="dropdown-item" href="Login_page/login.php">Login</a></li>
+                            <li><a class="dropdown-item" href="Login_page/signup.php">SignUp</a></li>
+                            <li><a class="dropdown-item" href="previousorders/previousorders.php">Previous Orders</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="config/logout.php">Logout</a></li>
+                </ul>
+                <form class="d-flex" id="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+                <div class="cart-btn"><a href="checkoutpage/cart.php"><i class="fas fa-shopping-bag"></i></a></div>
+            </div>
         </div>
-      </div>
     </nav>
     <!-- navbar -->
     <hr />
@@ -212,8 +154,8 @@
         >
       </div>
     </section>
-    <!-- footer -->
-    <footer id="footer">
+     <!-- footer -->
+     <footer id="footer">
       <div class="footer-top">
         <div class="container">
           <div class="row">
@@ -231,13 +173,13 @@
             <div class="col-lg-3 col-md-6 footer-links">
               <h4>Usefull Links</h4>
               <ul>
-                <li><a href="/Landing-Page/index.html">Home</a></li>
-                <li><a href="/aboutuspage/aboutus.html">About Us</a></li>
-                <li><a href="/loginpage/login.html">Account</a></li>
+                <li><a href="index.php">Home</a></li>
+                <li><a href="aboutuspage/aboutus.php">About Us</a></li>
+                <li><a href="config/logout.php">Logout</a></li>
                 <li>
-                  <a href="/productspage/index.html">Shop Now</a>
+                  <a href="productspage/index.php">Shop Now</a>
                 </li>
-                <li><a href="/contactuspage/contactus.html">Contact Us</a></li>
+                <li><a href="contactuspage/contactus.php">Contact Us</a></li>
               </ul>
             </div>
 
@@ -246,26 +188,26 @@
 
               <ul>
                 <li>
-                  <a href="/productspage/pagescode/consolescode/consoles.html"
+                  <a href="productspage\pagescode\consolescode\consoles.php"
                     >Gaming Consoles</a
                   >
                 </li>
                 <li>
-                  <a href="/productspage/pagescode/tvcode/tvs.html">TVs</a>
+                  <a href="productspage\pagescode\tvcode\tvs.php">TVs</a>
                 </li>
                 <li>
-                  <a href="/productspage/pagescode/laptopscode/laptops.html"
+                  <a href="productspage\pagescode\laptopscode\laptops.php"
                     >Laptops</a
                   >
                 </li>
                 <li>
-                  <a href="/productspage/pagescode/monitorscode/monitors.html"
+                  <a href="productspage\pagescode\monitorscode\monitors.php"
                     >Monitors</a
                   >
                 </li>
                 <li>
                   <a
-                    href="/productspage/pagescode/headphonescode/headphones.html"
+                    href="productspage\pagescode\headphonescode\headphones.php"
                     >Headphones</a
                   >
                 </li>
@@ -275,9 +217,9 @@
             <div class="col-lg-3 col-md-6 footer-links">
               <h4>Our Social</h4>
               <div class="socail-links mt-3">
-                <a href="https://x.com/" target="_blank"><i class="fa-brands fa-twitter"></i></a>
-                <a href="https://facebook.com/" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
-                <a href="https://instagram.com/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
               </div>
             </div>
           </div>

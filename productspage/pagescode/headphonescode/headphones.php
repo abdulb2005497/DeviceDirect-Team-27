@@ -1,3 +1,11 @@
+<?php
+if (session_status() == PHP_SESSION_NONE) 
+{ session_start();}      if (!isset($_SESSION['user_id'])) {
+    header("Location: Login_page/login.php");
+    exit(); }
+$welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
+?>  
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -16,7 +24,7 @@
 
     <link
       rel="stylesheet"
-      href="/productspage/pagescode/consolescode/consolestyle.css"
+      href="/productspage/pagescode/headphonescode/headphonestyle.css"
     />
     <link
       rel="stylesheet"
@@ -40,6 +48,7 @@
     <!-- fonts links -->
   </head>
   <body>
+    <!-- navbar -->
     <nav class="navbar navbar-expand-lg" id="navbar">
       <div class="container-fluid">
         <a class="navbar-brand" href="index.html" id="logo">
@@ -140,7 +149,6 @@
       </div>
     </nav>
     <!-- navbar -->
-
     <h3
       style="
         text-align: center;
@@ -149,53 +157,52 @@
         margin-bottom: 15px;
       "
     >
-      Select From Our Consoles
+      Select From Our Headphones
     </h3>
 
-    <section class="consolesection">
-      <a href="ps4.html" style="text-decoration: none"
-        ><div class="consolecards">
-          <div class="consoleimages ps4"></div>
-          <h4>PS4</h4>
+    <section class="headphonesection">
+      <a href="inearblack.html" style="text-decoration: none"
+        ><div class="headphonecards">
+          <div class="headphoneimages ineb"></div>
+          <h4>In Ear Black</h4>
           <p></p></div
       ></a>
 
-      <a href="ps5.html" style="text-decoration: none"
-        ><div class="consolecards">
-          <div class="consoleimages ps5"></div>
-          <h4>PS5</h4>
+      <a href="inearwhite.html" style="text-decoration: none"
+        ><div class="headphonecards">
+          <div class="headphoneimages inew"></div>
+          <h4>In Ear White</h4>
           <p></p></div
       ></a>
 
-      <a href="xbox1.html" style="text-decoration: none"
-        ><div class="consolecards">
-          <div class="consoleimages xbox1"></div>
-          <h4>Xbox 1</h4>
+      <a href="ineargrey.html" style="text-decoration: none"
+        ><div class="headphonecards">
+          <div class="headphoneimages ineg"></div>
+          <h4>In Ear Grey</h4>
           <p></p></div
       ></a>
 
-      <a href="nintendowii.html" style="text-decoration: none"
-        ><div class="consolecards">
-          <div class="consoleimages wii"></div>
-          <h4>Wii</h4>
+      <a href="overearblack.html" style="text-decoration: none"
+        ><div class="headphonecards">
+          <div class="headphoneimages oeb"></div>
+          <h4>Over Ear Black</h4>
           <p></p></div
       ></a>
 
-      <a href="wiiu.html" style="text-decoration: none"
-        ><div class="consolecards">
-          <div class="consoleimages wiiu"></div>
-          <h4>Wii U</h4>
+      <a href="overearwhite.html" style="text-decoration: none"
+        ><div class="headphonecards">
+          <div class="headphoneimages oew"></div>
+          <h4>Over Ear White</h4>
           <p></p></div
       ></a>
 
-      <a href="switch.html" style="text-decoration: none"
-        ><div class="consolecards">
-          <div class="consoleimages switch"></div>
-          <h4>Switch</h4>
+      <a href="overeargrey.html" style="text-decoration: none"
+        ><div class="headphonecards">
+          <div class="headphoneimages oeg"></div>
+          <h4>Over Ear Grey</h4>
           <p></p></div
       ></a>
     </section>
-
     <!-- footer -->
     <footer id="footer">
       <div class="footer-top">

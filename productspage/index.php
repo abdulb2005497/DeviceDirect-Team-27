@@ -1,3 +1,10 @@
+<?php
+if (session_status() == PHP_SESSION_NONE) 
+{ session_start();}      if (!isset($_SESSION['user_id'])) {
+    header("Location: ../Login_page/login.php");
+    exit(); }
+$welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
+?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -14,7 +21,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
     />
 
-    <link rel="stylesheet" href="/productspage/pagescode/tvcode/tvstyle.css" />
+    <link rel="stylesheet" href="../productspage/style.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
@@ -37,12 +44,13 @@
     <!-- fonts links -->
   </head>
   <body>
-    <!-- navbar -->
-    <nav class="navbar navbar-expand-lg" id="navbar">
+
+  <!-- navbar -->
+  <nav class="navbar navbar-expand-lg" id="navbar">
       <div class="container-fluid">
-        <a class="navbar-brand" href="index.html" id="logo">
+        <a class="navbar-brand" href="index.php" id="logo">
           <img
-            src="/Landing-Page/assests/images/device_direct_logo.png"
+            src="../assests/images/device_direct_logo.png"
             alt="Device Direct Logo"
             class="logo-img"
           />
@@ -67,18 +75,18 @@
               <a
                 class="nav-link active"
                 aria-current="page"
-                href="/Landing-Page/index.html"
+                href="../index.php"
                 >Home</a
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/productspage/index.html">Shop</a>
+              <a class="nav-link" href="../productspage/index.php">Shop</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/aboutuspage/aboutus.html">About</a>
+              <a class="nav-link" href="../aboutuspage/aboutus.php">About</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/contactuspage/contactus.html"
+              <a class="nav-link" href="../contactuspage/contactus.php"
                 >Contact</a
               >
             </li>
@@ -99,24 +107,25 @@
                 style="background-color: rgb(67 0 86)"
               >
                 <li>
-                  <a class="dropdown-item" href="/Login page/login.html"
+                  <a class="dropdown-item" href="../Login_page/login.php"
                     >Login</a
                   >
                 </li>
                 <li>
-                  <a class="dropdown-item" href="/Login page/signup.html"
+                  <a class="dropdown-item" href="../Login_page/signup.php"
                     >SignUp</a
                   >
                 </li>
                 <li>
                   <a
                     class="dropdown-item"
-                    href="/previousorders/previousorders.html"
+                    href="../previousorders/previousorders.php"
                     >Previous Orders</a
                   >
                 </li>
               </ul>
             </li>
+            <li class="nav-item"><a class="nav-link" href="config/logout.php">Logout</a></li>
           </ul>
           <form class="d-flex" id="search">
             <input
@@ -130,14 +139,14 @@
             </button>
           </form>
           <div class="cart-btn">
-            <a href="/checkoutpage/cart.html"
+            <a href="../checkoutpage/cart.php"
               ><i class="fas fa-shopping-bag"></i
             ></a>
           </div>
         </div>
       </div>
     </nav>
-    <!-- navbar -->
+    <!-- navbar -->
     <h3
       style="
         text-align: center;
@@ -146,52 +155,77 @@
         margin-bottom: 15px;
       "
     >
-      Select From Our TVs
+      Shop By Search
     </h3>
 
-    <section class="tvsection">
-      <a href="../tvcode/tvs-HD40.html" style="text-decoration: none"
-        ><div class="tvcards">
-          <div class="tvimages hd40"></div>
-          <h4>HD 40-Inch</h4>
+    <div class="searchsectionwrapper">
+      <section class="searchsection">
+        <form>
+          <img src="../productspage/categoryimages/search.png" />
+          <input type="text" placeholder="Search" id="inputsearch" autocomplete="off" />
+        </form>
+        <div class="optionbox"></div>
+      </section>
+    </div>
+
+    <h3
+      style="
+        text-align: center;
+        font-weight: 600;
+        margin-top: 20px;
+        margin-bottom: 15px;
+      "
+    >
+      Search By Category
+    </h3>
+
+    <section class="catrgoryimages">
+      <a
+        href="../productspage/pagescode/tvcode/tvs.php"
+        style="text-decoration: none"
+        ><div class="categorycards">
+          <div class="cimages tvs"></div>
+          <h4>TVs</h4>
           <p></p></div
       ></a>
 
-      <a href="../tvcode/tvs-4K40.html" style="text-decoration: none"
-        ><div class="tvcards">
-          <div class="tvimages i4k40"></div>
-          <h4>4K 40-Inch</h4>
+      <a
+        href="../productspage/pagescode/monitorscode/monitors.html"
+        style="text-decoration: none"
+        ><div class="categorycards">
+          <div class="cimages monitors"></div>
+          <h4>Monitors</h4>
           <p></p></div
       ></a>
 
-      <a href="../tvcode/tvs-HD60.html" style="text-decoration: none"
-        ><div class="tvcards">
-          <div class="tvimages hd60"></div>
-          <h4>HD 60-Inch</h4>
+      <a
+        href="../productspage/pagescode/laptopscode/laptops.html"
+        style="text-decoration: none"
+        ><div class="categorycards">
+          <div class="cimages laptops"></div>
+          <h4>Laptops</h4>
           <p></p></div
       ></a>
 
-      <a href="../tvcode/tvs-4K60.html" style="text-decoration: none"
-        ><div class="tvcards">
-          <div class="tvimages i4k60"></div>
-          <h4>4K 60-Inch</h4>
+      <a
+        href="../productspage/pagescode/headphonescode/headphones.html"
+        style="text-decoration: none"
+        ><div class="categorycards">
+          <div class="cimages headphones"></div>
+          <h4>Headphones</h4>
           <p></p></div
       ></a>
 
-      <a href="../tvcode/tvs-HD-80.html" style="text-decoration: none"
-        ><div class="tvcards">
-          <div class="tvimages ihd80"></div>
-          <h4>HD 80-Inch</h4>
-          <p></p></div
-      ></a>
-
-      <a href="../tvcode/tvs-4K80.html" style="text-decoration: none"
-        ><div class="tvcards">
-          <div class="tvimages i4k80"></div>
-          <h4>4K 80-Inch</h4>
+      <a
+        href="../productspage/pagescode/consolescode/consoles.html"
+        style="text-decoration: none"
+        ><div class="categorycards">
+          <div class="cimages consoles"></div>
+          <h4>Consoles</h4>
           <p></p></div
       ></a>
     </section>
+
     <!-- footer -->
     <footer id="footer">
       <div class="footer-top">
@@ -272,13 +306,12 @@
       </div>
     </footer>
     <!-- footer -->
-    <!--nav account dropdown -->
+
+    <script src="script.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"
     ></script>
-    <!--nav account dropdown -->
-    <script src="tvscript.js"></script>
   </body>
 </html>

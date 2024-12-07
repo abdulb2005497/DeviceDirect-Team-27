@@ -487,7 +487,7 @@ $welcome_message = "Hi, " . htmlspecialchars($_SESSION['first_name']);
                 <li><a href="aboutuspage/aboutus.php">About Us</a></li>
                 <li><a href="config/logout.php">Logout</a></li>
                 <li>
-                  <a href="/productspage/index.php">Shop Now</a>
+                  <a href="productspage/index.php">Shop Now</a>
                 </li>
                 <li><a href="contactuspage/contactus.php">Contact Us</a></li>
               </ul>
@@ -498,26 +498,26 @@ $welcome_message = "Hi, " . htmlspecialchars($_SESSION['first_name']);
 
               <ul>
                 <li>
-                  <a href="/productspage/pagescode/consolescode/consoles.php"
+                  <a href="productspage\pagescode\consolescode\consoles.php"
                     >Gaming Consoles</a
                   >
                 </li>
                 <li>
-                  <a href="/productspage/pagescode/tvcode/tvs.php">TVs</a>
+                  <a href="productspage\pagescode\tvcode\tvs.php">TVs</a>
                 </li>
                 <li>
-                  <a href="/productspage/pagescode/laptopscode/laptops.php"
+                  <a href="productspage\pagescode\laptopscode\laptops.php"
                     >Laptops</a
                   >
                 </li>
                 <li>
-                  <a href="/productspage/pagescode/monitorscode/monitors.php"
+                  <a href="productspage\pagescode\monitorscode\monitors.php"
                     >Monitors</a
                   >
                 </li>
                 <li>
                   <a
-                    href="/productspage/pagescode/headphonescode/headphones.php"
+                    href="productspage\pagescode\headphonescode\headphones.php"
                     >Headphones</a
                   >
                 </li>

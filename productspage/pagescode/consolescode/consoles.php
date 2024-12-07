@@ -1,3 +1,11 @@
+<?php
+if (session_status() == PHP_SESSION_NONE) 
+{ session_start();}      if (!isset($_SESSION['user_id'])) {
+    header("Location: Login_page/login.php");
+    exit(); }
+$welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
+?>  
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -14,7 +22,10 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
     />
 
-    <link rel="stylesheet" href="/productspage/pagescode/tvcode/tvstyle.css" />
+    <link
+      rel="stylesheet"
+      href="consolestyle.css"
+    />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
@@ -36,8 +47,7 @@
     />
     <!-- fonts links -->
   </head>
-  <body data-model="hd40">
-    <!-- navbar -->
+  <body>
     <nav class="navbar navbar-expand-lg" id="navbar">
       <div class="container-fluid">
         <a class="navbar-brand" href="index.html" id="logo">
@@ -138,7 +148,6 @@
       </div>
     </nav>
     <!-- navbar -->
-    <hr />
 
     <h3
       style="
@@ -148,71 +157,51 @@
         margin-bottom: 15px;
       "
     >
-      Select Your Colour
+      Select From Our Consoles
     </h3>
 
-    <section id="details" class="diffitems">
-      <div class="mainimage">
-        <img
-          src="TVs/40inch/HD-40-Black.webp"
-          width="100%"
-          id="normal"
-          alt=""
-        />
-        <div class="secimages">
-          <div class="secimagescols">
-            <img
-              src="TVs/40inch/HD-40-Black.webp"
-              width="100%"
-              class="smallimg"
-              id="black"
-            />
-          </div>
-          <div class="secimagescols">
-            <img
-              src="TVs/40inch/HD-40-White.webp"
-              width="100%"
-              class="smallimg"
-              id="white"
-            />
-          </div>
-        </div>
-      </div>
-      <div class="maindescription">
-        <br />
-        <h4 id="pname">40-Inch Black TV HD</h4>
-        <br />
-        <h2 id="pprice"><del>£199.99</del> £99.99</h2>
-        <br />
-        <select id="colourselector">
-          <option value="Black">Black</option>
-          <option value="White">White</option>
-        </select>
-        <input type="number" value="1" />
-        <br />
-        <br />
-        <a href="../../../checkoutpage/cart.html"><button class="cartclass">Add to Cart</button></a>
-        <br />
-        <br />
-        <h4 id="pdescriptionheading">
-          Product Description: HD 40 Inch Black TV – Now at Half Price!
-        </h4>
-        <br />
-        <span id="pdescription"
-          >Experience stunning visuals and immersive entertainment with the HD
-          40 Inch Black TV, the perfect addition to any home. Boasting
-          crystal-clear picture quality, vibrant colors, and sleek modern
-          design, this television is designed to enhance your viewing
-          experience, whether you're watching your favorite movies, shows, or
-          gaming. With advanced 4D surround sound technology and multiple
-          connectivity options, including HDMI and USB, it's ready to integrate
-          seamlessly into your setup. Limited Time Offer: Get this incredible HD
-          TV at half the original price! Don't miss this opportunity to upgrade
-          your entertainment system and bring cinematic visuals right to your
-          living room. Click "Add to Basket" now to make it yours before the
-          deal ends!</span
-        >
-      </div>
+    <section class="consolesection">
+      <a href="ps4.html" style="text-decoration: none"
+        ><div class="consolecards">
+          <div class="consoleimages ps4"></div>
+          <h4>PS4</h4>
+          <p></p></div
+      ></a>
+
+      <a href="ps5.html" style="text-decoration: none"
+        ><div class="consolecards">
+          <div class="consoleimages ps5"></div>
+          <h4>PS5</h4>
+          <p></p></div
+      ></a>
+
+      <a href="xbox1.html" style="text-decoration: none"
+        ><div class="consolecards">
+          <div class="consoleimages xbox1"></div>
+          <h4>Xbox 1</h4>
+          <p></p></div
+      ></a>
+
+      <a href="nintendowii.html" style="text-decoration: none"
+        ><div class="consolecards">
+          <div class="consoleimages wii"></div>
+          <h4>Wii</h4>
+          <p></p></div
+      ></a>
+
+      <a href="wiiu.html" style="text-decoration: none"
+        ><div class="consolecards">
+          <div class="consoleimages wiiu"></div>
+          <h4>Wii U</h4>
+          <p></p></div
+      ></a>
+
+      <a href="switch.html" style="text-decoration: none"
+        ><div class="consolecards">
+          <div class="consoleimages switch"></div>
+          <h4>Switch</h4>
+          <p></p></div
+      ></a>
     </section>
 
     <!-- footer -->
@@ -295,6 +284,7 @@
       </div>
     </footer>
     <!-- footer -->
+
     <!--nav account dropdown -->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
@@ -302,7 +292,5 @@
       crossorigin="anonymous"
     ></script>
     <!--nav account dropdown -->
-
-    <script src="tvscript.js"></script>
   </body>
 </html>

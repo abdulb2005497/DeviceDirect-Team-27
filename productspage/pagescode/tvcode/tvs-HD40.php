@@ -1,3 +1,10 @@
+<?php
+if (session_status() == PHP_SESSION_NONE) 
+{ session_start();}      if (!isset($_SESSION['user_id'])) {
+    header("Location: Login_page/login.php");
+    exit(); }
+$welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
+?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -14,10 +21,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
     />
 
-    <link
-      rel="stylesheet"
-      href="/productspage/pagescode/monitorscode/monitorstyle.css"
-    />
+    <link rel="stylesheet" href="tvstyle.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
@@ -39,13 +43,13 @@
     />
     <!-- fonts links -->
   </head>
-  <body>
-    <!-- navbar -->
-    <nav class="navbar navbar-expand-lg" id="navbar">
+  <body data-model="hd40">
+   <!-- navbar -->
+   <nav class="navbar navbar-expand-lg" id="navbar">
       <div class="container-fluid">
-        <a class="navbar-brand" href="index.html" id="logo">
+        <a class="navbar-brand" href="index.php" id="logo">
           <img
-            src="/Landing-Page/assests/images/device_direct_logo.png"
+            src="../assests/images/device_direct_logo.png"
             alt="Device Direct Logo"
             class="logo-img"
           />
@@ -70,18 +74,18 @@
               <a
                 class="nav-link active"
                 aria-current="page"
-                href="/Landing-Page/index.html"
+                href="../index.php"
                 >Home</a
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/productspage/index.html">Shop</a>
+              <a class="nav-link" href="../productspage/index.php">Shop</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/aboutuspage/aboutus.html">About</a>
+              <a class="nav-link" href="../aboutuspage/aboutus.php">About</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/contactuspage/contactus.html"
+              <a class="nav-link" href="../contactuspage/contactus.php"
                 >Contact</a
               >
             </li>
@@ -102,24 +106,25 @@
                 style="background-color: rgb(67 0 86)"
               >
                 <li>
-                  <a class="dropdown-item" href="/Login page/login.html"
+                  <a class="dropdown-item" href="../Login_page/login.php"
                     >Login</a
                   >
                 </li>
                 <li>
-                  <a class="dropdown-item" href="/Login page/signup.html"
+                  <a class="dropdown-item" href="../Login_page/signup.php"
                     >SignUp</a
                   >
                 </li>
                 <li>
                   <a
                     class="dropdown-item"
-                    href="/previousorders/previousorders.html"
+                    href="../previousorders/previousorders.php"
                     >Previous Orders</a
                   >
                 </li>
               </ul>
             </li>
+            <li class="nav-item"><a class="nav-link" href="config/logout.php">Logout</a></li>
           </ul>
           <form class="d-flex" id="search">
             <input
@@ -133,14 +138,16 @@
             </button>
           </form>
           <div class="cart-btn">
-            <a href="/checkoutpage/cart.html"
+            <a href="../checkoutpage/cart.php"
               ><i class="fas fa-shopping-bag"></i
             ></a>
           </div>
         </div>
       </div>
     </nav>
-    <!-- navbar -->
+    <!-- navbar -->
+    <hr />
+
     <h3
       style="
         text-align: center;
@@ -149,39 +156,73 @@
         margin-bottom: 15px;
       "
     >
-      Select From Our Monitors
+      Select Your Colour
     </h3>
 
-    <section class="monitorimages">
-      <a href="monitors-2K25.html" style="text-decoration: none"
-        ><div class="monitorcards">
-          <div class="mimages i2k25"></div>
-          <h4>2K 25 Inch</h4>
-          <p></p></div
-      ></a>
-
-      <a href="monitors-4K25.html" style="text-decoration: none"
-        ><div class="monitorcards">
-          <div class="mimages i4k25"></div>
-          <h4>4K 25 Inch</h4>
-          <p></p></div
-      ></a>
-
-      <a href="monitors-2K30.html" style="text-decoration: none"
-        ><div class="monitorcards">
-          <div class="mimages i2k30"></div>
-          <h4>2K 30 Inch</h4>
-          <p></p></div
-      ></a>
-
-      <a href="monitors-4K30.html" style="text-decoration: none"
-        ><div class="monitorcards">
-          <div class="mimages i4k30"></div>
-          <h4>4K 30 Inch</h4>
-          <p></p></div
-      ></a>
+    <section id="details" class="diffitems">
+      <div class="mainimage">
+        <img
+          src="TVs/40inch/HD-40-Black.webp"
+          width="100%"
+          id="normal"
+          alt=""
+        />
+        <div class="secimages">
+          <div class="secimagescols">
+            <img
+              src="TVs/40inch/HD-40-Black.webp"
+              width="100%"
+              class="smallimg"
+              id="black"
+            />
+          </div>
+          <div class="secimagescols">
+            <img
+              src="TVs/40inch/HD-40-White.webp"
+              width="100%"
+              class="smallimg"
+              id="white"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="maindescription">
+        <br />
+        <h4 id="pname">40-Inch Black TV HD</h4>
+        <br />
+        <h2 id="pprice"><del>£199.99</del> £99.99</h2>
+        <br />
+        <select id="colourselector">
+          <option value="Black">Black</option>
+          <option value="White">White</option>
+        </select>
+        <input type="number" value="1" />
+        <br />
+        <br />
+        <a href="../../../checkoutpage/cart.html"><button class="cartclass">Add to Cart</button></a>
+        <br />
+        <br />
+        <h4 id="pdescriptionheading">
+          Product Description: HD 40 Inch Black TV – Now at Half Price!
+        </h4>
+        <br />
+        <span id="pdescription"
+          >Experience stunning visuals and immersive entertainment with the HD
+          40 Inch Black TV, the perfect addition to any home. Boasting
+          crystal-clear picture quality, vibrant colors, and sleek modern
+          design, this television is designed to enhance your viewing
+          experience, whether you're watching your favorite movies, shows, or
+          gaming. With advanced 4D surround sound technology and multiple
+          connectivity options, including HDMI and USB, it's ready to integrate
+          seamlessly into your setup. Limited Time Offer: Get this incredible HD
+          TV at half the original price! Don't miss this opportunity to upgrade
+          your entertainment system and bring cinematic visuals right to your
+          living room. Click "Add to Basket" now to make it yours before the
+          deal ends!</span
+        >
+      </div>
     </section>
-    <!--This is a comment -->
+
     <!-- footer -->
     <footer id="footer">
       <div class="footer-top">
@@ -201,13 +242,13 @@
             <div class="col-lg-3 col-md-6 footer-links">
               <h4>Usefull Links</h4>
               <ul>
-                <li><a href="/Landing-Page/index.html">Home</a></li>
-                <li><a href="/aboutuspage/aboutus.html">About Us</a></li>
-                <li><a href="/loginpage/login.html">Account</a></li>
+                <li><a href="index.php">Home</a></li>
+                <li><a href="aboutuspage/aboutus.php">About Us</a></li>
+                <li><a href="config/logout.php">Logout</a></li>
                 <li>
-                  <a href="/productspage/index.html">Shop Now</a>
+                  <a href="productspage/index.php">Shop Now</a>
                 </li>
-                <li><a href="/contactuspage/contactus.html">Contact Us</a></li>
+                <li><a href="contactuspage/contactus.php">Contact Us</a></li>
               </ul>
             </div>
 
@@ -216,26 +257,26 @@
 
               <ul>
                 <li>
-                  <a href="/productspage/pagescode/consolescode/consoles.html"
+                  <a href="productspage\pagescode\consolescode\consoles.php"
                     >Gaming Consoles</a
                   >
                 </li>
                 <li>
-                  <a href="/productspage/pagescode/tvcode/tvs.html">TVs</a>
+                  <a href="productspage\pagescode\tvcode\tvs.php">TVs</a>
                 </li>
                 <li>
-                  <a href="/productspage/pagescode/laptopscode/laptops.html"
+                  <a href="productspage\pagescode\laptopscode\laptops.php"
                     >Laptops</a
                   >
                 </li>
                 <li>
-                  <a href="/productspage/pagescode/monitorscode/monitors.html"
+                  <a href="productspage\pagescode\monitorscode\monitors.php"
                     >Monitors</a
                   >
                 </li>
                 <li>
                   <a
-                    href="/productspage/pagescode/headphonescode/headphones.html"
+                    href="productspage\pagescode\headphonescode\headphones.php"
                     >Headphones</a
                   >
                 </li>
@@ -245,9 +286,9 @@
             <div class="col-lg-3 col-md-6 footer-links">
               <h4>Our Social</h4>
               <div class="socail-links mt-3">
-                <a href="https://x.com/" target="_blank"><i class="fa-brands fa-twitter"></i></a>
-                <a href="https://facebook.com/" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
-                <a href="https://instagram.com/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
               </div>
             </div>
           </div>
@@ -262,11 +303,15 @@
       </div>
     </footer>
     <!-- footer -->
+     
+    <!--nav account dropdown -->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"
     ></script>
     <!--nav account dropdown -->
+
+    <script src="tvscript.js"></script>
   </body>
 </html>
