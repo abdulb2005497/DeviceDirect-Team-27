@@ -1,11 +1,8 @@
 <?php
-
 if (session_status() == PHP_SESSION_NONE) 
 { session_start();}      if (!isset($_SESSION['user_id'])) {
     header("Location: Login_page/login.php");
     exit(); }
-
-
 $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
 ?>
 <!DOCTYPE html>
