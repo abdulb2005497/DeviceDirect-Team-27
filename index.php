@@ -91,12 +91,12 @@ $welcome_message = "Hi, " . htmlspecialchars($_SESSION['first_name']);
         <div class="col-md-3 py-3 py-md-0">
           <div class="card">
             <img
-              src="/productspage/pagescode/tvcode/TVs/40inch/HD-40-Black.webp"
+              src="productspage/pagescode/tvcode/TVs/40inch/HD-40-Black.webp"
               alt=""
             />
             <div class="card-body">
               <a
-                href="/productspage/pagescode/tvcode/tvs-HD40.html"
+                href="productspage/pagescode/tvcode/tvs-HD40.html"
                 style="text-decoration: none; color: inherit"
               >
                 <h3 class="text-center">HD 40 Inch Black TV</h3>
@@ -121,12 +121,12 @@ $welcome_message = "Hi, " . htmlspecialchars($_SESSION['first_name']);
         <div class="col-md-3 py-3 py-md-0">
           <div class="card">
             <img
-              src="/productspage/pagescode/headphonescode/Headphones/overeargrey.webp"
+              src="productspage/pagescode/headphonescode/Headphones/overeargrey.webp"
               alt=""
             />
             <div class="card-body">
               <a
-                href="/productspage/pagescode/headphonescode/overeargrey.html"
+                href="productspage/pagescode/headphonescode/overeargrey.html"
                 style="text-decoration: none; color: inherit"
               >
                 <h3 class="text-center">Over Ear Grey Headphones</h3>
@@ -151,12 +151,12 @@ $welcome_message = "Hi, " . htmlspecialchars($_SESSION['first_name']);
         <div class="col-md-3 py-3 py-md-0">
           <div class="card">
             <img
-              src="/productspage/pagescode/laptopscode/Laptops/16inch/Probook-16-black.webp"
+              src="productspage/pagescode/laptopscode/Laptops/16inch/Probook-16-black.webp"
               alt=""
             />
             <div class="card-body">
               <a
-                href="/productspage/pagescode/laptopscode/laptops-16P.html"
+                href="productspage/pagescode/laptopscode/laptops-16P.html"
                 style="text-decoration: none; color: inherit"
               >
                 <h3 class="text-center">16 inch Black Probook</h3>
@@ -181,12 +181,12 @@ $welcome_message = "Hi, " . htmlspecialchars($_SESSION['first_name']);
         <div class="col-md-3 py-3 py-md-0">
           <div class="card">
             <img
-              src="/productspage/pagescode/monitorscode/Monitors/30inch/4k-30-White.webp"
+              src="productspage/pagescode/monitorscode/Monitors/30inch/4k-30-White.webp"
               alt=""
             />
             <div class="card-body">
               <a
-                href="/productspage/pagescode/monitorscode/monitors-4K30.html"
+                href="productspage/pagescode/monitorscode/monitors-4K30.html"
                 style="text-decoration: none; color: inherit"
               >
                 <h3 class="text-center">30 Inch White Monitor 4K</h3>
@@ -213,12 +213,12 @@ $welcome_message = "Hi, " . htmlspecialchars($_SESSION['first_name']);
         <div class="col-md-3 py-3 py-md-0">
           <div class="card">
             <img
-              src="/productspage/pagescode/consolescode/Consoles/PS5/PS5 White.webp"
+              src="productspage/pagescode/consolescode/Consoles/PS5/PS5 White.webp"
               alt=""
             />
             <div class="card-body">
               <a
-                href="/productspage/pagescode/consolescode/ps5.html"
+                href="productspage/pagescode/consolescode/ps5.html"
                 style="text-decoration: none; color: inherit"
               >
                 <h3 class="text-center">Playstation 5</h3>
@@ -243,12 +243,12 @@ $welcome_message = "Hi, " . htmlspecialchars($_SESSION['first_name']);
         <div class="col-md-3 py-3 py-md-0">
           <div class="card">
             <img
-              src="/productspage/pagescode/tvcode/TVs/80inch/4k-80-Black.webp"
+              src="productspage/pagescode/tvcode/TVs/80inch/4k-80-Black.webp"
               alt=""
             />
             <div class="card-body">
               <a
-                href="/productspage/pagescode/consolescode/ps5.html"
+                href="productspage/pagescode/consolescode/ps5.html"
                 style="text-decoration: none; color: inherit"
               >
                 <h3 class="text-center">80-Inch Black TV 4k</h3>
@@ -273,12 +273,12 @@ $welcome_message = "Hi, " . htmlspecialchars($_SESSION['first_name']);
         <div class="col-md-3 py-3 py-md-0">
           <div class="card">
             <img
-              src="/productspage/pagescode/laptopscode/Laptops/16inch/Windows-16-White.webp"
+              src="productspage/pagescode/laptopscode/Laptops/16inch/Windows-16-White.webp"
               alt=""
             />
             <div class="card-body">
               <a
-                href="/productspage/pagescode/laptopscode/laptops-16W.html"
+                href="productspage/pagescode/laptopscode/laptops-16W.html"
                 style="text-decoration: none; color: inherit"
               >
                 <h3 class="text-center">16 inch Windows Laptop</h3>
@@ -303,12 +303,12 @@ $welcome_message = "Hi, " . htmlspecialchars($_SESSION['first_name']);
         <div class="col-md-3 py-3 py-md-0">
           <div class="card">
             <img
-              src="/productspage/pagescode/headphonescode/Headphones/inearblack.webp"
+              src="productspage/pagescode/headphonescode/Headphones/inearblack.webp"
               alt=""
             />
             <div class="card-body">
               <a
-                href="/productspage/pagescode/laptopscode/laptops-16W.html"
+                href="productspage/pagescode/laptopscode/laptops-16W.html"
                 style="text-decoration: none; color: inherit"
               >
                 <h3 class="text-center">In Ear Black Headphones</h3>
@@ -342,7 +342,7 @@ $welcome_message = "Hi, " . htmlspecialchars($_SESSION['first_name']);
               <h3>Best Laptop</h3>
               <h5>Latest Collection</h5>
               <p>Up To 50% Off</p>
-              <a href="/productspage/pagescode/laptopscode/laptops.html">
+              <a href="productspage/pagescode/laptopscode/laptops.html">
                 <button id="shopnow">Shop Now</button></a
               >
             </div>
@@ -355,7 +355,7 @@ $welcome_message = "Hi, " . htmlspecialchars($_SESSION['first_name']);
               <h3>Best Headphone</h3>
               <h5>Latest Collection</h5>
               <p>Up To 50% Off</p>
-              <a href="/productspage/pagescode/headphonescode/headphones.html">
+              <a href="productspage/pagescode/headphonescode/headphones.html">
                 <button id="shopnow">Shop Now</button></a
               >
             </div>
