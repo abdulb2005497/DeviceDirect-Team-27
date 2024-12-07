@@ -45,13 +45,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `First_name`, `Last_name`, `Email`, `Phone`, `Address`, `password`, `role`, `created_at`) VALUES
 (1, 'Anas', 'Ige', 'igeanas3@gmail.com', '', '', '$2y$10$ed2wwNv/feUExTKkIjynC.JbFXxG549UeuUGSDPnHedUZumfq2J5G', 'user', '2024-12-05 19:16:38'),
-(3, 'Anasl', 'Igl', 'igeanas3l@gmail.com', '', '', '$2y$10$z3rDiYb7aiS3yhsUtWBh9unzYpgEXMs/SjemiJ6a4DFgP99quRlXG', 'user', '2024-12-05 19:18:15'),
-(5, 'asd', 'asd', 'igeanas3@gmail.comc', 'asd', 'asd', '$2y$10$nMUfKaR6f8//4iKYw5VEZ.5gSrm0KY6NwSHuySfSklFYK6qBUT0q.', 'user', '2024-12-05 19:22:04'),
-(12, 'Anas', 'Ige', 'igeanas3@gmaihgfl.com', '07827702198', '86 Grosvenor Road, Aston, Birmingham, B67NA', '$2y$10$lYNwXP8ZuRCetLxB09.DQuHb0sQrIH.ns64mUVcOVa2JItFuBre0C', 'user', '2024-12-05 19:56:52'),
-(14, 'Anas', 'Ige', 'igeanas3@gmahgfkgfil.com', '07827702198', '86 Grosvenor Road, Aston, Birmingham, B67NA', '$2y$10$mDWsbF5/k8e2NKRuSdiFw.kWBn28dI6fmSX.JV3g.FiF16iP.8SB6', 'user', '2024-12-05 19:58:48'),
-(15, 'test', 'lol', 'test@test.com', '09', '86 Grosvenor Road, Aston, Birmingham, B67NA', '$2y$10$/OIiSu72p.YFYU8KImAxcujeKPFMSWLLEKkDHfA.lRexk28DS2gXC', 'user', '2024-12-06 14:12:09'),
-(16, 'pussloy', 'Ige', 'op@gmail.com', '07827702198', '86 Grosvenor Road, Aston, Birmingham, B67NA', '$2y$10$E96til197OuliX4MzAi1.uWKlv3Kxn4SBo1mBvDBFYkzJG/3XZmoO', 'user', '2024-12-06 17:21:59'),
-(17, 'Anas', 'Ige', 'igeanas33@gmail.com', '07827702198', '86 Grosvenor Road, Aston, Birmingham, B67NA', '$2y$10$mtphl04npp8KSsxCBzknGeeb0HCiTrT3qUMzFipYhea6QUHix7yOC', 'user', '2024-12-06 17:34:25');
+
 
 --
 -- Indexes for dumped tables

@@ -1,21 +1,14 @@
 <?php
 require_once __DIR__ . '/../config/db.php';
-
 if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
-
-
+    session_start();}
 if (empty($_SESSION['csrf_token'])) {
-    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-}
-
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));}
 $email_error = false; 
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (!hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
         $error_message = "Invalid CSRF token.";
-    } else {
+    }else{
         $first_name = htmlspecialchars($_POST['first_name']);
         $last_name = htmlspecialchars($_POST['last_name']);
         $email = htmlspecialchars($_POST['email']);
@@ -24,24 +17,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $role = 'user'; 
         $password = $_POST['password'];
         $confirm_password = $_POST['confirm_password'];
-
-        
-        if ($password !== $confirm_password) {
+        if($password !== $confirm_password) {
             $error_message = "Passwords do not match.";
-        } else {
-            
+        }else{
             $hashed_password = password_hash($password, PASSWORD_BCRYPT);
-
-            try {
-               
-                $stmt = $pdo->prepare("INSERT INTO users (First_name, Last_name, Email, Phone, Address, password, role) VALUES (?, ?, ?, ?, ?, ?, ?)");
+          try{$stmt = $pdo->prepare("INSERT INTO users (First_name, Last_name, Email, Phone, Address, password, role) VALUES (?, ?, ?, ?, ?, ?, ?)");
                 $stmt->execute([$first_name, $last_name, $email, $phone, $address, $hashed_password, $role]);
-
-                
                 header("Location: login.php");
                 exit();
-            } catch (PDOException $e) {
-                
+            }catch (PDOException $e) {
                 if ($e->getCode() == 23000) {
                     $email_error = true; 
                 } else {
