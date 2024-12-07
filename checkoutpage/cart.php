@@ -1,4 +1,18 @@
 
+<?php
+
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+if (!isset($_SESSION['user_id'])) {
+    header("Location: Login_page/login.php");
+    exit();
+}
+
+
+$welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
+?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -23,7 +37,8 @@
    />
  </head>
  <body>
- <nav class="navbar navbar-expand-lg" id="navbar">
+   <!-- navbar -->
+   <nav class="navbar navbar-expand-lg" id="navbar">
       <div class="container-fluid">
         <a class="navbar-brand" href="index.php" id="logo">
           <img
@@ -84,12 +99,12 @@
                 style="background-color: rgb(67 0 86)"
               >
                 <li>
-                  <a class="dropdown-item" href=".Login_page/login.php"
+                  <a class="dropdown-item" href="../Login_page/login.php"
                     >Login</a
                   >
                 </li>
                 <li>
-                  <a class="dropdown-item" href="Login_page/signup.php"
+                  <a class="dropdown-item" href="../Login_page/signup.php"
                     >SignUp</a
                   >
                 </li>
@@ -125,6 +140,7 @@
     </nav>
     <!-- navbar -->
 
+
     <div class="cart-container">
         <h1>CART PAGE</h1>
 
@@ -159,7 +175,7 @@
                 <p>Total: £250.98</p>
                 <p>Shipping: Free</p>
                 <p>Total: £250.98</p>
-                <a href="checkout.html"><button class="checkout-btn">Checkout </button></a>
+                <a href="../checkoutpage/checkout.php"><button class="checkout-btn">Checkout </button></a>
                 <button class="paypal-btn">Pay with PayPal</button>
                 <h3>Discount code:</h3>
                 <form class="discount-code" action="index.html" method="post">
@@ -167,7 +183,7 @@
                 </form>
             </div>
         </div>
-        <a href="wishlist.html">Enter wishlist</a>
+        <a href="wishlist.php`">Enter wishlist</a>
     </div>
     </form>
 
@@ -233,9 +249,9 @@
               <div class="col-lg-3 col-md-6 footer-links">
                 <h4>Our Social</h4>
                 <div class="socail-links mt-3">
-                  <a href="https://x.com/" target="_blank"><i class="fa-brands fa-twitter"></i></a>
-                  <a href="https://facebook.com/" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
-                  <a href="https://instagram.com/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                  <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                  <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                  <a href="#"><i class="fa-brands fa-instagram"></i></a>
                 </div>
               </div>
             </div>
