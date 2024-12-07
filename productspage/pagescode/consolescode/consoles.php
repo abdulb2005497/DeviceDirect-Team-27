@@ -1,3 +1,11 @@
+<?php
+if (session_status() == PHP_SESSION_NONE) 
+{ session_start();}      if (!isset($_SESSION['user_id'])) {
+    header("Location: Login_page/login.php");
+    exit(); }
+$welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
+?>  
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -16,7 +24,7 @@
 
     <link
       rel="stylesheet"
-      href="/productspage/pagescode/monitorscode/monitorstyle.css"
+      href="consolestyle.css"
     />
     <link
       rel="stylesheet"
@@ -40,7 +48,6 @@
     <!-- fonts links -->
   </head>
   <body>
-    <!-- navbar -->
     <nav class="navbar navbar-expand-lg" id="navbar">
       <div class="container-fluid">
         <a class="navbar-brand" href="index.html" id="logo">
@@ -141,6 +148,7 @@
       </div>
     </nav>
     <!-- navbar -->
+
     <h3
       style="
         text-align: center;
@@ -149,39 +157,53 @@
         margin-bottom: 15px;
       "
     >
-      Select From Our Monitors
+      Select From Our Consoles
     </h3>
 
-    <section class="monitorimages">
-      <a href="monitors-2K25.html" style="text-decoration: none"
-        ><div class="monitorcards">
-          <div class="mimages i2k25"></div>
-          <h4>2K 25 Inch</h4>
+    <section class="consolesection">
+      <a href="ps4.html" style="text-decoration: none"
+        ><div class="consolecards">
+          <div class="consoleimages ps4"></div>
+          <h4>PS4</h4>
           <p></p></div
       ></a>
 
-      <a href="monitors-4K25.html" style="text-decoration: none"
-        ><div class="monitorcards">
-          <div class="mimages i4k25"></div>
-          <h4>4K 25 Inch</h4>
+      <a href="ps5.html" style="text-decoration: none"
+        ><div class="consolecards">
+          <div class="consoleimages ps5"></div>
+          <h4>PS5</h4>
           <p></p></div
       ></a>
 
-      <a href="monitors-2K30.html" style="text-decoration: none"
-        ><div class="monitorcards">
-          <div class="mimages i2k30"></div>
-          <h4>2K 30 Inch</h4>
+      <a href="xbox1.html" style="text-decoration: none"
+        ><div class="consolecards">
+          <div class="consoleimages xbox1"></div>
+          <h4>Xbox 1</h4>
           <p></p></div
       ></a>
 
-      <a href="monitors-4K30.html" style="text-decoration: none"
-        ><div class="monitorcards">
-          <div class="mimages i4k30"></div>
-          <h4>4K 30 Inch</h4>
+      <a href="nintendowii.html" style="text-decoration: none"
+        ><div class="consolecards">
+          <div class="consoleimages wii"></div>
+          <h4>Wii</h4>
+          <p></p></div
+      ></a>
+
+      <a href="wiiu.html" style="text-decoration: none"
+        ><div class="consolecards">
+          <div class="consoleimages wiiu"></div>
+          <h4>Wii U</h4>
+          <p></p></div
+      ></a>
+
+      <a href="switch.html" style="text-decoration: none"
+        ><div class="consolecards">
+          <div class="consoleimages switch"></div>
+          <h4>Switch</h4>
           <p></p></div
       ></a>
     </section>
-    <!--This is a comment -->
+
     <!-- footer -->
     <footer id="footer">
       <div class="footer-top">
@@ -262,6 +284,8 @@
       </div>
     </footer>
     <!-- footer -->
+
+    <!--nav account dropdown -->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"

@@ -1,3 +1,11 @@
+<?php
+if (session_status() == PHP_SESSION_NONE) 
+{ session_start();}      if (!isset($_SESSION['user_id'])) {
+    header("Location: Login_page/login.php");
+    exit(); }
+$welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
+?>  
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -16,7 +24,7 @@
 
     <link
       rel="stylesheet"
-      href="/productspage/pagescode/laptopscode/laptopstyle.css"
+      href="/productspage/pagescode/monitorscode/monitorstyle.css"
     />
     <link
       rel="stylesheet"
@@ -149,66 +157,39 @@
         margin-bottom: 15px;
       "
     >
-      Select From Our Laptops
+      Select From Our Monitors
     </h3>
 
-    <section class="laptopsection">
-      <a href="laptops-12W.html" style="text-decoration: none"
-        ><div class="laptopcards">
-          <div class="laptopimages i12w"></div>
-          <h4>12 Inch Windows</h4>
+    <section class="monitorimages">
+      <a href="monitors-2K25.html" style="text-decoration: none"
+        ><div class="monitorcards">
+          <div class="mimages i2k25"></div>
+          <h4>2K 25 Inch</h4>
           <p></p></div
       ></a>
 
-      <a href="laptops-12C.html" style="text-decoration: none"
-        ><div class="laptopcards">
-          <div class="laptopimages i12c"></div>
-          <h4>12 Inch Chrome</h4>
+      <a href="monitors-4K25.html" style="text-decoration: none"
+        ><div class="monitorcards">
+          <div class="mimages i4k25"></div>
+          <h4>4K 25 Inch</h4>
           <p></p></div
       ></a>
 
-      <a href="laptops-12A.html" style="text-decoration: none"
-        ><div class="laptopcards">
-          <div class="laptopimages i12a"></div>
-          <h4>12 Inch Airbook</h4>
+      <a href="monitors-2K30.html" style="text-decoration: none"
+        ><div class="monitorcards">
+          <div class="mimages i2k30"></div>
+          <h4>2K 30 Inch</h4>
           <p></p></div
       ></a>
 
-      <a href="laptops-12P.html" style="text-decoration: none"
-        ><div class="laptopcards">
-          <div class="laptopimages i12p"></div>
-          <h4>12 Inch Probook</h4>
-          <p></p></div
-      ></a>
-
-      <a href="laptops-16W.html" style="text-decoration: none"
-        ><div class="laptopcards">
-          <div class="laptopimages i16w"></div>
-          <h4>16 Inch Windows</h4>
-          <p></p></div
-      ></a>
-
-      <a href="laptops-16C.html" style="text-decoration: none"
-        ><div class="laptopcards">
-          <div class="laptopimages i16c"></div>
-          <h4>16 Inch Chrome</h4>
-          <p></p></div
-      ></a>
-
-      <a href="laptops-16A.html" style="text-decoration: none"
-        ><div class="laptopcards">
-          <div class="laptopimages i16a"></div>
-          <h4>16 Inch Airbook</h4>
-          <p></p></div
-      ></a>
-
-      <a href="laptops-16P.html" style="text-decoration: none"
-        ><div class="laptopcards">
-          <div class="laptopimages i16p"></div>
-          <h4>16 Inch Probook</h4>
+      <a href="monitors-4K30.html" style="text-decoration: none"
+        ><div class="monitorcards">
+          <div class="mimages i4k30"></div>
+          <h4>4K 30 Inch</h4>
           <p></p></div
       ></a>
     </section>
+    <!--This is a comment -->
     <!-- footer -->
     <footer id="footer">
       <div class="footer-top">
@@ -289,7 +270,6 @@
       </div>
     </footer>
     <!-- footer -->
-    <!--nav account dropdown -->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"

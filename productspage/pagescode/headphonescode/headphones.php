@@ -1,3 +1,11 @@
+<?php
+if (session_status() == PHP_SESSION_NONE) 
+{ session_start();}      if (!isset($_SESSION['user_id'])) {
+    header("Location: Login_page/login.php");
+    exit(); }
+$welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
+?>  
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -14,7 +22,10 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
     />
 
-    <link rel="stylesheet" href="/productspage/style.css" />
+    <link
+      rel="stylesheet"
+      href="/productspage/pagescode/headphonescode/headphonestyle.css"
+    />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
@@ -118,7 +129,6 @@
               </ul>
             </li>
           </ul>
-
           <form class="d-flex" id="search">
             <input
               class="form-control me-2"
@@ -130,7 +140,6 @@
               Search
             </button>
           </form>
-
           <div class="cart-btn">
             <a href="/checkoutpage/cart.html"
               ><i class="fas fa-shopping-bag"></i
@@ -148,77 +157,52 @@
         margin-bottom: 15px;
       "
     >
-      Shop By Search
+      Select From Our Headphones
     </h3>
 
-    <div class="searchsectionwrapper">
-      <section class="searchsection">
-        <form>
-          <img src="../productspage/categoryimages/search.png" />
-          <input type="text" placeholder="Search" id="inputsearch" autocomplete="off" />
-        </form>
-        <div class="optionbox"></div>
-      </section>
-    </div>
-
-    <h3
-      style="
-        text-align: center;
-        font-weight: 600;
-        margin-top: 20px;
-        margin-bottom: 15px;
-      "
-    >
-      Search By Category
-    </h3>
-
-    <section class="catrgoryimages">
-      <a
-        href="../productspage/pagescode/tvcode/tvs.html"
-        style="text-decoration: none"
-        ><div class="categorycards">
-          <div class="cimages tvs"></div>
-          <h4>TVs</h4>
+    <section class="headphonesection">
+      <a href="inearblack.html" style="text-decoration: none"
+        ><div class="headphonecards">
+          <div class="headphoneimages ineb"></div>
+          <h4>In Ear Black</h4>
           <p></p></div
       ></a>
 
-      <a
-        href="../productspage/pagescode/monitorscode/monitors.html"
-        style="text-decoration: none"
-        ><div class="categorycards">
-          <div class="cimages monitors"></div>
-          <h4>Monitors</h4>
+      <a href="inearwhite.html" style="text-decoration: none"
+        ><div class="headphonecards">
+          <div class="headphoneimages inew"></div>
+          <h4>In Ear White</h4>
           <p></p></div
       ></a>
 
-      <a
-        href="../productspage/pagescode/laptopscode/laptops.html"
-        style="text-decoration: none"
-        ><div class="categorycards">
-          <div class="cimages laptops"></div>
-          <h4>Laptops</h4>
+      <a href="ineargrey.html" style="text-decoration: none"
+        ><div class="headphonecards">
+          <div class="headphoneimages ineg"></div>
+          <h4>In Ear Grey</h4>
           <p></p></div
       ></a>
 
-      <a
-        href="../productspage/pagescode/headphonescode/headphones.html"
-        style="text-decoration: none"
-        ><div class="categorycards">
-          <div class="cimages headphones"></div>
-          <h4>Headphones</h4>
+      <a href="overearblack.html" style="text-decoration: none"
+        ><div class="headphonecards">
+          <div class="headphoneimages oeb"></div>
+          <h4>Over Ear Black</h4>
           <p></p></div
       ></a>
 
-      <a
-        href="../productspage/pagescode/consolescode/consoles.html"
-        style="text-decoration: none"
-        ><div class="categorycards">
-          <div class="cimages consoles"></div>
-          <h4>Consoles</h4>
+      <a href="overearwhite.html" style="text-decoration: none"
+        ><div class="headphonecards">
+          <div class="headphoneimages oew"></div>
+          <h4>Over Ear White</h4>
+          <p></p></div
+      ></a>
+
+      <a href="overeargrey.html" style="text-decoration: none"
+        ><div class="headphonecards">
+          <div class="headphoneimages oeg"></div>
+          <h4>Over Ear Grey</h4>
           <p></p></div
       ></a>
     </section>
-
     <!-- footer -->
     <footer id="footer">
       <div class="footer-top">
@@ -300,11 +284,12 @@
     </footer>
     <!-- footer -->
 
-    <script src="script.js"></script>
+    <!--nav account dropdown -->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"
     ></script>
+    <!--nav account dropdown -->
   </body>
 </html>

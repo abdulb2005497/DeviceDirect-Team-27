@@ -1,3 +1,11 @@
+<?php
+if (session_status() == PHP_SESSION_NONE) 
+{ session_start();}      if (!isset($_SESSION['user_id'])) {
+    header("Location: Login_page/login.php");
+    exit(); }
+$welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
+?>  
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -14,7 +22,10 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
     />
 
-    <link rel="stylesheet" href="/productspage/pagescode/tvcode/tvstyle.css" />
+    <link
+      rel="stylesheet"
+      href="/productspage/pagescode/laptopscode/laptopstyle.css"
+    />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
@@ -146,49 +157,63 @@
         margin-bottom: 15px;
       "
     >
-      Select From Our TVs
+      Select From Our Laptops
     </h3>
 
-    <section class="tvsection">
-      <a href="../tvcode/tvs-HD40.html" style="text-decoration: none"
-        ><div class="tvcards">
-          <div class="tvimages hd40"></div>
-          <h4>HD 40-Inch</h4>
+    <section class="laptopsection">
+      <a href="laptops-12W.html" style="text-decoration: none"
+        ><div class="laptopcards">
+          <div class="laptopimages i12w"></div>
+          <h4>12 Inch Windows</h4>
           <p></p></div
       ></a>
 
-      <a href="../tvcode/tvs-4K40.html" style="text-decoration: none"
-        ><div class="tvcards">
-          <div class="tvimages i4k40"></div>
-          <h4>4K 40-Inch</h4>
+      <a href="laptops-12C.html" style="text-decoration: none"
+        ><div class="laptopcards">
+          <div class="laptopimages i12c"></div>
+          <h4>12 Inch Chrome</h4>
           <p></p></div
       ></a>
 
-      <a href="../tvcode/tvs-HD60.html" style="text-decoration: none"
-        ><div class="tvcards">
-          <div class="tvimages hd60"></div>
-          <h4>HD 60-Inch</h4>
+      <a href="laptops-12A.html" style="text-decoration: none"
+        ><div class="laptopcards">
+          <div class="laptopimages i12a"></div>
+          <h4>12 Inch Airbook</h4>
           <p></p></div
       ></a>
 
-      <a href="../tvcode/tvs-4K60.html" style="text-decoration: none"
-        ><div class="tvcards">
-          <div class="tvimages i4k60"></div>
-          <h4>4K 60-Inch</h4>
+      <a href="laptops-12P.html" style="text-decoration: none"
+        ><div class="laptopcards">
+          <div class="laptopimages i12p"></div>
+          <h4>12 Inch Probook</h4>
           <p></p></div
       ></a>
 
-      <a href="../tvcode/tvs-HD-80.html" style="text-decoration: none"
-        ><div class="tvcards">
-          <div class="tvimages ihd80"></div>
-          <h4>HD 80-Inch</h4>
+      <a href="laptops-16W.html" style="text-decoration: none"
+        ><div class="laptopcards">
+          <div class="laptopimages i16w"></div>
+          <h4>16 Inch Windows</h4>
           <p></p></div
       ></a>
 
-      <a href="../tvcode/tvs-4K80.html" style="text-decoration: none"
-        ><div class="tvcards">
-          <div class="tvimages i4k80"></div>
-          <h4>4K 80-Inch</h4>
+      <a href="laptops-16C.html" style="text-decoration: none"
+        ><div class="laptopcards">
+          <div class="laptopimages i16c"></div>
+          <h4>16 Inch Chrome</h4>
+          <p></p></div
+      ></a>
+
+      <a href="laptops-16A.html" style="text-decoration: none"
+        ><div class="laptopcards">
+          <div class="laptopimages i16a"></div>
+          <h4>16 Inch Airbook</h4>
+          <p></p></div
+      ></a>
+
+      <a href="laptops-16P.html" style="text-decoration: none"
+        ><div class="laptopcards">
+          <div class="laptopimages i16p"></div>
+          <h4>16 Inch Probook</h4>
           <p></p></div
       ></a>
     </section>
@@ -279,6 +304,5 @@
       crossorigin="anonymous"
     ></script>
     <!--nav account dropdown -->
-    <script src="tvscript.js"></script>
   </body>
 </html>
