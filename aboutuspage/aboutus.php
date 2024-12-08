@@ -152,11 +152,10 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
     </nav>
     <!-- navbar -->
     <!--Hero Section-->
-
     <section id="hero">
       <div class="hero-bg">
         <img
-          src="/Landing-Page/assests/images/about-hero.png"
+          src="../Landing-Page/assests/images/about-hero.png"
           alt="About Us Banner"
         />
       </div>
@@ -165,7 +164,6 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
         <p>The tech you need. At prices you deserve.</p>
       </div>
     </section>
-
     <!--Hero Section-->
 
   <!--New Improved Slider-->
