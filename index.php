@@ -343,9 +343,8 @@ $welcome_message = "Hi, " . htmlspecialchars($_SESSION['first_name']);
           Up To <span id="span2">50%</span> Off
         </h1>
         <p>
-          Discover unbeatable deals on the latest electronic gadgets at Device
-          Direct! <br />Whether you're upgrading your smartphone, buying the
-          latest gaming console,<br />
+          Device Direct can GUARUNTEE better prices and quality than our competitors! <br />Whether you're upgrading your smartphone, buying the
+          newest gaming console,<br />
           or looking for the perfect gift, our collection has something for
           everyone.
         </p>
