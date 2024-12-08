@@ -166,6 +166,4 @@ updateItems("white");
  
 }
 )
-
-
-
+  
