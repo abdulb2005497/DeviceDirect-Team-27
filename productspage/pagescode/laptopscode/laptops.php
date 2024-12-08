@@ -22,7 +22,7 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
     />
 
-    <link rel="stylesheet" href="laptopstyle.css" />
+    <link rel="stylesheet" href="laptopstyle.css?v=<?php echo time(); ?>">
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
@@ -127,17 +127,6 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
             </li>
             <li class="nav-item"><a class="nav-link" href="../../../config/logout.php">Logout</a></li>
           </ul>
-          <form class="d-flex" id="search">
-            <input
-              class="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-            <button class="btn btn-outline-success" type="submit">
-              Search
-            </button>
-          </form>
           <div class="cart-btn">
             <a href="../../../checkoutpage/cart.php"
               ><i class="fas fa-shopping-bag"></i

@@ -332,6 +332,13 @@ body {
   opacity: 1;
   background-color: white;
 }
+body {
+  background-image: url(../../categoryimages/background.jpeg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
+}
 
 /* footer */
 #footer {

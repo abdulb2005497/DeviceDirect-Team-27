@@ -129,7 +129,13 @@
   color: gray;
 }
 /* navbar */
-
+body {
+  background-image: url(../productspage/categoryimages/background.jpeg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
+}
 /* Progress Bar Styles */
 .progress-bar-container {
   width: 100%;

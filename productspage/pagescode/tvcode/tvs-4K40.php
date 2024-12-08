@@ -127,15 +127,7 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
             </li>
             <li class="nav-item"><a class="nav-link" href="../../../config/logout.php">Logout</a></li>
           </ul>
-          <div class="searchsectionwrappernav">
-  <section class="searchsectionnav">
-    <form>
-      <img src="../../../productspage/categoryimages/search.png" alt="Search Icon" />
-      <input type="text" placeholder="Search" id="inputsearchnav" autocomplete="off" />
-    </form>
-    <div class="optionboxnav"></div>
-  </section>
-</div>
+          
           <div class="cart-btn">
             <a href="../../../checkoutpage/cart.php"
               ><i class="fas fa-shopping-bag"></i
