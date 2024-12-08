@@ -21,11 +21,14 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
     />
 
-    <link rel="stylesheet" href="../productspage/style.css" />
+
+    <link rel="stylesheet" href="../productspage/style.css?v=<?php echo time(); ?>">
+
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
     />
+    
     <!-- bootstrap links -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
@@ -41,7 +44,11 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
       href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap"
       rel="stylesheet"
     />
+ 
+
     <!-- fonts links -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+
   </head>
   <body>
 
@@ -127,7 +134,7 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
             </li>
             <li class="nav-item"><a class="nav-link" href="config/logout.php">Logout</a></li>
           </ul>
-          <form class="d-flex" id="search">
+         <!-- <form class="d-flex" id="search">
             <input
               class="form-control me-2"
               type="search"
@@ -137,7 +144,20 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
             <button class="btn btn-outline-success" type="submit">
               Search
             </button>
-          </form>
+          </form> -->
+          <div class="searchsectionwrappernav">
+  <section class="searchsectionnav">
+    <form>
+      <img src="../productspage/categoryimages/search.png" alt="Search Icon" />
+      <input type="text" placeholder="Search" id="inputsearchnav" autocomplete="off" />
+    </form>
+    <div class="optionboxnav"></div>
+  </section>
+</div>
+
+          
+
+
           <div class="cart-btn">
             <a href="../checkoutpage/cart.php"
               ><i class="fas fa-shopping-bag"></i
