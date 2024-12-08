@@ -8,7 +8,7 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
 
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -22,10 +22,7 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
     />
 
-    <link
-      rel="stylesheet"
-      href="/productspage/pagescode/monitorscode/monitorstyle.css"
-    />
+    <link rel="stylesheet" href="monitorstyle.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
@@ -48,12 +45,11 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
     <!-- fonts links -->
   </head>
   <body>
-    <!-- navbar -->
-    <nav class="navbar navbar-expand-lg" id="navbar">
+  <nav class="navbar navbar-expand-lg" id="navbar">
       <div class="container-fluid">
-        <a class="navbar-brand" href="index.html" id="logo">
+        <a class="navbar-brand" href="index.php" id="logo">
           <img
-            src="/Landing-Page/assests/images/device_direct_logo.png"
+            src="../../../assests/images/device_direct_logo.png"
             alt="Device Direct Logo"
             class="logo-img"
           />
@@ -69,7 +65,7 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
           aria-label="Toggle navigation"
         >
           <span
-            ><img src="./assests/images/menu.png" alt="" width="30px"
+            ><img src="../../../assests/images/menu.png" alt="" width="30px"
           /></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -78,18 +74,18 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
               <a
                 class="nav-link active"
                 aria-current="page"
-                href="/Landing-Page/index.html"
+                href="../../../index.php"
                 >Home</a
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/productspage/index.html">Shop</a>
+              <a class="nav-link" href="../../index.php">Shop</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/aboutuspage/aboutus.html">About</a>
+              <a class="nav-link" href="../../../aboutuspage/aboutus.php">About</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/contactuspage/contactus.html"
+              <a class="nav-link" href="../../../contactuspage/contactus.php"
                 >Contact</a
               >
             </li>
@@ -110,24 +106,25 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
                 style="background-color: rgb(67 0 86)"
               >
                 <li>
-                  <a class="dropdown-item" href="/Login page/login.html"
+                  <a class="dropdown-item" href="../../../Login_page/login.php"
                     >Login</a
                   >
                 </li>
                 <li>
-                  <a class="dropdown-item" href="/Login page/signup.html"
+                  <a class="dropdown-item" href="../../../Login_page/signup.php"
                     >SignUp</a
                   >
                 </li>
                 <li>
                   <a
                     class="dropdown-item"
-                    href="/previousorders/previousorders.html"
+                    href="../../../previousorders/previousorders.php"
                     >Previous Orders</a
                   >
                 </li>
               </ul>
             </li>
+            <li class="nav-item"><a class="nav-link" href="../../../config/logout.php">Logout</a></li>
           </ul>
           <form class="d-flex" id="search">
             <input
@@ -141,14 +138,14 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
             </button>
           </form>
           <div class="cart-btn">
-            <a href="/checkoutpage/cart.html"
+            <a href="../../../checkoutpage/cart.php"
               ><i class="fas fa-shopping-bag"></i
             ></a>
           </div>
         </div>
       </div>
     </nav>
-    <!-- navbar -->
+    <!-- navbar -->
     <h3
       style="
         text-align: center;
@@ -161,28 +158,28 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
     </h3>
 
     <section class="monitorimages">
-      <a href="monitors-2K25.html" style="text-decoration: none"
+      <a href="../monitorscode/monitors-2K25.php" style="text-decoration: none"
         ><div class="monitorcards">
           <div class="mimages i2k25"></div>
           <h4>2K 25 Inch</h4>
           <p></p></div
       ></a>
 
-      <a href="monitors-4K25.html" style="text-decoration: none"
+      <a href="../monitorscode/monitors-4K25.php" style="text-decoration: none"
         ><div class="monitorcards">
           <div class="mimages i4k25"></div>
           <h4>4K 25 Inch</h4>
           <p></p></div
       ></a>
 
-      <a href="monitors-2K30.html" style="text-decoration: none"
+      <a href="../monitorscode/monitors-2K30.php" style="text-decoration: none"
         ><div class="monitorcards">
           <div class="mimages i2k30"></div>
           <h4>2K 30 Inch</h4>
           <p></p></div
       ></a>
 
-      <a href="monitors-4K30.html" style="text-decoration: none"
+      <a href="../monitorscode/monitors-4K30.php" style="text-decoration: none"
         ><div class="monitorcards">
           <div class="mimages i4k30"></div>
           <h4>4K 30 Inch</h4>
@@ -190,8 +187,8 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
       ></a>
     </section>
     <!--This is a comment -->
-    <!-- footer -->
-    <footer id="footer">
+   <!-- footer -->
+   <footer id="footer">
       <div class="footer-top">
         <div class="container">
           <div class="row">
@@ -209,13 +206,13 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
             <div class="col-lg-3 col-md-6 footer-links">
               <h4>Usefull Links</h4>
               <ul>
-                <li><a href="/Landing-Page/index.html">Home</a></li>
-                <li><a href="/aboutuspage/aboutus.html">About Us</a></li>
-                <li><a href="/loginpage/login.html">Account</a></li>
+                <li><a href="../../../index.php">Home</a></li>
+                <li><a href="../../../aboutuspage/aboutus.php">About Us</a></li>
+                <li><a href="../../../config/logout.php">Logout</a></li>
                 <li>
-                  <a href="/productspage/index.html">Shop Now</a>
+                  <a href="../../../productspage/index.php">Shop Now</a>
                 </li>
-                <li><a href="/contactuspage/contactus.html">Contact Us</a></li>
+                <li><a href="../../../contactuspage/contactus.php">Contact Us</a></li>
               </ul>
             </div>
 
@@ -224,26 +221,26 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
 
               <ul>
                 <li>
-                  <a href="/productspage/pagescode/consolescode/consoles.html"
+                  <a href="/DeviceDirect-Team-27/productspage/pagescode/consolescode/consoles.php"
                     >Gaming Consoles</a
                   >
                 </li>
                 <li>
-                  <a href="/productspage/pagescode/tvcode/tvs.html">TVs</a>
+                  <a href="/DeviceDirect-Team-27/productspage/pagescode/tvcode/tvs.php">TVs</a>
                 </li>
                 <li>
-                  <a href="/productspage/pagescode/laptopscode/laptops.html"
+                  <a href="/DeviceDirect-Team-27/productspage/pagescode/laptopscode/laptops.php"
                     >Laptops</a
                   >
                 </li>
                 <li>
-                  <a href="/productspage/pagescode/monitorscode/monitors.html"
+                  <a href="/DeviceDirect-Team-27/productspage/pagescode/monitorscode/monitors.php"
                     >Monitors</a
                   >
                 </li>
                 <li>
                   <a
-                    href="/productspage/pagescode/headphonescode/headphones.html"
+                    href="/DeviceDirect-Team-27/productspage/pagescode/headphonescode/headphones.php"
                     >Headphones</a
                   >
                 </li>
@@ -253,9 +250,9 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
             <div class="col-lg-3 col-md-6 footer-links">
               <h4>Our Social</h4>
               <div class="socail-links mt-3">
-                <a href="https://x.com/" target="_blank"><i class="fa-brands fa-twitter"></i></a>
-                <a href="https://facebook.com/" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
-                <a href="https://instagram.com/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://x.com/?lang=en"><i class="fa-brands fa-twitter"></i></a>
+                <a href="https://www.facebook.com/"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/"><i class="fa-brands fa-instagram"></i></a>
               </div>
             </div>
           </div>

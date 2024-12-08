@@ -4,7 +4,7 @@ if (session_status() == PHP_SESSION_NONE)
     header("Location: Login_page/login.php");
     exit(); }
 $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
-?>  
+?>
 
 <!DOCTYPE html>
 <html>
@@ -22,7 +22,7 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
     />
 
-    <link rel="stylesheet" href="headphonestyle.css" />
+    <link rel="stylesheet" href="laptopstyle.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
@@ -44,7 +44,7 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
     />
     <!-- fonts links -->
   </head>
-  <body>
+  <body data-model="w12">
    <!-- navbar -->
    <nav class="navbar navbar-expand-lg" id="navbar">
       <div class="container-fluid">
@@ -147,6 +147,7 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
       </div>
     </nav>
     <!-- navbar -->
+    <hr />
     <h3
       style="
         text-align: center;
@@ -155,54 +156,71 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
         margin-bottom: 15px;
       "
     >
-      Select From Our Headphones
+      Select Your Colour
     </h3>
 
-    <section class="headphonesection">
-      <a href="inearblack.php" style="text-decoration: none"
-        ><div class="headphonecards">
-          <div class="headphoneimages ineb"></div>
-          <h4>In Ear Black</h4>
-          <p></p></div
-      ></a>
-
-      <a href="inearwhite.php" style="text-decoration: none"
-        ><div class="headphonecards">
-          <div class="headphoneimages inew"></div>
-          <h4>In Ear White</h4>
-          <p></p></div
-      ></a>
-
-      <a href="ineargrey.php" style="text-decoration: none"
-        ><div class="headphonecards">
-          <div class="headphoneimages ineg"></div>
-          <h4>In Ear Grey</h4>
-          <p></p></div
-      ></a>
-
-      <a href="overearblack.php" style="text-decoration: none"
-        ><div class="headphonecards">
-          <div class="headphoneimages oeb"></div>
-          <h4>Over Ear Black</h4>
-          <p></p></div
-      ></a>
-
-      <a href="overearwhite.php" style="text-decoration: none"
-        ><div class="headphonecards">
-          <div class="headphoneimages oew"></div>
-          <h4>Over Ear White</h4>
-          <p></p></div
-      ></a>
-
-      <a href="overeargrey.php" style="text-decoration: none"
-        ><div class="headphonecards">
-          <div class="headphoneimages oeg"></div>
-          <h4>Over Ear Grey</h4>
-          <p></p></div
-      ></a>
+    <section id="details" class="diffitems">
+      <div class="mainimage">
+        <img
+          src="Laptops/12inch/Windows-12-Black.webp"
+          width="100%"
+          id="normal"
+          alt=""
+        />
+        <div class="secimages">
+          <div class="secimagescols">
+            <img
+              src="Laptops/12inch/Windows-12-Black.webp"
+              width="100%"
+              class="smallimg"
+              id="black"
+            />
+          </div>
+          <div class="secimagescols">
+            <img
+              src="Laptops/12inch/Windows-12-White.webp"
+              width="100%"
+              class="smallimg"
+              id="white"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="maindescription">
+        <br />
+        <h4 id="pname">12 inch Black Windows</h4>
+        <br />
+        <h2 id="pprice"><del>£449.99</del> £399.99</h2>
+        <br />
+        <select id="colourselector">
+          <option value="Black">Black</option>
+          <option value="White">White</option>
+        </select>
+        <input type="number" value="1" />
+        <br />
+        <br />
+        <a href="../../../checkoutpage/cart.php"><button class="cartclass">Add to Cart</button></a>
+        <br />
+        <br />
+        <h4 id="pdescriptionheading">
+          Product Description: 12 inch Black Windows
+        </h4>
+        <br />
+        <span id="pdescription"
+          >The 12-Inch Windows Laptop in bold black is a compact powerhouse for
+          both work and entertainment. With the familiar Windows OS and
+          efficient hardware, it’s perfect for multitasking, from editing
+          documents to streaming your favorite shows. Its black finish adds a
+          professional edge, while the lightweight design makes it easy to carry
+          wherever you go. Featuring a sharp display and robust connectivity
+          options, this laptop adapts seamlessly to your everyday needs.</span
+        >
+      </div>
     </section>
-   <!-- footer -->
-   <footer id="footer">
+
+    <hr />
+  <!-- footer -->
+  <footer id="footer">
       <div class="footer-top">
         <div class="container">
           <div class="row">
@@ -281,7 +299,6 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
       </div>
     </footer>
     <!-- footer -->
-
     <!--nav account dropdown -->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
@@ -289,5 +306,6 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
       crossorigin="anonymous"
     ></script>
     <!--nav account dropdown -->
+    <script src="laptopscript.js"></script>
   </body>
 </html>

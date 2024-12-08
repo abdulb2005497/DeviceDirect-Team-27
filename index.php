@@ -65,7 +65,7 @@ $welcome_message = "Hi, " . htmlspecialchars($_SESSION['first_name']);
             />
             <div class="card-body">
               <a
-                href="productspage/pagescode/tvcode/tvs-HD40.html"
+                href="productspage/pagescode/tvcode/tvs-HD40.php"
                 style="text-decoration: none; color: inherit"
               >
                 <h3 class="text-center">HD 40 Inch Black TV</h3>
@@ -95,7 +95,7 @@ $welcome_message = "Hi, " . htmlspecialchars($_SESSION['first_name']);
             />
             <div class="card-body">
               <a
-                href="productspage/pagescode/headphonescode/overeargrey.html"
+                href="productspage\pagescode\headphonescode\overeargrey.php"
                 style="text-decoration: none; color: inherit"
               >
                 <h3 class="text-center">Over Ear Grey Headphones</h3>
@@ -125,7 +125,7 @@ $welcome_message = "Hi, " . htmlspecialchars($_SESSION['first_name']);
             />
             <div class="card-body">
               <a
-                href="productspage/pagescode/laptopscode/laptops-16P.html"
+                href="productspage\pagescode\laptopscode\laptops-16P.php"
                 style="text-decoration: none; color: inherit"
               >
                 <h3 class="text-center">16 inch Black Probook</h3>
@@ -155,7 +155,7 @@ $welcome_message = "Hi, " . htmlspecialchars($_SESSION['first_name']);
             />
             <div class="card-body">
               <a
-                href="productspage/pagescode/monitorscode/monitors-4K30.html"
+                href="productspage\pagescode\monitorscode\monitors-4K30.php"
                 style="text-decoration: none; color: inherit"
               >
                 <h3 class="text-center">30 Inch White Monitor 4K</h3>
@@ -187,7 +187,7 @@ $welcome_message = "Hi, " . htmlspecialchars($_SESSION['first_name']);
             />
             <div class="card-body">
               <a
-                href="productspage/pagescode/consolescode/ps5.html"
+                href="productspage\pagescode\consolescode\ps5.php"
                 style="text-decoration: none; color: inherit"
               >
                 <h3 class="text-center">Playstation 5</h3>
@@ -217,7 +217,7 @@ $welcome_message = "Hi, " . htmlspecialchars($_SESSION['first_name']);
             />
             <div class="card-body">
               <a
-                href="productspage/pagescode/consolescode/ps5.html"
+                href="productspage\pagescode\tvcode\tvs-4K80.php"
                 style="text-decoration: none; color: inherit"
               >
                 <h3 class="text-center">80-Inch Black TV 4k</h3>
@@ -247,7 +247,7 @@ $welcome_message = "Hi, " . htmlspecialchars($_SESSION['first_name']);
             />
             <div class="card-body">
               <a
-                href="productspage/pagescode/laptopscode/laptops-16W.html"
+                href="productspage\pagescode\laptopscode\laptops-16W.php"
                 style="text-decoration: none; color: inherit"
               >
                 <h3 class="text-center">16 inch Windows Laptop</h3>
@@ -277,7 +277,7 @@ $welcome_message = "Hi, " . htmlspecialchars($_SESSION['first_name']);
             />
             <div class="card-body">
               <a
-                href="productspage/pagescode/laptopscode/laptops-16W.html"
+                href="productspage\pagescode\headphonescode\inearblack.php"
                 style="text-decoration: none; color: inherit"
               >
                 <h3 class="text-center">In Ear Black Headphones</h3>
@@ -311,7 +311,7 @@ $welcome_message = "Hi, " . htmlspecialchars($_SESSION['first_name']);
               <h3>Best Laptop</h3>
               <h5>Latest Collection</h5>
               <p>Up To 50% Off</p>
-              <a href="productspage/pagescode/laptopscode/laptops.html">
+              <a href="productspage/pagescode/laptopscode/laptops.php">
                 <button id="shopnow">Shop Now</button></a
               >
             </div>
@@ -324,7 +324,7 @@ $welcome_message = "Hi, " . htmlspecialchars($_SESSION['first_name']);
               <h3>Best Headphone</h3>
               <h5>Latest Collection</h5>
               <p>Up To 50% Off</p>
-              <a href="productspage/pagescode/headphonescode/headphones.html">
+              <a href="productspage/pagescode/headphonescode/headphones.php">
                 <button id="shopnow">Shop Now</button></a
               >
             </div>

@@ -1,6 +1,14 @@
+<?php
+if (session_status() == PHP_SESSION_NONE) 
+{ session_start();}      if (!isset($_SESSION['user_id'])) {
+    header("Location: Login_page/login.php");
+    exit(); }
+$welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
+?>
+
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -14,10 +22,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
     />
 
-    <link
-      rel="stylesheet"
-      href="/productspage/pagescode/monitorscode/monitorstyle.css"
-    />
+    <link rel="stylesheet" href="laptopstyle.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
@@ -39,13 +44,13 @@
     />
     <!-- fonts links -->
   </head>
-  <body data-model="i2k30">
-    <!-- navbar -->
-    <nav class="navbar navbar-expand-lg" id="navbar">
+  <body data-model="c12">
+   <!-- navbar -->
+   <nav class="navbar navbar-expand-lg" id="navbar">
       <div class="container-fluid">
-        <a class="navbar-brand" href="index.html" id="logo">
+        <a class="navbar-brand" href="index.php" id="logo">
           <img
-            src="/Landing-Page/assests/images/device_direct_logo.png"
+            src="../../../assests/images/device_direct_logo.png"
             alt="Device Direct Logo"
             class="logo-img"
           />
@@ -61,7 +66,7 @@
           aria-label="Toggle navigation"
         >
           <span
-            ><img src="./assests/images/menu.png" alt="" width="30px"
+            ><img src="../../../assests/images/menu.png" alt="" width="30px"
           /></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -70,18 +75,18 @@
               <a
                 class="nav-link active"
                 aria-current="page"
-                href="/Landing-Page/index.html"
+                href="../../../index.php"
                 >Home</a
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/productspage/index.html">Shop</a>
+              <a class="nav-link" href="../../index.php">Shop</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/aboutuspage/aboutus.html">About</a>
+              <a class="nav-link" href="../../../aboutuspage/aboutus.php">About</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/contactuspage/contactus.html"
+              <a class="nav-link" href="../../../contactuspage/contactus.php"
                 >Contact</a
               >
             </li>
@@ -102,24 +107,25 @@
                 style="background-color: rgb(67 0 86)"
               >
                 <li>
-                  <a class="dropdown-item" href="/Login page/login.html"
+                  <a class="dropdown-item" href="../../../Login_page/login.php"
                     >Login</a
                   >
                 </li>
                 <li>
-                  <a class="dropdown-item" href="/Login page/signup.html"
+                  <a class="dropdown-item" href="../../../Login_page/signup.php"
                     >SignUp</a
                   >
                 </li>
                 <li>
                   <a
                     class="dropdown-item"
-                    href="/previousorders/previousorders.html"
+                    href="../../../previousorders/previousorders.php"
                     >Previous Orders</a
                   >
                 </li>
               </ul>
             </li>
+            <li class="nav-item"><a class="nav-link" href="../../../config/logout.php">Logout</a></li>
           </ul>
           <form class="d-flex" id="search">
             <input
@@ -133,14 +139,14 @@
             </button>
           </form>
           <div class="cart-btn">
-            <a href="/checkoutpage/cart.html"
+            <a href="../../../checkoutpage/cart.php"
               ><i class="fas fa-shopping-bag"></i
             ></a>
           </div>
         </div>
       </div>
     </nav>
-    <!-- navbar -->
+    <!-- navbar -->
     <hr />
     <h3
       style="
@@ -152,10 +158,11 @@
     >
       Select Your Colour
     </h3>
+
     <section id="details" class="diffitems">
       <div class="mainimage">
         <img
-          src="Monitors/30inch/2k-30-Black.webp"
+          src="Laptops/12inch/Chromebook-12-Black.webp"
           width="100%"
           id="normal"
           alt=""
@@ -163,7 +170,7 @@
         <div class="secimages">
           <div class="secimagescols">
             <img
-              src="Monitors/30inch/2k-30-Black.webp"
+              src="Laptops/12inch/Chromebook-12-Black.webp"
               width="100%"
               class="smallimg"
               id="black"
@@ -171,7 +178,7 @@
           </div>
           <div class="secimagescols">
             <img
-              src="Monitors/30inch/2k-30-White.webp"
+              src="Laptops/12inch/Chromebook-12-white.webp"
               width="100%"
               class="smallimg"
               id="white"
@@ -181,9 +188,9 @@
       </div>
       <div class="maindescription">
         <br />
-        <h4 id="pname">30 Inch Black Monitor 2K</h4>
+        <h4 id="pname">12 inch Black Chromebook</h4>
         <br />
-        <h2 id="pprice"><del>£199.99</del> £149.99</h2>
+        <h2 id="pprice"><del>£449.99</del> £399.99</h2>
         <br />
         <select id="colourselector">
           <option value="Black">Black</option>
@@ -192,28 +199,27 @@
         <input type="number" value="1" />
         <br />
         <br />
-        <a href="../../../checkoutpage/cart.html"><button class="cartclass">Add to Cart</button></a>
+        <a href="../../../checkoutpage/cart.php"><button class="cartclass">Add to Cart</button></a>
         <br />
         <br />
         <h4 id="pdescriptionheading">
-          Product Description: 30 Inch Black Monitor 2K
+          Product Description: 12 inch Black Chromebook
         </h4>
         <br />
         <span id="pdescription"
-          >Experience unparalleled clarity with this 30-inch 2K monitor,
-          offering a vibrant 2560 x 1440 resolution for crystal-clear visuals.
-          Designed with productivity and entertainment in mind, its expansive
-          screen provides ample space for multitasking and immersive viewing.
-          The elegant black finish and slim bezel design add a modern touch to
-          any workspace or gaming setup. Featuring a fast refresh rate, wide
-          viewing angles, and versatile connectivity options, this monitor is
-          built to deliver premium performance for work or play.</span
+          >The 12-Inch Chromebook in black offers an affordable yet premium
+          computing experience. Perfect for students or casual users, this
+          lightweight laptop features a fast Chrome OS for seamless web
+          browsing, video streaming, and app usage. The black design is both
+          modern and durable, while the 12-inch display provides crisp visuals
+          for your daily tasks. With long battery life and built-in security,
+          this Chromebook ensures worry-free use on the go.</span
         >
       </div>
     </section>
     <hr />
     <!-- footer -->
-    <footer id="footer">
+   <footer id="footer">
       <div class="footer-top">
         <div class="container">
           <div class="row">
@@ -231,13 +237,13 @@
             <div class="col-lg-3 col-md-6 footer-links">
               <h4>Usefull Links</h4>
               <ul>
-                <li><a href="/Landing-Page/index.html">Home</a></li>
-                <li><a href="/aboutuspage/aboutus.html">About Us</a></li>
-                <li><a href="/loginpage/login.html">Account</a></li>
+                <li><a href="../../../index.php">Home</a></li>
+                <li><a href="../../../aboutuspage/aboutus.php">About Us</a></li>
+                <li><a href="../../../config/logout.php">Logout</a></li>
                 <li>
-                  <a href="/productspage/index.html">Shop Now</a>
+                  <a href="../../../productspage/index.php">Shop Now</a>
                 </li>
-                <li><a href="/contactuspage/contactus.html">Contact Us</a></li>
+                <li><a href="../../../contactuspage/contactus.php">Contact Us</a></li>
               </ul>
             </div>
 
@@ -246,26 +252,26 @@
 
               <ul>
                 <li>
-                  <a href="/productspage/pagescode/consolescode/consoles.html"
+                  <a href="/DeviceDirect-Team-27/productspage/pagescode/consolescode/consoles.php"
                     >Gaming Consoles</a
                   >
                 </li>
                 <li>
-                  <a href="/productspage/pagescode/tvcode/tvs.html">TVs</a>
+                  <a href="/DeviceDirect-Team-27/productspage/pagescode/tvcode/tvs.php">TVs</a>
                 </li>
                 <li>
-                  <a href="/productspage/pagescode/laptopscode/laptops.html"
+                  <a href="/DeviceDirect-Team-27/productspage/pagescode/laptopscode/laptops.php"
                     >Laptops</a
                   >
                 </li>
                 <li>
-                  <a href="/productspage/pagescode/monitorscode/monitors.html"
+                  <a href="/DeviceDirect-Team-27/productspage/pagescode/monitorscode/monitors.php"
                     >Monitors</a
                   >
                 </li>
                 <li>
                   <a
-                    href="/productspage/pagescode/headphonescode/headphones.html"
+                    href="/DeviceDirect-Team-27/productspage/pagescode/headphonescode/headphones.php"
                     >Headphones</a
                   >
                 </li>
@@ -275,9 +281,9 @@
             <div class="col-lg-3 col-md-6 footer-links">
               <h4>Our Social</h4>
               <div class="socail-links mt-3">
-                <a href="https://x.com/" target="_blank"><i class="fa-brands fa-twitter"></i></a>
-                <a href="https://facebook.com/" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
-                <a href="https://instagram.com/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://x.com/?lang=en"><i class="fa-brands fa-twitter"></i></a>
+                <a href="https://www.facebook.com/"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/"><i class="fa-brands fa-instagram"></i></a>
               </div>
             </div>
           </div>
@@ -299,7 +305,6 @@
       crossorigin="anonymous"
     ></script>
     <!--nav account dropdown -->
-
-    <script src="monitorscript.js"></script>
+    <script src="laptopscript.js"></script>
   </body>
 </html>

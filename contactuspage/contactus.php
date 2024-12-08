@@ -231,8 +231,8 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
       </section>
     </main>
 
-    <!-- footer -->
-  <footer id="footer">
+<!-- footer -->
+<footer id="footer">
       <div class="footer-top">
         <div class="container">
           <div class="row">
@@ -265,26 +265,26 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
 
               <ul>
                 <li>
-                  <a href="productspage\pagescode\consolescode\consoles.php"
+                  <a href="/DeviceDirect-Team-27/productspage/pagescode/consolescode/consoles.php"
                     >Gaming Consoles</a
                   >
                 </li>
                 <li>
-                  <a href="productspage\pagescode\tvcode\tvs.php">TVs</a>
+                  <a href="/DeviceDirect-Team-27/productspage/pagescode/tvcode/tvs.php">TVs</a>
                 </li>
                 <li>
-                  <a href="productspage\pagescode\laptopscode\laptops.php"
+                  <a href="/DeviceDirect-Team-27/productspage/pagescode/laptopscode/laptops.php"
                     >Laptops</a
                   >
                 </li>
                 <li>
-                  <a href="productspage\pagescode\monitorscode\monitors.php"
+                  <a href="/DeviceDirect-Team-27/productspage/pagescode/monitorscode/monitors.php"
                     >Monitors</a
                   >
                 </li>
                 <li>
                   <a
-                    href="productspage\pagescode\headphonescode\headphones.php"
+                    href="/DeviceDirect-Team-27/productspage/pagescode/headphonescode/headphones.php"
                     >Headphones</a
                   >
                 </li>
@@ -294,9 +294,9 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
             <div class="col-lg-3 col-md-6 footer-links">
               <h4>Our Social</h4>
               <div class="socail-links mt-3">
-                <a href="#"><i class="fa-brands fa-twitter"></i></a>
-                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://x.com/?lang=en"><i class="fa-brands fa-twitter"></i></a>
+                <a href="https://www.facebook.com/"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/"><i class="fa-brands fa-instagram"></i></a>
               </div>
             </div>
           </div>
@@ -311,7 +311,7 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
       </div>
     </footer>
     <!-- footer -->
-
+     
     <!-- Modal for Success Message -->
     <div id="modal">
       <div id="modalContent">
