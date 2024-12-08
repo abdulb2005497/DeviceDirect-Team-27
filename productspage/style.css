@@ -235,7 +235,7 @@ body {
   background: rgba(0, 0, 0, 0.1);
 }
 
-.searchsectionnav:focus-within .optionbox {
+.searchsectionnav:focus-within .optionboxnav {
   display: block;
 }
 
