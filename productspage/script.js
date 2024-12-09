@@ -1,199 +1,101 @@
-(function(){
-let searchitems = [
-    'HD 40-Inch TV',
-    '4K 40-Inch TV',
-    'HD 60-Inch TV',
-    '4K 60-Inch TV',
-    'HD 80-Inch TV',
-    '4K 80-Inch TV',
-    '2K 25 Inch Monitor',
-    '4K 25 Inch Monitor',
-    '2K 30 Inch Monitor',
-    '4K 30 Inch Monitor',
-    '12 Inch Windows Laptop',
-    '12 Inch Chrome Laptop',
-    '12 Inch Airbook Laptop',
-    '12 Inch Probook Laptop',
-    '16 Inch Windows Laptop',
-    '16 Inch Chrome Laptop',
-    '16 Inch Airbook Laptop',
-    '16 Inch Probook Laptop',
-    'In Ear Black Headphones',
-    'In Ear White Headphones',
-    'In Ear Grey Headphones',
-    'Over Ear Black Headphones',
-    'Over Ear White Headphones',
-    'Over Ear Grey Headphones',
-    'PS4',
-    'PS5',
-    'Xbox 1',
-    'Wii',
-    'Wii U',
-    'Switch'
-];
+document.addEventListener('DOMContentLoaded', function () {
+    fetchCategories(); 
+    fetchProducts();
+});
 
-const itemrefs = {
-  'HD 40-Inch TV': './pagescode/tvcode/tvs-HD40.php',
-  '4K 40-Inch TV': './pagescode/tvcode/tvs-4K40.php',
-  'HD 60-Inch TV': './pagescode/tvcode/tvs-HD60.php',
-  '4K 60-Inch TV': './pagescode/tvcode/tvs-4K60.php',
-  'HD 80-Inch TV': './pagescode/tvcode/tvs-HD-80.php',
-  '4K 80-Inch TV': './pagescode/tvcode/tvs-4K80.php',
-  '2K 25 Inch Monitor': './pagescode/monitorscode/monitors-2K25.php',
-  '4K 25 Inch Monitor': './pagescode/monitorscode/monitors-4K25.php',
-  '2K 30 Inch Monitor': './pagescode/monitorscode/monitors-2K30.php',
-  '4K 30 Inch Monitor': './pagescode/monitorscode/monitors-4K30.php',
-  '12 Inch Windows Laptop': './pagescode/laptopscode/laptops-12W.php',
-  '12 Inch Chrome Laptop': './pagescode/laptopscode/laptops-12C.php',
-  '12 Inch Airbook Laptop': './pagescode/laptopscode/laptops-12A.php',
-  '12 Inch Probook Laptop': './pagescode/laptopscode/laptops-12P.php',
-  '16 Inch Windows Laptop': './pagescode/laptopscode/laptops-16W.php',
-  '16 Inch Chrome Laptop': './pagescode/laptopscode/laptops-16C.php',
-  '16 Inch Airbook Laptop': './pagescode/laptopscode/laptops-16A.php',
-  '16 Inch Probook Laptop': './pagescode/laptopscode/laptops-16P.php',
-  'In Ear Black Headphones': './pagescode/headphonescode/inearblack.php',
-  'In Ear White Headphones': './pagescode/headphonescode/inearwhite.php',
-  'In Ear Grey Headphones': './pagescode/headphonescode/ineargrey.php',
-  'Over Ear Black Headphones': './pagescode/headphonescode/overearblack.php',
-  'Over Ear White Headphones': './pagescode/headphonescode/overearwhite.php',
-  'Over Ear Grey Headphones': './pagescode/headphonescode/overeargrey.php',
-  'PS4': './pagescode/consolescode/ps4.php',
-  'PS5': './pagescode/consolescode/ps5.php',
-  'Xbox 1': './pagescode/consolescode/xbox1.php',
-  'Wii': './pagescode/consolescode/nintendowii.php',
-  'Wii U': './pagescode/consolescode/wiiu.php',
-  'Switch': './pagescode/consolescode/switch.php'
-};
+function fetchCategories() {
+    fetch('fetchCategory.php')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(categories => {
+            const categorySelect = document.getElementById('category-select');
+
+            categorySelect.innerHTML = '<option value="">-- All Categories --</option>';
+
+            categories.forEach(category => {
+                const option = document.createElement('option');
+                option.value = category.category_id;
+                option.textContent = category.category_name;
+                categorySelect.appendChild(option);
+            });
 
 
-const optionBox=document.querySelector(".optionbox");  
-const inputBox=document.getElementById("inputsearch");
-
-inputBox.onkeyup = function() {
-    let result = [];
-    let input = inputBox.value;
-    if(input.length){
-
-        result=searchitems.filter((keyword)=>{
-            return keyword.toLowerCase().includes(input.toLowerCase());
+            categorySelect.addEventListener('change', function () {
+                const categoryId = this.value;
+                if (categoryId) {
+                    fetchProductsByCategory(categoryId);
+                } else {
+                    fetchProducts();
+                }
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching categories:', error);
+            document.getElementById('category-select').innerHTML = '<option value="">Error loading categories</option>';
         });
+}
 
+function fetchProducts() {
+    fetch('fetchProdByCat.php?category_id=')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(products => {
+            displayProducts(products);
+        })
+        .catch(error => {
+            console.error('Error fetching products:', error);
+            document.getElementById('product-container').innerHTML = '<p>There was an error fetching products. Please try again later.</p>';
+        });
+}
+
+function fetchProductsByCategory(categoryId) {
+    fetch(`fetchProdByCat.php?category_id=${categoryId}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(products => {
+            displayProducts(products);
+        })
+        .catch(error => {
+            console.error('Error fetching products:', error);
+            document.getElementById('product-container').innerHTML = '<p>There was an error fetching products. Please try again later.</p>';
+        });
+}
+
+function displayProducts(products) {
+    const productContainer = document.getElementById('product-container');
+    productContainer.innerHTML = '';
+
+    if (products.error) {
+        productContainer.innerHTML = `<p>${products.error}</p>`;
+    } else if (products.length === 0) {
+        productContainer.innerHTML = `<p>No products found.</p>`;
     } else {
-        result=[];
-    }
-    display(result);
-}
+        products.forEach(product => {
+            const productItem = document.createElement('div');
+            productItem.classList.add('product-item');
+            productItem.addEventListener('click', () => {
+                window.location.href = `product-details.php?product_id=${product.product_id}`;
+            });
 
-function display(result){
-    if(result.length){
-        const content =result.map((list)=>{
-            const ref = itemrefs[list];
-            return `<li><a href="${ref}">${list}</a></li>`;
-     }).join("");
-     optionBox.innerHTML = `<ul>${content}</ul>`;
-    }else {
-        optionBox.innerHTML = '<p>No results found.</p>';
-    }
-}
-})();
+            productItem.innerHTML = `
+                <img src="images/${product.image}" alt="${product.product_title}">
+                <h3>${product.product_title}</h3>
+                <p>£${product.price}</p>
+            `;
 
-(function () {
-    let searchitems = [
-      'HD 40-Inch TV',
-      '4K 40-Inch TV',
-      'HD 60-Inch TV',
-      '4K 60-Inch TV',
-      'HD 80-Inch TV',
-      '4K 80-Inch TV',
-      '2K 25 Inch Monitor',
-      '4K 25 Inch Monitor',
-      '2K 30 Inch Monitor',
-      '4K 30 Inch Monitor',
-      '12 Inch Windows Laptop',
-      '12 Inch Chrome Laptop',
-      '12 Inch Airbook Laptop',
-      '12 Inch Probook Laptop',
-      '16 Inch Windows Laptop',
-      '16 Inch Chrome Laptop',
-      '16 Inch Airbook Laptop',
-      '16 Inch Probook Laptop',
-      'In Ear Black Headphones',
-      'In Ear White Headphones',
-      'In Ear Grey Headphones',
-      'Over Ear Black Headphones',
-      'Over Ear White Headphones',
-      'Over Ear Grey Headphones',
-      'PS4',
-      'PS5',
-      'Xbox 1',
-      'Wii',
-      'Wii U',
-      'Switch',
-    ];
-  
-    const itemrefs = {
-      'HD 40-Inch TV': './pagescode/tvcode/tvs-HD40.php',
-      '4K 40-Inch TV': './pagescode/tvcode/tvs-4K40.php',
-      'HD 60-Inch TV': './pagescode/tvcode/tvs-HD60.php',
-      '4K 60-Inch TV': './pagescode/tvcode/tvs-4K60.php',
-      'HD 80-Inch TV': './pagescode/tvcode/tvs-HD-80.php',
-      '4K 80-Inch TV': './pagescode/tvcode/tvs-4K80.php',
-      '2K 25 Inch Monitor': './pagescode/monitorscode/monitors-2K25.php',
-      '4K 25 Inch Monitor': './pagescode/monitorscode/monitors-4K25.php',
-      '2K 30 Inch Monitor': './pagescode/monitorscode/monitors-2K30.php',
-      '4K 30 Inch Monitor': './pagescode/monitorscode/monitors-4K30.php',
-      '12 Inch Windows Laptop': './pagescode/laptopscode/laptops-12W.php',
-      '12 Inch Chrome Laptop': './pagescode/laptopscode/laptops-12C.php',
-      '12 Inch Airbook Laptop': './pagescode/laptopscode/laptops-12A.php',
-      '12 Inch Probook Laptop': './pagescode/laptopscode/laptops-12P.php',
-      '16 Inch Windows Laptop': './pagescode/laptopscode/laptops-16W.php',
-      '16 Inch Chrome Laptop': './pagescode/laptopscode/laptops-16C.php',
-      '16 Inch Airbook Laptop': './pagescode/laptopscode/laptops-16A.php',
-      '16 Inch Probook Laptop': './pagescode/laptopscode/laptops-16P.php',
-      'In Ear Black Headphones': './pagescode/headphonescode/inearblack.php',
-      'In Ear White Headphones': './pagescode/headphonescode/inearwhite.php',
-      'In Ear Grey Headphones': './pagescode/headphonescode/ineargrey.php',
-      'Over Ear Black Headphones': './pagescode/headphonescode/overearblack.php',
-      'Over Ear White Headphones': './pagescode/headphonescode/overearwhite.php',
-      'Over Ear Grey Headphones': './pagescode/headphonescode/overeargrey.php',
-      'PS4': './pagescode/consolescode/ps4.php',
-      'PS5': './pagescode/consolescode/ps5.php',
-      'Xbox 1': './pagescode/consolescode/xbox1.php',
-      'Wii': './pagescode/consolescode/nintendowii.php',
-      'Wii U': './pagescode/consolescode/wiiu.php',
-      'Switch': './pagescode/consolescode/switch.php'
-  };
-  
-  
-    const optionBoxNav = document.querySelector('.optionboxnav');
-    const inputBoxNav = document.getElementById('inputsearchnav');
-  
-    inputBoxNav.onkeyup = function () {
-      let result = [];
-      let input = inputBoxNav.value;
-      if (input.length) {
-        result = searchitems.filter((keyword) => {
-          return keyword.toLowerCase().includes(input.toLowerCase());
+            productContainer.appendChild(productItem);
         });
-      } else {
-        result = [];
-      }
-      displayNav(result);
-    };
-  
-    function displayNav(result) {
-      if (result.length) {
-        const content = result
-          .map((list) => {
-            const ref = itemrefs[list];
-            return `<li><a href="${ref}">${list}</a></li>`;
-          })
-          .join('');
-        optionBoxNav.innerHTML = `<ul>${content}</ul>`;
-      } else {
-        optionBoxNav.innerHTML = '<p>No results found.</p>';
-      }
     }
-  })(); 
-  
-
+}
