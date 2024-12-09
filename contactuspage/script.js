@@ -10,4 +10,3 @@ document.getElementById("contactForm").addEventListener("submit", function (e) {
       `Message: ${message}`
     );
   });
-  

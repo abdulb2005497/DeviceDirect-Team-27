@@ -37,12 +37,19 @@ if (!isset($_SESSION['user_id'])) {
                     </li>
                     <li class="nav-item"><a class="nav-link" href="config/logout.php">Logout</a></li>
                 </ul>
-                <form class="d-flex" id="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
+                <div class="searchsectionwrappernav">
+  <section class="searchsectionnav">
+    <form>
+      <img src="./productspage/categoryimages/search.png" alt="Search Icon" />
+      <input type="text" placeholder="Search" id="inputsearchnav" autocomplete="off" />
+    </form>
+    <div class="optionboxnav"></div>
+  </section>
+</div>
                 <div class="cart-btn"><a href="checkoutpage/cart.php"><i class="fas fa-shopping-bag"></i></a></div>
             </div>
         </div>
+        <script src="index.js"></script>
     </nav>
+    
 <!-- This is the working Navbar -->

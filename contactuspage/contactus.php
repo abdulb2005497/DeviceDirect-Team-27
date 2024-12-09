@@ -164,17 +164,7 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
             </li>
             <li class="nav-item"><a class="nav-link" href="config/logout.php">Logout</a></li>
           </ul>
-          <form class="d-flex" id="search">
-            <input
-              class="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-            <button class="btn btn-outline-success" type="submit">
-              Search
-            </button>
-          </form>
+
           <div class="cart-btn">
             <a href="../checkoutpage/cart.php"
               ><i class="fas fa-shopping-bag"></i

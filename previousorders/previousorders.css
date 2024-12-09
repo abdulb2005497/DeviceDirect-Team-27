@@ -109,16 +109,15 @@
   transition: 0.5s ease;
 }
 
-#search input {
-  border-radius: 50px;
-  border: none;
+.searchsectionwrappernav {
+  display: flex;
+  justify-content: center; 
+  margin-right: 20px;
+  z-index: 10;
+  position:relative;
 }
-#search button {
-  border-radius: 50px;
-  color: white;
-  border: 1px solid #212f3d;
-  background-color: #212f3d;
-}
+
+
 .cart-btn a i {
   padding-left: 10px;
   font-size: 20px;

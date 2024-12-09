@@ -20,7 +20,7 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>About Us - Device Direct</title>
-    <link rel="stylesheet" href="aboutus.css" />
+    <link rel="stylesheet" href="aboutus.css?v=<?php echo time(); ?>">
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
@@ -46,7 +46,7 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
     />
     <!-- fonts links -->
 
-    <script src="aboutus.js" defer></script>
+    
   </head>
   <body>
    <!-- navbar -->
@@ -131,17 +131,15 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
             </li>
             <li class="nav-item"><a class="nav-link" href="config/logout.php">Logout</a></li>
           </ul>
-          <form class="d-flex" id="search">
-            <input
-              class="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-            <button class="btn btn-outline-success" type="submit">
-              Search
-            </button>
-          </form>
+          <div class="searchsectionwrappernav">
+  <section class="searchsectionnav">
+    <form>
+      <img src="../productspage/categoryimages/search.png" alt="Search Icon" />
+      <input type="text" placeholder="Search" id="inputsearchnav" autocomplete="off" />
+    </form>
+    <div class="optionboxnav"></div>
+  </section>
+</div>
           <div class="cart-btn">
             <a href="../checkoutpage/cart.php"
               ><i class="fas fa-shopping-bag"></i
@@ -267,5 +265,6 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"
     ></script>
+    <script src="aboutus.js" defer></script>
   </body>
 </html>

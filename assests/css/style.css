@@ -108,16 +108,6 @@
   transition: 0.5s ease;
 }
 
-#search input {
-  border-radius: 50px;
-  border: none;
-}
-#search button {
-  border-radius: 50px;
-  color: white;
-  border: 1px solid #212f3d;
-  background-color: #212f3d;
-}
 .cart-btn a i {
   padding-left: 10px;
   font-size: 20px;
@@ -127,7 +117,111 @@
 .cart-btn a i:hover {
   color: gray;
 }
+.searchsectionwrappernav {
+  display: flex;
+  justify-content: center; 
+  margin-right: 20px;
+  z-index: 10;
+  position:relative;
+}
+
+
+.searchsectionnav {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 280px;
+  backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.1); 
+  border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+  overflow: hidden;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: visible;
+}
+
+.searchsectionnav form {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2); 
+}
+
+
+.searchsectionnav img {
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+}
+
+
+.searchsectionnav input {
+  flex-grow: 1;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  color: white;
+  background: transparent; 
+}
+
+.searchsectionnav input::placeholder {
+  color: white;
+}
+
+
+.optionboxnav {
+  display: none;
+  max-height: 300px;
+  overflow-y: auto; 
+  padding: 10px 0;
+  background-color: white;
+  position: absolute; 
+  top: 100%; 
+  left: 0;
+  width: 100%; 
+  border-radius:20px;
+  z-index: 1000; 
+}
+
+.searchsectionnav:focus-within .optionboxnav {
+  display: block;
+}
+
+.optionboxnav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.optionboxnav ul li {
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.optionboxnav ul li:hover {
+  background: rgba(255, 255, 255, 0.1);
+  text-decoration: black;
+}
+
+.optionboxnav a {
+  text-decoration: none;
+  color: black;
+}
+.optionboxnav a:hover{
+  text-decoration: none;
+  color: black;
+}
+.optionboxnav p {
+  text-align: center;
+  margin: 0;
+  padding: 10px;
+  color: black;
+  font-size: 14px;
+}
 /* navbar */
+
 
 /* home content */
 .home {
