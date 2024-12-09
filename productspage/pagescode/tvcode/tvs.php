@@ -1,7 +1,7 @@
 <?php
 if (session_status() == PHP_SESSION_NONE) 
 { session_start();}      if (!isset($_SESSION['user_id'])) {
-    header("Location: ../Login_page/login.php");
+    header("Location: Login_page/login.php");
     exit(); }
 $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
 ?>
@@ -21,14 +21,11 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
     />
 
-
-    <link rel="stylesheet" href="../productspage/style.css?v=<?php echo time(); ?>">
-
+    <link rel="stylesheet" href="tvstyle.css?v=<?php echo time(); ?>">
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
     />
-    
     <!-- bootstrap links -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
@@ -44,20 +41,15 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
       href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap"
       rel="stylesheet"
     />
- 
-
     <!-- fonts links -->
-    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
-
   </head>
   <body>
-
-  <!-- navbar -->
-  <nav class="navbar navbar-expand-lg" id="navbar">
+ <!-- navbar -->
+ <nav class="navbar navbar-expand-lg" id="navbar">
       <div class="container-fluid">
         <a class="navbar-brand" href="index.php" id="logo">
           <img
-            src="../assests/images/device_direct_logo.png"
+            src="../../../assests/images/device_direct_logo.png"
             alt="Device Direct Logo"
             class="logo-img"
           />
@@ -73,7 +65,7 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
           aria-label="Toggle navigation"
         >
           <span
-            ><img src="./assests/images/menu.png" alt="" width="30px"
+            ><img src="../../../assests/images/menu.png" alt="" width="30px"
           /></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -82,18 +74,18 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
               <a
                 class="nav-link active"
                 aria-current="page"
-                href="../index.php"
+                href="../../../index.php"
                 >Home</a
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="../productspage/index.php">Shop</a>
+              <a class="nav-link" href="../../index.php">Shop</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="../aboutuspage/aboutus.php">About</a>
+              <a class="nav-link" href="../../../aboutuspage/aboutus.php">About</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="../contactuspage/contactus.php"
+              <a class="nav-link" href="../../../contactuspage/contactus.php"
                 >Contact</a
               >
             </li>
@@ -114,52 +106,28 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
                 style="background-color: rgb(67 0 86)"
               >
                 <li>
-                  <a class="dropdown-item" href="../Login_page/login.php"
+                  <a class="dropdown-item" href="../../../Login_page/login.php"
                     >Login</a
                   >
                 </li>
                 <li>
-                  <a class="dropdown-item" href="../Login_page/signup.php"
+                  <a class="dropdown-item" href="../../../Login_page/signup.php"
                     >SignUp</a
                   >
                 </li>
                 <li>
                   <a
                     class="dropdown-item"
-                    href="../previousorders/previousorders.php"
+                    href="../../../previousorders/previousorders.php"
                     >Previous Orders</a
                   >
                 </li>
               </ul>
             </li>
-            <li class="nav-item"><a class="nav-link" href="config/logout.php">Logout</a></li>
+            <li class="nav-item"><a class="nav-link" href="../../../config/logout.php">Logout</a></li>
           </ul>
-         <!-- <form class="d-flex" id="search">
-            <input
-              class="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-            <button class="btn btn-outline-success" type="submit">
-              Search
-            </button>
-          </form> -->
-          <div class="searchsectionwrappernav">
-  <section class="searchsectionnav">
-    <form>
-      <img src="../productspage/categoryimages/search.png" alt="Search Icon" />
-      <input type="text" placeholder="Search" id="inputsearchnav" autocomplete="off" />
-    </form>
-    <div class="optionboxnav"></div>
-  </section>
-</div>
-
-          
-
-
           <div class="cart-btn">
-            <a href="../checkoutpage/cart.php"
+            <a href="../../../checkoutpage/cart.php"
               ><i class="fas fa-shopping-bag"></i
             ></a>
           </div>
@@ -175,79 +143,54 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
         margin-bottom: 15px;
       "
     >
-      Shop By Search
+      Select From Our TVs
     </h3>
 
-    <div class="searchsectionwrapper">
-      <section class="searchsection">
-        <form>
-          <img src="../productspage/categoryimages/search.png" />
-          <input type="text" placeholder="Search" id="inputsearch" autocomplete="off" />
-        </form>
-        <div class="optionbox"></div>
-      </section>
-    </div>
-
-    <h3
-      style="
-        text-align: center;
-        font-weight: 600;
-        margin-top: 20px;
-        margin-bottom: 15px;
-      "
-    >
-      Search By Category
-    </h3>
-
-    <section class="catrgoryimages">
-      <a
-        href="../productspage/pagescode/tvcode/tvs.php"
-        style="text-decoration: none"
-        ><div class="categorycards">
-          <div class="cimages tvs"></div>
-          <h4>TVs</h4>
+    <section class="tvsection">
+      <a href="../tvcode/tvs-HD40.php" style="text-decoration: none"
+        ><div class="tvcards">
+          <div class="tvimages hd40"></div>
+          <h4>HD 40-Inch</h4>
           <p></p></div
       ></a>
 
-      <a
-        href="../productspage/pagescode/monitorscode/monitors.php"
-        style="text-decoration: none"
-        ><div class="categorycards">
-          <div class="cimages monitors"></div>
-          <h4>Monitors</h4>
+      <a href="../tvcode/tvs-4K40.php" style="text-decoration: none"
+        ><div class="tvcards">
+          <div class="tvimages i4k40"></div>
+          <h4>4K 40-Inch</h4>
           <p></p></div
       ></a>
 
-      <a
-        href="../productspage/pagescode/laptopscode/laptops.php"
-        style="text-decoration: none"
-        ><div class="categorycards">
-          <div class="cimages laptops"></div>
-          <h4>Laptops</h4>
+      <a href="../tvcode/tvs-HD60.php" style="text-decoration: none"
+        ><div class="tvcards">
+          <div class="tvimages hd60"></div>
+          <h4>HD 60-Inch</h4>
           <p></p></div
       ></a>
 
-      <a
-        href="../productspage/pagescode/headphonescode/headphones.php"
-        style="text-decoration: none"
-        ><div class="categorycards">
-          <div class="cimages headphones"></div>
-          <h4>Headphones</h4>
+      <a href="../tvcode/tvs-4K60.php" style="text-decoration: none"
+        ><div class="tvcards">
+          <div class="tvimages i4k60"></div>
+          <h4>4K 60-Inch</h4>
           <p></p></div
       ></a>
 
-      <a
-        href="../productspage/pagescode/consolescode/consoles.php"
-        style="text-decoration: none"
-        ><div class="categorycards">
-          <div class="cimages consoles"></div>
-          <h4>Consoles</h4>
+      <a href="../tvcode/tvs-HD-80.php" style="text-decoration: none"
+        ><div class="tvcards">
+          <div class="tvimages ihd80"></div>
+          <h4>HD 80-Inch</h4>
+          <p></p></div
+      ></a>
+
+      <a href="../tvcode/tvs-4K80.php" style="text-decoration: none"
+        ><div class="tvcards">
+          <div class="tvimages i4k80"></div>
+          <h4>4K 80-Inch</h4>
           <p></p></div
       ></a>
     </section>
-
-<!-- footer -->
-<footer id="footer">
+     <!-- footer -->
+     <footer id="footer">
       <div class="footer-top">
         <div class="container">
           <div class="row">
@@ -265,13 +208,13 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
             <div class="col-lg-3 col-md-6 footer-links">
               <h4>Usefull Links</h4>
               <ul>
-                <li><a href="../index.php">Home</a></li>
-                <li><a href="../aboutuspage/aboutus.php">About Us</a></li>
-                <li><a href="../config/logout.php">Logout</a></li>
+                <li><a href="../../../index.php">Home</a></li>
+                <li><a href="../../../aboutuspage/aboutus.php">About Us</a></li>
+                <li><a href="../../../config/logout.php">Logout</a></li>
                 <li>
-                  <a href="../productspage/index.php">Shop Now</a>
+                  <a href="../../../productspage/index.php">Shop Now</a>
                 </li>
-                <li><a href="../contactuspage/contactus.php">Contact Us</a></li>
+                <li><a href="../../../contactuspage/contactus.php">Contact Us</a></li>
               </ul>
             </div>
 
@@ -326,12 +269,14 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
       </div>
     </footer>
     <!-- footer -->
-
-    <script src="script.js"></script>
+    <!--nav account dropdown -->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"
     ></script>
+    <!--nav account dropdown -->
+    <script src="tvscript.js?v=<?php echo time(); ?>"></script>
+
   </body>
 </html>

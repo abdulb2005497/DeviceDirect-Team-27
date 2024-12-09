@@ -1,13 +1,14 @@
 <?php
 if (session_status() == PHP_SESSION_NONE) 
 { session_start();}      if (!isset($_SESSION['user_id'])) {
-    header("Location: ../Login_page/login.php");
+    header("Location: Login_page/login.php");
     exit(); }
 $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
-?>
+?>  
+
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -21,14 +22,11 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
     />
 
-
-    <link rel="stylesheet" href="../productspage/style.css?v=<?php echo time(); ?>">
-
+    <link rel="stylesheet" href="consolestyle.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
     />
-    
     <!-- bootstrap links -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
@@ -44,20 +42,16 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
       href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap"
       rel="stylesheet"
     />
- 
-
     <!-- fonts links -->
-    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
-
   </head>
-  <body>
 
-  <!-- navbar -->
-  <nav class="navbar navbar-expand-lg" id="navbar">
+  <body data-model="switch">
+     <!-- navbar -->
+   <nav class="navbar navbar-expand-lg" id="navbar">
       <div class="container-fluid">
         <a class="navbar-brand" href="index.php" id="logo">
           <img
-            src="../assests/images/device_direct_logo.png"
+            src="../../../assests/images/device_direct_logo.png"
             alt="Device Direct Logo"
             class="logo-img"
           />
@@ -73,7 +67,7 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
           aria-label="Toggle navigation"
         >
           <span
-            ><img src="./assests/images/menu.png" alt="" width="30px"
+            ><img src="../../../assests/images/menu.png" alt="" width="30px"
           /></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -82,18 +76,18 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
               <a
                 class="nav-link active"
                 aria-current="page"
-                href="../index.php"
+                href="../../../index.php"
                 >Home</a
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="../productspage/index.php">Shop</a>
+              <a class="nav-link" href="../../index.php">Shop</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="../aboutuspage/aboutus.php">About</a>
+              <a class="nav-link" href="../../../aboutuspage/aboutus.php">About</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="../contactuspage/contactus.php"
+              <a class="nav-link" href="../../../contactuspage/contactus.php"
                 >Contact</a
               >
             </li>
@@ -114,52 +108,28 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
                 style="background-color: rgb(67 0 86)"
               >
                 <li>
-                  <a class="dropdown-item" href="../Login_page/login.php"
+                  <a class="dropdown-item" href="../../../Login_page/login.php"
                     >Login</a
                   >
                 </li>
                 <li>
-                  <a class="dropdown-item" href="../Login_page/signup.php"
+                  <a class="dropdown-item" href="../../../Login_page/signup.php"
                     >SignUp</a
                   >
                 </li>
                 <li>
                   <a
                     class="dropdown-item"
-                    href="../previousorders/previousorders.php"
+                    href="../../../previousorders/previousorders.php"
                     >Previous Orders</a
                   >
                 </li>
               </ul>
             </li>
-            <li class="nav-item"><a class="nav-link" href="config/logout.php">Logout</a></li>
-          </ul>
-         <!-- <form class="d-flex" id="search">
-            <input
-              class="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-            <button class="btn btn-outline-success" type="submit">
-              Search
-            </button>
-          </form> -->
-          <div class="searchsectionwrappernav">
-  <section class="searchsectionnav">
-    <form>
-      <img src="../productspage/categoryimages/search.png" alt="Search Icon" />
-      <input type="text" placeholder="Search" id="inputsearchnav" autocomplete="off" />
-    </form>
-    <div class="optionboxnav"></div>
-  </section>
-</div>
-
-          
-
-
+            <li class="nav-item"><a class="nav-link" href="../../../config/logout.php">Logout</a></li>
+</ul>
           <div class="cart-btn">
-            <a href="../checkoutpage/cart.php"
+            <a href="../../../checkoutpage/cart.php"
               ><i class="fas fa-shopping-bag"></i
             ></a>
           </div>
@@ -167,6 +137,7 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
       </div>
     </nav>
     <!-- navbar -->
+    <hr />
     <h3
       style="
         text-align: center;
@@ -175,76 +146,81 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
         margin-bottom: 15px;
       "
     >
-      Shop By Search
+      Select Your Colour
     </h3>
 
-    <div class="searchsectionwrapper">
-      <section class="searchsection">
-        <form>
-          <img src="../productspage/categoryimages/search.png" />
-          <input type="text" placeholder="Search" id="inputsearch" autocomplete="off" />
-        </form>
-        <div class="optionbox"></div>
-      </section>
-    </div>
-
-    <h3
-      style="
-        text-align: center;
-        font-weight: 600;
-        margin-top: 20px;
-        margin-bottom: 15px;
-      "
-    >
-      Search By Category
-    </h3>
-
-    <section class="catrgoryimages">
-      <a
-        href="../productspage/pagescode/tvcode/tvs.php"
-        style="text-decoration: none"
-        ><div class="categorycards">
-          <div class="cimages tvs"></div>
-          <h4>TVs</h4>
-          <p></p></div
-      ></a>
-
-      <a
-        href="../productspage/pagescode/monitorscode/monitors.php"
-        style="text-decoration: none"
-        ><div class="categorycards">
-          <div class="cimages monitors"></div>
-          <h4>Monitors</h4>
-          <p></p></div
-      ></a>
-
-      <a
-        href="../productspage/pagescode/laptopscode/laptops.php"
-        style="text-decoration: none"
-        ><div class="categorycards">
-          <div class="cimages laptops"></div>
-          <h4>Laptops</h4>
-          <p></p></div
-      ></a>
-
-      <a
-        href="../productspage/pagescode/headphonescode/headphones.php"
-        style="text-decoration: none"
-        ><div class="categorycards">
-          <div class="cimages headphones"></div>
-          <h4>Headphones</h4>
-          <p></p></div
-      ></a>
-
-      <a
-        href="../productspage/pagescode/consolescode/consoles.php"
-        style="text-decoration: none"
-        ><div class="categorycards">
-          <div class="cimages consoles"></div>
-          <h4>Consoles</h4>
-          <p></p></div
-      ></a>
+    <section id="details" class="diffitems">
+      <div class="mainimage">
+        <img
+          src="Consoles/switch/switchblack.webp"
+          width="100%"
+          id="normal"
+          alt=""
+        />
+        <div class="secimages">
+          <div class="secimagescols">
+            <img
+              src="Consoles/switch/switchblack.webp"
+              width="100%"
+              class="smallimg"
+              id="black"
+            />
+          </div>
+          <div class="secimagescols">
+            <img
+              src="Consoles/switch/Switch white.webp"
+              width="100%"
+              class="smallimg"
+              id="white"
+            />
+          </div>
+          <div class="secimagescols">
+            <img
+              src="Consoles/switch/switch red.webp"
+              width="100%"
+              class="smallimg"
+              id="red"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="maindescription">
+        <br />
+        <h4 id="pname">Black Nintendo Switch</h4>
+        <br />
+        <h2 id="pprice"><del>£249.99</del> £149.99</h2>
+        <br />
+        <select id="colourselector">
+          <option value="Black">Black</option>
+          <option value="White">White</option>
+          <option value="Red">Red</option>
+        </select>
+        <input type="number" value="1" />
+        <br />
+        <br />
+        <a href="../../../checkoutpage/cart.php"><button class="cartclass">Add to Cart</button></a>
+        <br />
+        <br />
+        <h4 id="pdescriptionheading">
+          Product Description: Black Nintendo Switch
+        </h4>
+        <br />
+        <span id="pdescription"
+          >The black Nintendo Switch combines portability and versatility in a
+          sleek, modern design. Whether you’re playing on the go or docking it
+          for big-screen action, the Switch delivers a seamless gaming
+          experience that adapts to your lifestyle. Its ergonomic Joy-Con
+          controllers provide precision and comfort, while the vibrant display
+          ensures crystal-clear visuals for handheld gaming. With a diverse
+          library of games, including action-packed adventures, puzzles, and
+          party games, the black Switch is perfect for solo players and groups
+          alike. Its stylish black finish adds a professional touch, making it a
+          must-have for gamers who value performance and aesthetics.</span
+        >
+      </div>
     </section>
+
+    <hr />
 
 <!-- footer -->
 <footer id="footer">
@@ -265,13 +241,13 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
             <div class="col-lg-3 col-md-6 footer-links">
               <h4>Usefull Links</h4>
               <ul>
-                <li><a href="../index.php">Home</a></li>
-                <li><a href="../aboutuspage/aboutus.php">About Us</a></li>
-                <li><a href="../config/logout.php">Logout</a></li>
+                <li><a href="../../../index.php">Home</a></li>
+                <li><a href="../../../aboutuspage/aboutus.php">About Us</a></li>
+                <li><a href="../../../config/logout.php">Logout</a></li>
                 <li>
-                  <a href="../productspage/index.php">Shop Now</a>
+                  <a href="../../../productspage/index.php">Shop Now</a>
                 </li>
-                <li><a href="../contactuspage/contactus.php">Contact Us</a></li>
+                <li><a href="../../../contactuspage/contactus.php">Contact Us</a></li>
               </ul>
             </div>
 
@@ -327,11 +303,13 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
     </footer>
     <!-- footer -->
 
-    <script src="script.js"></script>
+    <script src="consolescript.js"></script>
+    <!--nav account dropdown -->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"
     ></script>
+    <!--nav account dropdown -->
   </body>
 </html>
