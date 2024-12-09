@@ -1,7 +1,5 @@
 <?php
 session_start();
-include_once '../config/db.php';
-include_once 'cart_functions.php';
 
 // Check if the  is logged in
 if (!isset($_SESSION['user_id'])) {
@@ -9,20 +7,13 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-$user_id = $_SESSION['user_id'];
-
-$cart_items = getCartItems($user_id);
-
-$total = 0;
-foreach ($cart_items as $item) {
-    $total += $item['price'] * $item['quantity'];
-}
 
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-<head>
+  <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="style_cart.css">
     <title>Checkout</title>
@@ -76,110 +67,52 @@ foreach ($cart_items as $item) {
             </div>
         </div>
     </nav>
+    <title></title>
+  </head>
+  <body>
 
     <div class="cart-container">
         <h1>CART PAGE</h1>
+
         <div class="cart-layout">
+          <!-- These are placeholders will later be replaced with php code pulling the data from the database-->
             <div class="cart-items">
-                <?php if (empty($cart_items)): ?>
-                    <p>Your cart is empty!</p>
-                <?php else: ?>
-                    <?php foreach ($cart_items as $item): ?>
-                        <div class="cart-item">
-                            <img src="../productspage/images/<?php echo $item['image']; ?>" alt="<?php echo $item['product_title']; ?>">
-                            <div class="cart-details">
-                                <p><?php echo $item['product_title']; ?></p>
-                                <p>£<?php echo $item['price']; ?></p>
-                                <p>Size: <?php echo $item['size_name']; ?></p>
-                                <p>Quantity: <?php echo $item['quantity']; ?></p>
-                                <div class="buttons-container">
-                                    <form action="update_quantity.php" method="post">
-                                        <input type="hidden" name="cart_id" value="<?php echo $item['cart_id']; ?>">
-                                        <input type="number" name="quantity" value="<?php echo $item['quantity']; ?>" min="1" style="width: 50px;">
-                                        <button type="submit" name="update_quantity">Update</button>
-                                    </form>
-                                    <form action="remove_from_cart.php" method="post">
-                                        <input type="hidden" name="cart_id" value="<?php echo $item['cart_id']; ?>">
-                                        <button type="submit" name="remove_item" class="remove-btn">Remove</button>
-                                    </form>
-                                </div>
-
-                            </div>
-                        </div>
-                    <?php endforeach; ?>
-                <?php endif; ?>
-            </div>
-
-            <div class="checkout-summary">
-                <h2>Checkout Summary</h2>
-                <p>Total: £<?php echo number_format($total, 2); ?></p>
-                <p>Shipping: Free</p>
-                <p>Total: £<?php echo number_format($total, 2); ?></p>
-                <a href="../checkoutpage/checkout.php"><button class="checkout-btn">Checkout</button></a>
-                <button class="paypal-btn">Pay with PayPal</button>
-                <h3>Discount code:</h3>
-                <form class="discount-code" action="index.html" method="post">
-                    <input type="text" name="" placeholder="Enter code here">
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer id="footer">
-        <div class="footer-top">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-3 col-md-6 footer-contact">
-                        <h3>Device Direct</h3>
-                        <p>
-                            236 Coventry Road <br />
-                            TW4 5PF, Birmingham <br />
-                            United Kingdom <br />
-                        </p>
-                        <strong>Phone:</strong> +44 7748374824 <br />
-                        <strong>Email:</strong>support@devicedirect.co.uk<br />
+                <div class="cart-item">
+                    <img src="../productsmonitor.jpg" alt="">
+                    <div class="cart-details">
+                        <p>Product Title</p>
+                        <p>Product Colour</p>
+                        <p>Price</p>
+                        <button type="button" name="button">x</button>
                     </div>
-                    <div class="col-lg-3 col-md-6 footer-links">
-                        <h4>Useful Links</h4>
-                        <ul>
-                            <li><a href="../index.php">Home</a></li>
-                            <li><a href="../aboutuspage/aboutus.php">About Us</a></li>
-                            <li><a href="../config/logout.php">Logout</a></li>
-                            <li><a href="../productspage/index.php">Shop Now</a></li>
-                            <li><a href="../contactuspage/contactus.php">Contact Us</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-3 col-md-6 footer-links">
-                        <h4>Our Services</h4>
-                        <ul>
-                            <li><a href="#">Gaming Consoles</a></li>
-                            <li><a href="#">TVs</a></li>
-                            <li><a href="#">Laptops</a></li>
-                            <li><a href="#">Monitors</a></li>
-                            <li><a href="#">Headphones</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-3 col-md-6 footer-links">
-                        <h4>Our Social</h4>
-                        <div class="socail-links mt-3">
-                            <a href="#"><i class="fa-brands fa-twitter"></i></a>
-                            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-                            <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                        </div>
+                </div>
+                <div class="cart-item">
+                    <img src="images/monitor.jpg" alt="">
+                    <div class="cart-details">
+                        <p>Product Title</p>
+                        <p>Product Colour</p>
+                        <p>Price</p>
+                        <button type="button" name="button">x</button>
                     </div>
                 </div>
             </div>
-        </div>
-        <hr />
-        <div class="container py-4">
-            <div class="copyright">
-                &copy; Copyright <strong><span>Device Direct Shop</span></strong>. All Rights Reserved
+
+            <!-- Placeholder until php is complete -->
+            <div class="checkout-summary">
+                <h2>Checkout Summary</h2>
+                <p>Total: £519.97</p>
+                <p>Shipping: Free</p>
+                <p>Total: £519.97</p>
+                <button class="checkout-btn">Checkout</button>
+                <button class="paypal-btn">Pay with PayPal</button>
+                <h3>Discount code:</h3>
+                <form class="discount-code" action="index.html" method="post">
+                  <input type="text" name="" placeholder="Enter code here">
+                </form>
             </div>
         </div>
-    </footer>
-
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-</body>
+        <a href="wishlist.php">Enter wishlist</a>
+    </div>
+    </form>
+  </body>
 </html>
