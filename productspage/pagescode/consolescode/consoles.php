@@ -1,10 +1,10 @@
 <?php
-if (session_status() == PHP_SESSION_NONE) 
+if (session_status() == PHP_SESSION_NONE)
 { session_start();}      if (!isset($_SESSION['user_id'])) {
     header("Location: Login_page/login.php");
     exit(); }
 $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
-?>  
+?>
 
 <!DOCTYPE html>
 <html>
@@ -127,7 +127,7 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
             </li>
             <li class="nav-item"><a class="nav-link" href="../../../config/logout.php">Logout</a></li>
           </ul>
-          
+
           <div class="cart-btn">
             <a href="../../../checkoutpage/cart.php"
               ><i class="fas fa-shopping-bag"></i
@@ -192,6 +192,7 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
           <p></p></div
       ></a>
     </section>
+
 
    <!-- footer -->
    <footer id="footer">
