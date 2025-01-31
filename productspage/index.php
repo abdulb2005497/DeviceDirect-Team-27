@@ -1,9 +1,41 @@
 <?php
-if (session_status() == PHP_SESSION_NONE) 
-{ session_start();}      if (!isset($_SESSION['user_id'])) {
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+if (!isset($_SESSION['user_id'])) {
     header("Location: ../Login_page/login.php");
-    exit(); }
+    exit();
+}
+
+include('../config/db.php');
 $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
+
+$category_id = isset($_GET['category_id']) ? $_GET['category_id'] : null;
+
+if ($category_id) {
+    $query = "
+        SELECT p.product_id, p.product_title, pv.image, pv.price, ca.category_name
+        FROM products p
+        JOIN product_variants pv ON p.product_id = pv.product_id
+        JOIN product_categories ca ON pv.category_id = ca.category_id
+        WHERE pv.category_id = :category_id
+        GROUP BY p.product_id
+    ";
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(':category_id', $category_id, PDO::PARAM_INT);
+} else {
+    $query = "
+        SELECT p.product_id, p.product_title, pv.image, pv.price, ca.category_name
+        FROM products p
+        JOIN product_variants pv ON p.product_id = pv.product_id
+        JOIN product_categories ca ON pv.category_id = ca.category_id
+        GROUP BY p.product_id
+    ";
+    $stmt = $pdo->prepare($query);
+}
+
+$stmt->execute();
+$products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html>
@@ -28,7 +60,7 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
     />
-    
+
     <!-- bootstrap links -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
@@ -44,7 +76,7 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
       href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap"
       rel="stylesheet"
     />
- 
+
 
     <!-- fonts links -->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
@@ -155,7 +187,7 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
   </section>
 </div>
 
-          
+
 
 
           <div class="cart-btn">
@@ -175,18 +207,6 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
         margin-bottom: 15px;
       "
     >
-      Shop By Search
-    </h3>
-
-    <div class="searchsectionwrapper">
-      <section class="searchsection">
-        <form>
-          <img src="../productspage/categoryimages/search.png" />
-          <input type="text" placeholder="Search" id="inputsearch" autocomplete="off" />
-        </form>
-        <div class="optionbox"></div>
-      </section>
-    </div>
 
     <h3
       style="
@@ -196,55 +216,32 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
         margin-bottom: 15px;
       "
     >
-      Search By Category
-    </h3>
+Store page    </h3>
 
-    <section class="catrgoryimages">
-      <a
-        href="../productspage/pagescode/tvcode/tvs.php"
-        style="text-decoration: none"
-        ><div class="categorycards">
-          <div class="cimages tvs"></div>
-          <h4>TVs</h4>
-          <p></p></div
-      ></a>
+<div class="store-container">
+      <h3 class="text-center">Store Page</h3>
+      <div class="row">
+          <?php if ($products): ?>
+              <?php foreach ($products as $product): ?>
+                  <div class="col-md-4 mb-4">
+                      <div class="card h-100">
+                        <img src="images/<?= htmlspecialchars($product['image']) ?>" alt="<?= htmlspecialchars($product['product_title']) ?>">
+                          <div class="card-body">
+                              <h5 class="card-title"> <?= htmlspecialchars($product['product_title']) ?> </h5>
+                              <p class="card-text">Category: <?= htmlspecialchars($product['category_name']) ?></p>
+                              <p class="card-text">Price: $<?= number_format($product['price'], 2) ?></p>
+                              <a href="product_details.php?product_id=<?= $product['product_id'] ?>" class="btn btn-primary">View Details</a>
+                          </div>
+                      </div>
+                  </div>
+              <?php endforeach; ?>
+          <?php else: ?>
+              <p class="text-center">No products found.</p>
+          <?php endif; ?>
+  </div>
+</div>
 
-      <a
-        href="../productspage/pagescode/monitorscode/monitors.php"
-        style="text-decoration: none"
-        ><div class="categorycards">
-          <div class="cimages monitors"></div>
-          <h4>Monitors</h4>
-          <p></p></div
-      ></a>
 
-      <a
-        href="../productspage/pagescode/laptopscode/laptops.php"
-        style="text-decoration: none"
-        ><div class="categorycards">
-          <div class="cimages laptops"></div>
-          <h4>Laptops</h4>
-          <p></p></div
-      ></a>
-
-      <a
-        href="../productspage/pagescode/headphonescode/headphones.php"
-        style="text-decoration: none"
-        ><div class="categorycards">
-          <div class="cimages headphones"></div>
-          <h4>Headphones</h4>
-          <p></p></div
-      ></a>
-
-      <a
-        href="../productspage/pagescode/consolescode/consoles.php"
-        style="text-decoration: none"
-        ><div class="categorycards">
-          <div class="cimages consoles"></div>
-          <h4>Consoles</h4>
-          <p></p></div
-      ></a>
-    </section>
 
 <!-- footer -->
 <footer id="footer">
