@@ -227,6 +227,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                               <h5 class="card-title"> <?= htmlspecialchars($product['product_title']) ?> </h5>
                               <p class="card-text">Category: <?= htmlspecialchars($product['category_name']) ?></p>
                               <p class="card-text">Price: $<?= number_format($product['price'], 2) ?></p>
+                              <a href="product_details.php?product_id=<?= $product['product_id'] ?>" class="btn btn-primary">Save to Wishlist</a>
                               <a href="product_details.php?product_id=<?= $product['product_id'] ?>" class="btn btn-primary">View Details</a>
                           </div>
                       </div>
