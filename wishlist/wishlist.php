@@ -63,7 +63,7 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
 <!-- Navbar -->
 
 <div class="wishlist-container">
-    <h1>mY Wishlist</h1>
+    <h1>My Wishlist</h1>
     <div class="wishlist-layout">
         <div class="wishlist-items">
             
