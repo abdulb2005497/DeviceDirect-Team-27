@@ -9,6 +9,7 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
