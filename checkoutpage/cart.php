@@ -1,136 +1,114 @@
 <?php
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
+session_start();
+include_once '../config/db.php';
+include_once 'cart_functions.php';
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location: Login_page/login.php");
+    header("Location: login.php?error=Please log in first");
     exit();
 }
 
-// Initialize cart if not already
-if (!isset($_SESSION['cart'])) {
-    $_SESSION['cart'] = [];
-}
+$user_id = $_SESSION['user_id'];
+$cartItems = getCartItems($pdo, $user_id);
+$totalAmount = calculate_total($pdo, $_SESSION['user_id']);
 
-$welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
-
-// Function to remove item from cart
-if (isset($_GET['remove'])) {
-    $remove_id = $_GET['remove'];
-    unset($_SESSION['cart'][$remove_id]);
-}
-
-// Function to update quantity in cart
-if (isset($_POST['update'])) {
-    $id = $_POST['id'];
-    $quantity = $_POST['quantity'];
-    $_SESSION['cart'][$id]['quantity'] = $quantity;
-}
-
-// Calculate total price
-$total = 0;
-foreach ($_SESSION['cart'] as $item) {
-    $total += $item['price'] * $item['quantity'];
-}
+$_SESSION['total_price'] = $totalAmount;
 ?>
 
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Shopping Cart</title>
     <link rel="stylesheet" href="style_cart.css">
-    <title>Checkout</title>
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
     <!-- bootstrap links -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
-    <!-- fonts links -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet" />
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+   <!-- fonts links -->
+   <link rel="preconnect" href="https://fonts.googleapis.com" />
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+   <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet" />
 </head>
-<body>
-    <!-- navbar -->
-    <nav class="navbar navbar-expand-lg" id="navbar">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="index.php" id="logo">
-                <img src="../assests/images/device_direct_logo.png" alt="Device Direct Logo" class="logo-img" />
-                <span id="span1">D</span>evice <span>Direct</span></a
-            >
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span><img src="./assests/images/menu.png" alt="" width="30px" /></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="../index.php">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../productspage/index.php">Shop</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../aboutuspage/aboutus.php">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../contactuspage/contactus.php">Contact</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Account</a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: rgb(67 0 86)">
-                            <li><a class="dropdown-item" href="../Login_page/login.php">Login</a></li>
-                            <li><a class="dropdown-item" href="../Login_page/signup.php">SignUp</a></li>
-                            <li><a class="dropdown-item" href="../previousorders/previousorders.php">Previous Orders</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="../config/logout.php">Logout</a></li>
-                </ul>
 
-                <div class="cart-btn">
-                    <a href="../checkoutpage/cart.php"><i class="fas fa-shopping-bag"></i></a>
-                </div>
+<body>
+  <!-- navbar -->
+  <nav class="navbar navbar-expand-lg" id="navbar">
+      <div class="container-fluid">
+          <a class="navbar-brand" href="index.php" id="logo">
+              <img src="../assests/images/device_direct_logo.png" alt="Device Direct Logo" class="logo-img" />
+              <span id="span1">D</span>evice <span>Direct</span></a
+          >
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span><img src="./assests/images/menu.png" alt="" width="30px" /></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                      <a class="nav-link active" aria-current="page" href="../index.php">Home</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="../productspage/index.php">Shop</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="../aboutuspage/aboutus.php">About</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="../contactuspage/contactus.php">Contact</a>
+                  </li>
+                  <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Account</a>
+                      <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: rgb(67 0 86)">
+                          <li><a class="dropdown-item" href="../Login_page/login.php">Login</a></li>
+                          <li><a class="dropdown-item" href="../Login_page/signup.php">SignUp</a></li>
+                          <li><a class="dropdown-item" href="../previousorders/previousorders.php">Previous Orders</a></li>
+                      </ul>
+                  </li>
+                  <li class="nav-item"><a class="nav-link" href="../config/logout.php">Logout</a></li>
+              </ul>
+
+              <div class="cart-btn">
+                  <a href="../checkoutpage/cart.php"><i class="fas fa-shopping-bag"></i></a>
+              </div>
+          </div>
+      </div>
+  </nav>
+    <div class="cart-container">
+        <div class="cart-items-section">
+            <h1>My Cart</h1>
+            <?php if (!empty($cartItems)): ?>
+                <?php foreach ($cartItems as $item): ?>
+                    <div class="cart-item">
+                        <img src="../productspage/images/<?php echo $item['image']; ?>" alt="<?php echo $item['product_title']; ?>" class="cart-item-img">
+                        <div class="cart-item-details">
+                            <p class="product-title"><?php echo $item['product_title']; ?></p>
+                            <p class="product-price">£<?php echo number_format($item['price'], 2); ?></p>
+                            <form action="update_cart.php" method="post" class="quantity-form">
+                                <input type="hidden" name="prod_variant_id" value="<?php echo $item['prod_variant_id']; ?>">
+                                <input type="number" name="quantity" value="<?php echo $item['quantity']; ?>" min="1" class="quantity-input">
+                                <button type="submit" name="update_quantity" class="update-btn">Update</button>
+                            </form>
+                            <form action="remove_item.php" method="post" class="remove-form">
+                                <input type="hidden" name="prod_variant_id" value="<?php echo $item['prod_variant_id']; ?>">
+                                <button type="submit" name="remove_item" class="remove-btn">Remove</button>
+                            </form>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p>Your cart is empty.</p>
+            <?php endif; ?>
+        </div>
+
+        <div class="cart-summary">
+            <h2>Total</h2>
+            <p>Subtotal: £<?php echo number_format($totalAmount, 2); ?></p>
+            <p c>Delivery: <span class="free-shipping">Standard Delivery (Free)</span></p>
+            <br><hr><br>
+            <p>Total: £<?php echo number_format($totalAmount, 2); ?></p>
+
+            <button class="checkout-btn" onclick="window.location.href='checkout.php'">Checkout</button>
             </div>
         </div>
-    </nav>
-    <div class="container mt-5">
-        <h2>Shopping Cart</h2>
-
-        <?php if (empty($_SESSION['cart'])): ?>
-            <p>Your cart is empty.</p>
-        <?php else: ?>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Product</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th>Total</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($_SESSION['cart'] as $id => $item): ?>
-                        <tr>
-                            <td><?php echo $item['name']; ?></td>
-                            <td>£<?php echo number_format($item['price'], 2); ?></td>
-                            <td>
-                                <form method="POST" action="cart.php">
-                                    <input type="number" name="quantity" value="<?php echo $item['quantity']; ?>" min="1" max="10" />
-                                    <input type="hidden" name="id" value="<?php echo $id; ?>" />
-                                    <button type="submit" name="update" class="btn btn-sm btn-warning">Update</button>
-                                </form>
-                            </td>
-                            <td>£<?php echo number_format($item['price'] * $item['quantity'], 2); ?></td>
-                            <td><a href="cart.php?remove=<?php echo $id; ?>" class="btn btn-sm btn-danger">Remove</a></td>
-                        </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
-            <hr>
-            <h4>Total: £<?php echo number_format($total, 2); ?></h4>
-            <a href="checkoutpage/checkout.php" class="btn btn-success">Proceed to Checkout</a>
-        <?php endif; ?>
     </div>
-
     <!-- footer -->
   <footer id="footer">
       <div class="footer-top">
@@ -211,5 +189,6 @@ foreach ($_SESSION['cart'] as $item) {
       </div>
     </footer>
     <!-- footer -->
-    </body>
+</body>
+
 </html>
