@@ -14,6 +14,11 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
 
 $category_id = isset($_GET['category_id']) ? $_GET['category_id'] : null;
 
+$category_query = "SELECT category_id, category_name FROM product_categories";
+$category_stmt = $pdo->prepare($category_query);
+$category_stmt->execute();
+$categories = $category_stmt->fetchAll(PDO::FETCH_ASSOC);
+
 if ($category_id) {
     $query = "
         SELECT p.product_id, p.product_title, pv.image, pv.price, ca.category_name
@@ -25,7 +30,7 @@ if ($category_id) {
     ";
     $stmt = $pdo->prepare($query);
     $stmt->bindParam(':category_id', $category_id, PDO::PARAM_INT);
-    
+
 } else {
     $query = "
         SELECT p.product_id, p.product_title, pv.image, pv.price, ca.category_name
@@ -217,6 +222,20 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <div class="store-container">
       <h3 class="text-center">Store Page</h3>
+
+      <!-- Category Filter Dropdown -->
+      <form method="GET" action="" class="mb-3">
+          <label for="category">Filter by Category:</label>
+          <select name="category_id" id="category" class="form-select" onchange="this.form.submit()">
+              <option value="">All Categories</option>
+              <?php foreach ($categories as $category): ?>
+                  <option value="<?= $category['category_id'] ?>" <?= ($category_id == $category['category_id']) ? 'selected' : '' ?>>
+                      <?= htmlspecialchars($category['category_name']) ?>
+                  </option>
+              <?php endforeach; ?>
+          </select>
+      </form>
+
       <div class="row">
           <?php if ($products): ?>
               <?php foreach ($products as $product): ?>
