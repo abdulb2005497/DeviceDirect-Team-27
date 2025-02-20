@@ -24,7 +24,7 @@ if (!isset($_SESSION['user_id'])) {
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item"><a class="nav-link active" aria-current="page" href="index.php">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="productspage/index.php">Shop</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../productspage/index.php">Shop</a></li>
                     <li class="nav-item"><a class="nav-link" href="aboutuspage/aboutus.php">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="contactuspage/contactus.php">Contact</a></li>
                     <li class="nav-item dropdown">
