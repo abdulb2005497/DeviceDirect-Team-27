@@ -25,7 +25,7 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
 </head>
 <body>
 <!-- Navbar -->
-<?php include $_SERVER['DOCUMENT_ROOT'] . "../DeviceDirect-Team-27/navbar.php"; ?>
+<?php include '../navbar.php'; ?>
 <!-- Navbar -->
 
 
