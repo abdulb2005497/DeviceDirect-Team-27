@@ -83,7 +83,7 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
   <body>
   
  <!-- Navbar -->
-<?php include '../navbar.php'; ?>
+ <?php include $_SERVER['DOCUMENT_ROOT'] . "../DeviceDirect-Team-27/navbar.php"; ?>
 <!-- Navbar -->
 
     <main>
