@@ -32,8 +32,8 @@ $total_price = isset($_SESSION['total_price']) ? $_SESSION['total_price'] : 0;
        <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet" />
  </head>
  <body>
-   <!-- Navbar -->
-<?php include '../navbar.php'; ?>
+<!-- Navbar -->
+<?php include '../DeviceDirect-Team-27/navbar.php'; ?>
 <!-- Navbar -->
 
 
