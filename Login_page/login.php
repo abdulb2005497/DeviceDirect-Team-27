@@ -1,7 +1,8 @@
 <?php
 require_once __DIR__ . '/../config/db.php';
 if (session_status() == PHP_SESSION_NONE) {
-    session_start();}
+    session_start();
+}
 $error_message = ""; 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = htmlspecialchars($_POST['email']);
@@ -12,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($user && password_verify($password, $user['password'])) {
         $_SESSION['user_id'] = $user['user_id'];
         $_SESSION['first_name'] = $user['First_name'];
-         header("Location: ../Home/index.php");
+        header("Location: ../Home/index.php");
         exit();
     } else {
         $error_message = "Invalid email or password.";
