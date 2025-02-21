@@ -6,8 +6,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
 // Redirect to the login page if the user is not logged in
 if (!isset($_SESSION['user_id'])) {
-  header("Location: Login_page/login.php");
-
+    header("Location: ../Login_page/login.php");
     exit();
 }
 
@@ -20,14 +19,14 @@ $welcome_message = "Hi, " . htmlspecialchars($_SESSION['first_name']);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DeviceDirect | Home</title>
-    <link rel="stylesheet" href="assests/css/style.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="../assests/css/style.css?v=<?php echo time(); ?>">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- Navbar -->
-    <?php include 'navbar.php'; ?>
+    <?php include '../navbar.php'; ?>
     <!-- Navbar -->
      
     <!-- Welcome Message -->
@@ -47,7 +46,7 @@ $welcome_message = "Hi, " . htmlspecialchars($_SESSION['first_name']);
             </div>
         </div>
         <div class="img">
-        <img src="./assests/images/image1.png" alt="">
+            <img src="../assests/images/image1.png" alt="">
         </div>
     </section>
     <!-- product cards -->
@@ -61,7 +60,7 @@ $welcome_message = "Hi, " . htmlspecialchars($_SESSION['first_name']);
         <div class="col-md-3 py-3 py-md-0">
           <div class="card">
             <img
-              src="productspage/pagescode/tvcode/TVs/40inch/HD-40-Black.webp"
+              src="../productspage/pagescode/tvcode/TVs/40inch/HD-40-Black.webp"
               alt=""
             />
             <div class="card-body">
@@ -91,7 +90,7 @@ $welcome_message = "Hi, " . htmlspecialchars($_SESSION['first_name']);
         <div class="col-md-3 py-3 py-md-0">
           <div class="card">
             <img
-              src="productspage/pagescode/headphonescode/Headphones/overeargrey.webp"
+              src="../productspage/pagescode/headphonescode/Headphones/overeargrey.webp"
               alt=""
             />
             <div class="card-body">
@@ -121,7 +120,7 @@ $welcome_message = "Hi, " . htmlspecialchars($_SESSION['first_name']);
         <div class="col-md-3 py-3 py-md-0">
           <div class="card">
             <img
-                src="productspage/pagescode/laptopscode/Laptops/16inch/Probook-16-black.webp"
+              src="../productspage/pagescode/laptopscode/Laptops/16inch/Probook-16-black.webp"
               alt=""
             />
             <div class="card-body">
@@ -151,7 +150,7 @@ $welcome_message = "Hi, " . htmlspecialchars($_SESSION['first_name']);
         <div class="col-md-3 py-3 py-md-0">
           <div class="card">
             <img
-              src="productspage/pagescode/monitorscode/Monitors/30inch/4k-30-White.webp"
+              src="../oductspage/pagescode/monitorscode/Monitors/30inch/4k-30-White.webp"
               alt=""
             />
             <div class="card-body">
@@ -183,7 +182,7 @@ $welcome_message = "Hi, " . htmlspecialchars($_SESSION['first_name']);
         <div class="col-md-3 py-3 py-md-0">
           <div class="card">
             <img
-              src="productspage/pagescode/consolescode/Consoles/PS5/PS5 White.webp"
+              src="../productspage/pagescode/consolescode/Consoles/PS5/PS5 White.webp"
               alt=""
             />
             <div class="card-body">
@@ -213,7 +212,7 @@ $welcome_message = "Hi, " . htmlspecialchars($_SESSION['first_name']);
         <div class="col-md-3 py-3 py-md-0">
           <div class="card">
             <img
-              src="productspage/pagescode/tvcode/TVs/80inch/4k-80-Black.webp"
+              src="../productspage/pagescode/tvcode/TVs/80inch/4k-80-Black.webp"
               alt=""
             />
             <div class="card-body">
@@ -243,7 +242,7 @@ $welcome_message = "Hi, " . htmlspecialchars($_SESSION['first_name']);
         <div class="col-md-3 py-3 py-md-0">
           <div class="card">
             <img
-              src="productspage/pagescode/laptopscode/Laptops/16inch/Windows-16-White.webp"
+              src="../productspage/pagescode/laptopscode/Laptops/16inch/Windows-16-White.webp"
               alt=""
             />
             <div class="card-body">
@@ -273,7 +272,7 @@ $welcome_message = "Hi, " . htmlspecialchars($_SESSION['first_name']);
         <div class="col-md-3 py-3 py-md-0">
           <div class="card">
             <img
-              src="productspage/pagescode/headphonescode/Headphones/inearblack.webp"
+              src="../productspage/pagescode/headphonescode/Headphones/inearblack.webp"
               alt=""
             />
             <div class="card-body">
@@ -307,12 +306,12 @@ $welcome_message = "Hi, " . htmlspecialchars($_SESSION['first_name']);
       <div class="row">
         <div class="col-md-6 py-3 py-md-0">
           <div class="card">
-          <img src="./assests/images/c1.png" alt="" />
+            <img src="../assests/images/c1.png" alt="" />
             <div class="card-img-overlay">
               <h3>Best Laptop</h3>
               <h5>Latest Collection</h5>
               <p>Up To 50% Off</p>
-              <a href="productspage/pagescode/laptopscode/laptops.php">
+              <a href="../productspage/pagescode/laptopscode/laptops.php">
                 <button id="shopnow">Shop Now</button></a
               >
             </div>
@@ -320,12 +319,12 @@ $welcome_message = "Hi, " . htmlspecialchars($_SESSION['first_name']);
         </div>
         <div class="col-md-6 py-3 py-md-0">
           <div class="card">
-          <img src="./assests/images/c2.png" alt="" />
+            <img src="../assests/images/c2.png" alt="" />
             <div class="card-img-overlay">
               <h3>Best Headphone</h3>
               <h5>Latest Collection</h5>
               <p>Up To 50% Off</p>
-              <a href="productspage/pagescode/headphonescode/headphones.php">
+              <a href="../productspage/pagescode/headphonescode/headphones.php">
                 <button id="shopnow">Shop Now</button></a
               >
             </div>
@@ -350,11 +349,11 @@ $welcome_message = "Hi, " . htmlspecialchars($_SESSION['first_name']);
           everyone.
         </p>
         <div class="btn">
-        <a href="productspage\index.php"> <button>Shop Now</button></a>
+          <a href="../productspage\index.php"> <button>Shop Now</button></a>
         </div>
       </div>
       <div class="img">
-      <img src="./assests/images/image1.png" alt="" />
+        <img src="../assests/images/image1.png" alt="" />
       </div>
     </section>
     <!-- banner -->
@@ -364,7 +363,7 @@ $welcome_message = "Hi, " . htmlspecialchars($_SESSION['first_name']);
       <div class="row">
         <div class="col-md-4 py-3 py-md-0">
           <div class="card">
-          <img src="./assests/images/c3.png" alt="" />
+            <img src="../assests/images/c3.png" alt="" />
             <div class="card-img-overlay">
               <h3>Home Gadget</h3>
               <p>Latest collection Up To 50% Off</p>
@@ -373,7 +372,7 @@ $welcome_message = "Hi, " . htmlspecialchars($_SESSION['first_name']);
         </div>
         <div class="col-md-4 py-3 py-md-0">
           <div class="card">
-          <img src="./assests/images/c4.png" alt="" />
+            <img src="../assests/images/c4.png" alt="" />
             <div class="card-img-overlay">
               <h3>Gaming Gadget</h3>
               <p>Latest collection Up To 50% Off</p>
@@ -382,7 +381,7 @@ $welcome_message = "Hi, " . htmlspecialchars($_SESSION['first_name']);
         </div>
         <div class="col-md-4 py-3 py-md-0">
           <div class="card">
-          <img src="./assests/images/c5.png" alt="" />
+            <img src="../assests/images/c5.png" alt="" />
             <div class="card-img-overlay">
               <h3>Electronic Gadget</h3>
               <p>Latest collection Up To 50% Off</p>
@@ -433,7 +432,7 @@ $welcome_message = "Hi, " . htmlspecialchars($_SESSION['first_name']);
     <!-- newslater -->
 
    <!-- footer -->
-   <?php include 'footer.php'; ?>
+    <?php include '../footer.php'; ?>
    <!-- footer -->
 
 
