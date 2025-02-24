@@ -24,9 +24,9 @@ if (!isset($_SESSION['user_id'])) {
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item"><a class="nav-link active" aria-current="page" href="index.php">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../DeviceDirect-Team-27/productspage/index.php">Shop</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../DeviceDirect-Team-27/aboutuspage/aboutus.php">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../DeviceDirect-Team-27/contactuspage/contactus.php">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="DeviceDirect-Team-27/productspage/index.php">Shop</a></li>
+                    <li class="nav-item"><a class="nav-link" href="DeviceDirect-Team-27/aboutuspage/aboutus.php">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="DeviceDirect-Team-27/contactuspage/contactus.php">Contact</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Account</a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: rgb(67 0 86);">
