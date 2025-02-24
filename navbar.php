@@ -15,7 +15,7 @@ if (!isset($_SESSION['user_id'])) {
     <nav class="navbar navbar-expand-lg" id="navbar">
         <div class="container-fluid">
             <a class="navbar-brand" href="index.php" id="logo">
-            <img src="DEVICEDIRECT-TEAM-27/assests/images/device_direct_logo.png" alt="Device Direct Logo" class="logo-img">
+            <img src="../assests/images/device_direct_logo.png" alt="Device Direct Logo" class="logo-img">
                 <span id="span1">D</span>evice <span>Direct</span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,7 +41,7 @@ if (!isset($_SESSION['user_id'])) {
                 <div class="searchsectionwrappernav">
   <section class="searchsectionnav">
     <form>
-      <img src="DEVICEDIRECT-TEAM-27/productspage/categoryimages/search.png" alt="Search Icon" />
+      <img src="../productspage/categoryimages/search.png" alt="Search Icon" />
       <input type="text" placeholder="Search" id="inputsearchnav" autocomplete="off" />
     </form>
     <div class="optionboxnav"></div>
