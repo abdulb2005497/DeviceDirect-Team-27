@@ -41,7 +41,7 @@ if (!isset($_SESSION['user_id'])) {
                 <div class="searchsectionwrappernav">
   <section class="searchsectionnav">
     <form>
-      <img src="productspage/categoryimages/search.png" alt="Search Icon" />
+      <img src="../productspage/categoryimages/search.png" alt="Search Icon" />
       <input type="text" placeholder="Search" id="inputsearchnav" autocomplete="off" />
     </form>
     <div class="optionboxnav"></div>
