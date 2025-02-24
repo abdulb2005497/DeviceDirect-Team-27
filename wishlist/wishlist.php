@@ -60,7 +60,7 @@ $_SESSION['total_price'] = $totalAmount;
                           <li><a class="dropdown-item" href="../Login_page/login.php">Login</a></li>
                           <li><a class="dropdown-item" href="../Login_page/signup.php">SignUp</a></li>
                           <li><a class="dropdown-item" href="../previousorders/previousorders.php">Previous Orders</a></li>
-                          <li><a class="dropdown-item" href="wishlist/wishlist.php">My Wishlist</a></li>
+                          <li><a class="dropdown-item" href="wishlist.php">My Wishlist</a></li>
                       </ul>
                   </li>
                   <li class="nav-item"><a class="nav-link" href="../config/logout.php">Logout</a></li>
@@ -189,7 +189,7 @@ $_SESSION['total_price'] = $totalAmount;
         </div>
       </div>
     </footer>
-    <!-- footer -->
+
 </body>
 
 </html>

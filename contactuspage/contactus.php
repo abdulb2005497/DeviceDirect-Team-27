@@ -162,6 +162,7 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
                     >Previous Orders</a
                   >
                 </li>
+                <li><a class="dropdown-item" href="wishlist/wishlist.php">My Wishlist</a></li>
               </ul>
             </li>
             <li class="nav-item"><a class="nav-link" href="config/logout.php">Logout</a></li>

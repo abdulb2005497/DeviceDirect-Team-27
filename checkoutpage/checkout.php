@@ -110,6 +110,7 @@ $total_price = isset($_SESSION['total_price']) ? $_SESSION['total_price'] : 0;
                     >Previous Orders</a
                   >
                 </li>
+                <li><a class="dropdown-item" href="wishlist/wishlist.php">My Wishlist</a></li>
               </ul>
             </li>
             <li class="nav-item"><a class="nav-link" href="../config/logout.php">Logout</a></li>

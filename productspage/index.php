@@ -162,6 +162,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     >Previous Orders</a
                   >
                 </li>
+                <li><a class="dropdown-item" href="wishlist/wishlist.php">My Wishlist</a></li>
               </ul>
             </li>
             <li class="nav-item"><a class="nav-link" href="config/logout.php">Logout</a></li>
@@ -231,6 +232,7 @@ Store page    </h3>
                               <p class="card-text">Category: <?= htmlspecialchars($product['category_name']) ?></p>
                               <p class="card-text">Price: $<?= number_format($product['price'], 2) ?></p>
                               <a href="product_details.php?product_id=<?= $product['product_id'] ?>" class="btn btn-primary">View Details</a>
+                              <a href="../wishlist/wishlist.php $product['product_id'] ?>" class="btn btn-secondary">Save to My Wishlist</a>
                           </div>
                       </div>
                   </div>
