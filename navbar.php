@@ -30,10 +30,10 @@ if (!isset($_SESSION['user_id'])) {
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Account</a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: rgb(67 0 86);">
-                            <li><a class="dropdown-item" href="../DeviceDirect-Team-27/Login_page/login.php">Login</a></li>
-                            <li><a class="dropdown-item" href="../DeviceDirect-Team-27/Login_page/signup.php">SignUp</a></li>
-                            <li><a class="dropdown-item" href="../DeviceDirect-Team-27/previousorders/previousorders.php">Previous Orders</a></li>
-                            <li><a class="dropdown-item" href="../DeviceDirect-Team-27/wishlist/wishlist.php">My Wishlist</a></li>
+                            <li><a class="dropdown-item" href="Login_page/login.php">Login</a></li>
+                            <li><a class="dropdown-item" href="Login_page/signup.php">SignUp</a></li>
+                            <li><a class="dropdown-item" href="previousorders/previousorders.php">Previous Orders</a></li>
+                            <li><a class="dropdown-item" href="wishlist/wishlist.php">My Wishlist</a></li>
                         </ul>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="config/logout.php">Logout</a></li>
