@@ -33,7 +33,7 @@ $total_price = isset($_SESSION['total_price']) ? $_SESSION['total_price'] : 0;
  </head>
  <body>
    <!-- Navbar -->
-<?php include '../navbar.php'; ?>
+   <?php include $_SERVER['DOCUMENT_ROOT'] . "../DeviceDirect-Team-27/navbar.php"; ?>
 <!-- Navbar -->
 
 

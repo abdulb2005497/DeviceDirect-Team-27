@@ -90,7 +90,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
   <body>
 
 <!-- Navbar -->
-<?php include '../navbar.php'; ?>
+<?php include $_SERVER['DOCUMENT_ROOT'] . "../DeviceDirect-Team-27/navbar.php"; ?>
 <!-- Navbar -->
     <h3
       style="
