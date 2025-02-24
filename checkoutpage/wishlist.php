@@ -39,7 +39,7 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
  </head>
  <body>
 <!-- Navbar -->
-<?php include '../DeviceDirect-Team-27/navbar.php'; ?>
+<?php include '../navbar.php'; ?>
 <!-- Navbar -->
 
 

@@ -31,7 +31,7 @@ $_SESSION['total_price'] = $totalAmount;
 
 <body>
 <!-- Navbar -->
-<?php include '../DeviceDirect-Team-27/navbar.php'; ?>
+<?php include '../navbar.php'; ?>
 <!-- Navbar -->
     <div class="cart-container">
         <div class="cart-items-section">
