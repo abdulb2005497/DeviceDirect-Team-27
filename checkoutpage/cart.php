@@ -13,6 +13,8 @@ $cartItems = getCartItems($pdo, $user_id);
 $totalAmount = calculate_total($pdo, $_SESSION['user_id']);
 
 $_SESSION['total_price'] = $totalAmount;
+
+include_once '../navbar.php';
 ?>
 
 <!DOCTYPE html>
@@ -27,51 +29,11 @@ $_SESSION['total_price'] = $totalAmount;
    <link rel="preconnect" href="https://fonts.googleapis.com" />
    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
    <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet" />
+  
 </head>
 
 <body>
-  <!-- navbar -->
-  <nav class="navbar navbar-expand-lg" id="navbar">
-      <div class="container-fluid">
-          <a class="navbar-brand" href="index.php" id="logo">
-              <img src="../assests/images/device_direct_logo.png" alt="Device Direct Logo" class="logo-img" />
-              <span id="span1">D</span>evice <span>Direct</span></a
-          >
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span><img src="./assests/images/menu.png" alt="" width="30px" /></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                  <li class="nav-item">
-                      <a class="nav-link active" aria-current="page" href="../index.php">Home</a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="../productspage/index.php">Shop</a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="../aboutuspage/aboutus.php">About</a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="../contactuspage/contactus.php">Contact</a>
-                  </li>
-                  <li class="nav-item dropdown">
-                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Account</a>
-                      <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: rgb(67 0 86)">
-                          <li><a class="dropdown-item" href="../Login_page/login.php">Login</a></li>
-                          <li><a class="dropdown-item" href="../Login_page/signup.php">SignUp</a></li>
-                          <li><a class="dropdown-item" href="../previousorders/previousorders.php">Previous Orders</a></li>
-                          <li><a class="dropdown-item" href="wishlist/wishlist.php">My Wishlist</a></li>
-                      </ul>
-                  </li>
-                  <li class="nav-item"><a class="nav-link" href="../config/logout.php">Logout</a></li>
-              </ul>
 
-              <div class="cart-btn">
-                  <a href="../checkoutpage/cart.php"><i class="fas fa-shopping-bag"></i></a>
-              </div>
-          </div>
-      </div>
-  </nav>
     <div class="cart-container">
         <div class="cart-items-section">
             <h1>My Cart</h1>
@@ -189,6 +151,21 @@ $_SESSION['total_price'] = $totalAmount;
         </div>
       </div>
     </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMzT4K+gT9TnL3L2WsmRN8Q6PTg9vLUz59vFlY5fw3zj0o9A6R9zJ6gI65g" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhG0grQ603jE1RUizG9BKA7YIv7pVZHt9YjM9XItGoj6g9q8zRT3GJ8lq2z4" crossorigin="anonymous"></script>
+</body>
+</html>
+
+    <script>
+document.addEventListener("DOMContentLoaded", function () {
+    var dropdownElementList = document.querySelectorAll('.dropdown-toggle');
+    dropdownElementList.forEach(function(dropdownToggleEl) {
+        new bootstrap.Dropdown(dropdownToggleEl);
+    });
+});
+</script>
+
     <!-- footer -->
 </body>
 

@@ -11,10 +11,11 @@ if (!isset($_SESSION['user_id'])) {
 }
 ?>
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
 <nav class="navbar navbar-expand-lg navbar-light" id="navbar">
     <div class="container-fluid">
-        <a class="navbar-brand" href="index.php" id="logo">
+        <a class="navbar-brand" href="../Landing-Page/index.php" id="logo">
             <img src="../assests/images/device_direct_logo.png" alt="Device Direct Logo" class="logo-img" />
             <span id="span1">D</span>evice <span>Direct</span>
         </a>
@@ -45,7 +46,8 @@ if (!isset($_SESSION['user_id'])) {
                 <li class="nav-item"><a class="nav-link" href="../config/logout.php">Logout</a></li>
             </ul>
             <div class="cart-btn">
-                <a href="../checkoutpage/cart.php"><i class="fas fa-shopping-bag"></i></a>
+              <a href="../checkoutpage/cart.php"><i class="fas fa-shopping-bag"></i></a>
+
             </div>
         </div>
     </div>
