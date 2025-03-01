@@ -26,7 +26,7 @@ $welcome_message = "Hi, " . htmlspecialchars($_SESSION['first_name']);
 </head>
 <body>
     <!-- Navbar -->
-    <?php include 'navbar.php'; ?>
+    <?php include '../navbar.php'; ?>
     <!-- Navbar -->
      
     <!-- Welcome Message -->
