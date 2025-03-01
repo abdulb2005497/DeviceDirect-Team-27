@@ -11,6 +11,7 @@ if (!isset($_SESSION['user_id'])) {
 }
 ?>
 
+
 <nav class="navbar navbar-expand-lg navbar-light" id="navbar">
     <div class="container-fluid">
         <a class="navbar-brand" href="index.php" id="logo">
@@ -56,7 +57,7 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 .dropdown-menu {
-    background-color: #4B014D !important; 
+    background-color: #4B014D !important;
     border: none;
 }
 

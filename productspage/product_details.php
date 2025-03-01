@@ -2,7 +2,7 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-
+include_once('../navbar.php');
 include('../config/db.php'); // Include database connection
 include('../checkoutpage/cart_functions.php');
 
@@ -35,34 +35,7 @@ try {
         exit();
     }
 
-    // Query to fetch available color variants for the product
-    $colorQuery = "
-        SELECT pv.prod_variant_id, pv.image, pv.price, pv.colour_id, c.colour_name
-        FROM product_variants pv
-        JOIN product_colours c ON pv.colour_id = c.colour_id
-        WHERE pv.product_id = :product_id
-    ";
-    $colorStmt = $pdo->prepare($colorQuery);
-    $colorStmt->bindParam(':product_id', $product_id, PDO::PARAM_INT);
-    $colorStmt->execute();
-
-    $colors = $colorStmt->fetchAll(PDO::FETCH_ASSOC);
-} catch (PDOException $e) {
-    echo "Error: " . $e->getMessage();
-    exit();
-}
-
-$sizeQuery = "
-    SELECT pv.prod_variant_id, pv.image, pv.price, pv.size_id, s.size_name
-    FROM product_variants pv
-    JOIN product_sizes s ON pv.size_id = s.size_id
-    WHERE pv.product_id = :product_id
-";
-$sizeStmt = $pdo->prepare($sizeQuery);
-$sizeStmt->bindParam(':product_id', $product_id, PDO::PARAM_INT);
-$sizeStmt->execute();
-
-$sizes = $sizeStmt->fetchAll(PDO::FETCH_ASSOC);
+   
 ?>
 
 <!DOCTYPE html>
@@ -72,6 +45,7 @@ $sizes = $sizeStmt->fetchAll(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($product['product_title']); ?> - Product Details</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
@@ -88,54 +62,7 @@ $sizes = $sizeStmt->fetchAll(PDO::FETCH_ASSOC);
             <h2><?php echo htmlspecialchars($product['product_title']); ?></h2>
             <p class="text-muted">Category: <?php echo htmlspecialchars($product['category_name']); ?></p>
 
-            <!-- Color Selection -->
-            <label for="color-select" class="form-label">Select Color:</label>
-            <select id="color-select">
-                <?php
-                $uniqueColors = []; // Track unique colors to avoid duplicates
-                foreach ($colors as $color):
-                    $colorName = $color['colour_name'] ?? 'Unknown';
-                    $imagePath = !empty($color['image']) ? '/DeviceDirect-newprod/productspage/images/' . $color['image'] : '/images/default-placeholder.png';
 
-                    if (!isset($uniqueColors[$colorName])):
-                        $uniqueColors[$colorName] = true; // Mark this color as used
-                ?>
-                    <option
-                        value="<?= htmlspecialchars($color['prod_variant_id'] ?? '') ?>"
-                        data-price="<?= htmlspecialchars($color['price'] ?? '0') ?>"
-                        data-image="<?= htmlspecialchars($imagePath) ?>">
-                        <?= htmlspecialchars($colorName) ?>
-                    </option>
-                <?php
-                    endif;
-                endforeach;
-                ?>
-
-
-
-            </select>
-            <label for="size-select" class="form-label">Select Size:</label>
-            <select id="size-select">
-                <?php
-                $uniqueSizes = [];
-                foreach ($sizes as $size):
-                    $sizeName = $size['size_name'] ?? 'Unknown';
-                    $imagePath = !empty($size['image']) ? '/DeviceDirect-newprod/productspage/images/' . $size['image'] : '/images/default-placeholder.png';
-
-                    if (!isset($uniqueSizes[$sizeName])):
-                        $uniqueSizes[$sizeName] = true; // Mark this color as used
-                ?>
-                    <option
-                        value="<?= htmlspecialchars($size['prod_variant_id'] ?? '') ?>"
-                        data-price="<?= htmlspecialchars($size['price'] ?? '0') ?>"
-                        data-image="<?= htmlspecialchars($imagePath) ?>">
-                        <?= htmlspecialchars($sizeName) ?>
-                    </option>
-                <?php
-                    endif;
-                endforeach;
-                ?>
-            </select>
 
             <!-- Price -->
             <h4 id="product-price" class="mt-3">Price: £<?php echo number_format($colors[0]['price'], 2); ?></h4>
