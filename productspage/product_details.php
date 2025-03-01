@@ -51,6 +51,18 @@ try {
     echo "Error: " . $e->getMessage();
     exit();
 }
+
+$sizeQuery = "
+    SELECT pv.prod_variant_id, pv.image, pv.price, pv.size_id, s.size_name
+    FROM product_variants pv
+    JOIN product_sizes s ON pv.size_id = s.size_id
+    WHERE pv.product_id = :product_id
+";
+$sizeStmt = $pdo->prepare($sizeQuery);
+$sizeStmt->bindParam(':product_id', $product_id, PDO::PARAM_INT);
+$sizeStmt->execute();
+
+$sizes = $sizeStmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -64,6 +76,7 @@ try {
 </head>
 <body>
 
+<!-- Navbar -->
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-6">
@@ -79,19 +92,44 @@ try {
             <label for="color-select" class="form-label">Select Color:</label>
             <select id="color-select">
                 <?php
-                $uniqueColors = []; // Array to track unique colors
+                $uniqueColors = []; // Track unique colors to avoid duplicates
                 foreach ($colors as $color):
                     $colorName = $color['colour_name'] ?? 'Unknown';
                     $imagePath = !empty($color['image']) ? '/DeviceDirect-newprod/productspage/images/' . $color['image'] : '/images/default-placeholder.png';
 
                     if (!isset($uniqueColors[$colorName])):
-                        $uniqueColors[$colorName] = true; // Mark this color as seen
+                        $uniqueColors[$colorName] = true; // Mark this color as used
                 ?>
                     <option
                         value="<?= htmlspecialchars($color['prod_variant_id'] ?? '') ?>"
                         data-price="<?= htmlspecialchars($color['price'] ?? '0') ?>"
                         data-image="<?= htmlspecialchars($imagePath) ?>">
                         <?= htmlspecialchars($colorName) ?>
+                    </option>
+                <?php
+                    endif;
+                endforeach;
+                ?>
+
+
+
+            </select>
+            <label for="size-select" class="form-label">Select Size:</label>
+            <select id="size-select">
+                <?php
+                $uniqueSizes = [];
+                foreach ($sizes as $size):
+                    $sizeName = $size['size_name'] ?? 'Unknown';
+                    $imagePath = !empty($size['image']) ? '/DeviceDirect-newprod/productspage/images/' . $size['image'] : '/images/default-placeholder.png';
+
+                    if (!isset($uniqueSizes[$sizeName])):
+                        $uniqueSizes[$sizeName] = true; // Mark this color as used
+                ?>
+                    <option
+                        value="<?= htmlspecialchars($size['prod_variant_id'] ?? '') ?>"
+                        data-price="<?= htmlspecialchars($size['price'] ?? '0') ?>"
+                        data-image="<?= htmlspecialchars($imagePath) ?>">
+                        <?= htmlspecialchars($sizeName) ?>
                     </option>
                 <?php
                     endif;

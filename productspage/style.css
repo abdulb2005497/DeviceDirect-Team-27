@@ -539,3 +539,51 @@ body {
   color: #ffc800;
 }
 /* footer */
+.sidebar {
+  position: fixed;
+  top: 80px; /* Adjusted to be below navbar */
+  width:250px;
+  height: calc(100vh - 80px); /* Subtract navbar height */
+  background: #f8f9fa;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  transition: left 0.3s ease-in-out;
+}
+
+
+
+      .sidebar h3 {
+          font-size: 18px;
+          margin-bottom: 15px;
+      }
+
+      .sidebar label {
+          font-weight: bold;
+          font-size: 14px;
+          display: block;
+          margin-top: 10px;
+      }
+
+      .sidebar select,
+      .sidebar input {
+          width: 100%;
+          padding: 8px;
+          margin-top: 5px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+      }
+
+      .sidebar button {
+          width: 100%;
+          background-color: #430056;
+          color: white;
+          border: none;
+          padding: 8px 12px;
+          cursor: pointer;
+          border-radius: 5px;
+          margin-top: 10px;
+      }
+
+      .sidebar button:hover {
+          background-color: #320045;
+      }
