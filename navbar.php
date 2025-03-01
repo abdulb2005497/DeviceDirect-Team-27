@@ -12,8 +12,7 @@ if (!isset($_SESSION['user_id'])) {
 ?>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-
-<nav class="navbar navbar-expand-lg navbar-light" id="navbar">
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="navbar">
     <div class="container-fluid">
         <a class="navbar-brand" href="../Landing-Page/index.php" id="logo">
             <img src="../assests/images/device_direct_logo.png" alt="Device Direct Logo" class="logo-img" />
@@ -46,23 +45,33 @@ if (!isset($_SESSION['user_id'])) {
                 <li class="nav-item"><a class="nav-link" href="../config/logout.php">Logout</a></li>
             </ul>
             <div class="cart-btn">
-              <a href="../checkoutpage/cart.php"><i class="fas fa-shopping-bag"></i></a>
-
+                <a href="../checkoutpage/cart.php"><i class="fas fa-shopping-bag"></i></a>
             </div>
         </div>
     </div>
 </nav>
 
 <style>
+/* Ensure the navbar stays fixed at the top */
 .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
     background-color: rgb(248, 249, 250);
+    z-index: 1050; /* Ensures it's above all other elements */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Adds shadow for better visibility */
+}
+
+/* Prevent content from getting hidden behind navbar */
+body {
+    padding-top: 70px; /* Adjust this value to match the navbar height */
 }
 
 .dropdown-menu {
     background-color: #4B014D !important;
     border: none;
 }
-
 
 .dropdown-menu li {
     background-color: #4B004B;
@@ -75,10 +84,10 @@ if (!isset($_SESSION['user_id'])) {
 </style>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        var dropdownElementList = [].slice.call(document.querySelectorAll('.dropdown-toggle'));
-        var dropdownList = dropdownElementList.map(function (dropdownToggleEl) {
-            return new bootstrap.Dropdown(dropdownToggleEl);
-        });
+document.addEventListener("DOMContentLoaded", function () {
+    var dropdownElementList = [].slice.call(document.querySelectorAll('.dropdown-toggle'));
+    var dropdownList = dropdownElementList.map(function (dropdownToggleEl) {
+        return new bootstrap.Dropdown(dropdownToggleEl);
     });
+});
 </script>
