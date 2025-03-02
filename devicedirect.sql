@@ -1,31 +1,11 @@
--- phpMyAdmin SQL Dump
--- version 5.2.1
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1
--- Generation Time: Feb 16, 2025 at 05:56 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
 
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
 
---
--- Database: `devicedirect`
---
-
--- --------------------------------------------------------
-
---
--- Table structure for table `cart`
---
 
 CREATE TABLE `cart` (
   `cart_id` int(11) NOT NULL,
@@ -34,11 +14,7 @@ CREATE TABLE `cart` (
   `quantity` int(11) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
 
---
--- Table structure for table `discount_codes`
---
 
 CREATE TABLE `discount_codes` (
   `code_id` int(11) NOT NULL,
@@ -50,11 +26,7 @@ CREATE TABLE `discount_codes` (
   `created_at` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
 
---
--- Table structure for table `orders`
---
 
 CREATE TABLE `orders` (
   `order_id` int(11) NOT NULL,
@@ -69,20 +41,14 @@ CREATE TABLE `orders` (
   `postal_code` varchar(128) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `orders`
---
+
 
 INSERT INTO `orders` (`order_id`, `user_id`, `first_name`, `last_name`, `total_price`, `date_ordered`, `status`, `address`, `city`, `postal_code`) VALUES
 (9, 6, 'aaa', 'a', 41.98, '2025-02-15 18:49:00', 'pending', 'a', 'a', 'a'),
 (10, 6, 'a', 'a', 989.96, '2025-02-15 19:11:41', 'pending', 'a', 'a', 'a'),
 (11, 6, 'a', 'a', 1049.95, '2025-02-16 16:48:23', 'pending', 'a', 'a', 'a');
 
--- --------------------------------------------------------
 
---
--- Table structure for table `order_items`
---
 
 CREATE TABLE `order_items` (
   `order_id` int(11) NOT NULL,
@@ -94,9 +60,7 @@ CREATE TABLE `order_items` (
   `size_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `order_items`
---
+
 
 INSERT INTO `order_items` (`order_id`, `prod_id`, `colour_id`, `quantity`, `price_per_unit`, `total_price`, `size_id`) VALUES
 (9, 8, 1, 2, 20.99, 41.98, 8),
@@ -104,20 +68,14 @@ INSERT INTO `order_items` (`order_id`, `prod_id`, `colour_id`, `quantity`, `pric
 (10, 3, 3, 3, 259.99, 779.97, 5),
 (11, 1, 3, 5, 209.99, 1049.95, 5);
 
--- --------------------------------------------------------
 
---
--- Table structure for table `products`
---
 
 CREATE TABLE `products` (
   `product_id` int(11) NOT NULL,
   `product_title` varchar(128) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `products`
---
+
 
 INSERT INTO `products` (`product_id`, `product_title`) VALUES
 (1, 'HD TV\n'),
@@ -136,20 +94,14 @@ INSERT INTO `products` (`product_id`, `product_title`) VALUES
 (14, 'Nintendo Wii U'),
 (15, 'Nintendo Switch');
 
--- --------------------------------------------------------
 
---
--- Table structure for table `product_categories`
---
 
 CREATE TABLE `product_categories` (
   `category_id` int(11) NOT NULL,
   `category_name` varchar(128) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `product_categories`
---
+
 
 INSERT INTO `product_categories` (`category_id`, `category_name`) VALUES
 (1, 'Monitors'),
@@ -158,20 +110,14 @@ INSERT INTO `product_categories` (`category_id`, `category_name`) VALUES
 (4, 'Headphones'),
 (5, 'Gaming Consoles');
 
--- --------------------------------------------------------
 
---
--- Table structure for table `product_colours`
---
 
 CREATE TABLE `product_colours` (
   `colour_id` int(11) NOT NULL,
   `colour_name` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `product_colours`
---
+
 
 INSERT INTO `product_colours` (`colour_id`, `colour_name`) VALUES
 (1, 'Black'),
@@ -179,20 +125,14 @@ INSERT INTO `product_colours` (`colour_id`, `colour_name`) VALUES
 (3, 'White'),
 (4, 'Grey');
 
--- --------------------------------------------------------
 
---
--- Table structure for table `product_sizes`
---
 
 CREATE TABLE `product_sizes` (
   `size_id` int(11) NOT NULL,
   `size_name` varchar(128) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `product_sizes`
---
+
 
 INSERT INTO `product_sizes` (`size_id`, `size_name`) VALUES
 (1, '12 inch\r\n'),
@@ -204,11 +144,7 @@ INSERT INTO `product_sizes` (`size_id`, `size_name`) VALUES
 (7, '80 inch'),
 (8, 'N/A\r\n');
 
--- --------------------------------------------------------
 
---
--- Table structure for table `product_variants`
---
 
 CREATE TABLE `product_variants` (
   `prod_variant_id` int(11) NOT NULL,
@@ -222,9 +158,6 @@ CREATE TABLE `product_variants` (
   `price` decimal(7,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `product_variants`
---
 
 INSERT INTO `product_variants` (`prod_variant_id`, `product_id`, `category_id`, `colour_id`, `size_id`, `prod_desc`, `quantity`, `image`, `price`) VALUES
 (1, 1, 2, 1, 5, 'Experience stunning visuals and immersive entertainment with the HD 40 Inch Black TV, the perfect addition to any home. Boasting crystal-clear picture quality, vibrant colors, and sleek modern design, this television is designed to enhance your viewing experience, whether you\'re watching your favorite movies, shows, or gaming. With advanced 4D surround sound technology and multiple connectivity options, including HDMI and USB, it\'s ready to integrate seamlessly into your setup. Limited Time Offer: Get this incredible HD TV at half the original price! Don\'t miss this opportunity to upgrade your entertainment system and bring cinematic visuals right to your living room. Click \"Add to Basket\" now to make it yours before the deal ends!\n', 99, 'HD-40-Black.webp', 199.99),
