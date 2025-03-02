@@ -42,7 +42,7 @@ $welcome_message = "Hi, " . htmlspecialchars($_SESSION['first_name']);
             <h1>Latest Tech <span id="span2">Unbeatable Prices!</span></h1>
             <p>Found it cheaper? We will match it! <br>We will price match against any other UK retailer.</p>
             <div class="btn">
-                <a href="productspage\index.php"> <button>Shop Now</button></a>
+                <a href="/DeviceDirect-Team-27/productspage/index.php"> <button>Shop Now</button></a>
             </div>
         </div>
         <div class="img">
@@ -311,7 +311,7 @@ $welcome_message = "Hi, " . htmlspecialchars($_SESSION['first_name']);
               <h3>Best Laptop</h3>
               <h5>Latest Collection</h5>
               <p>Up To 50% Off</p>
-              <a href="productspage/pagescode/laptopscode/laptops.php">
+              <a href="/DeviceDirect-Team-27/productspage/index.php">
                 <button id="shopnow">Shop Now</button></a
               >
             </div>
@@ -324,7 +324,7 @@ $welcome_message = "Hi, " . htmlspecialchars($_SESSION['first_name']);
               <h3>Best Headphone</h3>
               <h5>Latest Collection</h5>
               <p>Up To 50% Off</p>
-              <a href="productspage/pagescode/headphonescode/headphones.php">
+              <a href="/DeviceDirect-Team-27/productspage/index.php">
                 <button id="shopnow">Shop Now</button></a
               >
             </div>
@@ -349,7 +349,7 @@ $welcome_message = "Hi, " . htmlspecialchars($_SESSION['first_name']);
           everyone.
         </p>
         <div class="btn">
-          <a href="productspage\index.php"> <button>Shop Now</button></a>
+          <a href="/DeviceDirect-Team-27/productspage/index.php"> <button>Shop Now</button></a>
         </div>
       </div>
       <div class="img">
