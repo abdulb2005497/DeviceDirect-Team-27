@@ -15,11 +15,9 @@ $size = isset($_GET['size']) ? $_GET['size'] : null;
 $min_price = isset($_GET['min_price']) ? floatval($_GET['min_price']) : null;
 $max_price = isset($_GET['max_price']) ? floatval($_GET['max_price']) : null;
 
-// Fetch all categories
 $category_query = "SELECT category_id, category_name FROM product_categories";
 $categories = $pdo->query($category_query)->fetchAll(PDO::FETCH_ASSOC);
 
-// Fetch all unique sizes
 $size_query = "SELECT DISTINCT s.size_id, s.size_name
                FROM product_sizes s
                JOIN product_variants pv ON s.size_id = pv.size_id
@@ -27,11 +25,10 @@ $size_query = "SELECT DISTINCT s.size_id, s.size_name
                ORDER BY s.size_name";
 $sizes = $pdo->query($size_query)->fetchAll(PDO::FETCH_ASSOC);
 
-// Build dynamic SQL query with filters
 $query = "
-    SELECT p.product_id, p.product_title, pv.prod_variant_id, pv.image, pv.price, s.size_name, ca.category_name
-    FROM products p
-    JOIN product_variants pv ON p.product_id = pv.product_id
+    SELECT p.product_title, pv.prod_variant_id, pv.image, pv.price, s.size_name, ca.category_name
+    FROM product_variants pv
+    JOIN products p ON pv.product_id = p.product_id
     JOIN product_categories ca ON pv.category_id = ca.category_id
     LEFT JOIN product_sizes s ON pv.size_id = s.size_id
     WHERE 1=1
@@ -69,27 +66,10 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- bootstrap links -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-      crossorigin="anonymous"
-    />
-    <!-- bootstrap links -->
-    <!-- fonts links -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap"
-      rel="stylesheet"
-    />
-    <!-- fonts links -->
-
 </head>
 <body>
 
-<!-- Filter Sidebar (Under Navbar) -->
+<!-- Filter Sidebar -->
 <div class="sidebar" id="filterSidebar">
     <h3>Filters</h3>
     <form method="GET" action="">
@@ -126,7 +106,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <!-- Products Display -->
 <div class="container mt-4 d-flex justify-content-end">
-    <div class="w-75"> <!-- Adjust width as needed -->
+    <div class="w-75">
         <h3 class="text-center">Store Page</h3>
         <div class="row">
             <?php if ($products): ?>
@@ -138,8 +118,8 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 <h5 class="card-title"><?= htmlspecialchars($product['product_title']) ?></h5>
                                 <p class="card-text">Category: <?= htmlspecialchars($product['category_name']) ?></p>
                                 <p class="card-text">Size: <?= htmlspecialchars($product['size_name']) ?></p>
-                                <p class="card-text">Price: $<?= number_format($product['price'], 2) ?></p>
-                                <a href="product_details.php?product_id=<?= $product['product_id'] ?>" class="btn btn-primary">View Details</a>
+                                <p class="card-text">Price: £<?= number_format($product['price'], 2) ?></p>
+                                <a href="product_details.php?variant_id=<?= $product['prod_variant_id'] ?>" class="btn btn-primary">View Details</a>
                             </div>
                         </div>
                     </div>
@@ -150,7 +130,6 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
     </div>
 </div>
-
 
 <script>
 document.getElementById("resetFilters").addEventListener("click", function () {

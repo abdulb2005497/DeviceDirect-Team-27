@@ -3,15 +3,14 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 include_once('../navbar.php');
-include('../config/db.php'); 
+include('../config/db.php');
 include('../checkoutpage/cart_functions.php');
 
-if (!isset($_GET['product_id']) || !is_numeric($_GET['product_id'])) {
-    echo "Invalid product ID.";
-    exit();
+if (!isset($_GET['variant_id']) || !is_numeric($_GET['variant_id'])) {
+    die("Invalid product variant ID.");
 }
 
-$product_id = intval($_GET['product_id']); 
+$variant_id = intval($_GET['variant_id']);
 
 try {
     $query = "
@@ -21,21 +20,20 @@ try {
             pv.prod_variant_id,
             pv.image,
             pv.price
-        FROM products p
-        JOIN product_variants pv ON p.product_id = pv.product_id
+        FROM product_variants pv
+        JOIN products p ON pv.product_id = p.product_id
         JOIN product_categories ca ON pv.category_id = ca.category_id
-        WHERE p.product_id = :product_id
+        WHERE pv.prod_variant_id = :variant_id
         LIMIT 1
     ";
     $stmt = $pdo->prepare($query);
-    $stmt->bindParam(':product_id', $product_id, PDO::PARAM_INT);
+    $stmt->bindParam(':variant_id', $variant_id, PDO::PARAM_INT);
     $stmt->execute();
 
     $product = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if (!$product) {
-        echo "Product not found.";
-        exit();
+        die("Product variant not found.");
     }
 
 } catch (PDOException $e) {
@@ -52,22 +50,6 @@ try {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <!-- bootstrap links -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-      crossorigin="anonymous"
-    />
-    <!-- bootstrap links -->
-    <!-- fonts links -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap"
-      rel="stylesheet"
-    />
-    <!-- fonts links -->
 </head>
 <body>
 
@@ -87,7 +69,6 @@ try {
 
             <!-- Add to Cart Form -->
             <form method="post">
-                <input type="hidden" name="product_id" value="<?php echo $product_id; ?>">
                 <input type="hidden" name="variant_id" value="<?= $product['prod_variant_id'] ?>">
 
                 <label for="quantity">Quantity:</label>

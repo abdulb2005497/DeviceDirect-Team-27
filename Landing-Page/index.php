@@ -1,16 +1,27 @@
 <?php
-// Start the session
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-
-// Redirect to the login page if the user is not logged in
 if (!isset($_SESSION['user_id'])) {
     header("Location: ../Login_page/login.php");
     exit();
 }
 
-// Display a welcome message for the logged-in user
+include('../config/db.php');
+include_once('../navbar.php');
+
+// Fetch all products
+$query = "
+    SELECT p.product_id, p.product_title, pv.prod_variant_id, pv.image, pv.price, s.size_name, ca.category_name
+    FROM products p
+    JOIN product_variants pv ON p.product_id = pv.product_id
+    JOIN product_categories ca ON pv.category_id = ca.category_id
+    LEFT JOIN product_sizes s ON pv.size_id = s.size_id
+    ORDER BY RAND()
+    LIMIT 8
+";
+$products = $pdo->query($query)->fetchAll(PDO::FETCH_ASSOC);
+
 $welcome_message = "Hi, " . htmlspecialchars($_SESSION['first_name']);
 ?>
 <!DOCTYPE html>
@@ -28,7 +39,7 @@ $welcome_message = "Hi, " . htmlspecialchars($_SESSION['first_name']);
     <!-- Navbar -->
     <?php include '../navbar.php'; ?>
     <!-- Navbar -->
-     
+
     <!-- Welcome Message -->
     <div class="container mt-4">
     <div class="text-center welcome-message">
@@ -42,7 +53,7 @@ $welcome_message = "Hi, " . htmlspecialchars($_SESSION['first_name']);
             <h1>Latest Tech <span id="span2">Unbeatable Prices!</span></h1>
             <p>Found it cheaper? We will match it! <br>We will price match against any other UK retailer.</p>
             <div class="btn">
-                <a href="/DeviceDirect-Team-27/productspage/index.php"> <button>Shop Now</button></a>
+                <a href="../productspage\index.php"> <button>Shop Now</button></a>
             </div>
         </div>
         <div class="img">
@@ -56,248 +67,41 @@ $welcome_message = "Hi, " . htmlspecialchars($_SESSION['first_name']);
         <span style="color: black">Black Friday</span> offers!!
       </h1>
       <div class="row" style="margin-top: 30px">
-        <!-- product card 1 -->
-        <div class="col-md-3 py-3 py-md-0">
-          <div class="card">
-            <img
-              src="productspage/pagescode/tvcode/TVs/40inch/HD-40-Black.webp"
-              alt=""
-            />
-            <div class="card-body">
-              <a
-                href="productspage/pagescode/tvcode/tvs-HD40.php"
-                style="text-decoration: none; color: inherit"
-              >
-                <h3 class="text-center">HD 40 Inch Black TV</h3>
-              </a>
-              <div class="star text-center">
-                <i class="fa-solid fa-star unchecked"></i>
-                <i class="fa-solid fa-star unchecked"></i>
-                <i class="fa-solid fa-star unchecked"></i>
-                <i class="fa-solid fa-star unchecked"></i>
-                <i class="fa-solid fa-star unchecked"></i>
-              </div>
-              <h2>
-                <del>£199.99</del> £99.99
-                <span><li class="fa-solid fa-cart-shopping"></li></span>
-              </h2>
+        <!-- product cards -->
+        <div class="row">
+                <?php if ($products): ?>
+                    <?php foreach ($products as $product): ?>
+                        <div class="col-md-3 py-3 py-md-0">
+                            <div class="card">
+                                <img src="../productspage/images/<?= htmlspecialchars($product['image']) ?>" class="card-img-top" alt="<?= htmlspecialchars($product['product_title']) ?>">
+                                <div class="card-body">
+                                    <a href="../productspage/product_details.php?variant_id=<?= $product['prod_variant_id']?>" style="text-decoration: none; color: inherit">
+                                        <h3 class="text-center"> <?= htmlspecialchars($product['product_title']) ?> </h3>
+                                    </a>
+                                    <div class="star text-center">
+                                        <i class="fa-solid fa-star unchecked"></i>
+                                        <i class="fa-solid fa-star unchecked"></i>
+                                        <i class="fa-solid fa-star unchecked"></i>
+                                        <i class="fa-solid fa-star unchecked"></i>
+                                        <i class="fa-solid fa-star unchecked"></i>
+                                    </div>
+                                    <h2>
+                                        <del>£<?= number_format($product['price'] + 50, 2) ?></del>
+                                        £<?= number_format($product['price'], 2) ?>
+                                        <span><li class="fa-solid fa-cart-shopping"></li></span>
+                                    </h2>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <p class="text-center">No products found.</p>
+                <?php endif; ?>
             </div>
-          </div>
-        </div>
-        <!-- product card 1 -->
 
-        <!-- product card 2 -->
-        <div class="col-md-3 py-3 py-md-0">
-          <div class="card">
-            <img
-              src="productspage/pagescode/headphonescode/Headphones/overeargrey.webp"
-              alt=""
-            />
-            <div class="card-body">
-              <a
-                href="productspage\pagescode\headphonescode\overeargrey.php"
-                style="text-decoration: none; color: inherit"
-              >
-                <h3 class="text-center">Over Ear Grey Headphones</h3>
-              </a>
-              <div class="star text-center">
-                <i class="fa-solid fa-star unchecked"></i>
-                <i class="fa-solid fa-star unchecked"></i>
-                <i class="fa-solid fa-star unchecked"></i>
-                <i class="fa-solid fa-star unchecked"></i>
-                <i class="fa-solid fa-star unchecked"></i>
-              </div>
-              <h2>
-                <del>£40.99</del> £30.99
-                <span><li class="fa-solid fa-cart-shopping"></li></span>
-              </h2>
-            </div>
-          </div>
         </div>
-        <!-- product card 2 -->
+        <!-- product cards -->
 
-        <!-- product card 3 -->
-        <div class="col-md-3 py-3 py-md-0">
-          <div class="card">
-            <img
-              src="productspage/pagescode/laptopscode/Laptops/16inch/Probook-16-black.webp"
-              alt=""
-            />
-            <div class="card-body">
-              <a
-                href="productspage\pagescode\laptopscode\laptops-16P.php"
-                style="text-decoration: none; color: inherit"
-              >
-                <h3 class="text-center">16 inch Black Probook</h3>
-              </a>
-              <div class="star text-center">
-                <i class="fa-solid fa-star unchecked"></i>
-                <i class="fa-solid fa-star unchecked"></i>
-                <i class="fa-solid fa-star unchecked"></i>
-                <i class="fa-solid fa-star unchecked"></i>
-                <i class="fa-solid fa-star unchecked"></i>
-              </div>
-              <h2>
-                <del>£499.99</del> £449.99
-                <span><li class="fa-solid fa-cart-shopping"></li></span>
-              </h2>
-            </div>
-          </div>
-        </div>
-        <!-- product card 3 -->
-
-        <!-- product card 4 -->
-        <div class="col-md-3 py-3 py-md-0">
-          <div class="card">
-            <img
-              src="productspage/pagescode/monitorscode/Monitors/30inch/4k-30-White.webp"
-              alt=""
-            />
-            <div class="card-body">
-              <a
-                href="productspage\pagescode\monitorscode\monitors-4K30.php"
-                style="text-decoration: none; color: inherit"
-              >
-                <h3 class="text-center">30 Inch White Monitor 4K</h3>
-              </a>
-              <div class="star text-center">
-                <i class="fa-solid fa-star unchecked"></i>
-                <i class="fa-solid fa-star unchecked"></i>
-                <i class="fa-solid fa-star unchecked"></i>
-                <i class="fa-solid fa-star unchecked"></i>
-                <i class="fa-solid fa-star unchecked"></i>
-              </div>
-              <h2>
-                <del>£259.99</del> £209.99
-                <span><li class="fa-solid fa-cart-shopping"></li></span>
-              </h2>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- product card 4 -->
-
-      <!-- product card 5 -->
-      <div class="row" style="margin-top: 30px">
-        <div class="col-md-3 py-3 py-md-0">
-          <div class="card">
-            <img
-              src="productspage/pagescode/consolescode/Consoles/PS5/PS5 White.webp"
-              alt=""
-            />
-            <div class="card-body">
-              <a
-                href="productspage\pagescode\consolescode\ps5.php"
-                style="text-decoration: none; color: inherit"
-              >
-                <h3 class="text-center">Playstation 5</h3>
-              </a>
-              <div class="star text-center">
-                <i class="fa-solid fa-star unchecked"></i>
-                <i class="fa-solid fa-star unchecked"></i>
-                <i class="fa-solid fa-star unchecked"></i>
-                <i class="fa-solid fa-star unchecked"></i>
-                <i class="fa-solid fa-star unchecked"></i>
-              </div>
-              <h2>
-                <del>£259.99</del> £159.99
-                <span><li class="fa-solid fa-cart-shopping"></li></span>
-              </h2>
-            </div>
-          </div>
-        </div>
-        <!-- product card 5 -->
-
-        <!-- product card 6 -->
-        <div class="col-md-3 py-3 py-md-0">
-          <div class="card">
-            <img
-              src="productspage/pagescode/tvcode/TVs/80inch/4k-80-Black.webp"
-              alt=""
-            />
-            <div class="card-body">
-              <a
-                href="productspage\pagescode\tvcode\tvs-4K80.php"
-                style="text-decoration: none; color: inherit"
-              >
-                <h3 class="text-center">80-Inch Black TV 4k</h3>
-              </a>
-              <div class="star text-center">
-                <i class="fa-solid fa-star unchecked"></i>
-                <i class="fa-solid fa-star unchecked"></i>
-                <i class="fa-solid fa-star unchecked"></i>
-                <i class="fa-solid fa-star unchecked"></i>
-                <i class="fa-solid fa-star unchecked"></i>
-              </div>
-              <h2>
-                <del>£349.99</del> £299.99
-                <span><li class="fa-solid fa-cart-shopping"></li></span>
-              </h2>
-            </div>
-          </div>
-        </div>
-        <!-- product card 6 -->
-
-        <!-- product card 7 -->
-        <div class="col-md-3 py-3 py-md-0">
-          <div class="card">
-            <img
-              src="productspage/pagescode/laptopscode/Laptops/16inch/Windows-16-White.webp"
-              alt=""
-            />
-            <div class="card-body">
-              <a
-                href="productspage\pagescode\laptopscode\laptops-16W.php"
-                style="text-decoration: none; color: inherit"
-              >
-                <h3 class="text-center">16 inch Windows Laptop</h3>
-              </a>
-              <div class="star text-center">
-                <i class="fa-solid fa-star unchecked"></i>
-                <i class="fa-solid fa-star unchecked"></i>
-                <i class="fa-solid fa-star unchecked"></i>
-                <i class="fa-solid fa-star unchecked"></i>
-                <i class="fa-solid fa-star unchecked"></i>
-              </div>
-              <h2>
-                <del>£449.99</del> £399.99
-                <span><li class="fa-solid fa-cart-shopping"></li></span>
-              </h2>
-            </div>
-          </div>
-        </div>
-        <!-- product card 7 -->
-
-        <!-- product card 8 -->
-        <div class="col-md-3 py-3 py-md-0">
-          <div class="card">
-            <img
-              src="productspage/pagescode/headphonescode/Headphones/inearblack.webp"
-              alt=""
-            />
-            <div class="card-body">
-              <a
-                href="productspage\pagescode\headphonescode\inearblack.php"
-                style="text-decoration: none; color: inherit"
-              >
-                <h3 class="text-center">In Ear Black Headphones</h3>
-              </a>
-              <div class="star text-center">
-                <i class="fa-solid fa-star unchecked"></i>
-                <i class="fa-solid fa-star unchecked"></i>
-                <i class="fa-solid fa-star unchecked"></i>
-                <i class="fa-solid fa-star unchecked"></i>
-                <i class="fa-solid fa-star unchecked"></i>
-              </div>
-              <h2>
-                <del>£20.99</del> £15.99
-                <span><li class="fa-solid fa-cart-shopping"></li></span>
-              </h2>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- product card 8 -->
     </div>
     <!-- product cards -->
 
@@ -311,7 +115,7 @@ $welcome_message = "Hi, " . htmlspecialchars($_SESSION['first_name']);
               <h3>Best Laptop</h3>
               <h5>Latest Collection</h5>
               <p>Up To 50% Off</p>
-              <a href="/DeviceDirect-Team-27/productspage/index.php">
+              <a href="../productspage/index.php?category_id=3&size=&min_price=&max_price=">
                 <button id="shopnow">Shop Now</button></a
               >
             </div>
@@ -324,7 +128,7 @@ $welcome_message = "Hi, " . htmlspecialchars($_SESSION['first_name']);
               <h3>Best Headphone</h3>
               <h5>Latest Collection</h5>
               <p>Up To 50% Off</p>
-              <a href="/DeviceDirect-Team-27/productspage/index.php">
+              <a href="../productspage/index.php?category_id=4&size=&min_price=0&max_price=0">
                 <button id="shopnow">Shop Now</button></a
               >
             </div>
@@ -349,7 +153,7 @@ $welcome_message = "Hi, " . htmlspecialchars($_SESSION['first_name']);
           everyone.
         </p>
         <div class="btn">
-          <a href="/DeviceDirect-Team-27/productspage/index.php"> <button>Shop Now</button></a>
+          <a href="../productspage\index.php"> <button>Shop Now</button></a>
         </div>
       </div>
       <div class="img">
