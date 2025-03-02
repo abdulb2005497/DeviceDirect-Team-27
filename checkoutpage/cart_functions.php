@@ -3,11 +3,10 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-include('../config/db.php'); // Include database connection
+include('../config/db.php'); 
 
-/**
- * Add item to cart
- */
+// Add item to cart
+ 
  function addToCart($pdo, $user_id, $prod_variant_id, $quantity) {
      try {
          if (!$user_id || !$prod_variant_id || !$quantity) {
@@ -51,44 +50,43 @@ include('../config/db.php'); // Include database connection
      }
  }
 
-/**
- * Remove item from cart
- */
+// Remove item from cart
+ 
  function remove_from_cart($pdo, $user_id, $prod_variant_id) {
      if (!$user_id || !$prod_variant_id) {
-         return false; // Prevent execution if values are missing
+         return false; 
      }
 
      try {
          $stmt = $pdo->prepare("DELETE FROM cart WHERE user_id = ? AND prod_variant_id = ?");
          $stmt->execute([$user_id, $prod_variant_id]);
 
-         return $stmt->rowCount() > 0; // Returns true if a row was deleted
+         return $stmt->rowCount() > 0; 
      } catch (PDOException $e) {
          die("Database error: " . $e->getMessage());
      }
  }
 
-/**
- * Update cart item quantity
- */
+// Update cart item quantity
+
  function update_cart_quantity($pdo, $user_id, $prod_variant_id, $quantity) {
      if (!$user_id || !$prod_variant_id || $quantity < 1) {
-         return false; // Prevent invalid updates
+         return false;
      }
 
      try {
          $stmt = $pdo->prepare("UPDATE cart SET quantity = ? WHERE user_id = ? AND prod_variant_id = ?");
          $stmt->execute([$quantity, $user_id, $prod_variant_id]);
 
-         return $stmt->rowCount() > 0; // Returns true if a row was updated
+         return $stmt->rowCount() > 0; 
      } catch (PDOException $e) {
          die("Database error: " . $e->getMessage());
      }
  }
-/**
- * Retrieve cart contents
- */
+
+
+// Retrieve cart contents
+ 
  function getCartItems($pdo, $user_id) {
     if (!$user_id) {
         return [];
@@ -103,7 +101,6 @@ include('../config/db.php'); // Include database connection
         $stmt->execute([$user_id]);
         $cartItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        // Debugging: print result to check what is fetched
 
 
         return $cartItems;
@@ -113,9 +110,9 @@ include('../config/db.php'); // Include database connection
 }
 
 
-/**
- * Calculate total cart value
- */
+
+ // Calculate total cart value
+
  function calculate_total($pdo, $user_id) {
      if (!$user_id) {
          return 0;
