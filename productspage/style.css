@@ -124,9 +124,8 @@ body {
 /* navbar */
 #navbar {
   background-color: #e5e7e9;
-  height:83px;
-  overflow:visible;
-
+  height: 83px;
+  overflow: visible;
 }
 #logo {
   margin-left: 15px;
@@ -179,12 +178,11 @@ body {
 
 .searchsectionwrappernav {
   display: flex;
-  justify-content: center; 
+  justify-content: center;
   margin-right: 20px;
   z-index: 10;
-  position:relative;
+  position: relative;
 }
-
 
 .searchsectionnav {
   display: flex;
@@ -192,9 +190,9 @@ body {
   align-items: stretch;
   width: 280px;
   backdrop-filter: blur(10px);
-  background: rgba(0, 0, 0, 0.1); 
+  background: rgba(0, 0, 0, 0.1);
   border-radius: 20px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   transition: all 0.3s ease;
   position: relative;
@@ -205,9 +203,8 @@ body {
   display: flex;
   align-items: center;
   padding: 10px 15px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2); 
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
-
 
 .searchsectionnav img {
   width: 24px;
@@ -215,33 +212,31 @@ body {
   margin-right: 10px;
 }
 
-
 .searchsectionnav input {
   flex-grow: 1;
   border: none;
   outline: none;
   font-size: 16px;
   color: white;
-  background: transparent; 
+  background: transparent;
 }
 
 .searchsectionnav input::placeholder {
   color: white;
 }
 
-
 .optionboxnav {
   display: none;
   max-height: 300px;
-  overflow-y: auto; 
+  overflow-y: auto;
   padding: 10px 0;
   background-color: white;
-  position: absolute; 
-  top: 100%; 
+  position: absolute;
+  top: 100%;
   left: 0;
-  width: 100%; 
-  border-radius:20px;
-  z-index: 1000; 
+  width: 100%;
+  border-radius: 20px;
+  z-index: 1000;
 }
 
 .searchsectionnav:focus-within .optionboxnav {
@@ -269,7 +264,7 @@ body {
   text-decoration: none;
   color: black;
 }
-.optionboxnav a:hover{
+.optionboxnav a:hover {
   text-decoration: none;
   color: black;
 }
@@ -346,13 +341,11 @@ body {
   background-size: cover;
 }
 
-
 .searchsectionwrapper {
   display: flex;
-  justify-content: center; 
+  justify-content: center;
   margin-top: 20px;
 }
-
 
 .searchsection {
   display: flex;
@@ -360,9 +353,9 @@ body {
   align-items: stretch;
   width: 400px;
   backdrop-filter: blur(10px);
-  background: rgba(0, 0, 0, 0.1); 
+  background: rgba(0, 0, 0, 0.1);
   border-radius: 20px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   transition: all 0.3s ease;
 }
@@ -371,9 +364,8 @@ body {
   display: flex;
   align-items: center;
   padding: 10px 15px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2); 
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
-
 
 .searchsection img {
   width: 24px;
@@ -381,20 +373,18 @@ body {
   margin-right: 10px;
 }
 
-
 .searchsection input {
   flex-grow: 1;
   border: none;
   outline: none;
   font-size: 16px;
   color: white;
-  background: transparent; 
+  background: transparent;
 }
 
 .searchsection input::placeholder {
   color: white;
 }
-
 
 .optionbox {
   display: none;
@@ -429,7 +419,7 @@ body {
   text-decoration: none;
   color: white;
 }
-.optionbox a:hover{
+.optionbox a:hover {
   text-decoration: none;
   color: white;
 }
@@ -440,7 +430,6 @@ body {
   color: white;
   font-size: 14px;
 }
-
 
 /* footer */
 #footer {
@@ -542,7 +531,7 @@ body {
 .sidebar {
   position: fixed;
   top: 80px; /* Adjusted to be below navbar */
-  width:250px;
+  width: 250px;
   height: calc(100vh - 80px); /* Subtract navbar height */
   background: #f8f9fa;
   padding: 20px;
@@ -550,40 +539,43 @@ body {
   transition: left 0.3s ease-in-out;
 }
 
+.sidebar h3 {
+  font-size: 18px;
+  margin-bottom: 15px;
+}
 
+.sidebar label {
+  font-weight: bold;
+  font-size: 14px;
+  display: block;
+  margin-top: 10px;
+}
 
-      .sidebar h3 {
-          font-size: 18px;
-          margin-bottom: 15px;
-      }
+.sidebar select,
+.sidebar input {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
 
-      .sidebar label {
-          font-weight: bold;
-          font-size: 14px;
-          display: block;
-          margin-top: 10px;
-      }
+.sidebar button {
+  width: 100%;
+  background-color: #430056;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 10px;
+}
 
-      .sidebar select,
-      .sidebar input {
-          width: 100%;
-          padding: 8px;
-          margin-top: 5px;
-          border: 1px solid #ccc;
-          border-radius: 5px;
-      }
+.sidebar button:hover {
+  background-color: #320045;
+}
 
-      .sidebar button {
-          width: 100%;
-          background-color: #430056;
-          color: white;
-          border: none;
-          padding: 8px 12px;
-          cursor: pointer;
-          border-radius: 5px;
-          margin-top: 10px;
-      }
-
-      .sidebar button:hover {
-          background-color: #320045;
-      }
+.navbar,
+.navbar-nav {
+  font-family: "Merriweather", serif;
+}
