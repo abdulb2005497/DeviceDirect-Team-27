@@ -26,14 +26,18 @@ if (!isset($_SESSION['user_id'])) {
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item"><a class="nav-link active" href="../Landing-Page/index.php">Home</a></li>
                 <li class="nav-item"><a class="nav-link" href="../productspage/index.php">Shop</a></li>
-                <li class="nav-item"><a class="nav-link" href="../aboutuspage/aboutus.php">About</a></li>
-                <li class="nav-item"><a class="nav-link" href="../contactuspage/contactus.php">Contact</a></li>
+                <li class="nav-item"><a class="nav-link" href="../aboutuspage/aboutus.php">Stock</a></li>
+                <li class="nav-item"><a class="nav-link" href="../contactuspage/contactus.php">Users</a></li>
+                <li class="nav-item"><a class="nav-link" href="../contactuspage/contactus.php">Orders</a></li>
+                <li class="nav-item"><a class="nav-link" href="../contactuspage/contactus.php">Discounts</a></li>
+
+
 
                 <!-- Account Dropdown -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                        data-bs-toggle="dropdown" aria-expanded="false">
-                        Account
+                        Admin
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="../Login_page/login.php">Login</a></li>
@@ -44,10 +48,11 @@ if (!isset($_SESSION['user_id'])) {
                 </li>
                 <li class="nav-item"><a class="nav-link" href="../config/logout.php">Logout</a></li>
             </ul>
-            <h2>Admin</h2>
+
             <div class="cart-btn">
                 <a href="../checkoutpage/cart.php"><i class="fas fa-shopping-bag"></i></a>
             </div>
+
         </div>
     </div>
 </nav>
