@@ -11,6 +11,7 @@ include('../config/db.php');
 include_once('../navbar.php');
 
 $category_id = isset($_GET['category_id']) ? $_GET['category_id'] : null;
+
 $size = isset($_GET['size']) ? $_GET['size'] : null;
 $min_price = isset($_GET['min_price']) ? floatval($_GET['min_price']) : null;
 $max_price = isset($_GET['max_price']) ? floatval($_GET['max_price']) : null;

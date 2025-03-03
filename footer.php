@@ -32,12 +32,12 @@ if (!isset($_SESSION['user_id'])) {
               <h4>Usefull Links</h4>
               <ul>
                 <li><a href="index.php">Home</a></li>
-                <li><a href="aboutuspage/aboutus.php">About Us</a></li>
-                <li><a href="config/logout.php">Logout</a></li>
+                <li><a href="../aboutuspage/aboutus.php">About Us</a></li>
+                <li><a href="../config/logout.php">Logout</a></li>
                 <li>
-                  <a href="productspage/index.php">Shop Now</a>
+                  <a href="../productspage/index.php">Shop Now</a>
                 </li>
-                <li><a href="contactuspage/contactus.php">Contact Us</a></li>
+                <li><a href="../contactuspage/contactus.php">Contact Us</a></li>
               </ul>
             </div>
 
@@ -46,26 +46,26 @@ if (!isset($_SESSION['user_id'])) {
 
               <ul>
                 <li>
-                  <a href="productspage\pagescode\consolescode\consoles.php"
+                  <a href="../productspage/index.php?category_id=5"
                     >Gaming Consoles</a
                   >
                 </li>
                 <li>
-                  <a href="productspage\pagescode\tvcode\tvs.php">TVs</a>
+                  <a href="../productspage/index.php?category_id=2">TVs</a>
                 </li>
                 <li>
-                  <a href="productspage\pagescode\laptopscode\laptops.php"
+                  <a href="../productspage/index.php?category_id=3"
                     >Laptops</a
                   >
                 </li>
                 <li>
-                  <a href="productspage\pagescode\monitorscode\monitors.php"
+                  <a href="../productspage/index.php?category_id=1"
                     >Monitors</a
                   >
                 </li>
                 <li>
                   <a
-                    href="productspage\pagescode\headphonescode\headphones.php"
+                    href="../productspage/index.php?category_id=4"
                     >Headphones</a
                   >
                 </li>
