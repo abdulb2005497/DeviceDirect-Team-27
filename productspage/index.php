@@ -133,6 +133,8 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </div>
 </div>
 
+
+<?php include_once '../footer.php'; ?>
 <script>
 document.getElementById("resetFilters").addEventListener("click", function () {
   window.location.href = window.location.pathname;

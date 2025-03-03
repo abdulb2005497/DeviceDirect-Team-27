@@ -9,10 +9,11 @@ if (!isset($_SESSION['user_id'])) {
     header("Location: Login_page/login.php");
     exit();
 }
-?> 
- 
- 
+?>
+
  <!-- footer -->
+ <link rel="stylesheet" href="/aboutuspage/aboutus.css">
+
  <footer id="footer">
       <div class="footer-top">
         <div class="container">
@@ -29,9 +30,9 @@ if (!isset($_SESSION['user_id'])) {
             </div>
 
             <div class="col-lg-3 col-md-6 footer-links">
-              <h4>Usefull Links</h4>
+              <h4>Useful Links</h4>
               <ul>
-                <li><a href="index.php">Home</a></li>
+                <li><a href="../Landing-Page/index.php">Home</a></li>
                 <li><a href="../aboutuspage/aboutus.php">About Us</a></li>
                 <li><a href="../config/logout.php">Logout</a></li>
                 <li>
@@ -46,26 +47,26 @@ if (!isset($_SESSION['user_id'])) {
 
               <ul>
                 <li>
-                  <a href="../productspage/index.php?category_id=5"
+                  <a href="../productspage/index.php?category_id=5&size=&min_price=&max_price="
                     >Gaming Consoles</a
                   >
                 </li>
                 <li>
-                  <a href="../productspage/index.php?category_id=2">TVs</a>
+                  <a href="../productspage\index.php?category_id=2&size=&min_price=0&max_price=0">TVs</a>
                 </li>
                 <li>
-                  <a href="../productspage/index.php?category_id=3"
+                  <a href="../productspage/index.php?category_id=3&size=&min_price=0&max_price=0"
                     >Laptops</a
                   >
                 </li>
                 <li>
-                  <a href="../productspage/index.php?category_id=1"
+                  <a href="../productspage\index.php?category_id=1&size=&min_price=0&max_price=0"
                     >Monitors</a
                   >
                 </li>
                 <li>
                   <a
-                    href="../productspage/index.php?category_id=4"
+                    href="../productspage\index.php?category_id=4&size=&min_price=0&max_price=0"
                     >Headphones</a
                   >
                 </li>
