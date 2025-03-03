@@ -22,7 +22,7 @@ $query = "
 ";
 $products = $pdo->query($query)->fetchAll(PDO::FETCH_ASSOC);
 
-$welcome_message = "Hi, " . htmlspecialchars($_SESSION['first_name']);
+$welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,13 +39,16 @@ $welcome_message = "Hi, " . htmlspecialchars($_SESSION['first_name']);
     <!-- Navbar -->
     <?php include '../navbar.php'; ?>
     <!-- Navbar -->
-
-    <!-- Welcome Message -->
-    <div class="container mt-4">
-    <div class="text-center welcome-message">
-        <h3><?php echo $welcome_message; ?></h3>
-    </div>
-    </div>
+    <script>
+        // welcome message when log in 
+        const welcomeMessage = "<?php echo $welcome_message; ?>";
+        const notification = document.createElement('div');
+        notification.textContent = welcomeMessage;
+        notification.classList.add('notification');
+        document.body.appendChild(notification);
+        // gets rid of the noti after 2 and a half seconds
+        setTimeout(() => { notification.remove(); }, 2500);
+    </script>
 
     <!-- Home Content -->
     <section class="home">
