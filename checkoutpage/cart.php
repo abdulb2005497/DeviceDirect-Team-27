@@ -72,85 +72,8 @@ include_once '../navbar.php';
             </div>
         </div>
     </div>
-    <!-- footer -->
-  <footer id="footer">
-      <div class="footer-top">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-3 col-md-6 footer-contact">
-              <h3>Device Direct</h3>
-              <p>
-                236 Coventry Road <br />
-                TW4 5PF, Birmingham <br />
-                United Kingdom <br />
-              </p>
-              <strong>Phone:</strong> +44 7748374824 <br />
-              <strong>Email:</strong>support@devicedirect.co.uk<br />
-            </div>
 
-            <div class="col-lg-3 col-md-6 footer-links">
-              <h4>Usefull Links</h4>
-              <ul>
-                <li><a href="../index.php">Home</a></li>
-                <li><a href="../aboutuspage/aboutus.php">About Us</a></li>
-                <li><a href="../config/logout.php">Logout</a></li>
-                <li>
-                  <a href="../productspage/index.php">Shop Now</a>
-                </li>
-                <li><a href="../contactuspage/contactus.php">Contact Us</a></li>
-              </ul>
-            </div>
 
-            <div class="col-lg-3 col-md-6 footer-links">
-              <h4>Our Services</h4>
-
-              <ul>
-                <li>
-                  <a href="productspage\pagescode\consolescode\consoles.php"
-                    >Gaming Consoles</a
-                  >
-                </li>
-                <li>
-                  <a href="productspage\pagescode\tvcode\tvs.php">TVs</a>
-                </li>
-                <li>
-                  <a href="productspage\pagescode\laptopscode\laptops.php"
-                    >Laptops</a
-                  >
-                </li>
-                <li>
-                  <a href="productspage\pagescode\monitorscode\monitors.php"
-                    >Monitors</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="productspage\pagescode\headphonescode\headphones.php"
-                    >Headphones</a
-                  >
-                </li>
-              </ul>
-            </div>
-
-            <div class="col-lg-3 col-md-6 footer-links">
-              <h4>Our Social</h4>
-              <div class="socail-links mt-3">
-                <a href="#"><i class="fa-brands fa-twitter"></i></a>
-                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-                <a href="#"><i class="fa-brands fa-instagram"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <hr />
-      <div class="container py-4">
-        <div class="copyright">
-          &copy; Copyright <strong><span>Device Direct Shop</span></strong
-          >. All Rights Reserved
-        </div>
-      </div>
-    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMzT4K+gT9TnL3L2WsmRN8Q6PTg9vLUz59vFlY5fw3zj0o9A6R9zJ6gI65g" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhG0grQ603jE1RUizG9BKA7YIv7pVZHt9YjM9XItGoj6g9q8zRT3GJ8lq2z4" crossorigin="anonymous"></script>

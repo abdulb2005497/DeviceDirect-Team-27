@@ -236,7 +236,7 @@ $welcome_message = "Hi, " . htmlspecialchars($_SESSION['first_name']);
     <!-- newslater -->
 
    <!-- footer -->
-    <?php include 'footer.php'; ?>
+    <?php include '../footer.php'; ?>
    <!-- footer -->
 
 
