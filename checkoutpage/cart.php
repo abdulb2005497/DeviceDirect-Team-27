@@ -73,7 +73,9 @@ include_once '../navbar.php';
         </div>
     </div>
 
-
+   <!-- footer -->
+       <?php include '../footer.php'; ?>
+   <!-- footer -->
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMzT4K+gT9TnL3L2WsmRN8Q6PTg9vLUz59vFlY5fw3zj0o9A6R9zJ6gI65g" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhG0grQ603jE1RUizG9BKA7YIv7pVZHt9YjM9XItGoj6g9q8zRT3GJ8lq2z4" crossorigin="anonymous"></script>
