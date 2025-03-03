@@ -54,7 +54,6 @@ if (!isset($_SESSION['user_id'])) {
 <style>
 /* Ensure the navbar stays fixed at the top */
 .navbar {
-    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
