@@ -22,7 +22,6 @@ $query = "
 ";
 $products = $pdo->query($query)->fetchAll(PDO::FETCH_ASSOC);
 
-$welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,28 +38,18 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
     <!-- Navbar -->
     <?php include 'adminnav.php'; ?>
     <!-- Navbar -->
-    <script>
-        // welcome message when log in 
-        const welcomeMessage = "<?php echo $welcome_message; ?>";
-        const notification = document.createElement('div');
-        notification.textContent = welcomeMessage;
-        notification.classList.add('notification');
-        document.body.appendChild(notification);
-        // gets rid of the noti after 2 and a half seconds
-        setTimeout(() => { notification.remove(); }, 2500);
-    </script>
-
+    
     <!-- Home Content -->
     <section class="home">
         <div class="content">
             <h1>Latest Tech <span id="span2">Unbeatable Prices!</span></h1>
             <p>Found it cheaper? We will match it! <br>We will price match against any other UK retailer.</p>
             <div class="btn">
-                <a href="../productspage\index.php"> <button>Shop Now</button></a>
+                <a href="../productspage/index.php"> <button>Shop Now</button></a>
             </div>
         </div>
         <div class="img">
-            <img src="./assests/images/image1.png" alt="">
+            <img src="../assests/images/image1.png" alt="">
         </div>
     </section>
     <!-- product cards -->
@@ -113,7 +102,7 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
       <div class="row">
         <div class="col-md-6 py-3 py-md-0">
           <div class="card">
-            <img src="./assests/images/c1.png" alt="" />
+            <img src="../assests/images/c1.png" alt="" />
             <div class="card-img-overlay">
               <h3>Best Laptop</h3>
               <h5>Latest Collection</h5>
@@ -126,7 +115,7 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
         </div>
         <div class="col-md-6 py-3 py-md-0">
           <div class="card">
-            <img src="./assests/images/c2.png" alt="" />
+            <img src="../assests/images/c2.png" alt="" />
             <div class="card-img-overlay">
               <h3>Best Headphone</h3>
               <h5>Latest Collection</h5>
@@ -160,7 +149,7 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
         </div>
       </div>
       <div class="img">
-        <img src="./assests/images/image1.png" alt="" />
+        <img src="../assests/images/image1.png" alt="" />
       </div>
     </section>
     <!-- banner -->
@@ -170,7 +159,7 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
       <div class="row">
         <div class="col-md-4 py-3 py-md-0">
           <div class="card">
-            <img src="./assests/images/c3.png" alt="" />
+            <img src="../assests/images/c3.png" alt="" />
             <div class="card-img-overlay">
               <h3>Home Gadget</h3>
               <p>Latest collection Up To 50% Off</p>
@@ -179,7 +168,7 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
         </div>
         <div class="col-md-4 py-3 py-md-0">
           <div class="card">
-            <img src="./assests/images/c4.png" alt="" />
+            <img src="../assests/images/c4.png" alt="" />
             <div class="card-img-overlay">
               <h3>Gaming Gadget</h3>
               <p>Latest collection Up To 50% Off</p>
@@ -188,7 +177,7 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
         </div>
         <div class="col-md-4 py-3 py-md-0">
           <div class="card">
-            <img src="./assests/images/c5.png" alt="" />
+            <img src="../assests/images/c5.png" alt="" />
             <div class="card-img-overlay">
               <h3>Electronic Gadget</h3>
               <p>Latest collection Up To 50% Off</p>

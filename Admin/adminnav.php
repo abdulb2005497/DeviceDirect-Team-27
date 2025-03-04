@@ -26,10 +26,10 @@ if (!isset($_SESSION['user_id'])) {
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item"><a class="nav-link active" href="../Landing-Page/index.php">Home</a></li>
                 <li class="nav-item"><a class="nav-link" href="../productspage/index.php">Shop</a></li>
-                <li class="nav-item"><a class="nav-link" href="../aboutuspage/aboutus.php">Stock</a></li>
-                <li class="nav-item"><a class="nav-link" href="../contactuspage/contactus.php">Users</a></li>
-                <li class="nav-item"><a class="nav-link" href="../contactuspage/contactus.php">Orders</a></li>
-                <li class="nav-item"><a class="nav-link" href="../contactuspage/contactus.php">Discounts</a></li>
+                <li class="nav-item"><a class="nav-link" href="stock.php">Stock</a></li>
+                <li class="nav-item"><a class="nav-link" href="users.php">Users</a></li>
+                <li class="nav-item"><a class="nav-link" href="orders.php">Orders</a></li>
+                <li class="nav-item"><a class="nav-link" href="discounts.php">Discounts</a></li>
 
 
 
@@ -53,7 +53,7 @@ if (!isset($_SESSION['user_id'])) {
                 <a href="../checkoutpage/cart.php"><i class="fas fa-shopping-bag"></i></a>
             </div>
 
-        </div>
+         </div>
     </div>
 </nav>
 
