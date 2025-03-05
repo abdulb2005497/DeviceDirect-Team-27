@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const progressBar = document.createElement("div");
         progressBar.className = "progress-bar";
 
-        // Calculate the width percentage
+        
         const progressPercentage = ((currentStageIndex + 1) / stages.length) * 100;
         progressBar.style.width = `${progressPercentage}%`;
 
