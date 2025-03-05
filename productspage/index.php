@@ -1,9 +1,7 @@
 <?php
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
+if (session_status() == PHP_SESSION_NONE) { session_start();
 }
-if (!isset($_SESSION['user_id'])) {
-    header("Location: ../Login_page/login.php");
+if (!isset($_SESSION['user_id'])) { header("Location: ../Login_page/login.php");
     exit();
 }
 
@@ -36,7 +34,7 @@ $query = "
 ";
 $params = [];
 
-// Apply filters dynamically
+
 if (!empty($category_id)) {
     $query .= " AND pv.category_id = :category_id";
     $params[':category_id'] = $category_id;
