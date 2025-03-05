@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <td>${new Date(order.order_date).toLocaleString()}</td>
                 <td>${order.status}</td>
             `;
-             // Create and append progress bar cell
+             
              const progressCell = document.createElement("td");
              const progressBar = createProgressBar(order.stages, order.status);
              progressCell.appendChild(progressBar);
