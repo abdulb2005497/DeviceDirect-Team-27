@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const progressPercentage = ((currentStageIndex + 1) / stages.length) * 100;
         progressBar.style.width = `${progressPercentage}%`;
 
-        // Create stage markers
+        
         stages.forEach((stage, index) => {
             const marker = document.createElement("div");
             marker.className = `progress-marker ${index <= currentStageIndex ? 'completed' : ''}`;
