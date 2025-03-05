@@ -79,6 +79,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Call the function with mock data
+    
     renderOrders(mockOrders);
 });
