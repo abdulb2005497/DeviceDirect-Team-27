@@ -38,6 +38,7 @@ if (!isset($_SESSION['user_id'])) {
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="../Login_page/login.php">Login</a></li>
                         <li><a class="dropdown-item" href="../Login_page/signup.php">Sign Up</a></li>
+                        <li><a class="dropdown-item" href="../Login_page/change_password.php">Change Password</a></li>
                         <li><a class="dropdown-item" href="../previousorders/previousorders.php">Previous Orders</a></li>
                         <li><a class="dropdown-item" href="../wishlist/wishlist.php">My Wishlist</a></li>
                     </ul>
