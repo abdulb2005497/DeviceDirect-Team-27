@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return progressBarContainer;
     }
 
-    // Function to render orders in the table
+    
     function renderOrders(orders) {
         orders.forEach(order => {
             const row = document.createElement("tr");
