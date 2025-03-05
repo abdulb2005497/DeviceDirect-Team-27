@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
          }
     ];
 
-     // Function to create progress bar
+     
      function createProgressBar(stages, currentStatus) {
         const statusOrder = ["Ordered", "Processed", "Shipped", "Delivered"];
         const currentStageIndex = statusOrder.indexOf(currentStatus);
