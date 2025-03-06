@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
          }
     ];
 
-     // Function to create progress bar
+     
      function createProgressBar(stages, currentStatus) {
         const statusOrder = ["Ordered", "Processed", "Shipped", "Delivered"];
         const currentStageIndex = statusOrder.indexOf(currentStatus);
@@ -41,11 +41,11 @@ document.addEventListener("DOMContentLoaded", () => {
         const progressBar = document.createElement("div");
         progressBar.className = "progress-bar";
 
-        // Calculate the width percentage
+        
         const progressPercentage = ((currentStageIndex + 1) / stages.length) * 100;
         progressBar.style.width = `${progressPercentage}%`;
 
-        // Create stage markers
+        
         stages.forEach((stage, index) => {
             const marker = document.createElement("div");
             marker.className = `progress-marker ${index <= currentStageIndex ? 'completed' : ''}`;
@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return progressBarContainer;
     }
 
-    // Function to render orders in the table
+    
     function renderOrders(orders) {
         orders.forEach(order => {
             const row = document.createElement("tr");
@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <td>${new Date(order.order_date).toLocaleString()}</td>
                 <td>${order.status}</td>
             `;
-             // Create and append progress bar cell
+             
              const progressCell = document.createElement("td");
              const progressBar = createProgressBar(order.stages, order.status);
              progressCell.appendChild(progressBar);
@@ -79,6 +79,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Call the function with mock data
+    
     renderOrders(mockOrders);
 });
