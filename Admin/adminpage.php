@@ -22,6 +22,7 @@ $query = "
 ";
 $products = $pdo->query($query)->fetchAll(PDO::FETCH_ASSOC);
 
+$welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,16 +37,26 @@ $products = $pdo->query($query)->fetchAll(PDO::FETCH_ASSOC);
 </head>
 <body>
     <!-- Navbar -->
-    <?php include 'adminnav.php'; ?>
+    <?php include '../navbar.php'; ?>
     <!-- Navbar -->
-    
+    <script>
+        // welcome message when log in
+        const welcomeMessage = "<?php echo $welcome_message; ?>";
+        const notification = document.createElement('div');
+        notification.textContent = welcomeMessage;
+        notification.classList.add('notification');
+        document.body.appendChild(notification);
+        // gets rid of the noti after 2 and a half seconds
+        setTimeout(() => { notification.remove(); }, 2500);
+    </script>
+
     <!-- Home Content -->
     <section class="home">
         <div class="content">
             <h1>Latest Tech <span id="span2">Unbeatable Prices!</span></h1>
             <p>Found it cheaper? We will match it! <br>We will price match against any other UK retailer.</p>
             <div class="btn">
-                <a href="../productspage/index.php"> <button>Shop Now</button></a>
+                <a href="../productspage\index.php"> <button>Shop Now</button></a>
             </div>
         </div>
         <div class="img">
