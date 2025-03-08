@@ -2,6 +2,8 @@
 session_start();
 include_once '../config/db.php';
 
+include_once('../navbar.php');
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $code = trim($_POST['discount_code']);
 
