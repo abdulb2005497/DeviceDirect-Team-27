@@ -26,10 +26,15 @@ if (!isset($_SESSION['user_id'])) {
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item"><a class="nav-link active" href="../Landing-Page/index.php">Home</a></li>
                 <li class="nav-item"><a class="nav-link" href="../productspage/index.php">Shop</a></li>
-                <li class="nav-item"><a class="nav-link" href="../aboutuspage/aboutus.php">About</a></li>
-                <li class="nav-item"><a class="nav-link" href="../contactuspage/contactus.php">Contact</a></li>
-
-                <!-- Account Dropdown -->
+                <?php if ($isAdmin): ?>
+                    <li class="nav-item"><a class="nav-link" href="../Admin/adminstock.php">Stock</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../Admin/users.php">Users</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../Admin/orders.php">Orders</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../Admin/discounts.php">Discounts</a></li>
+                <?php else: ?>
+                    <li class="nav-item"><a class="nav-link" href="../aboutuspage/aboutus.php">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../contactuspage/contactus.php">Contact</a></li>
+                <?php endif; ?>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                        data-bs-toggle="dropdown" aria-expanded="false">
