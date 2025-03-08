@@ -64,12 +64,17 @@ include_once '../navbar.php';
         <div class="cart-summary">
             <h2>Total</h2>
             <p>Subtotal: £<?php echo number_format($totalAmount, 2); ?></p>
-            <p c>Delivery: <span class="free-shipping">Standard Delivery (Free)</span></p>
-            <br><hr><br>
-            <p>Total: £<?php echo number_format($totalAmount, 2); ?></p>
+            <p>Delivery: <span class="free-shipping">Standard Delivery (Free)</span></p>
+            <form id="discount-form">
+                <label for="discount_code">Discount Code:</label>
+                <input type="text" id="discount_code" name="discount_code" class="discount-input">
+                <button type="button" id="apply-discount-btn" class="apply-discount-btn">Apply</button>
+            </form>
+            <p id="discount-message"></p>
+            <hr>
+            <p>Total: £<span id="total_price"><?php echo number_format($totalAmount, 2); ?></span></p>
 
             <button class="checkout-btn" onclick="window.location.href='checkout.php'">Checkout</button>
-            </div>
         </div>
     </div>
 
@@ -82,11 +87,38 @@ include_once '../navbar.php';
 </body>
 </html>
 
-    <script>
+<script>
 document.addEventListener("DOMContentLoaded", function () {
     var dropdownElementList = document.querySelectorAll('.dropdown-toggle');
     dropdownElementList.forEach(function(dropdownToggleEl) {
         new bootstrap.Dropdown(dropdownToggleEl);
+    });
+});
+</script>
+
+
+
+<script>
+document.getElementById('apply-discount-btn').addEventListener('click', function() {
+    let discountCode = document.getElementById('discount_code').value;
+    let totalPriceElement = document.getElementById('total_price');
+    let messageElement = document.getElementById('discount-message');
+
+    fetch('discounts.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: 'discount_code=' + encodeURIComponent(discountCode)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            totalPriceElement.innerText = data.new_total;
+            messageElement.innerText = data.message;
+            messageElement.style.color = "green";
+        } else {
+            messageElement.innerText = data.message;
+            messageElement.style.color = "red";
+        }
     });
 });
 </script>

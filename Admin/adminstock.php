@@ -29,8 +29,10 @@ $variants = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - Product Variants</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
+    <link rel="stylesheet" href="../assests/css/style.css?v=<?php echo time(); ?>">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">    <style>
         body { padding: 20px; }
         .table img { width: 100px; height: 100px; object-fit: cover; }
         .btn { margin-right: 5px; }
@@ -40,7 +42,7 @@ $variants = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <div class="container">
     <h2 class="mb-4 text-center">Stock Control</h2>
-
+    <br>
     <input type="text" id="searchInput" class="form-control mb-3" placeholder="Search by product name...">
     <a href="add_product.php" class="btn btn-success mb-3">Add New Product</a>
 
