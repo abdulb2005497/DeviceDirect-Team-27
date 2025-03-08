@@ -28,7 +28,7 @@ $isAdmin = isset($_SESSION['role']) && $_SESSION['role'] === 'admin';
                     <li class="nav-item"><a class="nav-link" href="../Admin/adminstock.php">Stock</a></li>
                     <li class="nav-item"><a class="nav-link" href="../Admin/users.php">Users</a></li>
                     <li class="nav-item"><a class="nav-link" href="../Admin/orders.php">Orders</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../Admin/discounts.php">Discounts</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../Admin/admin_discount.php">Discounts</a></li>
                 <?php else: ?>
                     <li class="nav-item"><a class="nav-link" href="../aboutuspage/aboutus.php">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="../contactuspage/contactus.php">Contact</a></li>
