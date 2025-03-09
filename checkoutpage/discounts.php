@@ -2,8 +2,6 @@
 session_start();
 include_once '../config/db.php';
 
-include_once('../navbar.php');
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $code = trim($_POST['discount_code']);
 
@@ -32,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         'success' => true,
         'new_total' => number_format($newTotal, 2),
         'discount_amount' => number_format($discountAmount, 2),
-        'message' => "Discount applied! You saved £" . number_format($discountAmount, 2),
+        'message' => "Discount has been applied! You've saved £" . number_format($discountAmount, 2),
     ]);
 }
 ?>
