@@ -54,13 +54,22 @@ INSERT INTO `orders` (`order_id`, `user_id`, `first_name`, `last_name`, `total_p
 
 
 CREATE TABLE `order_items` (
+  `order_item_id` int(11) NOT NULL AUTO_INCREMENT,
   `order_id` int(11) NOT NULL,
   `prod_id` int(11) NOT NULL,
   `colour_id` int(11) DEFAULT NULL,
   `quantity` int(11) DEFAULT NULL,
   `price_per_unit` decimal(7,2) DEFAULT NULL,
   `total_price` decimal(10,2) DEFAULT NULL,
-  `size_id` int(11) DEFAULT NULL
+  `size_id` int(11) DEFAULT NULL,
+  `return_status` ENUM('No Request', 'Requested', 'Approved', 'Rejected', 'Returned') DEFAULT 'No Request',
+  PRIMARY KEY (`order_item_id`),
+  KEY `order_id` (`order_id`),
+  KEY `prod_id` (`prod_id`),
+  KEY `colour_id` (`colour_id`),
+  KEY `size_id` (`size_id`),
+  CONSTRAINT `order_items_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`) ON DELETE CASCADE,
+  CONSTRAINT `order_items_ibfk_2` FOREIGN KEY (`prod_id`) REFERENCES `products` (`product_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
