@@ -73,6 +73,20 @@ CREATE TABLE `order_items` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
+CREATE TABLE `returns` (
+  `return_id` int(11) NOT NULL AUTO_INCREMENT,
+  `order_item_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `reason` TEXT NOT NULL,
+  `status` ENUM('Pending', 'Approved', 'Rejected', 'Completed') DEFAULT 'Pending',
+  `date_requested` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `date_resolved` TIMESTAMP NULL DEFAULT NULL,
+  PRIMARY KEY (`return_id`),
+  KEY `order_item_id` (`order_item_id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `returns_ibfk_1` FOREIGN KEY (`order_item_id`) REFERENCES `order_items` (`order_item_id`) ON DELETE CASCADE,
+  CONSTRAINT `returns_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 INSERT INTO `order_items` (`order_id`, `prod_id`, `colour_id`, `quantity`, `price_per_unit`, `total_price`, `size_id`) VALUES
 (9, 8, 1, 2, 20.99, 41.98, 8),
