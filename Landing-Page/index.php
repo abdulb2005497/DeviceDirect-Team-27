@@ -53,7 +53,7 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
     <!-- Home Content -->
     <section class="home">
         <div class="content">
-            <h1>Latest Tech <span id="span2">Unbeatable Prices!</span><br>Use code <span style="color: green">SAVE10</span> to get 10% off!!</h1>
+            <h1>Latest Tech <span id="span2">Unbeatable Prices!</span> Use code <span style="color: green">SAVE10</span> to get 10% off!!</h1>
             <p>Found it cheaper? We will match it! <br>We will price match against any other UK retailer.</p>
             <div class="btn">
                 <a href="../productspage\index.php"> <button>Shop Now</button></a>
