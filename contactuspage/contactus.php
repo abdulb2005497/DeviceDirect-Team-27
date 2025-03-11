@@ -1,19 +1,35 @@
 <?php
-
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-
 if (!isset($_SESSION['user_id'])) {
-
     header("Location: Login_page/login.php");
     exit();
-
 }
+
+include_once '../config/db.php'; // Include your PDO database connection
 include_once '../navbar.php';
 
 $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
+
+// Handle form submission
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $user_id = $_SESSION['user_id'];
+    $fullname = $_POST['name'];
+    $email = $_POST['email'];
+    $query_text = $_POST['message'];
+
+    try {
+        // Insert data into the queries table
+        $stmt = $pdo->prepare("INSERT INTO queries (user_id, fullname, email, query_text, resolved) VALUES (?, ?, ?, ?, 'No')");
+        $stmt->execute([$user_id, $fullname, $email, $query_text]);
+
+        $success_message = "Your message has been successfully sent.";
+    } catch (PDOException $e) {
+        $error_message = "Error: " . $e->getMessage();
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -147,7 +163,11 @@ $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
       document
         .getElementById("contactForm")
         .addEventListener("submit", function (e) {
-          e.preventDefault(); // Prevent form submission
+
+          if (!name || !email || !message) {
+            alert("Please fill in all fields.");
+            return;
+            }
 
           const name = document.getElementById("name").value;
           const email = document.getElementById("email").value;
