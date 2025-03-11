@@ -29,16 +29,19 @@ CREATE TABLE `discount_codes` (
 
 
 CREATE TABLE `orders` (
-  `order_id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
   `first_name` varchar(128) NOT NULL,
   `last_name` varchar(128) NOT NULL,
   `total_price` decimal(10,2) DEFAULT NULL,
-  `date_ordered` datetime DEFAULT NULL,
-  `status` enum('pending','processed','shipped','cancelled') DEFAULT 'pending',
+  `date_ordered` datetime DEFAULT CURRENT_TIMESTAMP,
+  `status` ENUM('pending', 'processed', 'shipped', 'cancelled', 'delivered') DEFAULT 'pending',
   `address` text DEFAULT NULL,
   `city` varchar(128) NOT NULL,
-  `postal_code` varchar(128) NOT NULL
+  `postal_code` varchar(128) NOT NULL,
+  PRIMARY KEY (`order_id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
