@@ -37,9 +37,8 @@ $isAdmin = isset($_SESSION['role']) && $_SESSION['role'] === 'admin';
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <?php echo $isAdmin ? 'Admin' : 'Account'; ?>
                     </a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="../Login_page/login.php">Login</a></li>
-                        <li><a class="dropdown-item" href="../Login_page/signup.php">Sign Up</a></li>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">                       
+                        <li><a class="dropdown-item" href="../Login_page/change_password.php">Change Password</a></li>
                         <li><a class="dropdown-item" href="../previousorders/previousorders.php">Previous Orders</a></li>
                         <li><a class="dropdown-item" href="../wishlist/wishlist.php">My Wishlist</a></li>
                     </ul>
