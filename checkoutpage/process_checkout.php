@@ -25,7 +25,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $order_id = $pdo->lastInsertId();
 
-        // Retrieve cart items
         $cartStmt = $pdo->prepare("SELECT c.prod_variant_id, c.quantity, pv.price, pv.product_id, pv.colour_id, pv.size_id, pv.quantity AS stock_quantity
                                    FROM cart c
                                    JOIN product_variants pv ON c.prod_variant_id = pv.prod_variant_id
@@ -55,6 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             ]);
 
             $updateStockStmt->execute([$item['quantity'], $item['prod_variant_id']]);
+        }
 
         $clearCartStmt = $pdo->prepare("DELETE FROM cart WHERE user_id = ?");
         $clearCartStmt->execute([$user_id]);
