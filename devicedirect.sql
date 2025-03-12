@@ -1,5 +1,3 @@
-
-
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -7,89 +5,62 @@ SET time_zone = "+00:00";
 
 
 
-
-CREATE TABLE `cart` (
-  `cart_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `prod_variant_id` int(11) NOT NULL,
-  `quantity` int(11) DEFAULT 1
+CREATE TABLE cart (
+  cart_id int(11) NOT NULL,
+  user_id int(11) NOT NULL,
+  prod_variant_id int(11) NOT NULL,
+  quantity int(11) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
 
-CREATE TABLE `discount_codes` (
-  `code_id` int(11) NOT NULL,
-  `code_text` varchar(20) DEFAULT NULL,
-  `discount` decimal(5,2) DEFAULT NULL,
-  `discount_type` enum('percentage','fixed') NOT NULL DEFAULT 'percentage',
-  `expiry_date` date DEFAULT NULL,
-  `is_active` tinyint(1) DEFAULT 1,
-  `created_at` datetime DEFAULT current_timestamp()
+CREATE TABLE discount_codes (
+  code_id int(11) NOT NULL,
+  code_text varchar(20) DEFAULT NULL,
+  discount decimal(5,2) DEFAULT NULL,
+  discount_type enum('percentage','fixed') NOT NULL DEFAULT 'percentage',
+  expiry_date date DEFAULT NULL,
+  is_active tinyint(1) DEFAULT 1,
+  created_at datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
 
-CREATE TABLE `orders` (
-  `order_id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) DEFAULT NULL,
-  `first_name` varchar(128) NOT NULL,
-  `last_name` varchar(128) NOT NULL,
-  `total_price` decimal(10,2) DEFAULT NULL,
-  `date_ordered` datetime DEFAULT CURRENT_TIMESTAMP,
-  `status` ENUM('pending', 'processed', 'shipped', 'cancelled', 'delivered') DEFAULT 'pending',
-  `address` text DEFAULT NULL,
-  `city` varchar(128) NOT NULL,
-  `postal_code` varchar(128) NOT NULL,
-  PRIMARY KEY (`order_id`),
-  KEY `user_id` (`user_id`),
-  CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
+CREATE TABLE orders (
+  order_id int(11) NOT NULL,
+  user_id int(11) DEFAULT NULL,
+  first_name varchar(128) NOT NULL,
+  last_name varchar(128) NOT NULL,
+  total_price decimal(10,2) DEFAULT NULL,
+  date_ordered datetime DEFAULT NULL,
+  status enum('pending','processed','shipped','cancelled') DEFAULT 'pending',
+  address text DEFAULT NULL,
+  city varchar(128) NOT NULL,
+  postal_code varchar(128) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
 
-INSERT INTO `orders` (`order_id`, `user_id`, `first_name`, `last_name`, `total_price`, `date_ordered`, `status`, `address`, `city`, `postal_code`) VALUES
+INSERT INTO orders (order_id, user_id, first_name, last_name, total_price, date_ordered, status, address, city, postal_code) VALUES
 (9, 6, 'aaa', 'a', 41.98, '2025-02-15 18:49:00', 'pending', 'a', 'a', 'a'),
 (10, 6, 'a', 'a', 989.96, '2025-02-15 19:11:41', 'pending', 'a', 'a', 'a'),
 (11, 6, 'a', 'a', 1049.95, '2025-02-16 16:48:23', 'pending', 'a', 'a', 'a');
 
 
 
-CREATE TABLE `order_items` (
-  `order_item_id` int(11) NOT NULL AUTO_INCREMENT,
-  `order_id` int(11) NOT NULL,
-  `prod_id` int(11) NOT NULL,
-  `colour_id` int(11) DEFAULT NULL,
-  `quantity` int(11) DEFAULT NULL,
-  `price_per_unit` decimal(7,2) DEFAULT NULL,
-  `total_price` decimal(10,2) DEFAULT NULL,
-  `size_id` int(11) DEFAULT NULL,
-  `return_status` ENUM('No Request', 'Requested', 'Approved', 'Rejected', 'Returned') DEFAULT 'No Request',
-  PRIMARY KEY (`order_item_id`),
-  KEY `order_id` (`order_id`),
-  KEY `prod_id` (`prod_id`),
-  KEY `colour_id` (`colour_id`),
-  KEY `size_id` (`size_id`),
-  CONSTRAINT `order_items_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`) ON DELETE CASCADE,
-  CONSTRAINT `order_items_ibfk_2` FOREIGN KEY (`prod_id`) REFERENCES `products` (`product_id`)
+CREATE TABLE order_items (
+  order_id int(11) NOT NULL,
+  prod_id int(11) NOT NULL,
+  colour_id int(11) DEFAULT NULL,
+  quantity int(11) DEFAULT NULL,
+  price_per_unit decimal(7,2) DEFAULT NULL,
+  total_price decimal(10,2) DEFAULT NULL,
+  size_id int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
-CREATE TABLE `returns` (
-  `return_id` int(11) NOT NULL AUTO_INCREMENT,
-  `order_item_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `reason` TEXT NOT NULL,
-  `status` ENUM('Pending', 'Approved', 'Rejected', 'Completed') DEFAULT 'Pending',
-  `date_requested` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  `date_resolved` TIMESTAMP NULL DEFAULT NULL,
-  PRIMARY KEY (`return_id`),
-  KEY `order_item_id` (`order_item_id`),
-  KEY `user_id` (`user_id`),
-  CONSTRAINT `returns_ibfk_1` FOREIGN KEY (`order_item_id`) REFERENCES `order_items` (`order_item_id`) ON DELETE CASCADE,
-  CONSTRAINT `returns_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-INSERT INTO `order_items` (`order_id`, `prod_id`, `colour_id`, `quantity`, `price_per_unit`, `total_price`, `size_id`) VALUES
+INSERT INTO order_items (order_id, prod_id, colour_id, quantity, price_per_unit, total_price, size_id) VALUES
 (9, 8, 1, 2, 20.99, 41.98, 8),
 (10, 1, 3, 1, 209.99, 209.99, 5),
 (10, 3, 3, 3, 259.99, 779.97, 5),
@@ -97,14 +68,14 @@ INSERT INTO `order_items` (`order_id`, `prod_id`, `colour_id`, `quantity`, `pric
 
 
 
-CREATE TABLE `products` (
-  `product_id` int(11) NOT NULL,
-  `product_title` varchar(128) NOT NULL
+CREATE TABLE products (
+  product_id int(11) NOT NULL,
+  product_title varchar(128) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
 
-INSERT INTO `products` (`product_id`, `product_title`) VALUES
+INSERT INTO products (product_id, product_title) VALUES
 (1, 'HD TV\n'),
 (2, '2K Monitor'),
 (3, '4K TV'),
@@ -123,14 +94,14 @@ INSERT INTO `products` (`product_id`, `product_title`) VALUES
 
 
 
-CREATE TABLE `product_categories` (
-  `category_id` int(11) NOT NULL,
-  `category_name` varchar(128) DEFAULT NULL
+CREATE TABLE product_categories (
+  category_id int(11) NOT NULL,
+  category_name varchar(128) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
 
-INSERT INTO `product_categories` (`category_id`, `category_name`) VALUES
+INSERT INTO product_categories (category_id, category_name) VALUES
 (1, 'Monitors'),
 (2, 'TVs'),
 (3, 'Laptops'),
@@ -139,14 +110,14 @@ INSERT INTO `product_categories` (`category_id`, `category_name`) VALUES
 
 
 
-CREATE TABLE `product_colours` (
-  `colour_id` int(11) NOT NULL,
-  `colour_name` varchar(50) DEFAULT NULL
+CREATE TABLE product_colours (
+  colour_id int(11) NOT NULL,
+  colour_name varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
 
-INSERT INTO `product_colours` (`colour_id`, `colour_name`) VALUES
+INSERT INTO product_colours (colour_id, colour_name) VALUES
 (1, 'Black'),
 (2, 'Red'),
 (3, 'White'),
@@ -154,14 +125,14 @@ INSERT INTO `product_colours` (`colour_id`, `colour_name`) VALUES
 
 
 
-CREATE TABLE `product_sizes` (
-  `size_id` int(11) NOT NULL,
-  `size_name` varchar(128) NOT NULL
+CREATE TABLE product_sizes (
+  size_id int(11) NOT NULL,
+  size_name varchar(128) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
 
-INSERT INTO `product_sizes` (`size_id`, `size_name`) VALUES
+INSERT INTO product_sizes (size_id, size_name) VALUES
 (1, '12 inch\r\n'),
 (2, '16 inch'),
 (3, '25 inch'),
@@ -173,20 +144,20 @@ INSERT INTO `product_sizes` (`size_id`, `size_name`) VALUES
 
 
 
-CREATE TABLE `product_variants` (
-  `prod_variant_id` int(11) NOT NULL,
-  `product_id` int(11) DEFAULT NULL,
-  `category_id` int(11) DEFAULT NULL,
-  `colour_id` int(11) DEFAULT NULL,
-  `size_id` int(11) DEFAULT NULL,
-  `prod_desc` text DEFAULT NULL,
-  `quantity` int(11) DEFAULT NULL,
-  `image` text DEFAULT NULL,
-  `price` decimal(7,2) DEFAULT NULL
+CREATE TABLE product_variants (
+  prod_variant_id int(11) NOT NULL,
+  product_id int(11) DEFAULT NULL,
+  category_id int(11) DEFAULT NULL,
+  colour_id int(11) DEFAULT NULL,
+  size_id int(11) DEFAULT NULL,
+  prod_desc text DEFAULT NULL,
+  quantity int(11) DEFAULT NULL,
+  image text DEFAULT NULL,
+  price decimal(7,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
-INSERT INTO `product_variants` (`prod_variant_id`, `product_id`, `category_id`, `colour_id`, `size_id`, `prod_desc`, `quantity`, `image`, `price`) VALUES
+INSERT INTO product_variants (prod_variant_id, product_id, category_id, colour_id, size_id, prod_desc, quantity, image, price) VALUES
 (1, 1, 2, 1, 5, 'Experience stunning visuals and immersive entertainment with the HD 40 Inch Black TV, the perfect addition to any home. Boasting crystal-clear picture quality, vibrant colors, and sleek modern design, this television is designed to enhance your viewing experience, whether you\'re watching your favorite movies, shows, or gaming. With advanced 4D surround sound technology and multiple connectivity options, including HDMI and USB, it\'s ready to integrate seamlessly into your setup. Limited Time Offer: Get this incredible HD TV at half the original price! Don\'t miss this opportunity to upgrade your entertainment system and bring cinematic visuals right to your living room. Click \"Add to Basket\" now to make it yours before the deal ends!\n', 99, 'HD-40-Black.webp', 199.99),
 (2, 3, 2, 1, 5, 'Discover the brilliance of ultra-high definition with the 4K 40 Inch Black TV. Compact yet powerful, this TV combines sleek design with cutting-edge 4K resolution, offering unparalleled clarity and lifelike colour details. Perfect for bedrooms, kitchens, or smaller living spaces, this TV ensures every pixel delivers perfection, whether you’re streaming, gaming, or watching live TV. Complete with advanced sound technology and seamless connectivity through HDMI and USB, it’s designed to fit effortlessly into your modern lifestyle. Don’t miss out—upgrade to 4K quality now and enjoy an exclusive offer for a limited time only!\r\n', 99, '4K-40-Black.webp', 249.99),
 (3, 1, 2, 3, 5, 'Experience stunning visuals and immersive entertainment with the HD 40 Inch White TV, the perfect addition to any home. Boasting crystal-clear picture quality, vibrant colours, and sleek modern design, this television is designed to enhance your viewing experience, whether you\'re watching your favourite movies, shows, or gaming. With advanced 4D surround sound technology and multiple connectivity options, including HDMI and USB, it\'s ready to integrate seamlessly into your setup. Limited Time Offer: Get this incredible HD TV at half the original price! Don\'t miss this opportunity to upgrade your entertainment system and bring cinematic visuals right to your living room. Click \"Add to Basket\" now to make it yours before the deal ends!\r\n', 99, 'HD-40-White.webp', 209.99),
@@ -251,56 +222,56 @@ INSERT INTO `product_variants` (`prod_variant_id`, `product_id`, `category_id`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `prod_reviews`
+-- Table structure for table prod_reviews
 --
 
-CREATE TABLE `prod_reviews` (
-  `review_id` int(11) NOT NULL,
-  `prod_id` int(11) DEFAULT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `rating` int(11) DEFAULT NULL CHECK (`rating` between 1 and 5),
-  `comment` text DEFAULT NULL,
-  `created_at` datetime DEFAULT current_timestamp()
+CREATE TABLE prod_reviews (
+  review_id int(11) NOT NULL,
+  prod_id int(11) DEFAULT NULL,
+  user_id int(11) DEFAULT NULL,
+  rating int(11) DEFAULT NULL CHECK (rating between 1 and 5),
+  comment text DEFAULT NULL,
+  created_at datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `queries`
+-- Table structure for table queries
 --
 
-CREATE TABLE `queries` (
-  `query_id` int(11) NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `fullname` int(11) NOT NULL,
-  `email` int(11) NOT NULL,
-  `query_text` text DEFAULT NULL,
-  `resolved` tinyint(1) DEFAULT 0
+CREATE TABLE queries (
+  query_id int(11) NOT NULL,
+  user_id int(11) DEFAULT NULL,
+  fullname int(11) NOT NULL,
+  email int(11) NOT NULL,
+  query_text text DEFAULT NULL,
+  resolved tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Table structure for table users
 --
 
-CREATE TABLE `users` (
-  `user_id` int(11) NOT NULL,
-  `First_name` varchar(50) NOT NULL,
-  `Last_name` varchar(50) NOT NULL,
-  `Email` varchar(100) NOT NULL,
-  `Phone` varchar(20) NOT NULL,
-  `Address` varchar(100) NOT NULL,
-  `password` varchar(100) NOT NULL,
-  `role` varchar(20) NOT NULL DEFAULT 'client',
-  `created_at` datetime NOT NULL DEFAULT current_timestamp()
+CREATE TABLE users (
+  user_id int(11) NOT NULL,
+  First_name varchar(50) NOT NULL,
+  Last_name varchar(50) NOT NULL,
+  Email varchar(100) NOT NULL,
+  Phone varchar(20) NOT NULL,
+  Address varchar(100) NOT NULL,
+  password varchar(100) NOT NULL,
+  role varchar(20) NOT NULL DEFAULT 'client',
+  created_at datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `users`
+-- Dumping data for table users
 --
 
-INSERT INTO `users` (`user_id`, `First_name`, `Last_name`, `Email`, `Phone`, `Address`, `password`, `role`, `created_at`) VALUES
+INSERT INTO users (user_id, First_name, Last_name, Email, Phone, Address, password, role, created_at) VALUES
 (6, 'devicedirect', 'no', 'dd@gmail.com', '0123123123213', 'aston', '$2y$10$COJ5oBv5uQBoAx7xJBeJ2Oedpijg9PuRojDrdaqMwLNtST6miYuiy', 'user', '2025-02-09 13:52:25');
 
 --
@@ -308,201 +279,201 @@ INSERT INTO `users` (`user_id`, `First_name`, `Last_name`, `Email`, `Phone`, `Ad
 --
 
 --
--- Indexes for table `cart`
+-- Indexes for table cart
 --
-ALTER TABLE `cart`
-  ADD PRIMARY KEY (`cart_id`),
-  ADD UNIQUE KEY `user_id` (`user_id`,`prod_variant_id`),
-  ADD KEY `prod_variant_id` (`prod_variant_id`);
+ALTER TABLE cart
+  ADD PRIMARY KEY (cart_id),
+  ADD UNIQUE KEY user_id (user_id,prod_variant_id),
+  ADD KEY prod_variant_id (prod_variant_id);
 
 --
--- Indexes for table `discount_codes`
+-- Indexes for table discount_codes
 --
-ALTER TABLE `discount_codes`
-  ADD PRIMARY KEY (`code_id`),
-  ADD UNIQUE KEY `code_text` (`code_text`);
+ALTER TABLE discount_codes
+  ADD PRIMARY KEY (code_id),
+  ADD UNIQUE KEY code_text (code_text);
 
 --
--- Indexes for table `orders`
+-- Indexes for table orders
 --
-ALTER TABLE `orders`
-  ADD PRIMARY KEY (`order_id`),
-  ADD KEY `user_id` (`user_id`);
+ALTER TABLE orders
+  ADD PRIMARY KEY (order_id),
+  ADD KEY user_id (user_id);
 
 --
--- Indexes for table `order_items`
+-- Indexes for table order_items
 --
-ALTER TABLE `order_items`
-  ADD PRIMARY KEY (`order_id`,`prod_id`),
-  ADD KEY `prod_id` (`prod_id`),
-  ADD KEY `colour_id` (`colour_id`),
-  ADD KEY `size_id` (`size_id`);
+ALTER TABLE order_items
+  ADD PRIMARY KEY (order_id,prod_id),
+  ADD KEY prod_id (prod_id),
+  ADD KEY colour_id (colour_id),
+  ADD KEY size_id (size_id);
 
 --
--- Indexes for table `products`
+-- Indexes for table products
 --
-ALTER TABLE `products`
-  ADD PRIMARY KEY (`product_id`);
+ALTER TABLE products
+  ADD PRIMARY KEY (product_id);
 
 --
--- Indexes for table `product_categories`
+-- Indexes for table product_categories
 --
-ALTER TABLE `product_categories`
-  ADD PRIMARY KEY (`category_id`);
+ALTER TABLE product_categories
+  ADD PRIMARY KEY (category_id);
 
 --
--- Indexes for table `product_colours`
+-- Indexes for table product_colours
 --
-ALTER TABLE `product_colours`
-  ADD PRIMARY KEY (`colour_id`);
+ALTER TABLE product_colours
+  ADD PRIMARY KEY (colour_id);
 
 --
--- Indexes for table `product_sizes`
+-- Indexes for table product_sizes
 --
-ALTER TABLE `product_sizes`
-  ADD PRIMARY KEY (`size_id`);
+ALTER TABLE product_sizes
+  ADD PRIMARY KEY (size_id);
 
 --
--- Indexes for table `product_variants`
+-- Indexes for table product_variants
 --
-ALTER TABLE `product_variants`
-  ADD PRIMARY KEY (`prod_variant_id`),
-  ADD KEY `category_id` (`category_id`),
-  ADD KEY `colour_id` (`colour_id`),
-  ADD KEY `size_id` (`size_id`),
-  ADD KEY `fk_product_id` (`product_id`);
+ALTER TABLE product_variants
+  ADD PRIMARY KEY (prod_variant_id),
+  ADD KEY category_id (category_id),
+  ADD KEY colour_id (colour_id),
+  ADD KEY size_id (size_id),
+  ADD KEY fk_product_id (product_id);
 
 --
--- Indexes for table `prod_reviews`
+-- Indexes for table prod_reviews
 --
-ALTER TABLE `prod_reviews`
-  ADD PRIMARY KEY (`review_id`),
-  ADD KEY `prod_id` (`prod_id`),
-  ADD KEY `user_id` (`user_id`);
+ALTER TABLE prod_reviews
+  ADD PRIMARY KEY (review_id),
+  ADD KEY prod_id (prod_id),
+  ADD KEY user_id (user_id);
 
 --
--- Indexes for table `queries`
+-- Indexes for table queries
 --
-ALTER TABLE `queries`
-  ADD PRIMARY KEY (`query_id`),
-  ADD KEY `user_id` (`user_id`);
+ALTER TABLE queries
+  ADD PRIMARY KEY (query_id),
+  ADD KEY user_id (user_id);
 
 --
--- Indexes for table `users`
+-- Indexes for table users
 --
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`user_id`);
+ALTER TABLE users
+  ADD PRIMARY KEY (user_id);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `cart`
+-- AUTO_INCREMENT for table cart
 --
-ALTER TABLE `cart`
-  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+ALTER TABLE cart
+  MODIFY cart_id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
--- AUTO_INCREMENT for table `discount_codes`
+-- AUTO_INCREMENT for table discount_codes
 --
-ALTER TABLE `discount_codes`
-  MODIFY `code_id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE discount_codes
+  MODIFY code_id int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `orders`
+-- AUTO_INCREMENT for table orders
 --
-ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+ALTER TABLE orders
+  MODIFY order_id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT for table `products`
+-- AUTO_INCREMENT for table products
 --
-ALTER TABLE `products`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+ALTER TABLE products
+  MODIFY product_id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
--- AUTO_INCREMENT for table `product_categories`
+-- AUTO_INCREMENT for table product_categories
 --
-ALTER TABLE `product_categories`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+ALTER TABLE product_categories
+  MODIFY category_id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `product_colours`
+-- AUTO_INCREMENT for table product_colours
 --
-ALTER TABLE `product_colours`
-  MODIFY `colour_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+ALTER TABLE product_colours
+  MODIFY colour_id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `product_sizes`
+-- AUTO_INCREMENT for table product_sizes
 --
-ALTER TABLE `product_sizes`
-  MODIFY `size_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+ALTER TABLE product_sizes
+  MODIFY size_id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT for table `product_variants`
+-- AUTO_INCREMENT for table product_variants
 --
-ALTER TABLE `product_variants`
-  MODIFY `prod_variant_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+ALTER TABLE product_variants
+  MODIFY prod_variant_id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
--- AUTO_INCREMENT for table `prod_reviews`
+-- AUTO_INCREMENT for table prod_reviews
 --
-ALTER TABLE `prod_reviews`
-  MODIFY `review_id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE prod_reviews
+  MODIFY review_id int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `queries`
+-- AUTO_INCREMENT for table queries
 --
-ALTER TABLE `queries`
-  MODIFY `query_id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE queries
+  MODIFY query_id int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT for table users
 --
-ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+ALTER TABLE users
+  MODIFY user_id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `cart`
+-- Constraints for table cart
 --
-ALTER TABLE `cart`
-  ADD CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `cart_ibfk_2` FOREIGN KEY (`prod_variant_id`) REFERENCES `product_variants` (`prod_variant_id`) ON DELETE CASCADE;
+ALTER TABLE cart
+  ADD CONSTRAINT cart_ibfk_1 FOREIGN KEY (user_id) REFERENCES users (user_id) ON DELETE CASCADE,
+  ADD CONSTRAINT cart_ibfk_2 FOREIGN KEY (prod_variant_id) REFERENCES product_variants (prod_variant_id) ON DELETE CASCADE;
 
 --
--- Constraints for table `orders`
+-- Constraints for table orders
 --
-ALTER TABLE `orders`
-  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
+ALTER TABLE orders
+  ADD CONSTRAINT orders_ibfk_1 FOREIGN KEY (user_id) REFERENCES users (user_id);
 
 --
--- Constraints for table `product_variants`
+-- Constraints for table product_variants
 --
-ALTER TABLE `product_variants`
-  ADD CONSTRAINT `fk_product_id` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `product_variants_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `product_categories` (`category_id`),
-  ADD CONSTRAINT `product_variants_ibfk_2` FOREIGN KEY (`colour_id`) REFERENCES `product_colours` (`colour_id`),
-  ADD CONSTRAINT `product_variants_ibfk_3` FOREIGN KEY (`size_id`) REFERENCES `product_sizes` (`size_id`);
+ALTER TABLE product_variants
+  ADD CONSTRAINT fk_product_id FOREIGN KEY (product_id) REFERENCES products (product_id) ON DELETE CASCADE,
+  ADD CONSTRAINT product_variants_ibfk_1 FOREIGN KEY (category_id) REFERENCES product_categories (category_id),
+  ADD CONSTRAINT product_variants_ibfk_2 FOREIGN KEY (colour_id) REFERENCES product_colours (colour_id),
+  ADD CONSTRAINT product_variants_ibfk_3 FOREIGN KEY (size_id) REFERENCES product_sizes (size_id);
 
 --
--- Constraints for table `prod_reviews`
+-- Constraints for table prod_reviews
 --
-ALTER TABLE `prod_reviews`
-  ADD CONSTRAINT `prod_reviews_ibfk_1` FOREIGN KEY (`prod_id`) REFERENCES `product_variants` (`prod_variant_id`),
-  ADD CONSTRAINT `prod_reviews_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
+ALTER TABLE prod_reviews
+  ADD CONSTRAINT prod_reviews_ibfk_1 FOREIGN KEY (prod_id) REFERENCES product_variants (prod_variant_id),
+  ADD CONSTRAINT prod_reviews_ibfk_2 FOREIGN KEY (user_id) REFERENCES users (user_id);
 
 --
--- Constraints for table `queries`
+-- Constraints for table queries
 --
-ALTER TABLE `queries`
-  ADD CONSTRAINT `queries_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
+ALTER TABLE queries
+  ADD CONSTRAINT queries_ibfk_1 FOREIGN KEY (user_id) REFERENCES users (user_id);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */; 
