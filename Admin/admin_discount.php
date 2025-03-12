@@ -38,7 +38,7 @@ include_once('../navbar.php');
         </thead>
         <tbody>
             <?php
-            $stmt = $pdo->query("SELECT * FROM discounts");
+            $stmt = $pdo->query("SELECT * FROM discount");
             while ($discount = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
                 <tr>
                     <td><?php echo htmlspecialchars($discount['code']); ?></td>
