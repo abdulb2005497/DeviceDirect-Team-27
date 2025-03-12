@@ -21,6 +21,7 @@ $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <title>Shopping Cart</title>
     <link rel="stylesheet" href="style_orders.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="../contactuspage/style.css">
     <!-- bootstrap links -->
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
    <!-- fonts links -->

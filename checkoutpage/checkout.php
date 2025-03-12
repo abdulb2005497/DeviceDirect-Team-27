@@ -12,6 +12,16 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 include_once '../navbar.php';
+include_once 'cart_functions.php';
+
+$user_id = $_SESSION['user_id'];
+$cartItems = getCartItems($pdo, $user_id);
+
+// Redirect if cart is empty
+if (empty($cartItems)) {
+    header("Location: cart.php?error=Your cart is empty. Add items before checking out.");
+    exit();
+}
 
 // Display a welcome message for the logged-in user
 $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
@@ -97,6 +107,6 @@ $total_price = isset($_SESSION['total_price']) ? $_SESSION['total_price'] : 0;
    <!-- footer -->
    <?php include '../footer.php'; ?>
    <!-- footer -->
-    
+
     </body>
 </html>

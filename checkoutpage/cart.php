@@ -74,7 +74,7 @@ include_once '../navbar.php';
             <hr>
             <p>Total: £<span id="total_price"><?php echo number_format($totalAmount, 2); ?></span></p>
 
-            <button class="checkout-btn" onclick="window.location.href='checkout.php'">Checkout</button>
+            <button class="checkout-btn" id="checkout-btn" onclick="window.location.href='checkout.php'" <?php echo empty($cartItems) ? 'disabled' : ''; ?>>Checkout</button>
         </div>
     </div>
 
@@ -96,6 +96,19 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    let checkoutBtn = document.getElementById("checkout-btn");
+
+    // Check if cart items exist
+    let cartItems = document.querySelectorAll(".cart-item").length;
+
+    if (cartItems === 0) {
+        checkoutBtn.disabled = true;
+        checkoutBtn.style.opacity = "0.5"; // Optional: Make the button look inactive
+    }
+});
+</script>
 
 
 <script>
