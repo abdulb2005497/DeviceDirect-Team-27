@@ -47,6 +47,38 @@ $order_items = $itemStmt->fetchAll(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="../contactuspage/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet" />
+
+    <style>
+        /* Centered Box for Order Details */
+        .order-box {
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 40px auto; /* Centering */
+            text-align: center;
+        }
+
+        /* Order Item Styling */
+        .order-item-card {
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Order Item Image */
+        .order-item-image {
+            max-width: 100px;  
+            height: auto;
+            border-radius: 5px;
+            display: block;
+            margin: 10px auto;
+        }
+    </style>
 </head>
 <body>
 
@@ -54,15 +86,21 @@ $order_items = $itemStmt->fetchAll(PDO::FETCH_ASSOC);
 <?php include '../navbar.php'; ?>
 
 <!-- Order Details Section -->
-<div class="container order-container mt-5">
-    <h2 class="text-center">Order #<?php echo $order['order_id']; ?></h2>
-    <div class="order-summary">
-        <p><strong>Total Price:</strong> $<?php echo number_format($order['total_price'], 2); ?></p>
-        <p><strong>Status:</strong> <?php echo ucfirst($order['status']); ?></p>
-        <p><strong>Date Ordered:</strong> <?php echo $order['date_ordered']; ?></p>
-    </div>
+<div class="order-box">
+    <h2>Order #<?php echo $order['order_id']; ?></h2>
+    <p><strong>Total Price:</strong> $<?php echo number_format($order['total_price'], 2); ?></p>
+    <p><strong>Status:</strong> <?php echo ucfirst($order['status']); ?></p>
+    <p><strong>Date Ordered:</strong> <?php echo $order['date_ordered']; ?></p>
 
-    <h3 class="mt-4">Items in Order</h3>
+    <!-- Buttons: View Details + Refund -->
+    <div class="d-flex justify-content-center gap-2 mt-3">
+        <a href="order_details.php?order_id=<?php echo $order['order_id']; ?>" class="btn btn-primary">View Details</a>
+        <a href="refund_request.php?order_id=<?php echo $order['order_id']; ?>" class="btn btn-danger">Refund</a>
+    </div>
+</div>
+
+<h3 class="text-center mt-4">Items in Order</h3>
+<div class="container">
     <div class="row">
         <?php if (count($order_items) > 0): ?>
             <?php foreach ($order_items as $item): ?>
