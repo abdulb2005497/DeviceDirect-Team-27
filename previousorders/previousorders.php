@@ -131,9 +131,9 @@ $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
       </div>
     </nav>
-    <!-- navbar -->
+   
 
-<!-- Orders Section -->
+
 <div class="container mt-5">
     <h2 class="text-center">My Orders</h2>
     <div class="row">
