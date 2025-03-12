@@ -1,6 +1,6 @@
 <?php
 session_start();
-require '../config/db.php'; // Include the database connection
+require '../config/db.php'; 
 
 if (!isset($_SESSION['user_id'])) {
     header("Location: ../Login_page/login.php");
