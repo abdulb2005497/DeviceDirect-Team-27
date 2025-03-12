@@ -54,7 +54,7 @@ $order_items = $itemStmt->fetchAll(PDO::FETCH_ASSOC);
 <?php include '../navbar.php'; ?>
 
 <!-- Order Details Section -->
-<div class="container mt-5">
+<div class="container order-container mt-5">
     <h2 class="text-center">Order #<?php echo $order['order_id']; ?></h2>
     <div class="order-summary">
         <p><strong>Total Price:</strong> $<?php echo number_format($order['total_price'], 2); ?></p>
@@ -68,7 +68,10 @@ $order_items = $itemStmt->fetchAll(PDO::FETCH_ASSOC);
             <?php foreach ($order_items as $item): ?>
                 <div class="col-md-6">
                     <div class="order-item-card">
-                        <img src="../product_images/<?php echo $item['image']; ?>" alt="<?php echo $item['product_title']; ?>" class="img-fluid">
+                        <img src="../product_images/<?php echo $item['image']; ?>" 
+                             alt="<?php echo $item['product_title']; ?>" 
+                             class="order-item-image img-fluid"
+                             onerror="this.onerror=null; this.src='../assets/images/placeholder.png';">
                         <div class="order-item-details">
                             <h5><?php echo $item['product_title']; ?></h5>
                             <p><strong>Quantity:</strong> <?php echo $item['quantity']; ?></p>
