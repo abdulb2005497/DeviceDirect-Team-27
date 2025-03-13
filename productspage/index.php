@@ -67,13 +67,11 @@ if ($_SERVER['REQUEST_METHOD']=== 'POST' && isset($_POST['prod_variant_id'])) {
     VALUES (:prod_variant_id, :user_id, :review_text, :rating, NOW())";
     $insert_stmt = $pdo->prepare($insert_query);
     $insert_stmt->execute([
-        'prod_variant_id' => $prod_variant_id,
-        'user_id' => $uer_id,
-        'review_text' => $review_text,
-        'rating' => $rating
+        ':prod_variant_id' => $prod_variant_id,
+        ':user_id' => $user_id,
+        ':review_text' => $review_text,
+        ':rating' => $rating
     ]);
-
-
 }
 ?>
 <!DOCTYPE html>
@@ -140,6 +138,19 @@ if ($_SERVER['REQUEST_METHOD']=== 'POST' && isset($_POST['prod_variant_id'])) {
                                 <p class="card-text">Size: <?= htmlspecialchars($product['size_name']) ?></p>
                                 <p class="card-text">Price: £<?= number_format($product['price'], 2) ?></p>
                                 <a href="product_details.php?variant_id=<?= $product['prod_variant_id'] ?>" class="btn btn-primary">View Details</a>
+
+                                <!--Reviews-->
+                                <hr>
+                                <h5>Reviews</h5>
+                                <?php
+                                $review_query = "SELECT r.*, u.user_name
+                                FROM product_reviews r
+                                JOIN users u ON r.user_id = u.user_id
+                                WHERE r.prod_variant_id = :prod_variant_id";
+                                $review_stmt = $pdo->prepare($review_query);
+                                $review_stmt->execute([':product_variant_id' => $product['prod_variant_id']]);
+                                $reviews = $review_stmt->fetchAll(PDO::FETCH_ASSOC);
+                                ?>
                             </div>
                         </div>
                     </div>
