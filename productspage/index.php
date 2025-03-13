@@ -9,7 +9,6 @@ include('../config/db.php');
 include_once('../navbar.php');
 
 $category_id = isset($_GET['category_id']) ? $_GET['category_id'] : null;
-
 $size = isset($_GET['size']) ? $_GET['size'] : null;
 $min_price = isset($_GET['min_price']) ? floatval($_GET['min_price']) : null;
 $max_price = isset($_GET['max_price']) ? floatval($_GET['max_price']) : null;
@@ -55,6 +54,25 @@ if (!empty($max_price)) {
 $stmt = $pdo->prepare($query);
 $stmt->execute($params);
 $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+//Handling reviews
+if ($_SERVER['REQUEST_METHOD']=== 'POST' && isset($_POST['prod_variant_id'])) {
+    $user_id = $_SESSION['user_id']; 
+    $prod_variant_id = $_POST['prod_variant_id'];
+    $rating = $_POST['rating'];
+    $review_text = $_POST['review_text'];
+
+    //Reviews being stored in database
+    $insert_query = "INSERT INTO product_reviews (prod_variant_id, user_id, review_text, rating, created_at)
+    VALUES (:prod_variant_id, :user_id, :review_text, :rating, NOW())";
+    $insert_stmt = $pdo->prepare($insert_query);
+    $insert_stmt->execute([
+        ':prod_variant_id' => $prod_variant_id,
+        ':user_id' => $user_id,
+        ':review_text' => $review_text,
+        ':rating' => $rating
+    ]);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -120,6 +138,46 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 <p class="card-text">Size: <?= htmlspecialchars($product['size_name']) ?></p>
                                 <p class="card-text">Price: £<?= number_format($product['price'], 2) ?></p>
                                 <a href="product_details.php?variant_id=<?= $product['prod_variant_id'] ?>" class="btn btn-primary">View Details</a>
+
+                                <!--Reviews-->
+                                <hr>
+                                <h5>Reviews</h5>
+                                <?php
+                                $review_query = "SELECT r.*, u.user_id
+                                FROM product_reviews r
+                                JOIN users u ON r.user_id = u.user_id
+                                WHERE r.prod_variant_id = :prod_variant_id";
+                                $review_stmt = $pdo->prepare($review_query);
+                                $review_stmt->execute([':prod_variant_id' => $product['prod_variant_id']]);
+                                $reviews = $review_stmt->fetchAll(PDO::FETCH_ASSOC);
+                                ?>
+                                <div class="reviews-list">
+                                    <?php if ($reviews): ?>
+                                        <?php foreach ($reviews as $review): ?>
+                                            <div class="review-box mb-3">
+                                                <p><strong><?=htmlspecialchars($review['user_id']) ?></strong> - Rating: <?= htmlspecialchars($review['rating']) ?>/5</p>
+                                                <p><?= htmlspecialchars($review['review_text']) ?></p>
+                                                <p class="text-muted"><?= htmlspecialchars($review['created_at']) ?></p>
+                                        </div>
+                                        <?php endforeach; ?>
+                                        <?php else: ?>
+                                            <p>No reviews yet. Be the first to review our product!</p>
+                                            <?php endif; ?>
+                                        </div>
+                                
+                                <!--Form for Review submission-->
+                                <form method="POST" action="">
+                                    <input type="hidden" name="prod_variant_id" value="<?= htmlspecialchars($product['prod_variant_id']) ?>">
+                                    <div class="mb-3">
+                                        <label for="rating">Rating (1-5):</label>
+                                        <input type="number" name="rating" id="rating" min="1" max="5" required class="form-control">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="review_text">Your Review:</label>
+                                            <textarea name="review_text" id="review_text" rows="5" required class="form-control"></textarea>
+                                        </div>
+                                        <button type="submit" class="btn btn-success">Submit Review</button>
+                                        </form>
                             </div>
                         </div>
                     </div>
@@ -130,6 +188,9 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
     </div>
 </div>
+
+
+
 
 
 <?php include_once '../footer.php'; ?>
