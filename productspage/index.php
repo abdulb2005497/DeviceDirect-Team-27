@@ -58,7 +58,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 //Handling reviews
 if ($_SERVER['REQUEST_METHOD']=== 'POST' && isset($_POST['prod_variant_id'])) {
     $user_id = $_SESSION['user_id']; 
-    $prod_variant_id = $_POST['prod_varaint_id'];
+    $prod_variant_id = $_POST['prod_variant_id'];
     $rating = $_POST['rating'];
     $review_text = $_POST['review_text'];
 
