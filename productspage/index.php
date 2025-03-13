@@ -167,7 +167,7 @@ if ($_SERVER['REQUEST_METHOD']=== 'POST' && isset($_POST['prod_variant_id'])) {
                                 
                                 <!--Form for Review submission-->
                                 <form method="POST" action="">
-                                    <input type="hidden" name="prod_variant_id" value="<? $product['prod_variant_id'] ?>">
+                                    <input type="hidden" name="prod_variant_id" value="<?= htmlspecialchars($product['prod_variant_id']) ?>">
                                     <div class="mb-3">
                                         <label for="rating">Rating (1-5):</label>
                                         <input type="number" name="rating" id="rating" min="1" max="5" required class="form-control">
