@@ -164,6 +164,20 @@ if ($_SERVER['REQUEST_METHOD']=== 'POST' && isset($_POST['prod_variant_id'])) {
                                             <p>No reviews yet. Be the first to review our product!</p>
                                             <?php endif; ?>
                                         </div>
+                                
+                                <!--Form for Review submission-->
+                                <form method="POST" action="">
+                                    <input type="hidden" name="prod_variant_id" value="<? $product['prod_variant_id'] ?>">
+                                    <div class="mb-3">
+                                        <label for="rating">Rating (1-5):</label>
+                                        <input type="number" name="rating" id="rating" min="1" max="5" required class="form-control">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="review_text">Your Review:</label>
+                                            <textarea name="review_text" id="review_text" rows="5" required class="form-control"></textarea>
+                                        </div>
+                                        <button type="submit" class="btn btn-success">Submit Review</button>
+                                        </form>
                             </div>
                         </div>
                     </div>
