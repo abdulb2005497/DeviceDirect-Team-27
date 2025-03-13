@@ -143,7 +143,7 @@ if ($_SERVER['REQUEST_METHOD']=== 'POST' && isset($_POST['prod_variant_id'])) {
                                 <hr>
                                 <h5>Reviews</h5>
                                 <?php
-                                $review_query = "SELECT r.*, u.user_name
+                                $review_query = "SELECT r.*, u.user_id
                                 FROM product_reviews r
                                 JOIN users u ON r.user_id = u.user_id
                                 WHERE r.prod_variant_id = :prod_variant_id";
@@ -155,7 +155,7 @@ if ($_SERVER['REQUEST_METHOD']=== 'POST' && isset($_POST['prod_variant_id'])) {
                                     <?php if ($reviews): ?>
                                         <?php foreach ($reviews as $review): ?>
                                             <div class="review-box mb-3">
-                                                <p><strong><?=htmlspecialchars($review['user_name']) ?></strong> - Rating: <?= htmlspecialchars($review['rating']) ?>/5</p>
+                                                <p><strong><?=htmlspecialchars($review['user_id']) ?></strong> - Rating: <?= htmlspecialchars($review['rating']) ?>/5</p>
                                                 <p><?= htmlspecialchars($review['review_text']) ?></p>
                                                 <p class="text-muted"><?= htmlspecialchars($review['created_at']) ?></p>
                                         </div>
