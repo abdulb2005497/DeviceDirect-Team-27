@@ -62,6 +62,17 @@ if ($_SERVER['REQUEST_METHOD']=== 'POST' && isset($_POST['prod_variant_id'])) {
     $rating = $_POST['rating'];
     $review_text = $_POST['review_text'];
 
+    //Reviews being stored in database
+    $insert_query = "INSERT INTO product_reviews (prod_variant_id, user_id, review_text, rating, created_at)
+    VALUES (:prod_variant_id, :user_id, :review_text, :rating, NOW())";
+    $insert_stmt = $pdo->prepare($insert_query);
+    $insert_stmt->execute([
+        'prod_variant_id' => $prod_variant_id,
+        'user_id' => $uer_id,
+        'review_text' => $review_text,
+        'rating' => $rating
+    ]);
+
 
 }
 ?>
