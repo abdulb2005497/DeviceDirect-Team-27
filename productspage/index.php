@@ -148,7 +148,7 @@ if ($_SERVER['REQUEST_METHOD']=== 'POST' && isset($_POST['prod_variant_id'])) {
                                 JOIN users u ON r.user_id = u.user_id
                                 WHERE r.prod_variant_id = :prod_variant_id";
                                 $review_stmt = $pdo->prepare($review_query);
-                                $review_stmt->execute([':product_variant_id' => $product['prod_variant_id']]);
+                                $review_stmt->execute([':prod_variant_id' => $product['prod_variant_id']]);
                                 $reviews = $review_stmt->fetchAll(PDO::FETCH_ASSOC);
                                 ?>
                                 <div class="reviews-list">
