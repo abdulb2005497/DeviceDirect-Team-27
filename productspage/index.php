@@ -9,7 +9,6 @@ include('../config/db.php');
 include_once('../navbar.php');
 
 $category_id = isset($_GET['category_id']) ? $_GET['category_id'] : null;
-
 $size = isset($_GET['size']) ? $_GET['size'] : null;
 $min_price = isset($_GET['min_price']) ? floatval($_GET['min_price']) : null;
 $max_price = isset($_GET['max_price']) ? floatval($_GET['max_price']) : null;
@@ -55,6 +54,16 @@ if (!empty($max_price)) {
 $stmt = $pdo->prepare($query);
 $stmt->execute($params);
 $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+//Handling reviews
+if ($_SERVER['REQUEST_METHOD']=== 'POST' && isset($_POST['prod_variant_id'])) {
+    $user_id = $_SESSION['user_id']; 
+    $prod_variant_id = $_POST['prod_varaint_id'];
+    $rating = $_POST['rating'];
+    $review_text = $_POST['review_text'];
+
+
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
