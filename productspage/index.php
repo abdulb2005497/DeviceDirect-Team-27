@@ -151,6 +151,19 @@ if ($_SERVER['REQUEST_METHOD']=== 'POST' && isset($_POST['prod_variant_id'])) {
                                 $review_stmt->execute([':product_variant_id' => $product['prod_variant_id']]);
                                 $reviews = $review_stmt->fetchAll(PDO::FETCH_ASSOC);
                                 ?>
+                                <div class="reviews-list">
+                                    <?php if ($reviews): ?>
+                                        <?php foreach ($reviews as $review): ?>
+                                            <div class="review-box mb-3">
+                                                <p><strong><?=htmlspecialchars($review['user_name']) ?></strong> - Rating: <?= htmlspecialchars($review['rating']) ?>/5</p>
+                                                <p><?= htmlspecialchars($review['review_text']) ?></p>
+                                                <p class="text-muted"><?= htmlspecialchars($review['created_at']) ?></p>
+                                        </div>
+                                        <?php endforeach; ?>
+                                        <?php else: ?>
+                                            <p>No reviews yet. Be the first to review our product!</p>
+                                            <?php endif; ?>
+                                        </div>
                             </div>
                         </div>
                     </div>
