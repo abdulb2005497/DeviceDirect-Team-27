@@ -20,3 +20,16 @@ $stmt->execute();
 $result = $stmt->get_result();
 $user = $result->fetch_assoc();
 ?>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Profile</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Update Your Profile</h1>
+
+</html>
