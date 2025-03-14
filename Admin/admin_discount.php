@@ -48,7 +48,7 @@ include_once('../navbar.php');
                     <td><?php echo $discount['is_active'] ? 'Active' : 'Inactive'; ?></td>
                     <td>
                         <form action="change_discount.php" method="post" style="display:inline;">
-                            <input type="hidden" name="discount_id" value="<?php echo $discount['id']; ?>">
+                            <input type="hidden" name="discount_id" value="<?php echo $discount['code_id']; ?>">
                             <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                         </form>
                     </td>
