@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 14, 2025 at 04:12 PM
+-- Generation Time: Mar 14, 2025 at 04:23 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -362,11 +362,13 @@ INSERT INTO `queries` (`query_id`, `user_id`, `fullname`, `email`, `query_text`,
 
 CREATE TABLE `users` (
   `user_id` int(11) NOT NULL,
-  `First_name` varchar(50) NOT NULL,
-  `Last_name` varchar(50) NOT NULL,
-  `Email` varchar(100) NOT NULL,
-  `Phone` varchar(20) NOT NULL,
-  `Address` varchar(100) NOT NULL,
+  `first_name` varchar(50) NOT NULL,
+  `last_name` varchar(50) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `phone` varchar(20) NOT NULL,
+  `address` varchar(100) NOT NULL,
+  `city` varchar(128) NOT NULL,
+  `post_code` varchar(128) NOT NULL,
   `password` varchar(100) NOT NULL,
   `role` varchar(20) NOT NULL DEFAULT 'client',
   `created_at` datetime NOT NULL DEFAULT current_timestamp()
@@ -376,10 +378,10 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `First_name`, `Last_name`, `Email`, `Phone`, `Address`, `password`, `role`, `created_at`) VALUES
-(6, 'devicedirect', 'no', 'dd@gmail.com', '0123123123213', 'aston', '$2y$10$xypKa5bQPE3XFfMMm5pBjeDXMjYtwXHu01tkqRQECZg./OGMqgGtC', 'admin', '2025-02-09 13:52:25'),
-(7, 'cust', 'customer', 'customer@gmail.com', '07745993464', '57A RHYDYPENAU ROAD', '$2y$10$G.YvchFny3FK0Ms1GBcR9OXUlsvDG8pkLlNzMLlH.bM1k6PQ1bdoK', 'user', '2025-03-11 16:34:22'),
-(8, 'customER', 'customer', 'c@gmail.com', '07745993464', '57A RHYDYPENAU ROAD', '$2y$10$.WNvMiTx.4C.Q6NngJTcn.V2WD77EJm1i.PtP1UorbJ7SvHFpb12C', 'user', '2025-03-11 16:49:41');
+INSERT INTO `users` (`user_id`, `first_name`, `last_name`, `email`, `phone`, `address`, `city`, `post_code`, `password`, `role`, `created_at`) VALUES
+(6, 'devicedirect', 'no', 'dd@gmail.com', '0123123123213', 'aston', '0', '0', '$2y$10$xypKa5bQPE3XFfMMm5pBjeDXMjYtwXHu01tkqRQECZg./OGMqgGtC', 'admin', '2025-02-09 13:52:25'),
+(7, 'cust', 'customer', 'customer@gmail.com', '07745993464', '57A RHYDYPENAU ROAD', '0', '0', '$2y$10$G.YvchFny3FK0Ms1GBcR9OXUlsvDG8pkLlNzMLlH.bM1k6PQ1bdoK', 'user', '2025-03-11 16:34:22'),
+(8, 'customER', 'customer', 'c@gmail.com', '07745993464', '57A RHYDYPENAU ROAD', '0', '0', '$2y$10$.WNvMiTx.4C.Q6NngJTcn.V2WD77EJm1i.PtP1UorbJ7SvHFpb12C', 'user', '2025-03-11 16:49:41');
 
 --
 -- Indexes for dumped tables
