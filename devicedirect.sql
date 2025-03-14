@@ -1,90 +1,138 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Mar 14, 2025 at 03:46 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
 
 
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
+--
+-- Database: `devicedirect`
+--
 
-CREATE TABLE cart (
-  cart_id int(11) NOT NULL,
-  user_id int(11) NOT NULL,
-  prod_variant_id int(11) NOT NULL,
-  quantity int(11) DEFAULT 1
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cart`
+--
+
+CREATE TABLE `cart` (
+  `cart_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `prod_variant_id` int(11) NOT NULL,
+  `quantity` int(11) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-CREATE TABLE refund_requests (
-    refund_id INT AUTO_INCREMENT PRIMARY KEY,
-    order_id INT NOT NULL,
-    user_id INT NOT NULL,
-    reason VARCHAR(255) NOT NULL,
-    status ENUM('pending', 'approved', 'rejected') DEFAULT 'pending',
-    request_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (order_id) REFERENCES orders(order_id) ON DELETE CASCADE,
-    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
-);
+--
+-- Dumping data for table `cart`
+--
 
-CREATE TABLE discount_codes (
-  code_id int(11) NOT NULL,
-  code_text varchar(20) DEFAULT NULL,
-  discount decimal(5,2) DEFAULT NULL,
-  discount_type enum('percentage','fixed') NOT NULL DEFAULT 'percentage',
-  expiry_date date DEFAULT NULL,
-  is_active tinyint(1) DEFAULT 1,
-  created_at datetime DEFAULT current_timestamp()
+INSERT INTO `cart` (`cart_id`, `user_id`, `prod_variant_id`, `quantity`) VALUES
+(38, 8, 13, 4);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `discounts`
+--
+
+CREATE TABLE `discounts` (
+  `code_id` int(11) NOT NULL,
+  `code` varchar(50) NOT NULL,
+  `discount_value` decimal(10,2) NOT NULL,
+  `discount_type` enum('percentage','fixed') NOT NULL,
+  `expires_at` date DEFAULT NULL,
+  `is_active` tinyint(1) DEFAULT 1,
+  `created_at` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
 
+--
+-- Table structure for table `orders`
+--
 
-CREATE TABLE orders (
-  order_id int(11) NOT NULL,
-  user_id int(11) DEFAULT NULL,
-  first_name varchar(128) NOT NULL,
-  last_name varchar(128) NOT NULL,
-  total_price decimal(10,2) DEFAULT NULL,
-  date_ordered datetime DEFAULT NULL,
-  status enum('pending','processed','shipped','cancelled') DEFAULT 'pending',
-  address text DEFAULT NULL,
-  city varchar(128) NOT NULL,
-  postal_code varchar(128) NOT NULL
+CREATE TABLE `orders` (
+  `order_id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `first_name` varchar(128) NOT NULL,
+  `last_name` varchar(128) NOT NULL,
+  `total_price` decimal(10,2) DEFAULT NULL,
+  `date_ordered` datetime DEFAULT NULL,
+  `status` enum('pending','processing','shipped','delivered','cancelled') DEFAULT 'pending',
+  `address` text DEFAULT NULL,
+  `city` varchar(128) NOT NULL,
+  `postal_code` varchar(128) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `orders`
+--
 
-
-INSERT INTO orders (order_id, user_id, first_name, last_name, total_price, date_ordered, status, address, city, postal_code) VALUES
+INSERT INTO `orders` (`order_id`, `user_id`, `first_name`, `last_name`, `total_price`, `date_ordered`, `status`, `address`, `city`, `postal_code`) VALUES
 (9, 6, 'aaa', 'a', 41.98, '2025-02-15 18:49:00', 'pending', 'a', 'a', 'a'),
 (10, 6, 'a', 'a', 989.96, '2025-02-15 19:11:41', 'pending', 'a', 'a', 'a'),
-(11, 6, 'a', 'a', 1049.95, '2025-02-16 16:48:23', 'pending', 'a', 'a', 'a');
+(11, 6, 'a', 'a', 1049.95, '2025-02-16 16:48:23', 'shipped', 'a', 'a', 'a'),
+(12, 8, 'Munib', 'shafi', 149.99, '2025-03-11 17:21:20', '', '57A RHYDYPENAU ROAD', 'Cardiff', 'CF23 6PY'),
+(13, 8, 'Munib', 'shafi', 459.98, '2025-03-11 17:33:56', 'shipped', '57A RHYDYPENAU ROAD', 'Cardiff', 'CF23 6PY');
 
+-- --------------------------------------------------------
 
+--
+-- Table structure for table `order_items`
+--
 
-CREATE TABLE order_items (
-  order_id int(11) NOT NULL,
-  prod_id int(11) NOT NULL,
-  colour_id int(11) DEFAULT NULL,
-  quantity int(11) DEFAULT NULL,
-  price_per_unit decimal(7,2) DEFAULT NULL,
-  total_price decimal(10,2) DEFAULT NULL,
-  size_id int(11) DEFAULT NULL
+CREATE TABLE `order_items` (
+  `order_id` int(11) NOT NULL,
+  `prod_id` int(11) NOT NULL,
+  `colour_id` int(11) DEFAULT NULL,
+  `quantity` int(11) DEFAULT NULL,
+  `price_per_unit` decimal(7,2) DEFAULT NULL,
+  `total_price` decimal(10,2) DEFAULT NULL,
+  `size_id` int(11) DEFAULT NULL,
+  `return_status` enum('No Request','Requested','Approved','Rejected','Returned') DEFAULT 'No Request'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `order_items`
+--
 
+INSERT INTO `order_items` (`order_id`, `prod_id`, `colour_id`, `quantity`, `price_per_unit`, `total_price`, `size_id`, `return_status`) VALUES
+(9, 8, 1, 2, 20.99, 41.98, 8, 'No Request'),
+(10, 1, 3, 1, 209.99, 209.99, 5, 'No Request'),
+(10, 3, 3, 3, 259.99, 779.97, 5, 'No Request'),
+(11, 1, 3, 5, 209.99, 1049.95, 5, 'No Request'),
+(12, 2, 1, 1, 149.99, 149.99, 3, 'No Request'),
+(13, 2, 1, 1, 149.99, 149.99, 3, 'No Request'),
+(13, 3, 3, 1, 309.99, 309.99, 6, 'No Request');
 
-INSERT INTO order_items (order_id, prod_id, colour_id, quantity, price_per_unit, total_price, size_id) VALUES
-(9, 8, 1, 2, 20.99, 41.98, 8),
-(10, 1, 3, 1, 209.99, 209.99, 5),
-(10, 3, 3, 3, 259.99, 779.97, 5),
-(11, 1, 3, 5, 209.99, 1049.95, 5);
+-- --------------------------------------------------------
 
+--
+-- Table structure for table `products`
+--
 
-
-CREATE TABLE products (
-  product_id int(11) NOT NULL,
-  product_title varchar(128) NOT NULL
+CREATE TABLE `products` (
+  `product_id` int(11) NOT NULL,
+  `product_title` varchar(128) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `products`
+--
 
-
-INSERT INTO products (product_id, product_title) VALUES
+INSERT INTO `products` (`product_id`, `product_title`) VALUES
 (1, 'HD TV\n'),
 (2, '2K Monitor'),
 (3, '4K TV'),
@@ -99,49 +147,68 @@ INSERT INTO products (product_id, product_title) VALUES
 (12, 'Xbox One'),
 (13, 'Nintendo Wii'),
 (14, 'Nintendo Wii U'),
-(15, 'Nintendo Switch');
+(15, 'Nintendo Switch'),
+(16, '4K Monitor');
 
+-- --------------------------------------------------------
 
+--
+-- Table structure for table `product_categories`
+--
 
-CREATE TABLE product_categories (
-  category_id int(11) NOT NULL,
-  category_name varchar(128) DEFAULT NULL
+CREATE TABLE `product_categories` (
+  `category_id` int(11) NOT NULL,
+  `category_name` varchar(128) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `product_categories`
+--
 
-
-INSERT INTO product_categories (category_id, category_name) VALUES
+INSERT INTO `product_categories` (`category_id`, `category_name`) VALUES
 (1, 'Monitors'),
 (2, 'TVs'),
 (3, 'Laptops'),
 (4, 'Headphones'),
 (5, 'Gaming Consoles');
 
+-- --------------------------------------------------------
 
+--
+-- Table structure for table `product_colours`
+--
 
-CREATE TABLE product_colours (
-  colour_id int(11) NOT NULL,
-  colour_name varchar(50) DEFAULT NULL
+CREATE TABLE `product_colours` (
+  `colour_id` int(11) NOT NULL,
+  `colour_name` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `product_colours`
+--
 
-
-INSERT INTO product_colours (colour_id, colour_name) VALUES
+INSERT INTO `product_colours` (`colour_id`, `colour_name`) VALUES
 (1, 'Black'),
 (2, 'Red'),
 (3, 'White'),
 (4, 'Grey');
 
+-- --------------------------------------------------------
 
+--
+-- Table structure for table `product_sizes`
+--
 
-CREATE TABLE product_sizes (
-  size_id int(11) NOT NULL,
-  size_name varchar(128) NOT NULL
+CREATE TABLE `product_sizes` (
+  `size_id` int(11) NOT NULL,
+  `size_name` varchar(128) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `product_sizes`
+--
 
-
-INSERT INTO product_sizes (size_id, size_name) VALUES
+INSERT INTO `product_sizes` (`size_id`, `size_name`) VALUES
 (1, '12 inch\r\n'),
 (2, '16 inch'),
 (3, '25 inch'),
@@ -151,22 +218,29 @@ INSERT INTO product_sizes (size_id, size_name) VALUES
 (7, '80 inch'),
 (8, 'N/A\r\n');
 
+-- --------------------------------------------------------
 
+--
+-- Table structure for table `product_variants`
+--
 
-CREATE TABLE product_variants (
-  prod_variant_id int(11) NOT NULL,
-  product_id int(11) DEFAULT NULL,
-  category_id int(11) DEFAULT NULL,
-  colour_id int(11) DEFAULT NULL,
-  size_id int(11) DEFAULT NULL,
-  prod_desc text DEFAULT NULL,
-  quantity int(11) DEFAULT NULL,
-  image text DEFAULT NULL,
-  price decimal(7,2) DEFAULT NULL
+CREATE TABLE `product_variants` (
+  `prod_variant_id` int(11) NOT NULL,
+  `product_id` int(11) DEFAULT NULL,
+  `category_id` int(11) DEFAULT NULL,
+  `colour_id` int(11) DEFAULT NULL,
+  `size_id` int(11) DEFAULT NULL,
+  `prod_desc` text DEFAULT NULL,
+  `quantity` int(11) DEFAULT NULL,
+  `image` text DEFAULT NULL,
+  `price` decimal(7,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `product_variants`
+--
 
-INSERT INTO product_variants (prod_variant_id, product_id, category_id, colour_id, size_id, prod_desc, quantity, image, price) VALUES
+INSERT INTO `product_variants` (`prod_variant_id`, `product_id`, `category_id`, `colour_id`, `size_id`, `prod_desc`, `quantity`, `image`, `price`) VALUES
 (1, 1, 2, 1, 5, 'Experience stunning visuals and immersive entertainment with the HD 40 Inch Black TV, the perfect addition to any home. Boasting crystal-clear picture quality, vibrant colors, and sleek modern design, this television is designed to enhance your viewing experience, whether you\'re watching your favorite movies, shows, or gaming. With advanced 4D surround sound technology and multiple connectivity options, including HDMI and USB, it\'s ready to integrate seamlessly into your setup. Limited Time Offer: Get this incredible HD TV at half the original price! Don\'t miss this opportunity to upgrade your entertainment system and bring cinematic visuals right to your living room. Click \"Add to Basket\" now to make it yours before the deal ends!\n', 99, 'HD-40-Black.webp', 199.99),
 (2, 3, 2, 1, 5, 'Discover the brilliance of ultra-high definition with the 4K 40 Inch Black TV. Compact yet powerful, this TV combines sleek design with cutting-edge 4K resolution, offering unparalleled clarity and lifelike colour details. Perfect for bedrooms, kitchens, or smaller living spaces, this TV ensures every pixel delivers perfection, whether you’re streaming, gaming, or watching live TV. Complete with advanced sound technology and seamless connectivity through HDMI and USB, it’s designed to fit effortlessly into your modern lifestyle. Don’t miss out—upgrade to 4K quality now and enjoy an exclusive offer for a limited time only!\r\n', 99, '4K-40-Black.webp', 249.99),
 (3, 1, 2, 3, 5, 'Experience stunning visuals and immersive entertainment with the HD 40 Inch White TV, the perfect addition to any home. Boasting crystal-clear picture quality, vibrant colours, and sleek modern design, this television is designed to enhance your viewing experience, whether you\'re watching your favourite movies, shows, or gaming. With advanced 4D surround sound technology and multiple connectivity options, including HDMI and USB, it\'s ready to integrate seamlessly into your setup. Limited Time Offer: Get this incredible HD TV at half the original price! Don\'t miss this opportunity to upgrade your entertainment system and bring cinematic visuals right to your living room. Click \"Add to Basket\" now to make it yours before the deal ends!\r\n', 99, 'HD-40-White.webp', 209.99),
@@ -181,12 +255,12 @@ INSERT INTO product_variants (prod_variant_id, product_id, category_id, colour_i
 (12, 3, 2, 3, 7, 'Immerse yourself in cinematic brilliance with the 4K 80 Inch White TV—the ultimate centrepiece for your entertainment space. Its enormous display paired with stunning 4K resolution ensures every scene comes to life with razor-sharp detail and vivid colour accuracy. Whether you’re hosting a movie marathon, gaming tournament, or sports viewing party, this TV delivers a truly immersive experience. With cutting-edge surround sound and versatile connectivity, it’s the perfect combination of technology and design. Limited Time Offer: Take this opportunity to own the pinnacle of home entertainment at a fraction of the cost. Click now to claim yours before it’s gone!\r\n', 99, '4k-80-White.webp', 359.99),
 (13, 2, 1, 1, 3, 'Elevate your visual experience with this sleek 2K 25-inch monitor. Boasting a stunning 2560 x 1440 resolution, it delivers sharp, vibrant images for immersive gaming, productivity, or multimedia enjoyment. The monitor\'s minimalist black design blends seamlessly into any setup, while its ergonomic stand ensures adjustable comfort for long hours of use. Equipped with fast refresh rates and multiple connectivity options, it\'s perfect for tech enthusiasts and professionals alike.\r\n', 99, '2k-25-Black.webp', 149.99),
 (14, 2, 1, 3, 3, 'Elevate your visual experience with this sleek 2K 25-inch monitor. Boasting a stunning 2560 x 1440 resolution, it delivers sharp, vibrant images for immersive gaming, productivity, or multimedia enjoyment. The monitor\'s minimalist black design blends seamlessly into any setup, while its ergonomic stand ensures adjustable comfort for long hours of use. Equipped with fast refresh rates and multiple connectivity options, it\'s perfect for tech enthusiasts and professionals alike.\r\n', 99, '2k-25-White.webp', 159.99),
-(15, 3, 1, 1, 3, 'Discover extraordinary detail with this 4K 25-inch monitor, boasting an ultra-high-definition resolution of 3840 x 2160. Perfect for professionals, gamers, and content creators, it delivers breath-taking clarity and vibrant colours for an unmatched viewing experience. The sleek black design complements any setup, while its compact size ensures it fits seamlessly into any workspace. With advanced connectivity options and smooth performance, this monitor is a powerful blend of style and functionality, ideal for those who demand exceptional quality.\r\n', 99, '4k-25-black.webp', 199.99),
-(16, 3, 1, 3, 3, 'Discover extraordinary detail with this 4K 25-inch monitor, boasting an ultra-high-definition resolution of 3840 x 2160. Perfect for professionals, gamers, and content creators, it delivers breath-taking clarity and vibrant colours for an unmatched viewing experience. The sleek black design complements any setup, while its compact size ensures it fits seamlessly into any workspace. With advanced connectivity options and smooth performance, this monitor is a powerful blend of style and functionality, ideal for those who demand exceptional quality.\r\n', 99, '4k-25-White.webp', 209.99),
+(15, 16, 1, 1, 3, 'Discover extraordinary detail with this 4K 25-inch monitor, boasting an ultra-high-definition resolution of 3840 x 2160. Perfect for professionals, gamers, and content creators, it delivers breath-taking clarity and vibrant colours for an unmatched viewing experience. The sleek black design complements any setup, while its compact size ensures it fits seamlessly into any workspace. With advanced connectivity options and smooth performance, this monitor is a powerful blend of style and functionality, ideal for those who demand exceptional quality.\r\n', 99, '4k-25-black.webp', 199.99),
+(16, 16, 1, 3, 3, 'Discover extraordinary detail with this 4K 25-inch monitor, boasting an ultra-high-definition resolution of 3840 x 2160. Perfect for professionals, gamers, and content creators, it delivers breath-taking clarity and vibrant colours for an unmatched viewing experience. The sleek black design complements any setup, while its compact size ensures it fits seamlessly into any workspace. With advanced connectivity options and smooth performance, this monitor is a powerful blend of style and functionality, ideal for those who demand exceptional quality.\r\n', 99, '4k-25-White.webp', 209.99),
 (17, 2, 1, 1, 4, 'Experience unparalleled clarity with this 2K 30-inch monitor, offering a vibrant 2560 x 1440 resolution for crystal-clear visuals. Designed with productivity and entertainment in mind, its expansive screen provides ample space for multitasking and immersive viewing. The elegant black finish and slim bezel design add a modern touch to any workspace or gaming setup. Featuring a fast refresh rate, wide viewing angles, and versatile connectivity options, this monitor is built to deliver premium performance for work or play.\r\n', 99, '2k-30-Black.webp', 199.99),
 (18, 2, 1, 3, 4, 'Experience unparalleled clarity with this 2K 30-inch monitor, offering a vibrant 2560 x 1440 resolution for crystal-clear visuals. Designed with productivity and entertainment in mind, its expansive screen provides ample space for multitasking and immersive viewing. The elegant black finish and slim bezel design add a modern touch to any workspace or gaming setup. Featuring a fast refresh rate, wide viewing angles, and versatile connectivity options, this monitor is built to deliver premium performance for work or play.\r\n', 99, '2k-30-White.webp', 209.99),
-(19, 3, 1, 1, 4, 'Immerse yourself in stunning visuals with this 4K 30-inch monitor, featuring an impressive resolution of 3840 x 2160 for razor-sharp detail and vivid colour accuracy. Perfect for multitasking, gaming, or professional work, its expansive display provides ample screen real estate and an immersive viewing experience. The sleek black design with slim bezels adds a modern touch to any setup, while ergonomic features ensure long-lasting comfort. Equipped with fast refresh rates and multiple connectivity options, this monitor is built for performance and style, making it a must-have for power users.\n', 99, '4k-30-Black.webp', 249.99),
-(20, 3, 1, 3, 4, 'Immerse yourself in stunning visuals with this 4K 30-inch monitor, featuring an impressive resolution of 3840 x 2160 for razor-sharp detail and vivid colour accuracy. Perfect for multitasking, gaming, or professional work, its expansive display provides ample screen real estate and an immersive viewing experience. The sleek black design with slim bezels adds a modern touch to any setup, while ergonomic features ensure long-lasting comfort. Equipped with fast refresh rates and multiple connectivity options, this monitor is built for performance and style, making it a must-have for power users.\r\n', 99, '4k-30-White.webp', 259.99),
+(19, 16, 1, 1, 4, 'Immerse yourself in stunning visuals with this 4K 30-inch monitor, featuring an impressive resolution of 3840 x 2160 for razor-sharp detail and vivid colour accuracy. Perfect for multitasking, gaming, or professional work, its expansive display provides ample screen real estate and an immersive viewing experience. The sleek black design with slim bezels adds a modern touch to any setup, while ergonomic features ensure long-lasting comfort. Equipped with fast refresh rates and multiple connectivity options, this monitor is built for performance and style, making it a must-have for power users.\n', 99, '4k-30-Black.webp', 249.99),
+(20, 16, 1, 3, 4, 'Immerse yourself in stunning visuals with this 4K 30-inch monitor, featuring an impressive resolution of 3840 x 2160 for razor-sharp detail and vivid colour accuracy. Perfect for multitasking, gaming, or professional work, its expansive display provides ample screen real estate and an immersive viewing experience. The sleek black design with slim bezels adds a modern touch to any setup, while ergonomic features ensure long-lasting comfort. Equipped with fast refresh rates and multiple connectivity options, this monitor is built for performance and style, making it a must-have for power users.\r\n', 99, '4k-30-White.webp', 259.99),
 (21, 4, 3, 1, 1, 'The 12-Inch Windows Laptop in bold black is a compact powerhouse for both work and entertainment. With the familiar Windows OS and efficient hardware, it’s perfect for multitasking, from editing documents to streaming your favorite shows. Its black finish adds a professional edge, while the lightweight design makes it easy to carry wherever you go. Featuring a sharp display and robust connectivity options, this laptop adapts seamlessly to your everyday needs.\r\n', 99, 'Windows-12-Black.webp', 399.99),
 (22, 4, 3, 3, 1, 'Sleek and versatile, the 12-Inch Windows Laptop in white is designed for efficiency and style. Powered by the latest Windows OS, it offers a smooth and intuitive user experience, whether you\'re working, studying, or browsing. Its lightweight build, crisp display, and all-day battery life ensure you stay productive on the go. The bright white design adds a modern touch to its compact, feature-packed form, making it an ideal choice for professionals and students alike.\r\n', 99, 'Windows-12-White.webp', 409.99),
 (23, 4, 3, 1, 2, 'Power and portability meet style in the 16-Inch Windows Laptop in black. With a spacious high-resolution display and the latest Windows OS, it’s designed for seamless multitasking and entertainment. Whether you’re working on a presentation, streaming content, or gaming, this laptop offers sharp visuals and smooth performance. Its sleek black design and lightweight build make it a versatile choice for professionals and students alike.\r\n', 99, 'Windows-16-Black.webp', 449.99),
@@ -231,258 +305,285 @@ INSERT INTO product_variants (prod_variant_id, product_id, category_id, colour_i
 -- --------------------------------------------------------
 
 --
--- Table structure for table prod_reviews
+-- Table structure for table `prod_reviews`
 --
 
-CREATE TABLE prod_reviews (
-  review_id int(11) NOT NULL,
-  prod_id int(11) DEFAULT NULL,
-  user_id int(11) DEFAULT NULL,
-  rating int(11) DEFAULT NULL CHECK (rating between 1 and 5),
-  comment text DEFAULT NULL,
-  created_at datetime DEFAULT current_timestamp()
+CREATE TABLE `prod_reviews` (
+  `review_id` int(11) NOT NULL,
+  `prod_variant_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `rating` int(11) DEFAULT NULL CHECK (`rating` between 1 and 5),
+  `comment` text DEFAULT NULL,
+  `created_at` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `prod_reviews`
+--
+
+INSERT INTO `prod_reviews` (`review_id`, `prod_variant_id`, `user_id`, `rating`, `comment`, `created_at`) VALUES
+(1, 13, 6, 2, 'shit', '2025-03-13 18:24:19'),
+(2, 13, 6, 2, 'shit', '2025-03-13 18:24:47'),
+(3, 13, 6, 4, NULL, '2025-03-13 18:24:56'),
+(4, 13, 6, 2, NULL, '2025-03-13 18:25:17'),
+(5, 13, 6, 2, 's', '2025-03-13 18:25:31');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table queries
+-- Table structure for table `queries`
 --
 
-CREATE TABLE queries (
-  query_id int(11) NOT NULL,
-  user_id int(11) DEFAULT NULL,
-  fullname int(11) NOT NULL,
-  email int(11) NOT NULL,
-  query_text text DEFAULT NULL,
-  resolved tinyint(1) DEFAULT 0
+CREATE TABLE `queries` (
+  `query_id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `fullname` varchar(128) NOT NULL,
+  `email` varchar(128) NOT NULL,
+  `query_text` text DEFAULT NULL,
+  `resolved` enum('No','Yes') NOT NULL DEFAULT 'No'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `queries`
+--
+
+INSERT INTO `queries` (`query_id`, `user_id`, `fullname`, `email`, `query_text`, `resolved`) VALUES
+(27, 8, 'Munib shafi', 'munib.s2005@gmail.com', 'asdasd', 'No'),
+(28, 8, 'Munib shafi', 'munib.s2005@gmail.com', 'asdasd', 'No'),
+(29, 8, 'asd', 'asd@gmail.com', 'asdasd', 'No'),
+(30, 8, 'asdasd', 'munib.s2005@gmail.com', 'asd', 'No'),
+(31, 8, 'Munib shafi', 'munib.s2005@gmail.com', 'asdasd', 'No'),
+(32, 8, 'asd', 'munib.s2005@gmail.com', 'adddd', 'No'),
+(33, 8, 'Munib shafi', 'munib.s2005@gmail.com', 'asdasd', 'No');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table users
+-- Table structure for table `users`
 --
 
-CREATE TABLE users (
-  user_id int(11) NOT NULL,
-  First_name varchar(50) NOT NULL,
-  Last_name varchar(50) NOT NULL,
-  Email varchar(100) NOT NULL,
-  Phone varchar(20) NOT NULL,
-  Address varchar(100) NOT NULL,
-  password varchar(100) NOT NULL,
-  role varchar(20) NOT NULL DEFAULT 'client',
-  created_at datetime NOT NULL DEFAULT current_timestamp()
+CREATE TABLE `users` (
+  `user_id` int(11) NOT NULL,
+  `First_name` varchar(50) NOT NULL,
+  `Last_name` varchar(50) NOT NULL,
+  `Email` varchar(100) NOT NULL,
+  `Phone` varchar(20) NOT NULL,
+  `Address` varchar(100) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `role` varchar(20) NOT NULL DEFAULT 'client',
+  `created_at` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table users
+-- Dumping data for table `users`
 --
 
-INSERT INTO users (user_id, First_name, Last_name, Email, Phone, Address, password, role, created_at) VALUES
-(6, 'devicedirect', 'no', 'dd@gmail.com', '0123123123213', 'aston', '$2y$10$COJ5oBv5uQBoAx7xJBeJ2Oedpijg9PuRojDrdaqMwLNtST6miYuiy', 'user', '2025-02-09 13:52:25');
+INSERT INTO `users` (`user_id`, `First_name`, `Last_name`, `Email`, `Phone`, `Address`, `password`, `role`, `created_at`) VALUES
+(6, 'devicedirect', 'no', 'dd@gmail.com', '0123123123213', 'aston', '$2y$10$COJ5oBv5uQBoAx7xJBeJ2Oedpijg9PuRojDrdaqMwLNtST6miYuiy', 'admin', '2025-02-09 13:52:25'),
+(7, 'cust', 'customer', 'customer@gmail.com', '07745993464', '57A RHYDYPENAU ROAD', '$2y$10$G.YvchFny3FK0Ms1GBcR9OXUlsvDG8pkLlNzMLlH.bM1k6PQ1bdoK', 'user', '2025-03-11 16:34:22'),
+(8, 'customER', 'customer', 'c@gmail.com', '07745993464', '57A RHYDYPENAU ROAD', '$2y$10$.WNvMiTx.4C.Q6NngJTcn.V2WD77EJm1i.PtP1UorbJ7SvHFpb12C', 'user', '2025-03-11 16:49:41');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table cart
+-- Indexes for table `cart`
 --
-ALTER TABLE cart
-  ADD PRIMARY KEY (cart_id),
-  ADD UNIQUE KEY user_id (user_id,prod_variant_id),
-  ADD KEY prod_variant_id (prod_variant_id);
+ALTER TABLE `cart`
+  ADD PRIMARY KEY (`cart_id`),
+  ADD UNIQUE KEY `user_id` (`user_id`,`prod_variant_id`),
+  ADD KEY `prod_variant_id` (`prod_variant_id`);
 
 --
--- Indexes for table discount_codes
+-- Indexes for table `discounts`
 --
-ALTER TABLE discount_codes
-  ADD PRIMARY KEY (code_id),
-  ADD UNIQUE KEY code_text (code_text);
+ALTER TABLE `discounts`
+  ADD PRIMARY KEY (`code_id`),
+  ADD UNIQUE KEY `code_text` (`code`);
 
 --
--- Indexes for table orders
+-- Indexes for table `orders`
 --
-ALTER TABLE orders
-  ADD PRIMARY KEY (order_id),
-  ADD KEY user_id (user_id);
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`order_id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
--- Indexes for table order_items
+-- Indexes for table `order_items`
 --
-ALTER TABLE order_items
-  ADD PRIMARY KEY (order_id,prod_id),
-  ADD KEY prod_id (prod_id),
-  ADD KEY colour_id (colour_id),
-  ADD KEY size_id (size_id);
+ALTER TABLE `order_items`
+  ADD PRIMARY KEY (`order_id`,`prod_id`),
+  ADD KEY `prod_id` (`prod_id`),
+  ADD KEY `colour_id` (`colour_id`),
+  ADD KEY `size_id` (`size_id`);
 
 --
--- Indexes for table products
+-- Indexes for table `products`
 --
-ALTER TABLE products
-  ADD PRIMARY KEY (product_id);
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`product_id`);
 
 --
--- Indexes for table product_categories
+-- Indexes for table `product_categories`
 --
-ALTER TABLE product_categories
-  ADD PRIMARY KEY (category_id);
+ALTER TABLE `product_categories`
+  ADD PRIMARY KEY (`category_id`);
 
 --
--- Indexes for table product_colours
+-- Indexes for table `product_colours`
 --
-ALTER TABLE product_colours
-  ADD PRIMARY KEY (colour_id);
+ALTER TABLE `product_colours`
+  ADD PRIMARY KEY (`colour_id`);
 
 --
--- Indexes for table product_sizes
+-- Indexes for table `product_sizes`
 --
-ALTER TABLE product_sizes
-  ADD PRIMARY KEY (size_id);
+ALTER TABLE `product_sizes`
+  ADD PRIMARY KEY (`size_id`);
 
 --
--- Indexes for table product_variants
+-- Indexes for table `product_variants`
 --
-ALTER TABLE product_variants
-  ADD PRIMARY KEY (prod_variant_id),
-  ADD KEY category_id (category_id),
-  ADD KEY colour_id (colour_id),
-  ADD KEY size_id (size_id),
-  ADD KEY fk_product_id (product_id);
+ALTER TABLE `product_variants`
+  ADD PRIMARY KEY (`prod_variant_id`),
+  ADD KEY `category_id` (`category_id`),
+  ADD KEY `colour_id` (`colour_id`),
+  ADD KEY `size_id` (`size_id`),
+  ADD KEY `fk_product_id` (`product_id`);
 
 --
--- Indexes for table prod_reviews
+-- Indexes for table `prod_reviews`
 --
-ALTER TABLE prod_reviews
-  ADD PRIMARY KEY (review_id),
-  ADD KEY prod_id (prod_id),
-  ADD KEY user_id (user_id);
+ALTER TABLE `prod_reviews`
+  ADD PRIMARY KEY (`review_id`),
+  ADD KEY `prod_id` (`prod_variant_id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `prod_variant_id` (`prod_variant_id`);
 
 --
--- Indexes for table queries
+-- Indexes for table `queries`
 --
-ALTER TABLE queries
-  ADD PRIMARY KEY (query_id),
-  ADD KEY user_id (user_id);
+ALTER TABLE `queries`
+  ADD PRIMARY KEY (`query_id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
--- Indexes for table users
+-- Indexes for table `users`
 --
-ALTER TABLE users
-  ADD PRIMARY KEY (user_id);
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`user_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table cart
+-- AUTO_INCREMENT for table `cart`
 --
-ALTER TABLE cart
-  MODIFY cart_id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+ALTER TABLE `cart`
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
--- AUTO_INCREMENT for table discount_codes
+-- AUTO_INCREMENT for table `discounts`
 --
-ALTER TABLE discount_codes
-  MODIFY code_id int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `discounts`
+  MODIFY `code_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table orders
+-- AUTO_INCREMENT for table `orders`
 --
-ALTER TABLE orders
-  MODIFY order_id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+ALTER TABLE `orders`
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
--- AUTO_INCREMENT for table products
+-- AUTO_INCREMENT for table `products`
 --
-ALTER TABLE products
-  MODIFY product_id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+ALTER TABLE `products`
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
--- AUTO_INCREMENT for table product_categories
+-- AUTO_INCREMENT for table `product_categories`
 --
-ALTER TABLE product_categories
-  MODIFY category_id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+ALTER TABLE `product_categories`
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table product_colours
+-- AUTO_INCREMENT for table `product_colours`
 --
-ALTER TABLE product_colours
-  MODIFY colour_id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+ALTER TABLE `product_colours`
+  MODIFY `colour_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table product_sizes
+-- AUTO_INCREMENT for table `product_sizes`
 --
-ALTER TABLE product_sizes
-  MODIFY size_id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+ALTER TABLE `product_sizes`
+  MODIFY `size_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT for table product_variants
+-- AUTO_INCREMENT for table `product_variants`
 --
-ALTER TABLE product_variants
-  MODIFY prod_variant_id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+ALTER TABLE `product_variants`
+  MODIFY `prod_variant_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
--- AUTO_INCREMENT for table prod_reviews
+-- AUTO_INCREMENT for table `prod_reviews`
 --
-ALTER TABLE prod_reviews
-  MODIFY review_id int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `prod_reviews`
+  MODIFY `review_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table queries
+-- AUTO_INCREMENT for table `queries`
 --
-ALTER TABLE queries
-  MODIFY query_id int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `queries`
+  MODIFY `query_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
--- AUTO_INCREMENT for table users
+-- AUTO_INCREMENT for table `users`
 --
-ALTER TABLE users
-  MODIFY user_id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+ALTER TABLE `users`
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table cart
+-- Constraints for table `cart`
 --
-ALTER TABLE cart
-  ADD CONSTRAINT cart_ibfk_1 FOREIGN KEY (user_id) REFERENCES users (user_id) ON DELETE CASCADE,
-  ADD CONSTRAINT cart_ibfk_2 FOREIGN KEY (prod_variant_id) REFERENCES product_variants (prod_variant_id) ON DELETE CASCADE;
+ALTER TABLE `cart`
+  ADD CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `cart_ibfk_2` FOREIGN KEY (`prod_variant_id`) REFERENCES `product_variants` (`prod_variant_id`) ON DELETE CASCADE;
 
 --
--- Constraints for table orders
+-- Constraints for table `orders`
 --
-ALTER TABLE orders
-  ADD CONSTRAINT orders_ibfk_1 FOREIGN KEY (user_id) REFERENCES users (user_id);
+ALTER TABLE `orders`
+  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
 
 --
--- Constraints for table product_variants
+-- Constraints for table `product_variants`
 --
-ALTER TABLE product_variants
-  ADD CONSTRAINT fk_product_id FOREIGN KEY (product_id) REFERENCES products (product_id) ON DELETE CASCADE,
-  ADD CONSTRAINT product_variants_ibfk_1 FOREIGN KEY (category_id) REFERENCES product_categories (category_id),
-  ADD CONSTRAINT product_variants_ibfk_2 FOREIGN KEY (colour_id) REFERENCES product_colours (colour_id),
-  ADD CONSTRAINT product_variants_ibfk_3 FOREIGN KEY (size_id) REFERENCES product_sizes (size_id);
+ALTER TABLE `product_variants`
+  ADD CONSTRAINT `fk_product_id` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `product_variants_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `product_categories` (`category_id`),
+  ADD CONSTRAINT `product_variants_ibfk_2` FOREIGN KEY (`colour_id`) REFERENCES `product_colours` (`colour_id`),
+  ADD CONSTRAINT `product_variants_ibfk_3` FOREIGN KEY (`size_id`) REFERENCES `product_sizes` (`size_id`);
 
 --
--- Constraints for table prod_reviews
+-- Constraints for table `prod_reviews`
 --
-ALTER TABLE prod_reviews
-  ADD CONSTRAINT prod_reviews_ibfk_1 FOREIGN KEY (prod_id) REFERENCES product_variants (prod_variant_id),
-  ADD CONSTRAINT prod_reviews_ibfk_2 FOREIGN KEY (user_id) REFERENCES users (user_id);
+ALTER TABLE `prod_reviews`
+  ADD CONSTRAINT `prod_reviews_ibfk_1` FOREIGN KEY (`prod_variant_id`) REFERENCES `product_variants` (`prod_variant_id`),
+  ADD CONSTRAINT `prod_reviews_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
 
 --
--- Constraints for table queries
+-- Constraints for table `queries`
 --
-ALTER TABLE queries
-  ADD CONSTRAINT queries_ibfk_1 FOREIGN KEY (user_id) REFERENCES users (user_id);
+ALTER TABLE `queries`
+  ADD CONSTRAINT `queries_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */; 
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
