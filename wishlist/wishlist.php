@@ -9,8 +9,7 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 $user_id = $_SESSION['user_id'];
-$wishlistItems = getWishlistItems($pdo, $user_id);
-
+$wishlistItems = getWishlistItems($pdo, $user_id) ?? [];
 ?>
 
 <!DOCTYPE html>
@@ -30,8 +29,8 @@ $wishlistItems = getWishlistItems($pdo, $user_id);
                 <img src="../assests/images/device_direct_logo.png" alt="Device Direct Logo" class="logo-img">
                 <span id="span1">D</span>evice <span>Direct</span>
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
-                <span><img src="./assests/images/menu.png" alt="" width="30px"></span>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false">
+                <span><img src="./assests/images/menu.png" alt="Menu" width="30px"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -51,19 +50,32 @@ $wishlistItems = getWishlistItems($pdo, $user_id);
         <?php if (!empty($wishlistItems)): ?>
             <?php foreach ($wishlistItems as $item): ?>
                 <div class="wishlist-item">
-                    <img src="../productspage/images/<?php echo $item['image']; ?>" alt="<?php echo $item['product_title']; ?>" class="wishlist-item-img">
+                    <img src="../productspage/images/<?php echo htmlspecialchars($item['image']); ?>" 
+                         alt="<?php echo htmlspecialchars($item['product_title']); ?>" 
+                         class="wishlist-item-img" 
+                         loading="lazy">
                     <div class="wishlist-item-details">
-                        <p class="product-title"><?php echo $item['product_title']; ?></p>
+                        <p class="product-title"><?php echo htmlspecialchars($item['product_title']); ?></p>
                         <p class="product-price">£<?php echo number_format($item['price'], 2); ?></p>
 
                         <form action="remove_wishlist.php" method="post" class="remove-form">
-                            <input type="hidden" name="prod_variant_id" value="<?php echo $item['prod_variant_id']; ?>">
+                            <input type="hidden" name="prod_variant_id" value="<?php echo htmlspecialchars($item['prod_variant_id']); ?>">
                             <button type="submit" name="remove_item" class="remove-btn">Remove</button>
                         </form>
-                        <a href="../checkoutpage/cart.php?add=<?php echo $item['prod_variant_id']; ?>" class="add-to-cart-btn">Add to Cart</a>
+                        
+                        <form action="../checkoutpage/cart.php" method="post">
+                            <input type="hidden" name="add_to_cart" value="<?php echo htmlspecialchars($item['prod_variant_id']); ?>">
+                            <button type="submit" class="add-to-cart-btn">Add to Cart</button>
+                        </form>
                     </div>
                 </div>
             <?php endforeach; ?>
         <?php else: ?>
-            <p>Your wishlist is empty.</p>
-    
+            <p>Your wishlist is empty. <a href="../productspage/index.php">Start shopping now!</a></p>
+        <?php endif; ?>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
