@@ -57,21 +57,21 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 //Handling reviews
 if ($_SERVER['REQUEST_METHOD']=== 'POST' && isset($_POST['prod_variant_id'])) {
-    $user_id = $_SESSION['user_id']; 
+    $user_id = $_SESSION['user_id'];
     $prod_variant_id = $_POST['prod_variant_id'];
     $rating = $_POST['rating'];
-    $review_text = $_POST['review_text'];
+    $review_text = $_POST['comment'];
 
     //Reviews being stored in database
-    $insert_query = "INSERT INTO product_reviews (prod_variant_id, user_id, review_text, rating, created_at)
-    VALUES (:prod_variant_id, :user_id, :review_text, :rating, NOW())";
+    $insert_query = "INSERT INTO prod_reviews (prod_variant_id, user_id, comment, rating, created_at) VALUES (:prod_variant_id, :user_id, :comment, :rating, NOW())";
     $insert_stmt = $pdo->prepare($insert_query);
     $insert_stmt->execute([
         ':prod_variant_id' => $prod_variant_id,
         ':user_id' => $user_id,
-        ':review_text' => $review_text,
+        ':comment' => $review_text,  // Change ':review_text' to ':comment'
         ':rating' => $rating
     ]);
+
 }
 ?>
 <!DOCTYPE html>
@@ -144,7 +144,7 @@ if ($_SERVER['REQUEST_METHOD']=== 'POST' && isset($_POST['prod_variant_id'])) {
                                 <h5>Reviews</h5>
                                 <?php
                                 $review_query = "SELECT r.*, u.user_id
-                                FROM product_reviews r
+                                FROM prod_reviews r
                                 JOIN users u ON r.user_id = u.user_id
                                 WHERE r.prod_variant_id = :prod_variant_id";
                                 $review_stmt = $pdo->prepare($review_query);
@@ -156,7 +156,7 @@ if ($_SERVER['REQUEST_METHOD']=== 'POST' && isset($_POST['prod_variant_id'])) {
                                         <?php foreach ($reviews as $review): ?>
                                             <div class="review-box mb-3">
                                                 <p><strong><?=htmlspecialchars($review['user_id']) ?></strong> - Rating: <?= htmlspecialchars($review['rating']) ?>/5</p>
-                                                <p><?= htmlspecialchars($review['review_text']) ?></p>
+                                                <p><?= htmlspecialchars($review['comment']) ?></p>
                                                 <p class="text-muted"><?= htmlspecialchars($review['created_at']) ?></p>
                                         </div>
                                         <?php endforeach; ?>
@@ -164,7 +164,6 @@ if ($_SERVER['REQUEST_METHOD']=== 'POST' && isset($_POST['prod_variant_id'])) {
                                             <p>No reviews yet. Be the first to review our product!</p>
                                             <?php endif; ?>
                                         </div>
-                                
                                 <!--Form for Review submission-->
                                 <form method="POST" action="">
                                     <input type="hidden" name="prod_variant_id" value="<?= htmlspecialchars($product['prod_variant_id']) ?>">
@@ -174,7 +173,7 @@ if ($_SERVER['REQUEST_METHOD']=== 'POST' && isset($_POST['prod_variant_id'])) {
                                         </div>
                                         <div class="mb-3">
                                             <label for="review_text">Your Review:</label>
-                                            <textarea name="review_text" id="review_text" rows="5" required class="form-control"></textarea>
+                                            <textarea name="comment" id="comment" rows="5" required class="form-control"></textarea>
                                         </div>
                                         <button type="submit" class="btn btn-success">Submit Review</button>
                                         </form>
