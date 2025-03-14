@@ -41,6 +41,7 @@ $isAdmin = isset($_SESSION['role']) && $_SESSION['role'] === 'admin';
                         <li><a class="dropdown-item" href="../Login_page/change_password.php">Change Password</a></li>
                         <li><a class="dropdown-item" href="../previousorders/previousorders.php">Previous Orders</a></li>
                         <li><a class="dropdown-item" href="../wishlist/wishlist.php">My Wishlist</a></li>
+                        <li><a class="dropdown-item" href="../update_profile/update_profile.php">Update Profile</a></li>
                     </ul>
                 </li>
                 <li class="nav-item"><a class="nav-link" href="../config/logout.php">Logout</a></li>

@@ -88,6 +88,9 @@ $conn->close();
     <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Navbar -->
+    <?php include '../navbar.php'; ?>
+    <!-- Navbar -->
     <div class="container">
         <h1>Update Your Profile</h1>
 
