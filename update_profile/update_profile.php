@@ -12,6 +12,60 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
+    
+    $user_id = $_SESSION['user_id'];
+    $full_name = trim($_POST['full_name']);
+    $email = trim($_POST['email']);
+    $phone = trim($_POST['phone']);
+    $address = trim($_POST['address']);
+    $city = trim($_POST['city']);
+    $post_code = trim($_POST['post_code']);
+    
+    // Validate email 
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $_SESSION['message'] = "Invalid email format";
+        $_SESSION['message_type'] = "error";
+        header("Location: update_profile.php");
+        exit;
+    }
+    
+    
+    $stmt = $conn->prepare("SELECT id FROM users WHERE email = ? AND id != ?");
+    $stmt->bind_param("si", $email, $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    if ($result->num_rows > 0) {
+        $_SESSION['message'] = "Email already in use by another account";
+        $_SESSION['message_type'] = "error";
+        header("Location: update_profile.php");
+        exit;
+    }
+    
+    // Update user data
+    $sql = "UPDATE users SET full_name = ?, email = ?, phone = ?, address = ?, city = ?, post_code = ? WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ssssssi", $full_name, $email, $phone, $address, $city, $post_code, $user_id);
+    
+    if ($stmt->execute()) {
+        $_SESSION['message'] = "Profile updated successfully";
+        $_SESSION['message_type'] = "success";
+    } else {
+        $_SESSION['message'] = "Error updating profile: " . $conn->error;
+        $_SESSION['message_type'] = "error";
+    }
+    
+    $stmt->close();
+    
+    // Redirect to avoid form resubmission
+    header("Location: update_profile.php");
+    exit;
+}
+
+
+
+//current user data
 $user_id = $_SESSION['user_id'];
 $sql = "SELECT * FROM users WHERE id = ?";
 $stmt = $conn->prepare($sql);
@@ -19,6 +73,8 @@ $stmt->bind_param("i", $user_id);
 $stmt->execute();
 $result = $stmt->get_result();
 $user = $result->fetch_assoc();
+$stmt->close();
+$conn->close();
 ?>
 
 <html lang="en">
