@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 14, 2025 at 03:46 PM
+-- Generation Time: Mar 14, 2025 at 04:23 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -57,6 +57,13 @@ CREATE TABLE `discounts` (
   `created_at` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `discounts`
+--
+
+INSERT INTO `discounts` (`code_id`, `code`, `discount_value`, `discount_type`, `expires_at`, `is_active`, `created_at`) VALUES
+(2, 'DD', 10.00, 'percentage', '2025-12-20', 1, '2025-03-14 14:59:26');
+
 -- --------------------------------------------------------
 
 --
@@ -70,7 +77,7 @@ CREATE TABLE `orders` (
   `last_name` varchar(128) NOT NULL,
   `total_price` decimal(10,2) DEFAULT NULL,
   `date_ordered` datetime DEFAULT NULL,
-  `status` enum('pending','processing','shipped','delivered','cancelled') DEFAULT 'pending',
+  `status` enum('pending','processing','shipped','delivered','cancelled','returned') DEFAULT 'pending',
   `address` text DEFAULT NULL,
   `city` varchar(128) NOT NULL,
   `postal_code` varchar(128) NOT NULL
@@ -84,8 +91,9 @@ INSERT INTO `orders` (`order_id`, `user_id`, `first_name`, `last_name`, `total_p
 (9, 6, 'aaa', 'a', 41.98, '2025-02-15 18:49:00', 'pending', 'a', 'a', 'a'),
 (10, 6, 'a', 'a', 989.96, '2025-02-15 19:11:41', 'pending', 'a', 'a', 'a'),
 (11, 6, 'a', 'a', 1049.95, '2025-02-16 16:48:23', 'shipped', 'a', 'a', 'a'),
-(12, 8, 'Munib', 'shafi', 149.99, '2025-03-11 17:21:20', '', '57A RHYDYPENAU ROAD', 'Cardiff', 'CF23 6PY'),
-(13, 8, 'Munib', 'shafi', 459.98, '2025-03-11 17:33:56', 'shipped', '57A RHYDYPENAU ROAD', 'Cardiff', 'CF23 6PY');
+(12, 8, 'Munib', 'shafi', 149.99, '2025-03-11 17:21:20', 'pending', '57A RHYDYPENAU ROAD', 'Cardiff', 'CF23 6PY'),
+(13, 8, 'Munib', 'shafi', 459.98, '2025-03-11 17:33:56', 'shipped', '57A RHYDYPENAU ROAD', 'Cardiff', 'CF23 6PY'),
+(16, 6, 'Munib', 'shafi', 269.98, '2025-03-14 14:59:40', 'processing', '57A RHYDYPENAU ROAD', 'Cardiff', 'CF23 6PY');
 
 -- --------------------------------------------------------
 
@@ -115,7 +123,8 @@ INSERT INTO `order_items` (`order_id`, `prod_id`, `colour_id`, `quantity`, `pric
 (11, 1, 3, 5, 209.99, 1049.95, 5, 'No Request'),
 (12, 2, 1, 1, 149.99, 149.99, 3, 'No Request'),
 (13, 2, 1, 1, 149.99, 149.99, 3, 'No Request'),
-(13, 3, 3, 1, 309.99, 309.99, 6, 'No Request');
+(13, 3, 3, 1, 309.99, 309.99, 6, 'No Request'),
+(16, 2, 1, 2, 149.99, 299.98, 3, 'No Request');
 
 -- --------------------------------------------------------
 
@@ -253,7 +262,7 @@ INSERT INTO `product_variants` (`prod_variant_id`, `product_id`, `category_id`, 
 (10, 1, 2, 3, 7, 'Transform your living room into a personal cinema with the HD 80 Inch White TV. With its massive display and crystal-clear high-definition resolution, this TV delivers a viewing experience that’s larger than life. Designed to impress, it showcases deep contrast, vibrant colours, and fluid motion—perfect for movies, gaming, or sports. Equipped with state-of-the-art audio and versatile connectivity options like HDMI and USB, this TV is built to integrate seamlessly into your setup. For a limited time, seize the chance to own this entertainment powerhouse at an extraordinary discount. Bring home the thrill of immersive visuals today!\r\n', 99, 'HD-80-White.webp', 309.99),
 (11, 3, 2, 1, 7, 'Immerse yourself in cinematic brilliance with the 4K 80 Inch Black TV—the ultimate centrepiece for your entertainment space. Its enormous display paired with stunning 4K resolution ensures every scene comes to life with razor-sharp detail and vivid colour accuracy. Whether you’re hosting a movie marathon, gaming tournament, or sports viewing party, this TV delivers a truly immersive experience. With cutting-edge surround sound and versatile connectivity, it’s the perfect combination of technology and design. Limited Time Offer: Take this opportunity to own the pinnacle of home entertainment at a fraction of the cost. Click now to claim yours before it’s gone!\n', 99, '4k-80-Black.webp', 349.99),
 (12, 3, 2, 3, 7, 'Immerse yourself in cinematic brilliance with the 4K 80 Inch White TV—the ultimate centrepiece for your entertainment space. Its enormous display paired with stunning 4K resolution ensures every scene comes to life with razor-sharp detail and vivid colour accuracy. Whether you’re hosting a movie marathon, gaming tournament, or sports viewing party, this TV delivers a truly immersive experience. With cutting-edge surround sound and versatile connectivity, it’s the perfect combination of technology and design. Limited Time Offer: Take this opportunity to own the pinnacle of home entertainment at a fraction of the cost. Click now to claim yours before it’s gone!\r\n', 99, '4k-80-White.webp', 359.99),
-(13, 2, 1, 1, 3, 'Elevate your visual experience with this sleek 2K 25-inch monitor. Boasting a stunning 2560 x 1440 resolution, it delivers sharp, vibrant images for immersive gaming, productivity, or multimedia enjoyment. The monitor\'s minimalist black design blends seamlessly into any setup, while its ergonomic stand ensures adjustable comfort for long hours of use. Equipped with fast refresh rates and multiple connectivity options, it\'s perfect for tech enthusiasts and professionals alike.\r\n', 99, '2k-25-Black.webp', 149.99),
+(13, 2, 1, 1, 3, 'Elevate your visual experience with this sleek 2K 25-inch monitor. Boasting a stunning 2560 x 1440 resolution, it delivers sharp, vibrant images for immersive gaming, productivity, or multimedia enjoyment. The monitor\'s minimalist black design blends seamlessly into any setup, while its ergonomic stand ensures adjustable comfort for long hours of use. Equipped with fast refresh rates and multiple connectivity options, it\'s perfect for tech enthusiasts and professionals alike.\r\n', 97, '2k-25-Black.webp', 149.99),
 (14, 2, 1, 3, 3, 'Elevate your visual experience with this sleek 2K 25-inch monitor. Boasting a stunning 2560 x 1440 resolution, it delivers sharp, vibrant images for immersive gaming, productivity, or multimedia enjoyment. The monitor\'s minimalist black design blends seamlessly into any setup, while its ergonomic stand ensures adjustable comfort for long hours of use. Equipped with fast refresh rates and multiple connectivity options, it\'s perfect for tech enthusiasts and professionals alike.\r\n', 99, '2k-25-White.webp', 159.99),
 (15, 16, 1, 1, 3, 'Discover extraordinary detail with this 4K 25-inch monitor, boasting an ultra-high-definition resolution of 3840 x 2160. Perfect for professionals, gamers, and content creators, it delivers breath-taking clarity and vibrant colours for an unmatched viewing experience. The sleek black design complements any setup, while its compact size ensures it fits seamlessly into any workspace. With advanced connectivity options and smooth performance, this monitor is a powerful blend of style and functionality, ideal for those who demand exceptional quality.\r\n', 99, '4k-25-black.webp', 199.99),
 (16, 16, 1, 3, 3, 'Discover extraordinary detail with this 4K 25-inch monitor, boasting an ultra-high-definition resolution of 3840 x 2160. Perfect for professionals, gamers, and content creators, it delivers breath-taking clarity and vibrant colours for an unmatched viewing experience. The sleek black design complements any setup, while its compact size ensures it fits seamlessly into any workspace. With advanced connectivity options and smooth performance, this monitor is a powerful blend of style and functionality, ideal for those who demand exceptional quality.\r\n', 99, '4k-25-White.webp', 209.99),
@@ -317,17 +326,6 @@ CREATE TABLE `prod_reviews` (
   `created_at` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `prod_reviews`
---
-
-INSERT INTO `prod_reviews` (`review_id`, `prod_variant_id`, `user_id`, `rating`, `comment`, `created_at`) VALUES
-(1, 13, 6, 2, 'shit', '2025-03-13 18:24:19'),
-(2, 13, 6, 2, 'shit', '2025-03-13 18:24:47'),
-(3, 13, 6, 4, NULL, '2025-03-13 18:24:56'),
-(4, 13, 6, 2, NULL, '2025-03-13 18:25:17'),
-(5, 13, 6, 2, 's', '2025-03-13 18:25:31');
-
 -- --------------------------------------------------------
 
 --
@@ -364,11 +362,13 @@ INSERT INTO `queries` (`query_id`, `user_id`, `fullname`, `email`, `query_text`,
 
 CREATE TABLE `users` (
   `user_id` int(11) NOT NULL,
-  `First_name` varchar(50) NOT NULL,
-  `Last_name` varchar(50) NOT NULL,
-  `Email` varchar(100) NOT NULL,
-  `Phone` varchar(20) NOT NULL,
-  `Address` varchar(100) NOT NULL,
+  `first_name` varchar(50) NOT NULL,
+  `last_name` varchar(50) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `phone` varchar(20) NOT NULL,
+  `address` varchar(100) NOT NULL,
+  `city` varchar(128) NOT NULL,
+  `post_code` varchar(128) NOT NULL,
   `password` varchar(100) NOT NULL,
   `role` varchar(20) NOT NULL DEFAULT 'client',
   `created_at` datetime NOT NULL DEFAULT current_timestamp()
@@ -378,10 +378,10 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `First_name`, `Last_name`, `Email`, `Phone`, `Address`, `password`, `role`, `created_at`) VALUES
-(6, 'devicedirect', 'no', 'dd@gmail.com', '0123123123213', 'aston', '$2y$10$COJ5oBv5uQBoAx7xJBeJ2Oedpijg9PuRojDrdaqMwLNtST6miYuiy', 'admin', '2025-02-09 13:52:25'),
-(7, 'cust', 'customer', 'customer@gmail.com', '07745993464', '57A RHYDYPENAU ROAD', '$2y$10$G.YvchFny3FK0Ms1GBcR9OXUlsvDG8pkLlNzMLlH.bM1k6PQ1bdoK', 'user', '2025-03-11 16:34:22'),
-(8, 'customER', 'customer', 'c@gmail.com', '07745993464', '57A RHYDYPENAU ROAD', '$2y$10$.WNvMiTx.4C.Q6NngJTcn.V2WD77EJm1i.PtP1UorbJ7SvHFpb12C', 'user', '2025-03-11 16:49:41');
+INSERT INTO `users` (`user_id`, `first_name`, `last_name`, `email`, `phone`, `address`, `city`, `post_code`, `password`, `role`, `created_at`) VALUES
+(6, 'devicedirect', 'no', 'dd@gmail.com', '0123123123213', 'aston', '0', '0', '$2y$10$xypKa5bQPE3XFfMMm5pBjeDXMjYtwXHu01tkqRQECZg./OGMqgGtC', 'admin', '2025-02-09 13:52:25'),
+(7, 'cust', 'customer', 'customer@gmail.com', '07745993464', '57A RHYDYPENAU ROAD', '0', '0', '$2y$10$G.YvchFny3FK0Ms1GBcR9OXUlsvDG8pkLlNzMLlH.bM1k6PQ1bdoK', 'user', '2025-03-11 16:34:22'),
+(8, 'customER', 'customer', 'c@gmail.com', '07745993464', '57A RHYDYPENAU ROAD', '0', '0', '$2y$10$.WNvMiTx.4C.Q6NngJTcn.V2WD77EJm1i.PtP1UorbJ7SvHFpb12C', 'user', '2025-03-11 16:49:41');
 
 --
 -- Indexes for dumped tables
@@ -482,19 +482,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `discounts`
 --
 ALTER TABLE `discounts`
-  MODIFY `code_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `code_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `products`

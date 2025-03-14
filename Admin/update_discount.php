@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     try {
-        $stmt = $pdo->prepare("SELECT id FROM discounts WHERE code = ?");
+        $stmt = $pdo->prepare("SELECT code_id FROM discounts WHERE code = ?");
         $stmt->execute([$discount_code]);
         $existingDiscount = $stmt->fetch(PDO::FETCH_ASSOC);
 
