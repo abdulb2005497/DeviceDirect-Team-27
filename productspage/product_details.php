@@ -107,6 +107,7 @@ try {
 <h3 class="mt-5>Customer Reviews</h3>
 
 <?php
+// handling review submissions
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit_review'])) {
     $user_id = $_SESSION['user_id'] ?? null;
     $rating = intval($_POST['rating'] ?? 0);
@@ -132,6 +133,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit_review'])) {
     
 
 }
+//fetching existing reviews
+$review_query = "
+SELECT r.rating, r.comment. r.created_at, u.username
+FROM product_reviews r
+JOIN users u ON r.user_id = u.user_id
+WHERE r.prod_variant_id = :prod_variant_id
+ORDER BY r.created_at DESC
+";
+
+$stmt = $pdo->prepare($review_query);
+$stmt->execute([':prod_variant_id => $variant_id']);
+$reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
+
 
 <?php include_once'../footer.php';  ?>
 
