@@ -107,7 +107,7 @@ try {
 <h3 class="mt-5>Customer Reviews</h3>
 
 <?php
-// handling review submissions
+//handling reviews submissions
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit_review'])) {
     $user_id = $_SESSION['user_id'] ?? null;
     $rating = intval($_POST['rating'] ?? 0);
@@ -146,6 +146,33 @@ $stmt = $pdo->prepare($review_query);
 $stmt->execute([':prod_variant_id => $variant_id']);
 $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
+
+<!--Displaying Reviews on each page-->
+
+<div class ="mt-3">
+    <?php if ($reviews): ?>
+        <?php foreach ($reviews as $review): ?>
+            <div class = "mb-3 p-3 border rounded bg-light">
+                <strong><? = htmlspecialchars($review['username']) ?></strong>
+                - <span class = "text-warning">
+                    <?php for ($i = 1; $i <= 5; $i++): ?>
+                        <i class = "fas fa-star <? = $i <= $review['rating'] ? 'text-warning' : 'text-secondary' ?>"></i>
+                        <?php endfor; ?>
+                    </span>
+                    <p class="mt-2"><? = htmlspecialchars($reivew['comment']) ?></p>
+                    <small class = "text-muted"><? = htmlspecialchars($review['created_at']) ?></small>
+                    </div>
+                    <?php endforeach; ?>
+                    <?php else: ?>
+                        <p>No reviews yet. Be the first to review our AMAZING product!</p>
+                        <?php endif; ?>
+                    </div>
+
+<!--Form to submit reviews-->
+<?php if (isset($_SESSION['user_id'])): ?>
+    <h4 class = "mt-5">Leave a Review<h4>
+        <form method = "POST" class = "mt-3">
+             
 
 
 <?php include_once'../footer.php';  ?>
