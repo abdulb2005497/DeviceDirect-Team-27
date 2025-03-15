@@ -172,12 +172,37 @@ $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <?php if (isset($_SESSION['user_id'])): ?>
     <h4 class = "mt-5">Leave a Review<h4>
         <form method = "POST" class = "mt-3">
-             
+             <div class = "mb-3">
+                <label for = "rating" class = "form-label">Rating:</label>
+                <div id = "star-rating" class = "d-flex">
+                    <?php for ($i = 1; $i <= 5; $i++) : ?>
+                        <i class = "fas fa-star star" data-value ="<? = $i ?>"></i>
+                        <?php endfor; ?>
+                    </div>
+                    <input type = "hidden" name = "rating" id = "rating" required>
+                    </div>
+
+                    <div class = "mb-3">
+                        <label for = "comment class = "form-label">Your Review:</label>
+                        <textarea name = "comment" id = "comment" rows = "5" class = "form-control" required></textarea>
+                    </div>
+
+                    <button type = "submit" name = "submit_review" class = "btn btn-success">Submit Review</button>
+                    </form>
+                    <?php else: ?>
+                        <p class = "mt-3">You need to <a href= "../Login_page/login.php">log in to our website</a>to leave a review.</p>
+                        <?php endif; ?>
 
 
 <?php include_once'../footer.php';  ?>
 
 <script src="imgchange.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+
+
+
 </body>
 </html>
