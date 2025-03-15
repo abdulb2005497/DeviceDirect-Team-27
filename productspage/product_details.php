@@ -104,7 +104,7 @@ try {
 
 <!--Reviews (NEW)-->
 <hr>
-<h3 class="mt-5>Customer Reviews</h3>
+<h3 class="mt-5">Customer Reviews</h3>
 
 <?php
 //handling reviews submissions
@@ -121,9 +121,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit_review'])) {
         $stmt = $pdo->prepare($insert_review_query);
         $stmt->execute([
             ':prod_variant_id' => $variant_id,
-            'user_id' => $user_id,
+            ':user_id' => $user_id,
             ':comment' => $comment,
-            ':rating' => $ratingg
+            ':rating' => $rating
         ]);
 
         echo "<meta http-equiv = 'refresh' content = '0'>";
@@ -135,7 +135,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit_review'])) {
 }
 //fetching existing reviews
 $review_query = "
-SELECT r.rating, r.comment. r.created_at, u.username
+SELECT r.rating, r.comment, r.created_at, u.username
 FROM product_reviews r
 JOIN users u ON r.user_id = u.user_id
 WHERE r.prod_variant_id = :prod_variant_id
@@ -183,7 +183,7 @@ $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     </div>
 
                     <div class = "mb-3">
-                        <label for = "comment class = "form-label">Your Review:</label>
+                        <label for = "comment" class = "form-label">Your Review:</label>
                         <textarea name = "comment" id = "comment" rows = "5" class = "form-control" required></textarea>
                     </div>
 
@@ -199,8 +199,21 @@ $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <script src="imgchange.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 
+<script>
+    const stars = document.querySelectorAll('.star');
+    const ratingInput = document.getElementById('rating');
+    stars.forEach(star => {
+        star.addEventListener('click, (e) => {
+        const value = e.target.getAttribute('data-value');
+        ratingInput.value = value;
+    stars.forEach(s => s.classList.remove('text-warning'));
+for (let i = 0; i< value; i++){
+    stars[i].classList.add('text-warning');
 
-
+}
+});
+    });
+</script>
 
 
 
