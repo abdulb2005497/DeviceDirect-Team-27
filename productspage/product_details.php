@@ -102,6 +102,37 @@ try {
     </div>
 </div>
 
+<!--Reviews (NEW)-->
+<hr>
+<h3 class="mt-5>Customer Reviews</h3>
+
+<?php
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit_review'])) {
+    $user_id = $_SESSION['user_id'] ?? null;
+    $rating = intval($_POST['rating'] ?? 0);
+    $comment = trim($_POST['comment'] ?? '');
+
+    if($user_id && $rating >= 1 && $rating <= 5 && !empty($comment)) {
+        $insert_review_query = "
+        INSERT INTO product_reviews (prod_variant_id, user_id, comment, rating, created_at)
+        VALUES (:prod_variant_id, :user_id, :comment, :rating, NOW())
+        ";
+        $stmt = $pdo->prepare($insert_review_query);
+        $stmt->execute([
+            ':prod_variant_id' => $variant_id,
+            'user_id' => $user_id,
+            ':comment' => $comment,
+            ':rating' => $ratingg
+        ]);
+
+        echo "<meta http-equiv = 'refresh' content = '0'>";
+    } else {
+            echo "<p class = 'text-danger'>Please provide a rating and a comment for the product.</p>";
+        }
+    
+
+}
+
 <?php include_once'../footer.php';  ?>
 
 <script src="imgchange.js"></script>
