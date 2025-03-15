@@ -135,7 +135,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit_review'])) {
 }
 //fetching existing reviews
 $review_query = "
-SELECT r.rating, r.review_text, r.created_at, u.user_id
+SELECT r.rating, r.review_text, r.created_at, u.First_name, u.Last_name
 FROM product_reviews r
 JOIN users u ON r.user_id = u.user_id
 WHERE r.prod_variant_id = :prod_variant_id
@@ -153,7 +153,7 @@ $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <?php if ($reviews): ?>
         <?php foreach ($reviews as $review): ?>
             <div class = "mb-3 p-3 border rounded bg-light">
-                <strong><?= htmlspecialchars($review['user_id']) ?></strong>
+                <strong><?= htmlspecialchars($review['First_name']) .' '. htmlspecialchars($review['Last_name']) ?></strong>
                 - <span class = "text-warning">
                     <?php for ($i = 1; $i <= 5; $i++): ?>
                         <i class ="fas fa-star <?= $i <= $review['rating'] ? 'text-warning' : 'text-secondary' ?>"></i>
