@@ -135,7 +135,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit_review'])) {
 }
 //fetching existing reviews
 $review_query = "
-SELECT r.rating, r.comment, r.created_at, u.username
+SELECT r.rating, r.review_text, r.created_at, u.user_id
 FROM product_reviews r
 JOIN users u ON r.user_id = u.user_id
 WHERE r.prod_variant_id = :prod_variant_id
@@ -143,7 +143,7 @@ ORDER BY r.created_at DESC
 ";
 
 $stmt = $pdo->prepare($review_query);
-$stmt->execute([':prod_variant_id => $variant_id']);
+$stmt->execute([':prod_variant_id' => $variant_id]);
 $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
@@ -153,13 +153,13 @@ $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <?php if ($reviews): ?>
         <?php foreach ($reviews as $review): ?>
             <div class = "mb-3 p-3 border rounded bg-light">
-                <strong><? = htmlspecialchars($review['username']) ?></strong>
+                <strong><?= htmlspecialchars($review['username']) ?></strong>
                 - <span class = "text-warning">
                     <?php for ($i = 1; $i <= 5; $i++): ?>
-                        <i class = "fas fa-star <? = $i <= $review['rating'] ? 'text-warning' : 'text-secondary' ?>"></i>
+                        <i class ="fas fa-star <?= $i <= $review['rating'] ? 'text-warning' : 'text-secondary' ?>"></i>
                         <?php endfor; ?>
                     </span>
-                    <p class="mt-2"><? = htmlspecialchars($reivew['comment']) ?></p>
+                    <p class="mt-2"><?= htmlspecialchars($review['comment']) ?></p>
                     <small class = "text-muted"><? = htmlspecialchars($review['created_at']) ?></small>
                     </div>
                     <?php endforeach; ?>
@@ -176,7 +176,7 @@ $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <label for = "rating" class = "form-label">Rating:</label>
                 <div id = "star-rating" class = "d-flex">
                     <?php for ($i = 1; $i <= 5; $i++) : ?>
-                        <i class = "fas fa-star star" data-value ="<? = $i ?>"></i>
+                        <i class="fas fa-star star" data-value="<?= $i ?>"></i>
                         <?php endfor; ?>
                     </div>
                     <input type = "hidden" name = "rating" id = "rating" required>
