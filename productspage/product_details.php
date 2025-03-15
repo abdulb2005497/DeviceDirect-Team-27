@@ -111,18 +111,18 @@ try {
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit_review'])) {
     $user_id = $_SESSION['user_id'] ?? null;
     $rating = intval($_POST['rating'] ?? 0);
-    $comment = trim($_POST['comment'] ?? '');
+    $review_text = trim($_POST['review_text'] ?? '');
 
-    if($user_id && $rating >= 1 && $rating <= 5 && !empty($comment)) {
+    if($user_id && $rating >= 1 && $rating <= 5 && !empty($review_text)) {
         $insert_review_query = "
-        INSERT INTO product_reviews (prod_variant_id, user_id, comment, rating, created_at)
-        VALUES (:prod_variant_id, :user_id, :comment, :rating, NOW())
+        INSERT INTO product_reviews (prod_variant_id, user_id, review_text, rating, created_at)
+        VALUES (:prod_variant_id, :user_id, :review_text, :rating, NOW())
         ";
         $stmt = $pdo->prepare($insert_review_query);
         $stmt->execute([
             ':prod_variant_id' => $variant_id,
             ':user_id' => $user_id,
-            ':comment' => $comment,
+            ':review_text' => $review_text,
             ':rating' => $rating
         ]);
 
@@ -153,13 +153,13 @@ $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <?php if ($reviews): ?>
         <?php foreach ($reviews as $review): ?>
             <div class = "mb-3 p-3 border rounded bg-light">
-                <strong><?= htmlspecialchars($review['username']) ?></strong>
+                <strong><?= htmlspecialchars($review['user_id']) ?></strong>
                 - <span class = "text-warning">
                     <?php for ($i = 1; $i <= 5; $i++): ?>
                         <i class ="fas fa-star <?= $i <= $review['rating'] ? 'text-warning' : 'text-secondary' ?>"></i>
                         <?php endfor; ?>
                     </span>
-                    <p class="mt-2"><?= htmlspecialchars($review['comment']) ?></p>
+                    <p class="mt-2"><?= htmlspecialchars($review['review_text']) ?></p>
                     <small class = "text-muted"><? = htmlspecialchars($review['created_at']) ?></small>
                     </div>
                     <?php endforeach; ?>
@@ -184,7 +184,7 @@ $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                     <div class = "mb-3">
                         <label for = "comment" class = "form-label">Your Review:</label>
-                        <textarea name = "comment" id = "comment" rows = "5" class = "form-control" required></textarea>
+                        <textarea name = "review_text" id = "comment" rows = "5" class = "form-control" required></textarea>
                     </div>
 
                     <button type = "submit" name = "submit_review" class = "btn btn-success">Submit Review</button>
@@ -203,7 +203,7 @@ $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
     const stars = document.querySelectorAll('.star');
     const ratingInput = document.getElementById('rating');
     stars.forEach(star => {
-        star.addEventListener('click, (e) => {
+        star.addEventListener('click', (e) => {
         const value = e.target.getAttribute('data-value');
         ratingInput.value = value;
     stars.forEach(s => s.classList.remove('text-warning'));
