@@ -111,18 +111,18 @@ try {
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit_review'])) {
     $user_id = $_SESSION['user_id'] ?? null;
     $rating = intval($_POST['rating'] ?? 0);
-    $review_text = trim($_POST['review_text'] ?? '');
+    $comment = trim($_POST['comment'] ?? '');
 
-    if($user_id && $rating >= 1 && $rating <= 5 && !empty($review_text)) {
+    if($user_id && $rating >= 1 && $rating <= 5 && !empty($comment)) {
         $insert_review_query = "
-        INSERT INTO product_reviews (prod_variant_id, user_id, review_text, rating, created_at)
-        VALUES (:prod_variant_id, :user_id, :review_text, :rating, NOW())
+        INSERT INTO prod_reviews (prod_variant_id, user_id, comment, rating, created_at)
+        VALUES (:prod_variant_id, :user_id, :comment, :rating, NOW())
         ";
         $stmt = $pdo->prepare($insert_review_query);
         $stmt->execute([
             ':prod_variant_id' => $variant_id,
             ':user_id' => $user_id,
-            ':review_text' => $review_text,
+            ':comment' => $comment,
             ':rating' => $rating
         ]);
 
@@ -135,8 +135,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit_review'])) {
 }
 //fetching existing reviews
 $review_query = "
-SELECT r.rating, r.review_text, r.created_at, u.First_name, u.Last_name
-FROM product_reviews r
+SELECT r.rating, r.comment, r.created_at, u.First_name, u.Last_name
+FROM prod_reviews r
 JOIN users u ON r.user_id = u.user_id
 WHERE r.prod_variant_id = :prod_variant_id
 ORDER BY r.created_at DESC
@@ -159,8 +159,8 @@ $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <i class ="fas fa-star <?= $i <= $review['rating'] ? 'text-warning' : 'text-secondary' ?>"></i>
                         <?php endfor; ?>
                     </span>
-                    <p class="mt-2"><?= htmlspecialchars($review['review_text']) ?></p>
-                    <small class = "text-muted"><? = htmlspecialchars($review['created_at']) ?></small>
+                    <p class="mt-2"><?= htmlspecialchars($review['comment']) ?></p>
+                    <small class = "text-muted"><?= htmlspecialchars($review['created_at']) ?></small>
                     </div>
                     <?php endforeach; ?>
                     <?php else: ?>
@@ -184,7 +184,7 @@ $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                     <div class = "mb-3">
                         <label for = "comment" class = "form-label">Your Review:</label>
-                        <textarea name = "review_text" id = "comment" rows = "5" class = "form-control" required></textarea>
+                        <textarea name = "comment" id = "comment" rows = "5" class = "form-control" required></textarea>
                     </div>
 
                     <button type = "submit" name = "submit_review" class = "btn btn-success">Submit Review</button>
