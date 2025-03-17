@@ -15,12 +15,13 @@ if ($conn->connect_error) {
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
     
     $user_id = $_SESSION['user_id'];
-    $full_name = trim($_POST['full_name']);
-    $email = trim($_POST['email']);
-    $phone = trim($_POST['phone']);
-    $address = trim($_POST['address']);
-    $city = trim($_POST['city']);
-    $post_code = trim($_POST['post_code']);
+    $First_name = trim($_POST['First_name']);
+    $Last_name = trim($_POST['Last_name']);
+    $Email = trim($_POST['Email']);
+    $Phone = trim($_POST['Phone']);
+    $Address = trim($_POST['Address']);
+    $password = trim($_POST['password']);
+    
     
     // Validate email 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -32,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
     
     
     $stmt = $conn->prepare("SELECT id FROM users WHERE email = ? AND id != ?");
-    $stmt->bind_param("si", $email, $user_id);
+    $stmt->bind_param("si", $Email, $user_id);
     $stmt->execute();
     $result = $stmt->get_result();
     
@@ -44,9 +45,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
     }
     
     // Update user data
-    $sql = "UPDATE users SET full_name = ?, email = ?, phone = ?, address = ?, city = ?, post_code = ? WHERE id = ?";
+    $sql = "UPDATE users SET First_name = ?, Last_name = ?, Email = ?, Phone = ?, Address = ?, password = ? WHERE user_id = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssssssi", $full_name, $email, $phone, $address, $city, $post_code, $user_id);
+    $stmt->bind_param("ssssssi", $First_name, $Last_name, $Email, $Phone, $Address, $password, $user_id);
     
     if ($stmt->execute()) {
         $_SESSION['message'] = "Profile updated successfully";
@@ -58,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
     
     $stmt->close();
     
-    // Redirect to avoid form resubmission
+    
     header("Location: update_profile.php");
     exit;
 }
@@ -67,7 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
 
 //current user data
 $user_id = $_SESSION['user_id'];
-$sql = "SELECT * FROM users WHERE id = ?";
+$sql = "SELECT * FROM users WHERE user_id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
@@ -88,9 +89,6 @@ $conn->close();
     <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Navbar -->
-    <?php include '../navbar.php'; ?>
-    <!-- Navbar -->
     <div class="container">
         <h1>Update Your Profile</h1>
 
@@ -106,34 +104,36 @@ $conn->close();
         
         <form action="update_profile.php" method="post">
             <div class="form-group">
-                <label for="full_name">Full Name</label>
-                <input type="text" id="full_name" name="full_name" value="<?php echo htmlspecialchars($user['full_name']); ?>">
+                <label for="First_name">First_name</label>
+                <input type="text" id="First_name" name="First_name" value="<?php echo htmlspecialchars($user['First_name']); ?>">
+            </div>
+
+            <div class="form-group">
+                <label for="Last_name">Last_name</label>
+                <input type="text" id="Last_name" name="Last_name" value="<?php echo htmlspecialchars($user['Last_name']); ?>">
             </div>
             
             <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($user['email']); ?>">
+                <label for="Email">Email</label>
+                <input type="Email" id="Email" name="Email" value="<?php echo htmlspecialchars($user['Email']); ?>">
             </div>
             
             <div class="form-group">
-                <label for="phone">Phone</label>
-                <input type="text" id="phone" name="phone" value="<?php echo htmlspecialchars($user['phone']); ?>">
+                <label for="Phone">Phone</label>
+                <input type="text" id="Phone" name="Phone" value="<?php echo htmlspecialchars($user['Phone']); ?>">
             </div>
             
             <div class="form-group">
-                <label for="address">Address</label>
-                <textarea id="address" name="address"><?php echo htmlspecialchars($user['address']); ?></textarea>
+                <label for="Address">Address</label>
+                <textarea id="Address" name="Address"><?php echo htmlspecialchars($user['Address']); ?></textarea>
             </div>
             
             <div class="form-group">
-                <label for="city">City</label>
-                <input type="text" id="city" name="city" value="<?php echo htmlspecialchars($user['city']); ?>">
+                <label for="password">password</label>
+                <input type="text" id="password" name="password" value="<?php echo htmlspecialchars($user['password']); ?>">
             </div>
             
-            <div class="form-group">
-                <label for="postal_code">Post Code</label>
-                <input type="text" id="post_code" name="post_code" value="<?php echo htmlspecialchars($user['post_code']); ?>">
-            </div>
+           
             
             <div class="form-group">
                 <button type="submit" name="update">Update Profile</button>
