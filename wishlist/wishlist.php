@@ -9,6 +9,31 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 
+$successMessage = "";
+
+// Remove item from wishlist
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['remove_item'])) {
+    $prod_variant_id = $_POST['prod_variant_id'];
+    $stmt = $pdo->prepare("DELETE FROM wishlist WHERE user_id = ? AND prod_variant_id = ?");
+    $stmt->execute([$user_id, $prod_variant_id]);
+    $successMessage = "Item removed from wishlist.";
+}
+
+// Move item to cart
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['move_to_cart'])) {
+    $prod_variant_id = $_POST['prod_variant_id'];
+
+    // Add item to cart
+    $stmt = $pdo->prepare("INSERT INTO cart (user_id, prod_variant_id) VALUES (?, ?)");
+    $stmt->execute([$user_id, $prod_variant_id]);
+
+    // Remove from wishlist
+    $stmt = $pdo->prepare("DELETE FROM wishlist WHERE user_id = ? AND prod_variant_id = ?");
+    $stmt->execute([$user_id, $prod_variant_id]);
+
+    $successMessage = "Item moved to cart.";
+}
+
 // Fetch wishlist items
 $stmt = $pdo->prepare("SELECT w.prod_variant_id, p.product_title, p.image, p.price 
                        FROM wishlist w
@@ -58,6 +83,10 @@ $wishlistItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
         .btn-danger:hover {
             background-color: #d9534f;
         }
+        .btn-success {
+            font-weight: 600;
+            border-radius: 5px;
+        }
         footer {
             margin-top: 30px;
             text-align: center;
@@ -94,14 +123,20 @@ $wishlistItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <div class="container wishlist-container">
         <h1 class="text-center">My Wishlist</h1>
 
+        <?php if (!empty($successMessage)): ?>
+            <div class="alert alert-success text-center"><?php echo $successMessage; ?></div>
+        <?php endif; ?>
+
         <?php if (!empty($wishlistItems)): ?>
             <div class="row">
                 <?php foreach ($wishlistItems as $item): ?>
                     <div class="col-md-4">
                         <div class="wishlist-item card">
-                            <img src="../productspage/images/<?php echo htmlspecialchars($item['image']); ?>" 
-                                 alt="<?php echo htmlspecialchars($item['product_title']); ?>" 
-                                 class="card-img-top wishlist-img">
+                            <img src="<?php echo file_exists("../productspage/images/".$item['image']) 
+                                ? "../productspage/images/".htmlspecialchars($item['image']) 
+                                : '../assets/images/default-product.png'; ?>" 
+                                alt="<?php echo htmlspecialchars($item['product_title']); ?>" 
+                                class="card-img-top wishlist-img">
                             <div class="card-body">
                                 <h5 class="card-title"><?php echo htmlspecialchars($item['product_title']); ?></h5>
                                 <p class="card-text">£<?php echo number_format($item['price'], 2); ?></p>
@@ -109,6 +144,9 @@ $wishlistItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                     <input type="hidden" name="prod_variant_id" value="<?php echo $item['prod_variant_id']; ?>">
                                     <button type="submit" name="remove_item" class="btn btn-danger btn-sm">
                                         <i class="fas fa-trash-alt"></i> Remove
+                                    </button>
+                                    <button type="submit" name="move_to_cart" class="btn btn-success btn-sm">
+                                        <i class="fas fa-shopping-cart"></i> Move to Cart
                                     </button>
                                 </form>
                             </div>
@@ -126,14 +164,3 @@ $wishlistItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-
-<?php
-// Remove item from wishlist if requested
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['remove_item'])) {
-    $prod_variant_id = $_POST['prod_variant_id'];
-    $stmt = $pdo->prepare("DELETE FROM wishlist WHERE user_id = ? AND prod_variant_id = ?");
-    $stmt->execute([$user_id, $prod_variant_id]);
-    header("Location: wishlist.php");
-    exit();
-}
-?>
