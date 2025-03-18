@@ -20,11 +20,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
     $Email = trim($_POST['Email']);
     $Phone = trim($_POST['Phone']);
     $Address = trim($_POST['Address']);
-    $password = trim($_POST['password']);
     
     
     // Validate email 
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    if (!filter_var($Email, FILTER_VALIDATE_EMAIL)) {
         $_SESSION['message'] = "Invalid email format";
         $_SESSION['message_type'] = "error";
         header("Location: update_profile.php");
@@ -45,9 +44,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
     }
     
     // Update user data
-    $sql = "UPDATE users SET First_name = ?, Last_name = ?, Email = ?, Phone = ?, Address = ?, password = ? WHERE user_id = ?";
+    $sql = "UPDATE users SET First_name = ?, Last_name = ?, Email = ?, Phone = ?, Address = ? WHERE user_id = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssssssi", $First_name, $Last_name, $Email, $Phone, $Address, $password, $user_id);
+    $stmt->bind_param("ssssssi", $First_name, $Last_name, $Email, $Phone, $Address,  $user_id);
     
     if ($stmt->execute()) {
         $_SESSION['message'] = "Profile updated successfully";
@@ -131,12 +130,6 @@ $conn->close();
                 <label for="Address">Address</label>
                 <textarea id="Address" name="Address"><?php echo htmlspecialchars($user['Address']); ?></textarea>
             </div>
-            
-            <div class="form-group">
-                <label for="password">password</label>
-                <input type="text" id="password" name="password" value="<?php echo htmlspecialchars($user['password']); ?>">
-            </div>
-            
            
             
             <div class="form-group">
@@ -145,7 +138,7 @@ $conn->close();
         </form>
         
         <div class="links">
-            <a href="change_password.php">Change Password</a>
+            <a href="Login_page/change_password.php">Change Password</a>
             <a href="index.php">Back to Homepage</a>
         </div>
     </div>
