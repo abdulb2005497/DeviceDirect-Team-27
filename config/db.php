@@ -1,8 +1,8 @@
 <?php
 $host = "localhost";         
-$dbname = "devicedirect"; 
-$username = "root";          
-$password = "";              
+$dbname = "cs2team27_devicedirect"; 
+$username = "cs2team27";          
+$password = "BxYWD1WOJpecGSA";              
 
 try {
     
