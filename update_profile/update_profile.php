@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
     }
     
     
-    $stmt = $conn->prepare("SELECT id FROM users WHERE Email = ? AND id != ?");
+    $stmt = $conn->prepare("SELECT user_id FROM users WHERE Email = ? AND user_id != ?");
     $stmt->bind_param("si", $Email, $user_id);
     $stmt->execute();
     $result = $stmt->get_result();
