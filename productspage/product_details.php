@@ -128,7 +128,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit_review'])) {
 
         echo "<meta http-equiv = 'refresh' content = '0'>";
     } else {
-            echo "<p class = 'text-danger'>Please provide a rating and a comment for the product.</p>";
+            echo "<p class = 'text-danger'>please provide a rating and a comment for the product.</p>";
         }
     
 
