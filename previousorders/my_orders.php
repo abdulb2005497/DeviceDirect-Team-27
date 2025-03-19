@@ -1,8 +1,8 @@
 <?php
 session_start();
-require '../config/db.php'; // Include database connection
+require '../config/db.php'; 
 
-// Check if user is logged in
+
 if (!isset($_SESSION['user_id'])) {
     header("Location: ../Login_page/login.php");
     exit();
@@ -11,7 +11,7 @@ if (!isset($_SESSION['user_id'])) {
 $user_id = $_SESSION['user_id'];
 $welcome_message = "Welcome, " . htmlspecialchars($_SESSION['first_name']);
 
-// Fetch user orders
+
 $stmt = $pdo->prepare("SELECT * FROM orders WHERE user_id = ? ORDER BY date_ordered DESC");
 $stmt->execute([$user_id]);
 $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -27,10 +27,10 @@ $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </head>
 <body>
 
-<!-- Navbar -->
-<?php include '../includes/navbar.php'; ?> <!-- If you have a navbar file, include it -->
 
-<!-- Orders Section -->
+<?php include '../includes/navbar.php'; ?> 
+
+
 <div class="container mt-5">
     <h2 class="text-center">My Orders</h2>
     <div class="row">
@@ -39,7 +39,7 @@ $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <div class="col-md-6">
                     <div class="order-card p-4 shadow-sm">
                         <h4>Order #<?php echo $order['order_id']; ?></h4>
-                        <p><strong>Total Price:</strong> $<?php echo number_format($order['total_price'], 2); ?></p>
+                        <p><strong>Total Price:</strong> £<?php echo number_format($order['total_price'], 2); ?></p>
                         <p><strong>Status:</strong> <?php echo ucfirst($order['status']); ?></p>
                         <p><strong>Date Ordered:</strong> <?php echo $order['date_ordered']; ?></p>
                         <a href="order_details.php?order_id=<?php echo $order['order_id']; ?>" class="btn btn-primary">View Details</a>
