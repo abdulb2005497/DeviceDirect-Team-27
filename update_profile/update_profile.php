@@ -13,41 +13,42 @@ if ($conn->connect_error) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
-    
+
     $user_id = $_SESSION['user_id'];
-    $First_name = trim($_POST['First_name']);
-    $Last_name = trim($_POST['Last_name']);
-    $Email = trim($_POST['Email']);
-    $Phone = trim($_POST['Phone']);
-    $Address = trim($_POST['Address']);
-    
-    
-    // Validate email 
-    if (!filter_var($Email, FILTER_VALIDATE_EMAIL)) {
+    $first_name = trim($_POST['first_name']);
+    $last_name = trim($_POST['last_name']);
+    $email = trim($_POST['email']);
+    $phone = trim($_POST['phone']);
+    $address = trim($_POST['address']);
+    $city = trim($_POST['city']);
+    $post_code = trim($_POST['post_code']);
+
+    // Validate email
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $_SESSION['message'] = "Invalid email format";
         $_SESSION['message_type'] = "error";
         header("Location: update_profile.php");
         exit;
     }
-    
-    
-    $stmt = $conn->prepare("SELECT user_id FROM users WHERE Email = ? AND user_id != ?");
-    $stmt->bind_param("si", $Email, $user_id);
+
+
+    $stmt = $conn->prepare("SELECT user_id FROM users WHERE email = ? AND user_id != ?");
+    $stmt->bind_param("si", $email, $user_id);
     $stmt->execute();
     $result = $stmt->get_result();
-    
+
     if ($result->num_rows > 0) {
         $_SESSION['message'] = "Email already in use by another account";
         $_SESSION['message_type'] = "error";
         header("Location: update_profile.php");
         exit;
     }
-    
+
     // Update user data
-    $sql = "UPDATE users SET First_name = ?, Last_name = ?, Email = ?, Phone = ?, Address = ? WHERE user_id = ?";
+    $sql = "UPDATE users SET first_name = ?, last_name = ?, email = ?, phone = ?, address = ?, city = ?, post_code = ? WHERE user_id = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssssssi", $First_name, $Last_name, $Email, $Phone, $Address,  $user_id);
-    
+    $stmt->bind_param("sssssssi", $first_name, $last_name, $email, $phone, $address, $city, $post_code, $user_id);
+
     if ($stmt->execute()) {
         $_SESSION['message'] = "Profile updated successfully";
         $_SESSION['message_type'] = "success";
@@ -55,10 +56,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
         $_SESSION['message'] = "Error updating profile: " . $conn->error;
         $_SESSION['message_type'] = "error";
     }
-    
+
     $stmt->close();
-    
-    
+
     header("Location: update_profile.php");
     exit;
 }
@@ -97,49 +97,57 @@ $conn->close();
 
         <?php if (isset($_SESSION['message'])): ?>
             <div class="alert <?php echo $_SESSION['message_type']; ?>">
-                <?php 
-                    echo $_SESSION['message']; 
+                <?php
+                    echo $_SESSION['message'];
                     unset($_SESSION['message']);
                     unset($_SESSION['message_type']);
                 ?>
             </div>
         <?php endif; ?>
-        
+
         <form action="update_profile.php" method="post">
             <div class="form-group">
-                <label for="First_name">First_name</label>
-                <input type="text" id="First_name" name="First_name" value="<?php echo htmlspecialchars($user['First_name']); ?>">
+                <label for="first_name">First Name</label>
+                <input type="text" id="first_name" name="first_name" value="<?php echo htmlspecialchars($user['first_name']); ?>">
+            </div>
+            <div class="form-group">
+                <label for="last_name">Last Name</label>
+                <input type="text" id="last_name" name="last_name" value="<?php echo htmlspecialchars($user['last_name']); ?>">
             </div>
 
-            <div class="form-group">
-                <label for="Last_name">Last_name</label>
-                <input type="text" id="Last_name" name="Last_name" value="<?php echo htmlspecialchars($user['Last_name']); ?>">
-            </div>
-            
             <div class="form-group">
                 <label for="Email">Email</label>
                 <input type="Email" id="Email" name="Email" value="<?php echo htmlspecialchars($user['Email']); ?>">
             </div>
-            
+
             <div class="form-group">
                 <label for="Phone">Phone</label>
                 <input type="text" id="Phone" name="Phone" value="<?php echo htmlspecialchars($user['Phone']); ?>">
             </div>
-            
+
             <div class="form-group">
-                <label for="Address">Address</label>
-                <textarea id="Address" name="Address"><?php echo htmlspecialchars($user['Address']); ?></textarea>
+                <label for="address">Address</label>
+                <textarea id="address" name="address"><?php echo htmlspecialchars($user['address']); ?></textarea>
             </div>
-           
-            
+
+            <div class="form-group">
+                <label for="city">City</label>
+                <input type="text" id="city" name="city" value="<?php echo htmlspecialchars($user['city']); ?>">
+            </div>
+
+            <div class="form-group">
+                <label for="postal_code">Post Code</label>
+                <input type="text" id="post_code" name="post_code" value="<?php echo htmlspecialchars($user['post_code']); ?>">
+            </div>
+
             <div class="form-group">
                 <button type="submit" name="update">Update Profile</button>
             </div>
         </form>
-        
+
         <div class="links">
-            <a href="Login_page/change_password.php">Change Password</a>
-            <a href="index.php">Back to Homepage</a>
+            <a href="../Login_page/change_password.php">Change Password</a>
+            <a href="../Landing-Page/index.php">Back to Homepage</a>
         </div>
     </div>
 </body>

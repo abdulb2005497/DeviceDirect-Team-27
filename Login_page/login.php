@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $user = $stmt->fetch();
     if ($user && password_verify($password, $user['password'])) {
         $_SESSION['user_id'] = $user['user_id'];
-        $_SESSION['first_name'] = $user['First_name'];
+        $_SESSION['first_name'] = $user['first_name'];
         $_SESSION['role'] = $user['role'];
 
         if ($user['role'] === 'admin') {

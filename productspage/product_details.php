@@ -17,12 +17,18 @@ try {
         SELECT
             p.product_title,
             ca.category_name,
+            co.colour_name,
+            s.size_name,
             pv.prod_variant_id,
+            pv.prod_desc,
+            pv.quantity,
             pv.image,
             pv.price
         FROM product_variants pv
         JOIN products p ON pv.product_id = p.product_id
         JOIN product_categories ca ON pv.category_id = ca.category_id
+        JOIN product_colours co ON pv.colour_id = co.colour_id
+        JOIN product_sizes s ON pv.size_id = s.size_id
         WHERE pv.prod_variant_id = :variant_id
         LIMIT 1
     ";
@@ -56,29 +62,30 @@ try {
 </head>
 <body>
 
+
 <!-- Product Details Container -->
-<div class="container mt-5">
+<div class="container mt-5 product-container">
     <div class="row">
         <div class="col-md-6">
-            <img id="product-image" src="../productspage/images/<?= htmlspecialchars($product['image']) ?>"
-                class="img-fluid"
-                alt="<?= htmlspecialchars($product['product_title']) ?>">
+            <img id="product-image" src="../productspage/images/<?php echo htmlspecialchars($product['image']); ?>" class="img-fluid product-image" alt="<?php echo htmlspecialchars($product['product_title']); ?>">
         </div>
         <div class="col-md-6">
             <h2><?php echo htmlspecialchars($product['product_title']); ?></h2>
             <p class="text-muted">Category: <?php echo htmlspecialchars($product['category_name']); ?></p>
-
-            <h4 id="product-price" class="mt-3">Price: £<?php echo number_format($product['price'], 2); ?></h4>
-
-            <!-- Add to Cart Form -->
+            <p class="text-muted">Colour: <?php echo htmlspecialchars($product['colour_name']); ?></p>
+            <p class="text-muted">Size: <?php echo htmlspecialchars(string: $product['size_name']); ?></p>
+            <h4 id="product-price" class="text-success">Price: £<?php echo number_format($product['price'], 2); ?></h4>
             <form method="post">
-                <input type="hidden" name="variant_id" value="<?= $product['prod_variant_id'] ?>">
-
-                <label for="quantity">Quantity:</label>
+                <input type="hidden" name="variant_id" value="<?php echo $product['prod_variant_id']; ?>">
+                <label for="quantity" class="form-label">Quantity:</label>
                 <input type="number" id="quantity" name="quantity" value="1" min="1" class="form-control w-50 mb-3">
-
-                <button type='submit' name='add_to_cart' class="btn btn-primary">Add to Cart</button>
+                <button type='submit' name='add_to_cart' class="btn btn-primary w-100">Add to Cart</button>
             </form>
+            <br><h4 id="product-info" class="product-description">Product Details <br><br><?php echo htmlspecialchars(string: $product['prod_desc']) ?></h4>
+
+        </div>
+    </div>
+</div>
 
             <?php
             if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
