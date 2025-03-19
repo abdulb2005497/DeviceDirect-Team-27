@@ -9,7 +9,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
 include('../config/db.php');
 include '../navbar.php';
 $query = "
-SELECT pv.prod_variant_id, p.product_title, pv.prod_desc, pv.quantity, pv.image, pv.price, s.size_name, ca.category_name, co.colour_name
+SELECT pv.prod_variant_id, p.product_title, p.prod_desc, pv.quantity, pv.image, pv.price, s.size_name, ca.category_name, co.colour_name
 FROM product_variants pv
 JOIN products p ON pv.product_id = p.product_id
 JOIN product_categories ca ON pv.category_id = ca.category_id

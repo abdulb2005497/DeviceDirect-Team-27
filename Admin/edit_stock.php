@@ -58,20 +58,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
+    // Update product_variants (excluding prod_desc)
     $update_stmt = $pdo->prepare("
         UPDATE product_variants
-        SET category_id = ?, colour_id = ?, size_id = ?, prod_desc = ?, quantity = ?, price = ?, image = ?
+        SET category_id = ?, colour_id = ?, size_id = ?, quantity = ?, price = ?, image = ?
         WHERE prod_variant_id = ?
     ");
+    $update_stmt->execute([$category_id, $colour_id, $size_id, $quantity, $price, $image, $prod_variant_id]);
 
-    if ($update_stmt->execute([$category_id, $colour_id, $size_id, $prod_desc, $quantity, $price, $image, $prod_variant_id])) {
-        echo "<script>alert('Product updated successfully!'); window.location.href='adminstock.php';</script>";
-    } else {
-        echo "Error updating product.";
-    }
+    // Update prod_desc in products
+    $update_desc_stmt = $pdo->prepare("
+        UPDATE products
+        SET prod_desc = ?
+        WHERE product_id = ?
+    ");
+    $update_desc_stmt->execute([$prod_desc, $variant['product_id']]);
+
+    echo "<script>alert('Product updated successfully!'); window.location.href='adminstock.php';</script>";
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
