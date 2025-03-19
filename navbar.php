@@ -39,11 +39,10 @@ $isAdmin = isset($_SESSION['role']) && $_SESSION['role'] === 'admin';
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">   
                         <li><a class="dropdown-item" href="../update_profile/update_profile.php">Update Profile</a></li>                    
-                        <li><a class="dropdown-item" href="../Login_page/change_password.php">Change Password</a></li>
                         <li><a class="dropdown-item" href="../previousorders/previousorders.php">Previous Orders</a></li>
-                <?php if (!$isAdmin): ?>
-                        <li><a class="dropdown-item" href="../wishlist/wishlist.php">My Wishlist</a></li>
-                <?php endif; ?>
+                        <?php if (!$isAdmin): ?>
+                                <li><a class="dropdown-item" href="../wishlist/wishlist.php">My Wishlist</a></li>
+                        <?php endif; ?>
                     </ul>
                 </li>
                 <li class="nav-item"><a class="nav-link" href="../config/logout.php">Logout</a></li>
