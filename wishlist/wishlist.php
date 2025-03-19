@@ -2,53 +2,49 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
+
 include_once('../navbar.php');
 include('../config/db.php');
 include('../checkoutpage/cart_functions.php');
 
-if (!isset($_SESSION['user_id'])) {
-    die("You need to <a href='../Login_page/login.php'>log in</a> to view your wishlist.");
+// Initialize wishlist session if not set
+if (!isset($_SESSION['wishlist'])) {
+    $_SESSION['wishlist'] = [];
 }
-
-$user_id = $_SESSION['user_id'];
 
 // Adding item to wishlist
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_wishlist'])) {
     $variant_id = $_POST['variant_id'] ?? null;
+    $product_title = $_POST['product_title'] ?? 'Unknown Product';
+    $category_name = $_POST['category_name'] ?? 'Unknown Category';
+    $colour_name = $_POST['colour_name'] ?? 'Unknown Colour';
+    $size_name = $_POST['size_name'] ?? 'Unknown Size';
+    $image = $_POST['image'] ?? 'default.jpg';
+    $price = $_POST['price'] ?? 0.00;
 
     if ($variant_id) {
-        $query = "INSERT INTO wishlist (user_id, prod_variant_id) VALUES (:user_id, :variant_id) ON DUPLICATE KEY UPDATE added_at = NOW()";
-        $stmt = $pdo->prepare($query);
-        $stmt->execute([':user_id' => $user_id, ':variant_id' => $variant_id]);
+        $_SESSION['wishlist'][$variant_id] = [
+            'product_title' => $product_title,
+            'category_name' => $category_name,
+            'colour_name' => $colour_name,
+            'size_name' => $size_name,
+            'image' => $image,
+            'price' => $price
+        ];
     }
 }
 
 // Removing item from wishlist
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['remove_from_wishlist'])) {
     $variant_id = $_POST['variant_id'] ?? null;
-
-    if ($variant_id) {
-        $query = "DELETE FROM wishlist WHERE user_id = :user_id AND prod_variant_id = :variant_id";
-        $stmt = $pdo->prepare($query);
-        $stmt->execute([':user_id' => $user_id, ':variant_id' => $variant_id]);
+    
+    if ($variant_id && isset($_SESSION['wishlist'][$variant_id])) {
+        unset($_SESSION['wishlist'][$variant_id]);
     }
 }
 
-// Fetch wishlist items
-$query = "
-SELECT p.product_title, ca.category_name, co.colour_name, s.size_name, pv.prod_variant_id, pv.image, pv.price
-FROM wishlist w
-JOIN product_variants pv ON w.prod_variant_id = pv.prod_variant_id
-JOIN products p ON pv.product_id = p.product_id
-JOIN product_categories ca ON pv.category_id = ca.category_id
-JOIN product_colours co ON pv.colour_id = co.colour_id
-JOIN product_sizes s ON pv.size_id = s.size_id
-WHERE w.user_id = :user_id
-ORDER BY w.added_at DESC
-";
-$stmt = $pdo->prepare($query);
-$stmt->execute([':user_id' => $user_id]);
-$wishlist_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
+// Get wishlist items from session
+$wishlist_items = $_SESSION['wishlist'];
 ?>
 
 <!DOCTYPE html>
@@ -68,7 +64,7 @@ $wishlist_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
     <?php if ($wishlist_items): ?>
         <div class="row">
-            <?php foreach ($wishlist_items as $item): ?>
+            <?php foreach ($wishlist_items as $variant_id => $item): ?>
                 <div class="col-md-4 mb-4">
                     <div class="card">
                         <img src="../productspage/images/<?= htmlspecialchars($item['image']) ?>" class="card-img-top" alt="<?= htmlspecialchars($item['product_title']) ?>">
@@ -80,7 +76,7 @@ $wishlist_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <h4 class="text-success">£<?= number_format($item['price'], 2) ?></h4>
                             
                             <form method="post" class="mt-2">
-                                <input type="hidden" name="variant_id" value="<?= $item['prod_variant_id'] ?>">
+                                <input type="hidden" name="variant_id" value="<?= $variant_id ?>">
                                 <button type="submit" name="remove_from_wishlist" class="btn btn-danger w-100">Remove from Wishlist</button>
                             </form>
                         </div>
