@@ -117,12 +117,12 @@ $conn->close();
 
             <div class="form-group">
                 <label for="Email">Email</label>
-                <input type="Email" id="Email" name="Email" value="<?php echo htmlspecialchars($user['Email']); ?>">
+                <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($user['email']); ?>">
             </div>
 
             <div class="form-group">
                 <label for="Phone">Phone</label>
-                <input type="text" id="Phone" name="Phone" value="<?php echo htmlspecialchars($user['Phone']); ?>">
+                <input type="text" id="phone" name="phone" value="<?php echo htmlspecialchars($user['phone']); ?>">
             </div>
 
             <div class="form-group">
