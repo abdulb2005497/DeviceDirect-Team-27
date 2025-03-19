@@ -43,6 +43,7 @@ $isAdmin = isset($_SESSION['role']) && $_SESSION['role'] === 'admin';
                         <?php if (!$isAdmin): ?>
                                 <li><a class="dropdown-item" href="../wishlist/wishlist.php">My Wishlist</a></li>
                         <?php endif; ?>
+                        
                         <?php if ($isAdmin): ?>
                             <li><a class="dropdown-item" href="../Admin/admin_log.php">Admin Log</a></li>
                         <?php endif; ?>

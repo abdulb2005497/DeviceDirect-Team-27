@@ -1,41 +1,75 @@
 <?php
 session_start();
 
-// Check if the user is an admin
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
     header("Location: ../Login_page/login.php");
     exit();
 }
 
 include('../config/db.php');
+include('admin_action.php'); 
 
 $categories = $pdo->query("SELECT * FROM product_categories")->fetchAll(PDO::FETCH_ASSOC);
 $colours = $pdo->query("SELECT * FROM product_colours")->fetchAll(PDO::FETCH_ASSOC);
 $sizes = $pdo->query("SELECT * FROM product_sizes")->fetchAll(PDO::FETCH_ASSOC);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $title = $_POST['title'];
-    $description = $_POST['description'];
-    $category_id = $_POST['category'];
-    $colour_id = $_POST['colour'];
-    $size_id = $_POST['size'] ?: NULL;
-    $price = $_POST['price'];
-    $quantity = $_POST['quantity'];
+    $title = trim($_POST['title']);
+    $description = trim($_POST['description']);
+    $category_id = intval($_POST['category']);
+    $colour_id = intval($_POST['colour']);
+    $size_id = !empty($_POST['size']) ? intval($_POST['size']) : NULL;
+    $price = floatval($_POST['price']);
+    $quantity = intval($_POST['quantity']);
+
+    $category_name = $pdo->query("SELECT category_name FROM product_categories WHERE category_id = $category_id")->fetchColumn();
+    $colour_name = $pdo->query("SELECT colour_name FROM product_colours WHERE colour_id = $colour_id")->fetchColumn();
+    $size_name = $size_id ? $pdo->query("SELECT size_name FROM product_sizes WHERE size_id = $size_id")->fetchColumn() : "N/A";
 
     $image = $_FILES['image']['name'];
     $target_dir = "../productspage/images/";
     $target_file = $target_dir . basename($image);
-    move_uploaded_file($_FILES['image']['tmp_name'], $target_file);
+    $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
-    $stmt = $pdo->prepare("INSERT INTO products (product_title) VALUES (?)");
-    $stmt->execute([$title]);
-    $product_id = $pdo->lastInsertId();
+    $allowed_types = ['jpg', 'jpeg', 'png', 'webp'];
+    if (!in_array($imageFileType, $allowed_types)) {
+        die("Invalid file type. Only JPG, JPEG, PNG, and WEBP are allowed.");
+    }
+    if ($_FILES["image"]["size"] > 5000000) {
+        die("File is too large. Maximum size is 5MB.");
+    }
+    if (!move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
+        die("Error uploading image.");
+    }
 
-    $stmt = $pdo->prepare("INSERT INTO product_variants (product_id, prod_desc, category_id, colour_id, size_id, price, quantity, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt->execute([$product_id, $description, $category_id, $colour_id, $size_id, $price, $quantity, $image]);
+    try {
+        $pdo->beginTransaction();
 
-    header("Location: adminstock.php");
-    exit();
+        $stmt = $pdo->prepare("INSERT INTO products (product_title, prod_desc) VALUES (?, ?)");
+        $stmt->execute([$title, $description]);
+        $product_id = $pdo->lastInsertId();
+
+        $stmt = $pdo->prepare("
+            INSERT INTO product_variants (product_id, category_id, colour_id, size_id, price, quantity, image)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
+        ");
+        $stmt->execute([$product_id, $category_id, $colour_id, $size_id, $price, $quantity, $image]);
+
+        $pdo->commit();
+
+        logAdminAction(
+            $pdo,
+            $_SESSION['user_id'],
+            "Added new product '$title' (ID: $product_id), Category: $category_name, Colour: $colour_name, Size: $size_name, Price: £$price, Quantity: $quantity",
+            "product_variants"
+        );
+
+        echo "<script>alert('Product added successfully!'); window.location.href='adminstock.php';</script>";
+        exit();
+    } catch (PDOException $e) {
+        $pdo->rollBack();
+        die("Error adding product: " . $e->getMessage());
+    }
 }
 ?>
 

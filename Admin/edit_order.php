@@ -7,6 +7,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
 }
 
 include('../config/db.php');
+include('admin_action.php');
 
 if (!isset($_GET['id']) || empty($_GET['id'])) {
     die("Invalid order ID");
@@ -14,7 +15,6 @@ if (!isset($_GET['id']) || empty($_GET['id'])) {
 
 $order_id = $_GET['id'];
 
-// Fetch order details
 $query = "SELECT * FROM orders WHERE order_id = ?";
 $stmt = $pdo->prepare($query);
 $stmt->execute([$order_id]);
@@ -24,7 +24,6 @@ if (!$order) {
     die("Order not found");
 }
 
-// Fetch order items
 $query = "
 SELECT oi.*, p.product_title, pv.image, c.colour_name, s.size_name
 FROM order_items oi
@@ -39,13 +38,13 @@ $stmt->execute([$order_id]);
 $order_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $currentStatus = trim(strtolower($order['status']));
 
-// Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $status = $_POST['status'];
 
     $updateQuery = "UPDATE orders SET status = ? WHERE order_id = ?";
     $stmt = $pdo->prepare($updateQuery);
     $stmt->execute([$status, $order_id]);
+    logAdminAction($pdo, $_SESSION['user_id'], "Updated order #$order_id to status: $status", "orders");
 
     header("Location: orders.php");
     exit();
