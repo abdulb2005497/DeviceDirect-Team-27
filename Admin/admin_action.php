@@ -9,6 +9,5 @@ function logAdminAction($pdo, $user_id, $action, $affected_table) {
         ':affected_table' => $affected_table
     ]);
 }
-header("Location: adminpage.php");
 
  ?>
