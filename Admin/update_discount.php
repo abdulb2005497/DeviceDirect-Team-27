@@ -2,6 +2,7 @@
 session_start();
 include('../config/db.php');
 include_once('../navbar.php');
+include('admin_action.php');
 
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
     header("Location: ../Login_page/login.php");
@@ -32,6 +33,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             $stmt = $pdo->prepare("INSERT INTO discounts (code, discount_value, discount_type, expires_at, is_active) VALUES (?, ?, ?, ?, 1)");
             $stmt->execute([$discount_code, $discount_value, $discount_type, $discount_expiry]);
+
+            logAdminAction($pdo, $_SESSION['user_id'], "Added new discount code: $discount_code;Discount amount: $discount_value;Discount type: $discount_type; Expiry date: $discount_expiry", "discounts");
+
             $_SESSION['success_message'] = "New discount added successfully!";
             header("Location: admin_discount.php");
             exit();

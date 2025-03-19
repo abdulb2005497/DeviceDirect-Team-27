@@ -1,19 +1,28 @@
 <?php
 session_start();
 
-// Check if the user is an admin
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
     header("Location: ../Login_page/login.php");
     exit();
 }
+
 include('../config/db.php');
+include('admin_action.php');
 
 $prod_variant_id = $_GET['id'];
 
 $stmt = $pdo->prepare("
-    SELECT pv.*, p.product_title
+    SELECT pv.*,
+           p.product_title,
+           p.prod_desc,
+           c.category_name,
+           co.colour_name,
+           s.size_name
     FROM product_variants pv
     JOIN products p ON pv.product_id = p.product_id
+    JOIN product_categories c ON pv.category_id = c.category_id
+    JOIN product_colours co ON pv.colour_id = co.colour_id
+    LEFT JOIN product_sizes s ON pv.size_id = s.size_id
     WHERE pv.prod_variant_id = ?
 ");
 $stmt->execute([$prod_variant_id]);
@@ -27,7 +36,6 @@ $categories = $pdo->query("SELECT * FROM product_categories")->fetchAll(PDO::FET
 $colours = $pdo->query("SELECT * FROM product_colours")->fetchAll(PDO::FETCH_ASSOC);
 $sizes = $pdo->query("SELECT * FROM product_sizes")->fetchAll(PDO::FETCH_ASSOC);
 
-// Handle form submission
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $category_id = intval($_POST['category_id']);
     $colour_id = intval($_POST['colour_id']);
@@ -36,6 +44,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $quantity = intval($_POST['quantity']);
     $price = floatval($_POST['price']);
     $image = $variant['image'];
+
+    $changes = [];
+
+    $new_category = $pdo->prepare("SELECT category_name FROM product_categories WHERE category_id = ?");
+    $new_category->execute([$category_id]);
+    $new_category = $new_category->fetchColumn();
+
+    $new_colour = $pdo->prepare("SELECT colour_name FROM product_colours WHERE colour_id = ?");
+    $new_colour->execute([$colour_id]);
+    $new_colour = $new_colour->fetchColumn();
+
+    $new_size = null;
+    if ($size_id) {
+        $new_size_stmt = $pdo->prepare("SELECT size_name FROM product_sizes WHERE size_id = ?");
+        $new_size_stmt->execute([$size_id]);
+        $new_size = $new_size_stmt->fetchColumn();
+    }
 
     if (!empty($_FILES['image']['name'])) {
         $target_dir = "../productspage/images/";
@@ -52,29 +77,56 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
-            $image = $image_name;
+            if ($image !== $image_name) {
+                $changes[] = "Image changed from '{$image}' to '{$image_name}'";
+                $image = $image_name;
+            }
         } else {
             die("Error uploading image.");
         }
     }
 
-    // Update product_variants (excluding prod_desc)
-    $update_stmt = $pdo->prepare("
-        UPDATE product_variants
-        SET category_id = ?, colour_id = ?, size_id = ?, quantity = ?, price = ?, image = ?
-        WHERE prod_variant_id = ?
-    ");
-    $update_stmt->execute([$category_id, $colour_id, $size_id, $quantity, $price, $image, $prod_variant_id]);
+    if ($new_category !== $variant['category_name']) {
+        $changes[] = "Category changed from '{$variant['category_name']}' to '{$new_category}'";
+    }
+    if ($new_colour !== $variant['colour_name']) {
+        $changes[] = "Colour changed from '{$variant['colour_name']}' to '{$new_colour}'";
+    }
+    if ($new_size !== $variant['size_name']) {
+        $changes[] = "Size changed from '{$variant['size_name']}' to '{$new_size}'";
+    }
+    if ($prod_desc !== $variant['prod_desc']) {
+        $changes[] = "Description updated";
+    }
+    if ($quantity !== $variant['quantity']) {
+        $changes[] = "Quantity changed from '{$variant['quantity']}' to '{$quantity}'";
+    }
+    if ($price !== $variant['price']) {
+        $changes[] = "Price changed from '£" . number_format($variant['price'], 2) . "' to '£" . number_format($price, 2) . "'";
+    }
 
-    // Update prod_desc in products
-    $update_desc_stmt = $pdo->prepare("
-        UPDATE products
-        SET prod_desc = ?
-        WHERE product_id = ?
-    ");
-    $update_desc_stmt->execute([$prod_desc, $variant['product_id']]);
+    if (!empty($changes)) {
+        $update_stmt = $pdo->prepare("
+            UPDATE product_variants
+            SET category_id = ?, colour_id = ?, size_id = ?, quantity = ?, price = ?, image = ?
+            WHERE prod_variant_id = ?
+        ");
+        $update_stmt->execute([$category_id, $colour_id, $size_id, $quantity, $price, $image, $prod_variant_id]);
 
-    echo "<script>alert('Product updated successfully!'); window.location.href='adminstock.php';</script>";
+        $update_desc_stmt = $pdo->prepare("
+            UPDATE products
+            SET prod_desc = ?
+            WHERE product_id = ?
+        ");
+        $update_desc_stmt->execute([$prod_desc, $variant['product_id']]);
+
+        $change_details = implode("; ", $changes);
+        logAdminAction($pdo, $_SESSION['user_id'], "Updated product variant ID '{$prod_variant_id}'. Changes: {$change_details}", "product_variants");
+
+        echo "<script>alert('Product updated successfully!'); window.location.href='adminstock.php';</script>";
+    } else {
+        echo "<script>alert('No changes detected.'); window.location.href='adminstock.php';</script>";
+    }
 }
 ?>
 <!DOCTYPE html>
