@@ -11,7 +11,12 @@ include_once('../navbar.php');
 $category_id = isset($_GET['category_id']) ? $_GET['category_id'] : null;
 $size = isset($_GET['size']) ? $_GET['size'] : null;
 $min_price = isset($_GET['min_price']) ? floatval($_GET['min_price']) : null;
-$max_price = isset($_GET['max_price']) ? floatval($_GET['max_price']) : null;
+
+$max_price_query = "SELECT CEIL(MAX(price) / 100) * 100 AS max_price FROM product_variants";
+$max_price_result = $pdo->query($max_price_query)->fetch(PDO::FETCH_ASSOC);
+$default_max_price = $max_price_result['max_price'] ?? 500; // Default if no products exist
+
+$max_price = isset($_GET['max_price']) ? floatval($_GET['max_price']) : $default_max_price;
 
 $category_query = "SELECT category_id, category_name FROM product_categories";
 $categories = $pdo->query($category_query)->fetchAll(PDO::FETCH_ASSOC);
@@ -33,7 +38,6 @@ $query = "
 ";
 $params = [];
 
-
 if (!empty($category_id)) {
     $query .= " AND pv.category_id = :category_id";
     $params[':category_id'] = $category_id;
@@ -41,10 +45,6 @@ if (!empty($category_id)) {
 if (!empty($size)) {
     $query .= " AND s.size_id = :size";
     $params[':size'] = $size;
-}
-if (!empty($min_price)) {
-    $query .= " AND pv.price >= :min_price";
-    $params[':min_price'] = $min_price;
 }
 if (!empty($max_price)) {
     $query .= " AND pv.price <= :max_price";
@@ -69,8 +69,6 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </head>
 <body>
     
-
-<!-- Filter Sidebar -->
 <div class="sidebar" id="filterSidebar">
     <h3>Filters</h3>
     <form method="GET" action="">
@@ -95,18 +93,15 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 </option>
             <?php endforeach; ?>
         </select>
-
-        <label for="min_price">Price:</label>
-        <input type="number" name="min_price" id="min_price" placeholder="Min" value="<?= $min_price ?>">
-        <input type="number" name="max_price" id="max_price" placeholder="Max" value="<?= $max_price ?>">
+<label for="priceRange">Price Range: <span id="priceDisplay">£0 - £<?= $max_price ?></span></label>
+<input type="range" id="priceRange" name="max_price" min="0" max="<?= $default_max_price ?>" step="1" value="<?= $max_price ?>" class="w-100">
+<input type="hidden" name="min_price" value="0">
 
         <button type="submit" class="btn btn-primary">Apply Filters</button>
         <button type="button" id="resetFilters" class="btn btn-secondary">Reset Filters</button>
     </form>
 </div>
 
-<!-- Products Display -->
- 
 <div class="container mt-4 d-flex justify-content-end">
     <div class="w-75">
         <h3 class="text-center">Store Page</h3>
@@ -136,19 +131,28 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </div>
 </div>
 
-
-
-
-
 <?php include_once '../footer.php'; ?>
 <script>
-  document.getElementById("resetFilters").addEventListener("click", function () {
-  window.location.href = window.location.pathname;
+document.addEventListener("DOMContentLoaded", function() {
+    const priceSlider = document.getElementById("priceRange");
+    const priceDisplay = document.getElementById("priceDisplay");
+    const resetButton = document.getElementById("resetFilters");
+
+    function updatePriceDisplay() {
+        priceDisplay.textContent = `£0 - £${priceSlider.value}`;
+    }
+
+    priceSlider.addEventListener("input", updatePriceDisplay);
+    updatePriceDisplay(); 
+
+    resetButton.addEventListener("click", function () {
+        window.location.href = window.location.pathname;
+    });
 });
 
 document.getElementById("searchInput").addEventListener("keyup", function() {
     var filter = this.value.toLowerCase();
-    var cards = document.querySelectorAll(".col-md-4"); // Selects product cards
+    var cards = document.querySelectorAll(".col-md-4"); 
 
     cards.forEach(card => {
         var productName = card.querySelector(".card-title").innerText.toLowerCase();
@@ -158,6 +162,5 @@ document.getElementById("searchInput").addEventListener("keyup", function() {
 
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-
 </body>
 </html>
