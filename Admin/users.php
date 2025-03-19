@@ -182,7 +182,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete'])) {
                                     </div>
                                     <div class="mb-3">
                                         <label>Email</label>
-                                        <input type="email" name="Email" class="form-control" value="<?php echo htmlspecialchars($customer['email']); ?>" required>
+                                        <input type="email" name="email" class="form-control" value="<?php echo htmlspecialchars($customer['email']); ?>" required>
                                     </div>
                                     <div class="mb-3">
                                         <label>Password</label>
