@@ -20,7 +20,7 @@ try {
             co.colour_name,
             s.size_name,
             pv.prod_variant_id,
-            pv.prod_desc,
+            p.prod_desc,
             pv.quantity,
             pv.image,
             pv.price
