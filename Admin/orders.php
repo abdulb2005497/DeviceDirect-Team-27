@@ -38,7 +38,7 @@ $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
 
     <style>
-        body { padding: 20px; }
+        body { font-family: 'Merriweather', serif; }
         .table th, .table td { vertical-align: middle; }
         .product-img { width: 50px; height: 50px; object-fit: cover; margin-right: 10px; }
         .order-items { display: none; }
@@ -47,7 +47,7 @@ $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <body>
 
 <div class="container">
-    <h2 class="mb-4 text-center">Order Management</h2>
+    <h2 class="mb-4 text-center" style="margin-top: 30px";>Order Management</h2>
     <input type="text" id="searchInput" class="form-control mb-3" placeholder="Search by customer name...">
 
     <table class="table table-bordered">
@@ -134,7 +134,9 @@ document.querySelectorAll(".toggle-items").forEach(button => {
 });
 </script>
 
-    
+   <!-- footer -->
+   <?php include '../footer.php'; ?>
+   <!-- footer -->
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
