@@ -68,6 +68,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
 </head>
 <body>
+    
 
 <!-- Filter Sidebar -->
 <div class="sidebar" id="filterSidebar">
@@ -105,9 +106,12 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </div>
 
 <!-- Products Display -->
+ 
 <div class="container mt-4 d-flex justify-content-end">
     <div class="w-75">
         <h3 class="text-center">Store Page</h3>
+        <input type="text" id="searchInput" class="form-control mb-3" placeholder="Search for products...">
+
         <div class="row">
             <?php if ($products): ?>
                 <?php foreach ($products as $product): ?>
@@ -138,9 +142,20 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <?php include_once '../footer.php'; ?>
 <script>
-document.getElementById("resetFilters").addEventListener("click", function () {
+  document.getElementById("resetFilters").addEventListener("click", function () {
   window.location.href = window.location.pathname;
 });
+
+document.getElementById("searchInput").addEventListener("keyup", function() {
+    var filter = this.value.toLowerCase();
+    var cards = document.querySelectorAll(".col-md-4"); // Selects product cards
+
+    cards.forEach(card => {
+        var productName = card.querySelector(".card-title").innerText.toLowerCase();
+        card.style.display = productName.includes(filter) ? "" : "none";
+    });
+});
+
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 

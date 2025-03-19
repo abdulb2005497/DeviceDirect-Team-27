@@ -32,14 +32,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $hashed_password = password_hash($password, PASSWORD_BCRYPT);
 
             try {
-                $stmt = $pdo->prepare("INSERT INTO users (first_name, last_name, email, phone, address, city, post_code, password, role)
-                                       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-                $stmt->execute([$first_name, $last_name, $email, $phone, $address, $city, $postcode, $hashed_password, $role]);
-                header("Location: login.php");
-                exit();
+                $stmt = $pdo->prepare("SELECT 1 FROM users WHERE LOWER(email) = LOWER(?) LIMIT 1");
+                $stmt->execute([$email]);
+                
+                if ($stmt->fetch()) {
+                    $email_error = true;
+                    $error_message = "This email is already registered. Please use another email.";
+                } else {
+                    // Insert new user
+                    $stmt = $pdo->prepare("INSERT INTO users (first_name, last_name, email, phone, address, city, post_code, password, role)
+                                           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                    $stmt->execute([$first_name, $last_name, $email, $phone, $address, $city, $postcode, $hashed_password, $role]);
+
+                    header("Location: login.php");
+                    exit();
+                }
             } catch (PDOException $e) {
                 if ($e->getCode() == 23000) {
                     $email_error = true;
+                    $error_message = "This email is already registered.";
                 } else {
                     $error_message = "Error. Please try again.";
                 }
