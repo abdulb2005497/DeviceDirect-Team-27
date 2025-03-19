@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 19, 2025 at 02:51 AM
+-- Generation Time: Mar 19, 2025 at 06:35 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,6 +20,20 @@ SET time_zone = "+00:00";
 --
 -- Database: `devicedirect`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin_logs`
+--
+
+CREATE TABLE `admin_logs` (
+  `admin_log_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `action` text NOT NULL,
+  `affected_table` varchar(255) DEFAULT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -62,7 +76,8 @@ CREATE TABLE `discounts` (
 --
 
 INSERT INTO `discounts` (`code_id`, `code`, `discount_value`, `discount_type`, `expires_at`, `is_active`, `created_at`) VALUES
-(2, 'DD', 10.00, 'percentage', '2025-12-20', 1, '2025-03-14 14:59:26');
+(2, 'DD', 10.00, 'percentage', '2025-12-20', 1, '2025-03-14 14:59:26'),
+(7, 'discount please', 25.00, 'percentage', '3222-12-24', 1, '2025-03-19 17:02:07');
 
 -- --------------------------------------------------------
 
@@ -89,11 +104,8 @@ CREATE TABLE `orders` (
 
 INSERT INTO `orders` (`order_id`, `user_id`, `first_name`, `last_name`, `total_price`, `date_ordered`, `status`, `address`, `city`, `postal_code`) VALUES
 (9, 6, 'aaa', 'a', 41.98, '2025-02-15 18:49:00', 'pending', 'a', 'a', 'a'),
-(10, 6, 'a', 'a', 989.96, '2025-02-15 19:11:41', 'pending', 'a', 'a', 'a'),
-(11, 6, 'a', 'a', 1049.95, '2025-02-16 16:48:23', 'shipped', 'a', 'a', 'a'),
-(12, 8, 'Munib', 'shafi', 149.99, '2025-03-11 17:21:20', 'pending', '57A RHYDYPENAU ROAD', 'Cardiff', 'CF23 6PY'),
 (13, 8, 'Munib', 'shafi', 459.98, '2025-03-11 17:33:56', 'shipped', '57A RHYDYPENAU ROAD', 'Cardiff', 'CF23 6PY'),
-(16, 6, 'Munib', 'shafi', 269.98, '2025-03-14 14:59:40', 'processing', '57A RHYDYPENAU ROAD', 'Cardiff', 'CF23 6PY');
+(16, 6, 'Munib', 'shafi', 269.98, '2025-03-14 14:59:40', 'delivered', '57A RHYDYPENAU ROAD', 'Cardiff', 'CF23 6PY');
 
 -- --------------------------------------------------------
 
@@ -143,8 +155,8 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`product_id`, `product_title`, `prod_desc`) VALUES
-(1, 'Samsung 8K HDR Smart TV ', 'Experience breath-taking visuals with the Samsung 8K HDR Smart TV. Featuring Quantum Dot Technology and AI-powered upscaling, this television delivers ultra-sharp clarity, vibrant colours, and deep contrasts. With Dolby Atmos and Object Tracking Sound, it creates an immersive cinematic experience. Powered by Tizen OS, it provides seamless access to apps like Netflix, YouTube, and Disney+.'),
-(2, 'KOORUI Gaming Monitor, 165Hz, FHD, IPS', 'The KOORUI Gaming Monitor is built for competitive gamers who demand high performance. With a 165Hz refresh rate and 1ms response time, it eliminates motion blur and ensures ultra-smooth gameplay. The IPS panel offers vibrant colors and wide viewing angles, while adaptive sync technology prevents screen tearing. Perfect for eSports and fast-paced action games.\n\n'),
+(1, 'Samsung 8K HDR Smart TV ', 'Experience breathtaking visuals with the Samsung 8K HDR Smart TV. Featuring Quantum Dot Technology and AI-powered upscaling, this television delivers ultra-sharp clarity, vibrant colors, and deep contrasts. With Dolby Atmos and Object Tracking Sound, it creates an immersive cinematic experience. Powered by Tizen OS, it provides seamless access to apps like Netflix, YouTube, and Disney+.'),
+(2, 'KOORUI Gaming Monitor, 165Hz, FHD, IPS', 'The KOORUI Gaming Monitor is built for competitive gamers who demand high performance. With a 165Hz refresh rate and 1ms response time, it eliminates motion blur and ensures ultra-smooth gameplay. The IPS panel offers vibrant colours and wide viewing angles, while adaptive sync technology prevents screen tearing. Perfect for eSports and fast-paced action games.'),
 (3, 'LG UR78 UHD 4K Smart TV', 'Upgrade your entertainment with the LG UR78 UHD 4K Smart TV. Featuring a 4K UHD display with HDR10 support, it delivers exceptional picture quality and realism. Powered by the α5 AI Processor Gen6, it enhances contrast and sharpness in real-time. With webOS, you can access streaming services effortlessly, and ThinQ AI enables voice control for a smart home experience.'),
 (4, 'Samsung Galaxy Book', 'The Samsung Galaxy Book is a sleek and lightweight laptop designed for professionals and students. Featuring a 13th Gen Intel Core processor, AMOLED display, and long battery life, it ensures seamless multitasking and stunning visuals. With Wi-Fi 6E support, S Pen compatibility, and Samsung ecosystem integration, it\'s perfect for work, creativity, and entertainment.\n\n'),
 (5, 'Razer Blade 16', 'The Razer Blade 16 is a powerhouse gaming laptop featuring an Intel Core i9 processor, NVIDIA GeForce RTX 4090 GPU, and a 16-inch Mini-LED dual-mode display. With a 240Hz refresh rate, per-key RGB backlit keyboard, and advanced cooling system, it delivers top-tier performance for gamers and creators alike.\n\n'),
@@ -166,7 +178,15 @@ INSERT INTO `products` (`product_id`, `product_title`, `prod_desc`) VALUES
 (24, 'Skullcandy Crusher® ANC 2', 'The Skullcandy Crusher ANC 2 headphones are built for bass lovers, featuring adjustable sensory bass, Active Noise Cancellation, and personalized audio tuning. With up to 50 hours of battery life, multipoint Bluetooth connectivity, and built-in Tile tracking, they’re the ultimate travel and music companion.\n'),
 (25, 'JBL Endurance Peak 3', 'The JBL Endurance Peak 3 are true wireless sports earbuds designed for active lifestyles. Featuring IP68 water and dust resistance, they can withstand intense workouts and outdoor adventures. With JBL Pure Bass Sound, PowerHook™ design for a secure fit, and 50 hours of total battery life, they deliver powerful audio wherever you go.\n\n'),
 (26, 'Hisense E4NTUK Smart ', 'The Hisense E4NTUK Smart TV delivers 4K UHD resolution, Dolby Vision HDR, and AI-powered image processing for a stunning viewing experience. Running on VIDAA OS, it provides easy access to streaming services like Netflix, Prime Video, and YouTube. With voice control support, Game Mode Plus, and a sleek design, it’s an excellent entertainment hub for any home.\n\n'),
-(27, 'Sony  BRAVIA X75WL 4K Ultra HD HDR Smart Google TV', 'The Sony BRAVIA X75WL is a 4K Ultra HD Smart TV powered by Google TV. Featuring X-Reality PRO upscaling, Motionflow XR technology, and HDR10 support, it delivers crystal-clear visuals with smooth motion. With Dolby Audio, Google Assistant integration, and Chromecast built-in, it offers a seamless smart home experience.\n\n');
+(27, 'Sony  BRAVIA X75WL 4K Ultra HD HDR Smart Google TV', 'The Sony BRAVIA X75WL is a 4K Ultra HD Smart TV powered by Google TV. Featuring X-Reality PRO upscaling, Motionflow XR technology, and HDR10 support, it delivers crystal-clear visuals with smooth motion. With Dolby Audio, Google Assistant integration, and Chromecast built-in, it offers a seamless smart home experience.\n\n'),
+(28, 'asdasd', ''),
+(29, 'asdasd', ''),
+(30, 'asdasd', 'asd'),
+(31, 'asd', 'asd'),
+(32, 'asd', 'asd'),
+(33, 'test produt', 'TEST DESC'),
+(34, 'asd', 'asd'),
+(35, 'new prod', 'log testSSSSS');
 
 -- --------------------------------------------------------
 
@@ -262,7 +282,7 @@ CREATE TABLE `product_variants` (
 --
 
 INSERT INTO `product_variants` (`prod_variant_id`, `product_id`, `category_id`, `colour_id`, `size_id`, `quantity`, `image`, `price`) VALUES
-(1, 1, 2, 1, 5, 99, 'samsung 40.jpg', 199.99),
+(1, 1, 2, 1, 5, 99, 'samsung 40.jpg', 249.99),
 (2, 3, 2, 1, 5, 99, '4k lg 40.jpg', 249.99),
 (5, 1, 2, 1, 6, 99, 'samsung 60.jpg', 249.99),
 (7, 3, 2, 1, 6, 99, '4k lg 60.jpg', 299.99),
@@ -400,13 +420,19 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`user_id`, `first_name`, `last_name`, `email`, `phone`, `address`, `city`, `post_code`, `password`, `role`, `created_at`) VALUES
 (6, 'devicedirect', 'no', 'dd@gmail.com', '0123123123213', 'aston', 'cf', '0', '$2y$10$xypKa5bQPE3XFfMMm5pBjeDXMjYtwXHu01tkqRQECZg./OGMqgGtC', 'admin', '2025-02-09 13:52:25'),
-(7, 'cust', 'customer', 'customer@gmail.com', '07745993464', '57A RHYDYPENAU ROAD', '0', '0', '$2y$10$G.YvchFny3FK0Ms1GBcR9OXUlsvDG8pkLlNzMLlH.bM1k6PQ1bdoK', 'user', '2025-03-11 16:34:22'),
-(8, 'customER', 'customer', 'c@gmail.com', '07745993464', '57A RHYDYPENAU ROAD', '0', '0', '$2y$10$.WNvMiTx.4C.Q6NngJTcn.V2WD77EJm1i.PtP1UorbJ7SvHFpb12C', 'user', '2025-03-11 16:49:41'),
+(8, 'Best', 'Customer', 'c@hotmail.com', '07745993464', '57A RHYDYPENAU', 'Birmingham', 'B5 5JRw', '$2y$10$q2pfxvedNgw3CVmUIFKz8uMDRlaDbTUk9HN.2Bwn8QiSDfiCZdQtu', 'user', '2025-03-11 16:49:41'),
 (9, 'Munib', 'shafi', 'munib.s2005@gmail.com', '07745993464', '57A RHYDYPENAU ROAD', 'Cardiff', 'CF23 6PY', '$2y$10$ES1sJeqr4I1CYcgJbwWkAu1Yq4zNFrybVMS/Cwh7EbFAjOiTK/WkO', 'user', '2025-03-18 11:02:58');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `admin_logs`
+--
+ALTER TABLE `admin_logs`
+  ADD PRIMARY KEY (`admin_log_id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indexes for table `cart`
@@ -500,6 +526,12 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `admin_logs`
+--
+ALTER TABLE `admin_logs`
+  MODIFY `admin_log_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
@@ -509,7 +541,7 @@ ALTER TABLE `cart`
 -- AUTO_INCREMENT for table `discounts`
 --
 ALTER TABLE `discounts`
-  MODIFY `code_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `code_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `orders`
@@ -521,7 +553,7 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `product_categories`
@@ -545,7 +577,7 @@ ALTER TABLE `product_sizes`
 -- AUTO_INCREMENT for table `product_variants`
 --
 ALTER TABLE `product_variants`
-  MODIFY `prod_variant_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+  MODIFY `prod_variant_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
 
 --
 -- AUTO_INCREMENT for table `prod_reviews`
@@ -563,11 +595,17 @@ ALTER TABLE `queries`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `admin_logs`
+--
+ALTER TABLE `admin_logs`
+  ADD CONSTRAINT `admin_logs_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `cart`
