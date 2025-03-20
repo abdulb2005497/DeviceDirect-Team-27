@@ -12,6 +12,20 @@ if (!isset($_SESSION['wishlist'])) {
     $_SESSION['wishlist'] = [];
 }
 
+// Flash message system
+function set_flash_message($message) {
+    $_SESSION['flash_message'] = $message;
+}
+
+function get_flash_message() {
+    if (isset($_SESSION['flash_message'])) {
+        $message = $_SESSION['flash_message'];
+        unset($_SESSION['flash_message']);
+        return $message;
+    }
+    return null;
+}
+
 // Adding item to wishlist
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_wishlist'])) {
     $variant_id = $_POST['variant_id'] ?? null;
@@ -22,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_wishlist'])) {
     $image = $_POST['image'] ?? 'default.jpg';
     $price = $_POST['price'] ?? 0.00;
 
-    if ($variant_id) {
+    if ($variant_id && ctype_digit($variant_id)) {
         $_SESSION['wishlist'][$variant_id] = [
             'product_title' => $product_title,
             'category_name' => $category_name,
@@ -31,6 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_wishlist'])) {
             'image' => $image,
             'price' => $price
         ];
+        set_flash_message("Item added to wishlist!");
     }
 }
 
@@ -40,6 +55,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['remove_from_wishlist'
     
     if ($variant_id && isset($_SESSION['wishlist'][$variant_id])) {
         unset($_SESSION['wishlist'][$variant_id]);
+        set_flash_message("Item removed from wishlist!");
+    }
+}
+
+// Moving item to cart
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['move_to_cart'])) {
+    $variant_id = $_POST['variant_id'] ?? null;
+    
+    if ($variant_id && isset($_SESSION['wishlist'][$variant_id])) {
+        $item = $_SESSION['wishlist'][$variant_id];
+        unset($_SESSION['wishlist'][$variant_id]);
+
+        // Assuming you have a function to add items to cart
+        add_to_cart($variant_id, $item['product_title'], $item['category_name'], $item['colour_name'], $item['size_name'], $item['image'], $item['price']);
+
+        set_flash_message("Item moved to cart!");
     }
 }
 
@@ -61,35 +92,5 @@ $wishlist_items = $_SESSION['wishlist'];
 <div class="container mt-5">
     <h2>Your Wishlist</h2>
     <hr>
-    
-    <?php if ($wishlist_items): ?>
-        <div class="row">
-            <?php foreach ($wishlist_items as $variant_id => $item): ?>
-                <div class="col-md-4 mb-4">
-                    <div class="card">
-                        <img src="../productspage/images/<?= htmlspecialchars($item['image']) ?>" class="card-img-top" alt="<?= htmlspecialchars($item['product_title']) ?>">
-                        <div class="card-body">
-                            <h5 class="card-title"> <?= htmlspecialchars($item['product_title']) ?> </h5>
-                            <p class="text-muted">Category: <?= htmlspecialchars($item['category_name']) ?></p>
-                            <p class="text-muted">Colour: <?= htmlspecialchars($item['colour_name']) ?></p>
-                            <p class="text-muted">Size: <?= htmlspecialchars($item['size_name']) ?></p>
-                            <h4 class="text-success">£<?= number_format($item['price'], 2) ?></h4>
-                            
-                            <form method="post" class="mt-2">
-                                <input type="hidden" name="variant_id" value="<?= $variant_id ?>">
-                                <button type="submit" name="remove_from_wishlist" class="btn btn-danger w-100">Remove from Wishlist</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            <?php endforeach; ?>
-        </div>
-    <?php else: ?>
-        <p>Your wishlist is empty. Start adding your favourite products!</p>
-    <?php endif; ?>
-</div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-
-</body>
-</html>
+    <!-- Display flash message
