@@ -36,6 +36,7 @@
 2️⃣ Configure the database:
    - Import `devicedirect.sql` into **MySQL**.
    - Update database credentials in the `config` directory.
+     
 3️⃣ Run the application using a local server (e.g., **XAMPP** or **WAMP**).
 
 ---
