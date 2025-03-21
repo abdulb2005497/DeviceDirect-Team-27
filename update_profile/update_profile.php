@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
     // Update user data
     $sql = "UPDATE users SET First_name = ?, Last_name = ?, Email = ?, Phone = ?, Address = ? WHERE user_id = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sssssssi", $First_name, $Last_name, $Email, $Phone, $Address, $user_id);
+    $stmt->bind_param("sssssi", $First_name, $Last_name, $Email, $Phone, $Address, $user_id);
 
     if ($stmt->execute()) {
         $_SESSION['message'] = "Profile updated successfully";
@@ -71,6 +71,15 @@ $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
 $result = $stmt->get_result();
+
+if ($result->num_rows == 0) {
+    // No user found with this ID
+    $_SESSION['message'] = "User not found in database";
+    $_SESSION['message_type'] = "error";
+    header("Location: ../Login_page/login.php"); // Redirect to login
+    exit;
+}
+
 $user = $result->fetch_assoc();
 $stmt->close();
 $conn->close();
@@ -110,31 +119,27 @@ $conn->close();
         <form action="update_profile.php" method="post">
             <div class="form-group">
                 <label for="First_name">First Name</label>
-                <input type="text" id="First_name" name="First_name" value="<?php echo htmlspecialchars($user['First_name']); ?>">
+                <input type="text" id="First_name" name="First_name" value="<?php echo isset($user['First_name']) ? htmlspecialchars($user['First_name']) : ''; ?>">
             </div>
+
             <div class="form-group">
                 <label for="Last_name">Last Name</label>
-                <input type="text" id="Last_name" name="Last_name" value="<?php echo htmlspecialchars($user['Last_name']); ?>">
+                <input type="text" id="Last_name" name="Last_name" value="<?php echo isset($user['Last_name']) ? htmlspecialchars($user['Last_name']): ''; ?>">
             </div>
 
             <div class="form-group">
                 <label for="Email">Email</label>
-                <input type="Email" id="Email" name="Email" value="<?php echo htmlspecialchars($user['Email']); ?>">
+                <input type="Email" id="Email" name="Email" value="<?php echo isset($user['Email']) ? htmlspecialchars($user['Email']): ''; ?>">
             </div>
 
             <div class="form-group">
                 <label for="Phone">Phone</label>
-                <input type="text" id="Phone" name="Phone" value="<?php echo htmlspecialchars($user['Phone']); ?>">
+                <input type="text" id="Phone" name="Phone" value="<?php echo isset($user['Phone']) ? htmlspecialchars($user['Phone']): ''; ?>">
             </div>
 
             <div class="form-group">
                 <label for="Address">Address</label>
-                <textarea id="Address" name="Address"><?php echo htmlspecialchars($user['Address']); ?></textarea>
-            </div>
-
-            <div class="form-group">
-                <label for="City">City</label>
-                <input type="text" id="City" name="City" value="<?php echo htmlspecialchars($user['City']); ?>">
+                <textarea id="Address" name="Address"><?php echo isset($user['Address']) ?htmlspecialchars($user['Address']): ''; ?></textarea>
             </div>
 
 
