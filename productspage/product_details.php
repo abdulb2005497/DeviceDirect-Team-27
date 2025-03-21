@@ -78,8 +78,7 @@ try {
             <form method="post">
                 <input type="hidden" name="variant_id" value="<?php echo $product['prod_variant_id']; ?>">
                 <label for="quantity" class="form-label">Quantity:</label>
-                <input type="number" id="quantity" name="quantity" value="1" min="1" class="form-control w-50 mb-3">
-                <button type='submit' name='add_to_cart' class="btn btn-primary w-100">Add to Cart</button>
+                <input type="number" id="quantity" name="quantity" value="1" min="1" max="<?php echo htmlspecialchars($product['quantity']); ?>" class="form-control w-50 mb-3">                <button type='submit' name='add_to_cart' class="btn btn-primary w-100">Add to Cart</button>
             </form>
             <br><h4 id="product-info" class="product-description">Product Details <br><br><?php echo htmlspecialchars(string: $product['prod_desc']) ?></h4>
 
@@ -92,7 +91,16 @@ try {
                 $user_id = $_SESSION['user_id'] ?? null;
                 $variant_id = $_POST['variant_id'] ?? null;
                 $quantity = $_POST['quantity'] ?? 1;
-
+                
+                
+                if ((int) $quantity > (int) $product['quantity']) {
+                    echo "<p class='text-danger mt-3'>Error: You cannot order more than the available stock (" 
+                         . htmlspecialchars((int) $product['quantity']) . ").</p>";
+                } else {
+                    echo "<p class='text-success mt-3'>Your order has been added successfully.</p>";
+                }
+                
+                
                 if ($user_id && $variant_id && $quantity) {
                     $result = addToCart($pdo, $user_id, $variant_id, $quantity);
                     if ($result) {
