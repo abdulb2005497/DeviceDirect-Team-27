@@ -59,6 +59,79 @@ try {
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
+
+<!--CSS styling for Reviews section-->
+<style>
+.reviews-section {
+        background-color: #f8f9fa;
+        padding: 20px 0;
+    }
+
+    .reviews-section .mb-3 {
+        background-color: #e9ecef;
+        padding: 15px;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+    }
+
+    .reviews-section .text-muted {
+        color: #6c757d !important;
+    }
+
+    .reviews-section .text-warning {
+        color: #ffc107 !important;
+    }
+
+    .reviews-section strong {
+        font-size: 1.1em;
+        color: #343a40;
+    }
+
+    .reviews-section p.mt-2 {
+        font-size: 1rem;
+        color: #495057;
+    }
+
+    .reviews-section small {
+        font-size: 0.8rem;
+        color: #6c757d;
+    }
+
+    .reviews-section .text-muted a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    .reviews-section .text-muted a:hover {
+        text-decoration: underline;
+    }
+
+    .reviews-section form {
+        margin-top: 30px;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+    }
+
+    .reviews-section form .form-label {
+        font-weight: bold;
+    }
+
+    .reviews-section form .star {
+        font-size: 1.5em;
+        cursor: pointer;
+    }
+
+    .reviews-section form button {
+        margin-top: 15px;
+    }
+
+    .reviews-section form button:hover {
+        background-color: #28a745;
+    }
+</style>
+
 </head>
 <body>
 
@@ -164,7 +237,7 @@ $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <!--Displaying Reviews on each page-->
 
-<div class ="mt-3">
+<div class ="reviews-section mt-3">
     <?php if ($reviews): ?>
         <?php foreach ($reviews as $review): ?>
             <div class = "mb-3 p-3 border rounded bg-light">
