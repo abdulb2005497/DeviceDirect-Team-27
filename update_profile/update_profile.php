@@ -92,6 +92,9 @@ $conn->close();
     
 </head>
 <body>
+    <!-- Navbar -->
+    <?php include '../navbar.php'; ?>
+    <!-- Navbar -->
     <div class="container">
         <h1>Update Your Profile</h1>
 
@@ -150,6 +153,9 @@ $conn->close();
             <a href="../Landing-Page/index.php">Back to Homepage</a>
         </div>
     </div>
+    <!-- footer -->
+    <?php include '../footer.php'; ?>
+   <!-- footer -->
 </body>
 
 </html>
