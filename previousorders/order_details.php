@@ -1,6 +1,6 @@
 <?php
 session_start();
-require '../config/db.php'; 
+require '../config/db.php';
 
 if (!isset($_SESSION['user_id'])) {
     header("Location: ../Login_page/login.php");
@@ -11,17 +11,18 @@ if (!isset($_GET['order_id'])) {
     die("Order ID is missing.");
 }
 
-$order_id = intval($_GET['order_id']); 
-$user_id = $_SESSION['user_id']; 
+$order_id = intval($_GET['order_id']);
+$user_id = $_SESSION['user_id'];
 
+// Fetch order info
 $stmt = $pdo->prepare("SELECT * FROM orders WHERE order_id = ? AND user_id = ?");
 $stmt->execute([$order_id, $user_id]);
 $order = $stmt->fetch(PDO::FETCH_ASSOC);
-
 if (!$order) {
     die("Order not found.");
 }
 
+// Fetch order items
 $itemStmt = $pdo->prepare("
     SELECT oi.*, p.product_title, pv.image 
     FROM order_items oi
@@ -31,6 +32,12 @@ $itemStmt = $pdo->prepare("
 ");
 $itemStmt->execute([$order_id]);
 $order_items = $itemStmt->fetchAll(PDO::FETCH_ASSOC);
+
+// Fetch refund status if exists
+$refundStatus = null;
+$refundStmt = $pdo->prepare("SELECT status FROM refund_requests WHERE order_id = ? AND user_id = ?");
+$refundStmt->execute([$order_id, $user_id]);
+$refundStatus = $refundStmt->fetchColumn();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -46,7 +53,6 @@ $order_items = $itemStmt->fetchAll(PDO::FETCH_ASSOC);
             font-family: 'Merriweather', serif;
             background-color: #f8f9fa;
         }
-
         .order-box {
             background: #fff;
             border-radius: 10px;
@@ -56,19 +62,16 @@ $order_items = $itemStmt->fetchAll(PDO::FETCH_ASSOC);
             margin: 50px auto;
             text-align: center;
         }
-
         .order-item {
             border-top: 1px solid #ddd;
             padding: 15px 0;
         }
-
         .order-item img {
             max-width: 100px;
             height: auto;
             border-radius: 5px;
             margin-bottom: 10px;
         }
-
         .btn-refund {
             background-color: #dc3545;
             color: white;
@@ -78,18 +81,9 @@ $order_items = $itemStmt->fetchAll(PDO::FETCH_ASSOC);
             border-radius: 5px;
             transition: 0.3s;
         }
-
         .btn-refund:hover {
             background-color: #b02a37;
         }
-
-        .refund-message {
-            color: green;
-            font-weight: bold;
-            margin-top: 15px;
-            display: none;
-        }
-
         .modal-content {
             border-radius: 10px;
         }
@@ -124,9 +118,25 @@ $order_items = $itemStmt->fetchAll(PDO::FETCH_ASSOC);
         <p>No items found in this order.</p>
     <?php endif; ?>
 
+    <!-- Refund Status Message -->
+    <?php if ($refundStatus): ?>
+        <div class="alert 
+            <?php echo $refundStatus === 'approved' ? 'alert-success' : 
+                        ($refundStatus === 'declined' ? 'alert-danger' : 'alert-warning'); ?>">
+            <?php if ($refundStatus === 'approved'): ?>
+                ✅ Your refund has been <strong>approved</strong>. It will arrive in <strong>7 working days</strong>.
+            <?php elseif ($refundStatus === 'declined'): ?>
+                ❌ Your refund request was <strong>rejected</strong>.
+            <?php else: ?>
+                ⏳ Your refund request is <strong>under review</strong>.
+            <?php endif; ?>
+        </div>
+    <?php endif; ?>
+
     <!-- Refund Button -->
-    <button class="btn btn-refund" data-bs-toggle="modal" data-bs-target="#refundModal">Request Refund</button>
-    <p class="refund-message">Your refund request is under review.</p>
+    <?php if (!$refundStatus): ?>
+        <button class="btn btn-refund" data-bs-toggle="modal" data-bs-target="#refundModal">Request Refund</button>
+    <?php endif; ?>
 </div>
 
 <!-- Refund Modal -->
@@ -158,7 +168,6 @@ $order_items = $itemStmt->fetchAll(PDO::FETCH_ASSOC);
 <?php include '../footer.php'; ?>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-
 <script>
 document.getElementById("refundForm").addEventListener("submit", function(event) {
     event.preventDefault();
@@ -182,12 +191,9 @@ document.getElementById("refundForm").addEventListener("submit", function(event)
             refundButton.innerText = "Refund Request Under Review";
             refundButton.style.backgroundColor = "gray";
             refundButton.disabled = true;
-
-            const message = document.querySelector(".refund-message");
-            message.style.display = "block";
-
             const modal = bootstrap.Modal.getInstance(document.getElementById("refundModal"));
             modal.hide();
+            location.reload(); // Refresh to show updated status
         } else {
             alert("Error: " + response);
         }
@@ -198,6 +204,5 @@ document.getElementById("refundForm").addEventListener("submit", function(event)
     });
 });
 </script>
-
 </body>
 </html>
