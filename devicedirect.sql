@@ -138,11 +138,16 @@ INSERT INTO `order_items` (`order_id`, `prod_id`, `colour_id`, `quantity`, `pric
 (13, 3, 3, 1, 309.99, 309.99, 6, 'No Request'),
 (16, 2, 1, 2, 149.99, 299.98, 3, 'No Request');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `products`
---
+CREATE TABLE refund_requests (
+    refund_id INT AUTO_INCREMENT PRIMARY KEY,
+    order_id INT NOT NULL,
+    user_id INT NOT NULL,
+    reason VARCHAR(255) NOT NULL,
+    status ENUM('pending', 'approved', 'rejected') DEFAULT 'pending',
+    request_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (order_id) REFERENCES orders(order_id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
+);
 
 CREATE TABLE `products` (
   `product_id` int(11) NOT NULL,
