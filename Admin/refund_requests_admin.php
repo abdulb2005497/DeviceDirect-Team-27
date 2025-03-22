@@ -79,7 +79,7 @@ $refunds = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <td><?= $refund['reviewed_at'] ?? '—' ?></td>
                         <td>£<?= number_format($refund['total_price'], 2) ?></td>
                         <td>
-                            <?php if ($refund['status'] === 'pending'): ?>
+                            <?php if ($refund['status'] === 'under_review'): ?>
                                 <a href="process_refund.php?id=<?= $refund['refund_id'] ?>&action=approve" class="btn btn-success btn-sm mb-1">Accept</a>
                                 <a href="process_refund.php?id=<?= $refund['refund_id'] ?>&action=decline" class="btn btn-danger btn-sm">Decline</a>
                             <?php else: ?>
