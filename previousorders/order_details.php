@@ -124,12 +124,12 @@ $order_items = $itemStmt->fetchAll(PDO::FETCH_ASSOC);
         <p>No items found in this order.</p>
     <?php endif; ?>
 
-    
+    <!-- Refund Button -->
     <button class="btn btn-refund" data-bs-toggle="modal" data-bs-target="#refundModal">Request Refund</button>
-    <p class="refund-message"> Your refund request is under review.</p>
+    <p class="refund-message">Your refund request is under review.</p>
 </div>
 
-
+<!-- Refund Modal -->
 <div class="modal fade" id="refundModal" tabindex="-1" aria-labelledby="refundModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content p-4">
@@ -164,25 +164,38 @@ document.getElementById("refundForm").addEventListener("submit", function(event)
     event.preventDefault();
 
     let refundReason = document.getElementById("refundReason").value;
-    let refundButton = document.querySelector(".btn-refund");
-    let refundMessage = document.querySelector(".refund-message");
-
     if (!refundReason) {
-        alert("Please select a refund reason.");
+        alert("Please select a reason.");
         return;
     }
 
-   
-    refundButton.innerText = "Processing...";
-    refundButton.disabled = true;
+    const formData = new FormData(this);
 
-    setTimeout(() => {
-        refundButton.innerText = "Refund Request Under Review";
-        refundButton.style.backgroundColor = "gray";
-        refundMessage.style.display = "block";
-        let modal = bootstrap.Modal.getInstance(document.getElementById('refundModal'));
-        modal.hide();
-    }, 1500);
+    fetch("submit_refund.php", {
+        method: "POST",
+        body: formData
+    })
+    .then(res => res.text())
+    .then(response => {
+        if (response.trim() === "success") {
+            const refundButton = document.querySelector(".btn-refund");
+            refundButton.innerText = "Refund Request Under Review";
+            refundButton.style.backgroundColor = "gray";
+            refundButton.disabled = true;
+
+            const message = document.querySelector(".refund-message");
+            message.style.display = "block";
+
+            const modal = bootstrap.Modal.getInstance(document.getElementById("refundModal"));
+            modal.hide();
+        } else {
+            alert("Error: " + response);
+        }
+    })
+    .catch(err => {
+        alert("Something went wrong.");
+        console.error(err);
+    });
 });
 </script>
 
