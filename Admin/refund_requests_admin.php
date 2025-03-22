@@ -7,9 +7,9 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
     exit();
 }
 
-// Fetch refund requests
+// Fetch refund requests with necessary info
 $stmt = $pdo->query("
-    SELECT rr.id, rr.order_id, rr.user_id, rr.reason, rr.status, rr.requested_at,
+    SELECT rr.refund_id, rr.order_id, rr.user_id, rr.reason, rr.status, rr.requested_at, rr.reviewed_at,
            u.first_name, u.last_name, o.total_price
     FROM refund_requests rr
     JOIN users u ON rr.user_id = u.user_id
@@ -23,25 +23,19 @@ $refunds = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Refund Requests</title>
+    <title>Admin - Refund Requests</title>
     <link rel="stylesheet" href="../assests/css/style.css?v=<?php echo time(); ?>">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Merriweather', serif;
-            background-color: #f8f9fa;
         }
-        .refund-box {
-            margin: 60px auto;
-            max-width: 1000px;
+        .container {
+            margin-top: 50px;
         }
-        .action-btn {
-            margin-right: 5px;
-        }
-        .table td, .table th {
+        .table th, .table td {
             vertical-align: middle;
-            text-align: center;
         }
     </style>
 </head>
@@ -49,7 +43,7 @@ $refunds = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <?php include '../navbar.php'; ?>
 
-<div class="container refund-box">
+<div class="container">
     <h2 class="text-center mb-4">Refund Requests</h2>
 
     <?php if (count($refunds) > 0): ?>
@@ -59,8 +53,9 @@ $refunds = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <th>Order ID</th>
                     <th>Customer</th>
                     <th>Reason</th>
-                    <th>Requested At</th>
                     <th>Status</th>
+                    <th>Requested At</th>
+                    <th>Reviewed At</th>
                     <th>Total (£)</th>
                     <th>Action</th>
                 </tr>
@@ -71,21 +66,22 @@ $refunds = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <td><?= $refund['order_id'] ?></td>
                         <td><?= htmlspecialchars($refund['first_name'] . ' ' . $refund['last_name']) ?></td>
                         <td><?= ucfirst(str_replace('_', ' ', $refund['reason'])) ?></td>
-                        <td><?= $refund['requested_at'] ?></td>
                         <td>
                             <?php if ($refund['status'] === 'pending'): ?>
                                 <span class="badge bg-warning text-dark">Pending</span>
                             <?php elseif ($refund['status'] === 'approved'): ?>
                                 <span class="badge bg-success">Approved</span>
-                            <?php elseif ($refund['status'] === 'declined'): ?>
+                            <?php else: ?>
                                 <span class="badge bg-danger">Declined</span>
                             <?php endif; ?>
                         </td>
+                        <td><?= $refund['requested_at'] ?></td>
+                        <td><?= $refund['reviewed_at'] ?? '—' ?></td>
                         <td>£<?= number_format($refund['total_price'], 2) ?></td>
                         <td>
                             <?php if ($refund['status'] === 'pending'): ?>
-                                <a href="process_refund.php?id=<?= $refund['id'] ?>&action=approve" class="btn btn-success btn-sm action-btn">Accept</a>
-                                <a href="process_refund.php?id=<?= $refund['id'] ?>&action=decline" class="btn btn-danger btn-sm">Decline</a>
+                                <a href="process_refund.php?id=<?= $refund['refund_id'] ?>&action=approve" class="btn btn-success btn-sm mb-1">Accept</a>
+                                <a href="process_refund.php?id=<?= $refund['refund_id'] ?>&action=decline" class="btn btn-danger btn-sm">Decline</a>
                             <?php else: ?>
                                 <em>No action</em>
                             <?php endif; ?>
