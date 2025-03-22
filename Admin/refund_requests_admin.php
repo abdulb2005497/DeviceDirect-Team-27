@@ -2,17 +2,20 @@
 session_start();
 require '../config/db.php';
 
-// OPTIONAL: Check if user is an admin here
-// if ($_SESSION['role'] !== 'admin') {
-//     die("Access denied.");
-// }
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
+    header("Location: ../Login_page/login.php");
+    exit();
+}
 
-$stmt = $pdo->query("SELECT rr.*, o.total_price, u.first_name, u.last_name 
-                     FROM refund_requests rr
-                     JOIN orders o ON rr.order_id = o.order_id
-                     JOIN users u ON rr.user_id = u.user_id
-                     ORDER BY requested_at DESC");
-
+// Fetch refund requests
+$stmt = $pdo->query("
+    SELECT rr.id, rr.order_id, rr.user_id, rr.reason, rr.status, rr.requested_at,
+           u.first_name, u.last_name, o.total_price
+    FROM refund_requests rr
+    JOIN users u ON rr.user_id = u.user_id
+    JOIN orders o ON rr.order_id = o.order_id
+    ORDER BY rr.requested_at DESC
+");
 $refunds = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
@@ -21,44 +24,71 @@ $refunds = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <head>
     <meta charset="UTF-8">
     <title>Refund Requests</title>
+    <link rel="stylesheet" href="../assests/css/style.css?v=<?php echo time(); ?>">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Merriweather', serif; }
+        .refund-box { margin-top: 40px; }
+        .action-btn { margin-right: 5px; }
+    </style>
 </head>
-<body class="p-4">
-    <div class="container">
-        <h2>Refund Requests</h2>
-        <table class="table table-bordered table-striped mt-4">
-            <thead>
+<body>
+
+<?php include '../navbar.php'; ?>
+
+<div class="container refund-box">
+    <h2 class="text-center mb-4">Refund Requests</h2>
+
+    <?php if (count($refunds) > 0): ?>
+        <table class="table table-bordered table-striped">
+            <thead class="table-dark">
                 <tr>
-                    <th>Request ID</th>
-                    <th>User</th>
                     <th>Order ID</th>
+                    <th>Customer</th>
                     <th>Reason</th>
-                    <th>Status</th>
                     <th>Requested At</th>
+                    <th>Status</th>
+                    <th>Total (£)</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($refunds as $r): ?>
+                <?php foreach ($refunds as $refund): ?>
                     <tr>
-                        <td><?= $r['id'] ?></td>
-                        <td><?= htmlspecialchars($r['first_name'] . ' ' . $r['last_name']) ?></td>
-                        <td><?= $r['order_id'] ?></td>
-                        <td><?= htmlspecialchars($r['reason']) ?></td>
-                        <td><?= ucfirst($r['status']) ?></td>
-                        <td><?= $r['requested_at'] ?></td>
+                        <td><?= $refund['order_id'] ?></td>
+                        <td><?= htmlspecialchars($refund['first_name'] . ' ' . $refund['last_name']) ?></td>
+                        <td><?= ucfirst(str_replace('_', ' ', $refund['reason'])) ?></td>
+                        <td><?= $refund['requested_at'] ?></td>
                         <td>
-                            <?php if ($r['status'] === 'pending'): ?>
-                                <a href="process_refund.php?id=<?= $r['id'] ?>&action=approve" class="btn btn-success btn-sm">Approve</a>
-                                <a href="process_refund.php?id=<?= $r['id'] ?>&action=reject" class="btn btn-danger btn-sm">Reject</a>
+                            <?php if ($refund['status'] === 'pending'): ?>
+                                <span class="badge bg-warning text-dark">Pending</span>
+                            <?php elseif ($refund['status'] === 'approved'): ?>
+                                <span class="badge bg-success">Approved</span>
                             <?php else: ?>
-                                <span class="text-muted">Processed</span>
+                                <span class="badge bg-danger">Declined</span>
+                            <?php endif; ?>
+                        </td>
+                        <td>£<?= number_format($refund['total_price'], 2) ?></td>
+                        <td>
+                            <?php if ($refund['status'] === 'pending'): ?>
+                                <a href="process_refund.php?id=<?= $refund['id'] ?>&action=approve" class="btn btn-success btn-sm action-btn">Accept</a>
+                                <a href="process_refund.php?id=<?= $refund['id'] ?>&action=decline" class="btn btn-danger btn-sm">Decline</a>
+                            <?php else: ?>
+                                <em>No action</em>
                             <?php endif; ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
-    </div>
+    <?php else: ?>
+        <p class="text-center">No refund requests found.</p>
+    <?php endif; ?>
+</div>
+
+<?php include '../footer.php'; ?>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>
