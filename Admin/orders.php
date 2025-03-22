@@ -76,10 +76,11 @@ $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <td><?= htmlspecialchars($order['status']) ?></td>
                 <td>£<?= number_format($order['total_price'], 2) ?></td>
                 <td>
-                    <button class="btn btn-info btn-sm toggle-items" data-order-id="<?= $order['order_id'] ?>">View Items</button>
-                    <a href="edit_order.php?id=<?= $order['order_id'] ?>" class="btn btn-warning btn-sm">Edit</a>
-                    <a href="delete_order.php?id=<?= $order['order_id'] ?>" class="btn btn-danger btn-sm">Delete</a>
-                </td>
+    <button class="btn btn-info btn-sm toggle-items" data-order-id="<?= $order['order_id'] ?>">View Items</button>
+    <a href="refund_requests_admin.php?order_id=<?= $order['order_id'] ?>" class="btn btn-success btn-sm">Review Refund</a>
+    <a href="edit_order.php?id=<?= $order['order_id'] ?>" class="btn btn-warning btn-sm">Edit</a>
+    <a href="delete_order.php?id=<?= $order['order_id'] ?>" class="btn btn-danger btn-sm">Delete</a>
+</td>
             </tr>
             <tr class="order-items" id="items-<?= $order['order_id'] ?>">
                 <td colspan="6">
