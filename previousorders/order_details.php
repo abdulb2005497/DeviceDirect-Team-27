@@ -176,7 +176,7 @@ document.getElementById("refundForm").addEventListener("submit", function(event)
     refundButton.innerText = "Processing...";
     refundButton.disabled = true;
 
-    // Simulating backend processing
+    
     setTimeout(() => {
         refundButton.innerText = "Refund Request Under Review";
         refundButton.style.backgroundColor = "gray";
