@@ -28,9 +28,21 @@ $refunds = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Merriweather', serif; }
-        .refund-box { margin-top: 40px; }
-        .action-btn { margin-right: 5px; }
+        body {
+            font-family: 'Merriweather', serif;
+            background-color: #f8f9fa;
+        }
+        .refund-box {
+            margin: 60px auto;
+            max-width: 1000px;
+        }
+        .action-btn {
+            margin-right: 5px;
+        }
+        .table td, .table th {
+            vertical-align: middle;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -65,7 +77,7 @@ $refunds = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 <span class="badge bg-warning text-dark">Pending</span>
                             <?php elseif ($refund['status'] === 'approved'): ?>
                                 <span class="badge bg-success">Approved</span>
-                            <?php else: ?>
+                            <?php elseif ($refund['status'] === 'declined'): ?>
                                 <span class="badge bg-danger">Declined</span>
                             <?php endif; ?>
                         </td>
