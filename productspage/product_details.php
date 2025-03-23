@@ -60,7 +60,9 @@ try {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
 
-<!--CSS styling for Reviews section-->
+
+    <!--CSS styling for Reviews section-->
+
 <style>
 .reviews-section {
         background-color: #f8f9fa;
@@ -149,7 +151,6 @@ try {
 </head>
 <body>
 
-
 <!-- Product Details Container -->
 <div class="container mt-5 product-container">
     <div class="row">
@@ -208,11 +209,12 @@ try {
 </div>
 
 <!--Reviews (NEW)-->
+
 <hr>
 <h3 class="mt-5">Customer Reviews</h3>
 
+<!--handling reviews submissions-->
 <?php
-//handling reviews submissions
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit_review'])) {
     $user_id = $_SESSION['user_id'] ?? null;
     $rating = intval($_POST['rating'] ?? 0);
@@ -251,9 +253,9 @@ $stmt = $pdo->prepare($review_query);
 $stmt->execute([':prod_variant_id' => $variant_id]);
 $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
+<!--handling reviews submissions-->
 
 <!--Displaying Reviews on each page-->
-
 <div class ="reviews-section mt-3">
     <?php if ($reviews): ?>
         <?php foreach ($reviews as $review): ?>
@@ -296,6 +298,7 @@ $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <p>No reviews yet. Be the first to review our AMAZING product!</p>
                         <?php endif; ?>
                     </div>
+<!--Displaying Reviews on each page-->
 
 <!--Form to submit reviews-->
 <?php if (isset($_SESSION['user_id'])): ?>
@@ -321,6 +324,7 @@ $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <?php else: ?>
                         <p class = "mt-3">You need to <a href= "../Login_page/login.php">log in to our website</a>to leave a review.</p>
                         <?php endif; ?>
+<!--Form to submit reviews-->
 
 <!--deleting reviews--> 
 <?php if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_review'])) {
@@ -337,6 +341,7 @@ $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
     echo "<meta http-equiv='refresh' content='0'>";
 }
 ?>
+<!--deleting reviews-->
 
 <!--editing reviews-->
 <?php if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_review'])) {
@@ -365,13 +370,15 @@ $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
 ?>
-
+<!--editing reviews-->
 
 <?php include_once'../footer.php';  ?>
 
 <script src="imgchange.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 
+
+<!--Javascript for the star rating-->
 <script>
     const stars = document.querySelectorAll('.star');
     const ratingInput = document.getElementById('rating');
@@ -387,7 +394,9 @@ for (let i = 0; i< value; i++){
 });
     });
 </script>
+<!--Javascript for the star rating-->
 
+<!--Javascript for editing-->
 <script>
  function showEditForm(reviewId, comment, rating) {
     document.querySelectorAll('[id^="edit-form-"]').forEach(form => form.classList.add('d-none'));
@@ -397,7 +406,7 @@ for (let i = 0; i< value; i++){
     document.getElementById('comment-' + reviewId).value = comment;
 }   
 </script>
-
+<!--Javascript for editing-->
 
 
 </body>
