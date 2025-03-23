@@ -4,6 +4,9 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 include_once('../navbar.php');
 include('../config/db.php');
+include ('../checkoutpage/cart_functions.php');
+include ('wishlist_function.php');
+
 
 if (!isset($_SESSION['user_id'])) {
     echo "<p class='text-danger mt-3'>You need to log in to view your wishlist.</p>";
@@ -15,7 +18,7 @@ $user_id = $_SESSION['user_id'];
 try {
     // Fetch products in the wishlist
     $query = "
-        SELECT 
+        SELECT
             p.product_title,
             ca.category_name,
             co.colour_name,
@@ -34,7 +37,7 @@ try {
     $stmt = $pdo->prepare($query);
     $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
     $stmt->execute();
-    
+
     $wishlist_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 } catch (PDOException $e) {
@@ -54,6 +57,41 @@ try {
 </head>
 <body>
 
+
+<style>
+.card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-img-top {
+  height: 300px;
+  object-fit: contain;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+
+.card-title {
+  font-size: 20;
+  font-weight: bold;
+}
+
+.card p {
+  margin-bottom: 5px;
+}
+
+.card .btn {
+  width: 100%; 
+  margin-top: auto;
+}
+
+</style>
 <div class="container mt-5">
     <h2>Your Wishlist</h2>
 
@@ -110,12 +148,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['remove_from_wishlist'
 
     if ($variant_id) {
         $remove_query = "
-            DELETE FROM wishlist 
+            DELETE FROM wishlist
             WHERE user_id = :user_id AND prod_variant_id = :variant_id
         ";
         $stmt = $pdo->prepare($remove_query);
         $stmt->execute([':user_id' => $user_id, ':variant_id' => $variant_id]);
-        
+
         echo "<meta http-equiv='refresh' content='0'>";
     }
 }
