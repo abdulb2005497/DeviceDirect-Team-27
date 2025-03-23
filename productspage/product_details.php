@@ -255,7 +255,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit_review'])) {
 }
 
 $review_query = "
-SELECT r.rating, r.comment, r.created_at, u.First_name, u.Last_name
+SELECT r.review_id, r.rating, r.comment, r.created_at, u.user_id, u.First_name, u.Last_name
 FROM prod_reviews r
 JOIN users u ON r.user_id = u.user_id
 WHERE r.prod_variant_id = :prod_variant_id
