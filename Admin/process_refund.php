@@ -8,8 +8,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
 }
 
 if (!isset($_GET['id']) || !isset($_GET['action'])) {
-    die("Invalid request.");
-}
+    die("Invalid request.");}
 
 $refund_id = intval($_GET['id']);
 $action = $_GET['action'];
