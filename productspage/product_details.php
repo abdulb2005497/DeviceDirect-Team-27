@@ -61,11 +61,8 @@ try {
     <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
 
 
-<<<<<<< HEAD
-=======
-    <!--CSS styling for Reviews section-->
 
->>>>>>> 7adbfc1e3a5bc39415ced544f4d024e2fd74e801
+<!--CSS styling for Reviews section-->
 <style>
 .reviews-section {
         background-color: #f8f9fa;
@@ -140,18 +137,11 @@ try {
     outline: none;
     box-shadow: none;
 }
-
 </style>
-
 </head>
+
 <body>
-
-<<<<<<< HEAD
-
-
-=======
 <!-- Product Details Container -->
->>>>>>> 7adbfc1e3a5bc39415ced544f4d024e2fd74e801
 <div class="container mt-5 product-container">
     <div class="row">
         <div class="col-md-6">
@@ -208,20 +198,12 @@ try {
     </div>
 </div>
 
-<<<<<<< HEAD
-=======
 <!--Reviews (NEW)-->
->>>>>>> 7adbfc1e3a5bc39415ced544f4d024e2fd74e801
 
 <hr>
 <h3 class="mt-5">Customer Reviews</h3>
-
 <!--handling reviews submissions-->
 <?php
-<<<<<<< HEAD
-
-=======
->>>>>>> 7adbfc1e3a5bc39415ced544f4d024e2fd74e801
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit_review'])) {
     $user_id = $_SESSION['user_id'] ?? null;
     $rating = intval($_POST['rating'] ?? 0);
@@ -245,9 +227,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit_review'])) {
             echo "<p class = 'text-danger'>Please provide a rating and a comment for the product.</p>";
         }
     
-
 }
-
 $review_query = "
 SELECT r.review_id, r.rating, r.comment, r.created_at, u.user_id, u.First_name, u.Last_name
 FROM prod_reviews r
@@ -262,12 +242,7 @@ $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <!--handling reviews submissions-->
 
-<<<<<<< HEAD
-
-
-=======
 <!--Displaying Reviews on each page-->
->>>>>>> 7adbfc1e3a5bc39415ced544f4d024e2fd74e801
 <div class ="reviews-section mt-3">
     <?php if ($reviews): ?>
         <?php foreach ($reviews as $review): ?>
