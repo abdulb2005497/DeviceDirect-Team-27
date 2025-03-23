@@ -40,8 +40,7 @@ $refunds = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <?php include '../navbar.php'; ?>
 <div class="container">
     <h2 class="text-center mb-4">Refund Requests</h2>
-
-    <?php if (count($refunds) > 0): ?>
+      <?php if (count($refunds) > 0): ?>
         <table class="table table-bordered table-striped">
             <thead class="table-dark">
                 <tr>
