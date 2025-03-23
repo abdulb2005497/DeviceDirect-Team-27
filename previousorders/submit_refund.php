@@ -17,7 +17,6 @@ if (!$order_id || !$reason) {
     echo "Missing required data.";
     exit();
 }
-
 try {
     $stmt = $pdo->prepare("INSERT INTO refund_requests (order_id, user_id, reason, status, requested_at) VALUES (?, ?, ?, 'under_review', NOW())");
     $stmt->execute([$order_id, $user_id, $reason]);
