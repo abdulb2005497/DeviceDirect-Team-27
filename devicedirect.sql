@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 19, 2025 at 06:35 PM
+-- Generation Time: Mar 24, 2025 at 12:34 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -35,6 +35,22 @@ CREATE TABLE `admin_logs` (
   `timestamp` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `admin_logs`
+--
+
+INSERT INTO `admin_logs` (`admin_log_id`, `user_id`, `action`, `affected_table`, `timestamp`) VALUES
+(1, 6, 'Updated product variant ID \'1\'. Changes: Colour changed from \'Black\' to \'Grey\'; Size changed from \'40 inch\' to \'30 inch\'; Price changed from \'£249.99\' to \'£249.99\'', 'product_variants', '2025-03-19 17:48:58'),
+(2, 6, 'Updated product variant ID \'1\'. Changes: Colour changed from \'Grey\' to \'Black\'; Size changed from \'30 inch\' to \'40 inch\'; Price changed from \'£249.99\' to \'£249.99\'', 'product_variants', '2025-03-19 17:50:04'),
+(3, 6, 'Updated user ID \'8\' (c@hotmail.com). Changes: First Name changed from \'Best\' to \'Bes\'; Email changed from \'c@hotmail.com\' to \'\'', 'users', '2025-03-19 18:03:34'),
+(4, 6, 'Added new product \'sara\' (ID: 36), Category: Headphones, Colour: White, Size: 25 inch, Price: £199.99, Quantity: 2', 'product_variants', '2025-03-19 20:24:09'),
+(5, 6, 'Updated product variant ID \'83\'. Changes: Category changed from \'Headphones\' to \'TVs\'; Colour changed from \'White\' to \'Grey\'; Size changed from \'25 inch\' to \'60 inch\'; Description updated; Quantity changed from \'2\' to \'22\'; Price changed from \'£199.99\' to \'£199.99\'', 'product_variants', '2025-03-19 20:24:36'),
+(6, 6, 'Deleted product variant ID 83 (Product: sara, Colour: Grey, Size: 60 inch, Product ID: 36)', 'product_variants', '2025-03-19 20:24:48'),
+(7, 6, 'Updated user ID \'8\' (). Changes: Email changed from \'\' to \'c@gmail.com\'', 'users', '2025-03-19 20:27:16'),
+(8, 13, 'Updated product variant ID \'1\'. Changes: Category changed from \'TVs\' to \'Headphones\'; Price changed from \'£249.99\' to \'£249.99\'', 'product_variants', '2025-03-21 14:25:09'),
+(9, 13, 'Updated product variant ID \'1\'. Changes: Category changed from \'Headphones\' to \'TVs\'; Price changed from \'£249.99\' to \'£249.99\'', 'product_variants', '2025-03-21 14:25:30'),
+(10, 6, 'Updated order #18 to status: Processing', 'orders', '2025-03-21 14:41:03');
+
 -- --------------------------------------------------------
 
 --
@@ -53,7 +69,10 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`cart_id`, `user_id`, `prod_variant_id`, `quantity`) VALUES
-(38, 8, 13, 4);
+(38, 8, 13, 4),
+(53, 16, 13, 1),
+(61, 17, 58, 2),
+(62, 6, 61, 2);
 
 -- --------------------------------------------------------
 
@@ -103,9 +122,11 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`order_id`, `user_id`, `first_name`, `last_name`, `total_price`, `date_ordered`, `status`, `address`, `city`, `postal_code`) VALUES
-(9, 6, 'aaa', 'a', 41.98, '2025-02-15 18:49:00', 'pending', 'a', 'a', 'a'),
-(13, 8, 'Munib', 'shafi', 459.98, '2025-03-11 17:33:56', 'shipped', '57A RHYDYPENAU ROAD', 'Cardiff', 'CF23 6PY'),
-(16, 6, 'Munib', 'shafi', 269.98, '2025-03-14 14:59:40', 'delivered', '57A RHYDYPENAU ROAD', 'Cardiff', 'CF23 6PY');
+(26, 6, 'Munib', 'shafi', 149.99, '2025-03-22 20:42:42', 'pending', '57A RHYDYPENAU ROAD', 'Cardiff', 'CF23 6PY'),
+(28, 6, 'asdasd', 'Shafi', 599.96, '2025-03-23 14:37:10', 'pending', 'Rhyd-Y-Penau Road', 'Cardiff', 'CF23 6PZ'),
+(29, 6, 'Munib', 'Shafi', 199.99, '2025-03-23 14:37:50', 'pending', 'Rhyd-Y-Penau Road', 'Cardiff', 'CF23 6PZ'),
+(30, 6, 'Munib', 'shafi', 299.98, '2025-03-23 14:50:00', 'pending', '57A RHYDYPENAU ROAD', 'Cardiff', 'CF23 6PY'),
+(32, 6, 'Munib', 'Shafi', 449.97, '2025-03-23 15:02:38', 'pending', 'Rhyd-Y-Penau Road', 'Cardiff', 'CF23 6PZ');
 
 -- --------------------------------------------------------
 
@@ -129,26 +150,17 @@ CREATE TABLE `order_items` (
 --
 
 INSERT INTO `order_items` (`order_id`, `prod_id`, `colour_id`, `quantity`, `price_per_unit`, `total_price`, `size_id`, `return_status`) VALUES
-(9, 8, 1, 2, 20.99, 41.98, 8, 'No Request'),
-(10, 1, 3, 1, 209.99, 209.99, 5, 'No Request'),
-(10, 3, 3, 3, 259.99, 779.97, 5, 'No Request'),
-(11, 1, 3, 5, 209.99, 1049.95, 5, 'No Request'),
-(12, 2, 1, 1, 149.99, 149.99, 3, 'No Request'),
-(13, 2, 1, 1, 149.99, 149.99, 3, 'No Request'),
-(13, 3, 3, 1, 309.99, 309.99, 6, 'No Request'),
-(16, 2, 1, 2, 149.99, 299.98, 3, 'No Request');
+(26, 2, 1, 1, 149.99, 149.99, 3, 'No Request'),
+(28, 2, 1, 4, 149.99, 599.96, 3, 'No Request'),
+(29, 2, 1, 1, 199.99, 199.99, 4, 'No Request'),
+(30, 2, 1, 2, 149.99, 299.98, 3, 'No Request'),
+(32, 2, 1, 3, 149.99, 449.97, 3, 'No Request');
 
-CREATE TABLE refund_requests (
-    refund_id INT AUTO_INCREMENT PRIMARY KEY,
-    order_id INT NOT NULL,
-    user_id INT NOT NULL,
-    reason VARCHAR(255),
-    status ENUM('pending', 'approved', 'declined') DEFAULT 'pending',
-    requested_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    reviewed_at DATETIME NULL,
-    FOREIGN KEY (order_id) REFERENCES orders(order_id) ON DELETE CASCADE,
-    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
-);
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `products`
+--
 
 CREATE TABLE `products` (
   `product_id` int(11) NOT NULL,
@@ -192,7 +204,8 @@ INSERT INTO `products` (`product_id`, `product_title`, `prod_desc`) VALUES
 (32, 'asd', 'asd'),
 (33, 'test produt', 'TEST DESC'),
 (34, 'asd', 'asd'),
-(35, 'new prod', 'log testSSSSS');
+(35, 'new prod', 'log testSSSSS'),
+(36, 'sara', 'sarassssss');
 
 -- --------------------------------------------------------
 
@@ -288,14 +301,14 @@ CREATE TABLE `product_variants` (
 --
 
 INSERT INTO `product_variants` (`prod_variant_id`, `product_id`, `category_id`, `colour_id`, `size_id`, `quantity`, `image`, `price`) VALUES
-(1, 1, 2, 1, 5, 99, 'samsung 40.jpg', 249.99),
+(1, 1, 2, 1, 5, 0, 'samsung 40.jpg', 249.99),
 (2, 3, 2, 1, 5, 99, '4k lg 40.jpg', 249.99),
 (5, 1, 2, 1, 6, 99, 'samsung 60.jpg', 249.99),
 (7, 3, 2, 1, 6, 99, '4k lg 60.jpg', 299.99),
 (9, 1, 2, 1, 7, 99, 'samsung 80.jpg', 299.99),
 (11, 3, 2, 1, 7, 99, '4k lg 80.jpg', 349.99),
-(13, 2, 1, 1, 3, 97, 'koorui 20.jpg', 149.99),
-(17, 2, 1, 1, 4, 99, 'koorui 30.jpg', 199.99),
+(13, 2, 1, 1, 3, 82, 'koorui 20.jpg', 149.99),
+(17, 2, 1, 1, 4, 98, 'koorui 30.jpg', 199.99),
 (19, 16, 1, 1, 4, 99, 'phillips 30 black.jpg', 249.99),
 (20, 16, 1, 3, 4, 99, 'phillips 30 white.jpg', 259.99),
 (21, 4, 3, 1, 1, 99, 'gbook black.jpg', 399.99),
@@ -370,7 +383,8 @@ CREATE TABLE `prod_reviews` (
 
 INSERT INTO `prod_reviews` (`review_id`, `prod_variant_id`, `user_id`, `rating`, `comment`, `created_at`) VALUES
 (6, 17, 6, 4, 'balasdsad', '2025-03-18 12:44:18'),
-(7, 13, 6, 5, 'good', '2025-03-18 12:51:16');
+(8, 13, 14, 4, 'good', '2025-03-21 14:38:45'),
+(9, 58, 17, 4, 'ad', '2025-03-23 18:20:45');
 
 -- --------------------------------------------------------
 
@@ -398,7 +412,35 @@ INSERT INTO `queries` (`query_id`, `user_id`, `fullname`, `email`, `query_text`,
 (30, 8, 'asdasd', 'munib.s2005@gmail.com', 'asd', 'No'),
 (31, 8, 'Munib shafi', 'munib.s2005@gmail.com', 'asdasd', 'No'),
 (32, 8, 'asd', 'munib.s2005@gmail.com', 'adddd', 'No'),
-(33, 8, 'Munib shafi', 'munib.s2005@gmail.com', 'asdasd', 'No');
+(33, 8, 'Munib shafi', 'munib.s2005@gmail.com', 'asdasd', 'No'),
+(34, 17, 'Munib shafi', 'munib.s2005@gmail.com', 'asd', 'No');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `refund_requests`
+--
+
+CREATE TABLE `refund_requests` (
+  `refund_id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `reason` varchar(255) DEFAULT NULL,
+  `status` varchar(20) DEFAULT NULL,
+  `requested_at` datetime DEFAULT current_timestamp(),
+  `reviewed_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `refund_requests`
+--
+
+INSERT INTO `refund_requests` (`refund_id`, `order_id`, `user_id`, `reason`, `status`, `requested_at`, `reviewed_at`) VALUES
+(1, 28, 13, 'wrong', 'approved', '2025-03-22 20:25:29', '2025-03-23 14:36:47'),
+(2, 29, 13, 'late', 'approved', '2025-03-23 14:37:52', '2025-03-23 14:43:54'),
+(3, 30, 13, 'late', 'under_review', '2025-03-23 14:39:28', NULL),
+(4, 31, 14, 'late', 'under_review', '2025-03-23 14:41:44', NULL),
+(5, 27, 17, 'wrong', 'under_review', '2025-03-23 14:44:34', NULL);
 
 -- --------------------------------------------------------
 
@@ -425,9 +467,26 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `first_name`, `last_name`, `email`, `phone`, `address`, `city`, `post_code`, `password`, `role`, `created_at`) VALUES
-(6, 'devicedirect', 'no', 'dd@gmail.com', '0123123123213', 'aston', 'cf', '0', '$2y$10$xypKa5bQPE3XFfMMm5pBjeDXMjYtwXHu01tkqRQECZg./OGMqgGtC', 'admin', '2025-02-09 13:52:25'),
-(8, 'Best', 'Customer', 'c@hotmail.com', '07745993464', '57A RHYDYPENAU', 'Birmingham', 'B5 5JRw', '$2y$10$q2pfxvedNgw3CVmUIFKz8uMDRlaDbTUk9HN.2Bwn8QiSDfiCZdQtu', 'user', '2025-03-11 16:49:41'),
-(9, 'Munib', 'shafi', 'munib.s2005@gmail.com', '07745993464', '57A RHYDYPENAU ROAD', 'Cardiff', 'CF23 6PY', '$2y$10$ES1sJeqr4I1CYcgJbwWkAu1Yq4zNFrybVMS/Cwh7EbFAjOiTK/WkO', 'user', '2025-03-18 11:02:58');
+(6, 'devicedirect', 'no', 'dd@gmail.com', '0123123123213', 'aston', 'cf', '0', '$2y$10$KBDtnyDFN5MQ4B34RXTPJedHNvq2EGi4bRhm4zyPY8tojxY.TDtru', 'admin', '2025-02-09 13:52:25'),
+(8, 'Bes', 'Customer', 'c@gmail.com', '07745993464', '57A RHYDYPENAU', 'Birmingham', 'B5 5JRw', '$2y$10$wrh7aNiAc/MwZqWBLGFfvOGYs81269aUe/0u80rHnMmmd.mMOHpi.', 'user', '2025-03-11 16:49:41'),
+(13, 'Munib', 'shafi', 'dd1@gmail.com', '07745993464', 'aston', 'university', 'b5 5jr', '$2y$10$l5xrPvTRiFgVz/oF8svnt.gEi8pCLGCg/QjgxwphWXL94sxlGZ5t6', 'admin', '2025-03-21 14:14:05'),
+(14, 'Munib', 'shafi', 'munib@gmail.com', '07745993464', '57A RHYDYPENAU ROAD', 'Cardiff', 'CF23 6PY', '$2y$10$P5uRj4PrDLOsCMWjoWBcXOr8.i1WxxbHrasXX5psfGgEHGay9y3h6', 'user', '2025-03-21 14:37:53'),
+(15, 'Munib', 'shafi', 'testuser@gmail.com', '07745993464', '57A RHYDYPENAU ROAD', 'Cardiff', 'CF23 6PY', '$2y$10$cYPG6bzSng.U2B0fLiUI7.weFArXzQV.SL3EdlOvgs.r0A4tSW.Gq', 'user', '2025-03-22 22:11:14'),
+(16, 'test', 'test', 'test@test.com', '07745993464', '57A RHYDYPENAU ROAD', 'Cardiff', 'CF23 6PY', '$2y$10$fAXSrQTls5o1Sn386on6xOsvr689IIP0ddD7UGKeuHsdeCFu/9Bki', 'user', '2025-03-22 22:58:55'),
+(17, 'Munib', 'shafi', 'test@gmail.com', '07745993464', '57A RHYDYPENAU ROAD', 'Cardiff', 'CF23 6PY', '$2y$10$dMIQMa.JI08IxokzVjvysOT6oRk5zsXz2T9wVXoU0JqDYYPhw2l.S', 'user', '2025-03-23 01:24:16'),
+(19, 'Munib', 'shafi', 'munib.s2005@gmail.com', '07745993464', '57A RHYDYPENAU ROAD', 'Cardiff', 'CF23 6PY', '$2y$10$plqTCfzw8y4RxrP1341IOucK0RLFDdGD7E/lGvYLvrKlTPMNlrLka', 'user', '2025-03-23 22:42:03');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `wishlist`
+--
+
+CREATE TABLE `wishlist` (
+  `wishlist_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `prod_variant_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Indexes for dumped tables
@@ -522,10 +581,26 @@ ALTER TABLE `queries`
   ADD KEY `user_id` (`user_id`);
 
 --
+-- Indexes for table `refund_requests`
+--
+ALTER TABLE `refund_requests`
+  ADD PRIMARY KEY (`refund_id`),
+  ADD KEY `order_id` (`order_id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`user_id`);
+
+--
+-- Indexes for table `wishlist`
+--
+ALTER TABLE `wishlist`
+  ADD PRIMARY KEY (`wishlist_id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `prod_variant_id` (`prod_variant_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -535,13 +610,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `admin_logs`
 --
 ALTER TABLE `admin_logs`
-  MODIFY `admin_log_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `admin_log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT for table `discounts`
@@ -553,13 +628,13 @@ ALTER TABLE `discounts`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `product_categories`
@@ -583,25 +658,37 @@ ALTER TABLE `product_sizes`
 -- AUTO_INCREMENT for table `product_variants`
 --
 ALTER TABLE `product_variants`
-  MODIFY `prod_variant_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+  MODIFY `prod_variant_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
 
 --
 -- AUTO_INCREMENT for table `prod_reviews`
 --
 ALTER TABLE `prod_reviews`
-  MODIFY `review_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `review_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `queries`
 --
 ALTER TABLE `queries`
-  MODIFY `query_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `query_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+
+--
+-- AUTO_INCREMENT for table `refund_requests`
+--
+ALTER TABLE `refund_requests`
+  MODIFY `refund_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT for table `wishlist`
+--
+ALTER TABLE `wishlist`
+  MODIFY `wishlist_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Constraints for dumped tables
@@ -647,6 +734,13 @@ ALTER TABLE `prod_reviews`
 --
 ALTER TABLE `queries`
   ADD CONSTRAINT `queries_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
+
+--
+-- Constraints for table `wishlist`
+--
+ALTER TABLE `wishlist`
+  ADD CONSTRAINT `wishlist_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `wishlist_ibfk_2` FOREIGN KEY (`prod_variant_id`) REFERENCES `product_variants` (`prod_variant_id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
