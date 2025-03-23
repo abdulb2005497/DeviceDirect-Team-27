@@ -11,7 +11,7 @@ if (!isset($_GET['variant_id']) || !is_numeric($_GET['variant_id'])) {
 }
 
 $variant_id = intval($_GET['variant_id']);
-
+$user_id = $_SESSION['user_id'] ?? null;
 try {
     $query = "
         SELECT
@@ -226,7 +226,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit_review'])) {
 }
 //fetching existing reviews
 $review_query = "
-SELECT r.rating, r.comment, r.created_at, u.First_name, u.Last_name
+SELECT r.review_id, r.rating, r.comment, r.created_at, u.user_id, u.First_name, u.Last_name
 FROM prod_reviews r
 JOIN users u ON r.user_id = u.user_id
 WHERE r.prod_variant_id = :prod_variant_id
@@ -252,7 +252,31 @@ $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     </span>
                     <p class="mt-2"><?= htmlspecialchars($review['comment']) ?></p>
                     <small class = "text-muted"><?= htmlspecialchars($review['created_at']) ?></small>
-                    </div>
+                    <?php if ($user_id && $user_id == $review['user_id']): ?>
+                        <form method="POST" class="d-inline-block">
+                        <input type="hidden" name="review_id" value="<?= $review['review_id'] ?>">
+                        <button type="submit" name="delete_review" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                    <button onclick="showEditForm(<?= $review['review_id'] ?>, '<?= htmlspecialchars($review['comment'], ENT_QUOTES) ?>', <?= $review['rating'] ?>)" class="btn btn-warning btn-sm">Edit</button>
+                <?php endif; ?>
+                </div>
+
+                <form id="edit-form-<?= $review['review_id'] ?>" method="POST" class="mt-3 d-none">
+                <input type="hidden" name="review_id" value="<?= $review['review_id'] ?>">
+                <div class="mb-3">
+                    <label for="rating-<?= $review['review_id'] ?>" class="form-label">Rating:</label>
+                    <select name="rating" id="rating-<?= $review['review_id'] ?>" class="form-control w-50">
+                        <?php for ($i = 1; $i <= 5; $i++): ?>
+                            <option value="<?= $i ?>" <?= $i == $review['rating'] ? 'selected' : '' ?>><?= $i ?></option>
+                        <?php endfor; ?>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="comment-<?= $review['review_id'] ?>" class="form-label">Your Review:</label>
+                    <textarea name="comment" id="comment-<?= $review['review_id'] ?>" rows="5" class="form-control"><?= htmlspecialchars($review['comment']) ?></textarea>
+                </div>
+                <button type="submit" name="edit_review" class="btn btn-success">Update Review</button>
+            </form>
                     <?php endforeach; ?>
                     <?php else: ?>
                         <p>No reviews yet. Be the first to review our AMAZING product!</p>
@@ -284,6 +308,50 @@ $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <p class = "mt-3">You need to <a href= "../Login_page/login.php">log in to our website</a>to leave a review.</p>
                         <?php endif; ?>
 
+<!--deleting reviews--> 
+<?php if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_review'])) {
+    $review_id = intval($_POST['review_id']);
+    
+    $delete_query = "
+        DELETE FROM prod_reviews 
+        WHERE review_id = :review_id AND user_id = :user_id
+    ";
+    
+    $stmt = $pdo->prepare($delete_query);
+    $stmt->execute([':review_id' => $review_id, ':user_id' => $user_id]);
+    
+    echo "<meta http-equiv='refresh' content='0'>";
+}
+?>
+
+<!--editing reviews-->
+<?php if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_review'])) {
+    $review_id = intval($_POST['review_id']);
+    $new_rating = intval($_POST['rating']);
+    $new_comment = trim($_POST['comment']);
+    
+    if ($new_rating >= 1 && $new_rating <= 5 && !empty($new_comment)) {
+        $update_query = "
+            UPDATE prod_reviews 
+            SET rating = :rating, comment = :comment, created_at = NOW()
+            WHERE review_id = :review_id AND user_id = :user_id
+        ";
+        
+        $stmt = $pdo->prepare($update_query);
+        $stmt->execute([
+            ':rating' => $new_rating,
+            ':comment' => $new_comment,
+            ':review_id' => $review_id,
+            ':user_id' => $user_id
+        ]);
+        
+        echo "<meta http-equiv='refresh' content='0'>";
+    } else {
+        echo "<p class='text-danger'>Please provide a valid rating and comment.</p>";
+    }
+}
+?>
+
 
 <?php include_once'../footer.php';  ?>
 
@@ -304,6 +372,16 @@ for (let i = 0; i< value; i++){
 }
 });
     });
+</script>
+
+<script>
+ function showEditForm(reviewId, comment, rating) {
+    document.querySelectorAll('[id^="edit-form-"]').forEach(form => form.classList.add('d-none'));
+    const form = document.getElementById('edit-form-' + reviewId);
+    form.classList.remove('d-none');
+    document.getElementById('rating-' + reviewId).value = rating;
+    document.getElementById('comment-' + reviewId).value = comment;
+}   
 </script>
 
 
