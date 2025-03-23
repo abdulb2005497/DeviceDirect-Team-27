@@ -29,7 +29,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
     $role = trim($_POST['role']);
     $city = trim($_POST['city']);
     $postcode = trim($_POST['post_code']);
-
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
     $original_stmt = $pdo->prepare("SELECT * FROM users WHERE user_id = ?");
