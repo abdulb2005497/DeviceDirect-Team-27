@@ -20,14 +20,13 @@ $status = $action === 'approve' ? 'approved' : 'declined';
 try {
     $stmt = $pdo->prepare("UPDATE refund_requests SET status = ?, reviewed_at = NOW() WHERE refund_id = ?");
     $stmt->execute([$status, $refund_id]);
-    $message = ucfirst($status) . " refund successfully.";
+$message = ucfirst($status) . " refund successfully.";
     header("Location: refund_requests_admin.php?msg=" . urlencode($message));
     exit();
 } catch (PDOException $e) {
     $error = "Failed to update refund request: " . $e->getMessage();
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -52,9 +51,7 @@ try {
     </style>
 </head>
 <body>
-
 <?php include '../navbar.php'; ?>
-
 <div class="container text-center">
     <h2>Refund Processing</h2>
     <?php if (isset($error)): ?>
@@ -64,9 +61,7 @@ try {
         <a href="refund_requests_admin.php" class="btn btn-primary mt-3">Back to Refund Requests</a>
     <?php endif; ?>
 </div>
-
 <?php include '../footer.php'; ?>
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
