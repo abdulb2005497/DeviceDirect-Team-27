@@ -66,7 +66,7 @@ $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
             $currentOrder = null;
             foreach ($orders as $order):
                 if ($currentOrder !== $order['order_id']):
-                    if ($currentOrder !== null) echo "</tbody></table></td></tr>"; // Close previous order items
+                    if ($currentOrder !== null) echo "</tbody></table></td></tr>"; 
                     $currentOrder = $order['order_id'];
             ?>
             <tr>
@@ -135,9 +135,9 @@ document.querySelectorAll(".toggle-items").forEach(button => {
 });
 </script>
 
-   <!-- footer -->
+   
    <?php include '../footer.php'; ?>
-   <!-- footer -->
+   
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>

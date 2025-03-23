@@ -60,7 +60,7 @@ try {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
 
-<!--CSS styling for Reviews section-->
+
 <style>
 .reviews-section {
         background-color: #f8f9fa;
@@ -136,7 +136,7 @@ try {
 <body>
 
 
-<!-- Product Details Container -->
+
 <div class="container mt-5 product-container">
     <div class="row">
         <div class="col-md-6">
@@ -193,12 +193,12 @@ try {
     </div>
 </div>
 
-<!--Reviews (NEW)-->
+
 <hr>
 <h3 class="mt-5">Customer Reviews</h3>
 
 <?php
-//handling reviews submissions
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit_review'])) {
     $user_id = $_SESSION['user_id'] ?? null;
     $rating = intval($_POST['rating'] ?? 0);
@@ -224,7 +224,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit_review'])) {
     
 
 }
-//fetching existing reviews
+
 $review_query = "
 SELECT r.rating, r.comment, r.created_at, u.First_name, u.Last_name
 FROM prod_reviews r
@@ -238,7 +238,7 @@ $stmt->execute([':prod_variant_id' => $variant_id]);
 $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
-<!--Displaying Reviews on each page-->
+
 
 <div class ="reviews-section mt-3">
     <?php if ($reviews): ?>
@@ -259,7 +259,6 @@ $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <?php endif; ?>
                     </div>
 
-<!--Form to submit reviews-->
 <?php if (isset($_SESSION['user_id'])): ?>
     <h4 class = "mt-5">Leave a Review<h4>
         <form method = "POST" class = "mt-3">

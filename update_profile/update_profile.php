@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
     $Address = trim($_POST['Address']);
     
 
-    // Validate email
+    
     if (!filter_var($Email, FILTER_VALIDATE_EMAIL)) {
         $_SESSION['message'] = "Invalid email format";
         $_SESSION['message_type'] = "error";
@@ -43,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
         exit;
     }
 
-    // Update user data
+    
     $sql = "UPDATE users SET First_name = ?, Last_name = ?, Email = ?, Phone = ?, Address = ? WHERE user_id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("sssssi", $First_name, $Last_name, $Email, $Phone, $Address, $user_id);
@@ -64,7 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
 
 
 
-//current user data
+
 $user_id = $_SESSION['user_id'];
 $sql = "SELECT * FROM users WHERE user_id = ?";
 $stmt = $conn->prepare($sql);
@@ -73,10 +73,10 @@ $stmt->execute();
 $result = $stmt->get_result();
 
 if ($result->num_rows == 0) {
-    // No user found with this ID
+   
     $_SESSION['message'] = "User not found in database";
     $_SESSION['message_type'] = "error";
-    header("Location: ../Login_page/login.php"); // Redirect to login
+    header("Location: ../Login_page/login.php"); 
     exit;
 }
 
@@ -100,9 +100,9 @@ $conn->close();
     
 </head>
 <body>
-       <!-- Navbar -->
+      
        <?php include '../navbar.php'; ?>
-    <!-- Navbar -->
+    
     <div class="container">
         <h1>Update Your Profile</h1>
 
