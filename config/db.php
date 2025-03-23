@@ -3,7 +3,6 @@ $host = "localhost";
 $dbname = "devicedirect"; 
 $username = "root";          
 $password = "";              
-
 try {
     
     $pdo = new PDO('mysql:host=localhost;dbname=devicedirect', $username, $password);
