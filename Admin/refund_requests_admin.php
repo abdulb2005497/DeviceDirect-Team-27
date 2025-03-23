@@ -7,7 +7,6 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
     exit();
 }
 
-// Fetch refund requests with necessary info
 $stmt = $pdo->query("
     SELECT rr.refund_id, rr.order_id, rr.user_id, rr.reason, rr.status, rr.requested_at, rr.reviewed_at,
            u.first_name, u.last_name, o.total_price
