@@ -69,11 +69,8 @@ if ($user_id) {
     <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
 
 
-<<<<<<< HEAD
-=======
     <!--CSS styling for Reviews section-->
 
->>>>>>> 7adbfc1e3a5bc39415ced544f4d024e2fd74e801
 <style>
 .reviews-section {
         background-color: #f8f9fa;
@@ -155,10 +152,6 @@ if ($user_id) {
 
 <body>
 
-<<<<<<< HEAD
-
-
-=======
 <!-- Product Details Container -->
 <div class="container mt-5 product-container">
     <div class="row">
@@ -178,7 +171,7 @@ if ($user_id) {
                 <button type='submit' name='add_to_cart' class="btn btn-primary w-100">Add to Cart</button>
             </form>
 
-            <!-- Wishlist Form (NEW) -->
+            
             <form method="post" class="mt-2">
                 <input type="hidden" name="variant_id" value="<?php echo $product['prod_variant_id']; ?>">
                 <button type='submit' name='add_to_wishlist' class="btn btn-warning w-100">
@@ -229,17 +222,12 @@ if ($user_id) {
 </div>
 
 <!--Reviews (NEW)-->
->>>>>>> 7adbfc1e3a5bc39415ced544f4d024e2fd74e801
 
 <hr>
 <h3 class="mt-5">Customer Reviews</h3>
 
 <!--handling reviews submissions-->
 <?php
-<<<<<<< HEAD
-
-=======
->>>>>>> 7adbfc1e3a5bc39415ced544f4d024e2fd74e801
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit_review'])) {
     $user_id = $_SESSION['user_id'] ?? null;
     $rating = intval($_POST['rating'] ?? 0);
@@ -280,12 +268,7 @@ $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <!--handling reviews submissions-->
 
-<<<<<<< HEAD
-
-
-=======
 <!--Displaying Reviews on each page-->
->>>>>>> 7adbfc1e3a5bc39415ced544f4d024e2fd74e801
 <div class ="reviews-section mt-3">
     <?php if ($reviews): ?>
         <?php foreach ($reviews as $review): ?>
