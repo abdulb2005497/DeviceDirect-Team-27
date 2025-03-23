@@ -16,9 +16,7 @@ $action = $_GET['action'];
 if (!in_array($action, ['approve', 'decline'])) {
     die("Invalid action.");
 }
-
 $status = $action === 'approve' ? 'approved' : 'declined';
-
 try {
     $stmt = $pdo->prepare("UPDATE refund_requests SET status = ?, reviewed_at = NOW() WHERE refund_id = ?");
     $stmt->execute([$status, $refund_id]);
