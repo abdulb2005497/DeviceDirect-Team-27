@@ -819,4 +819,7 @@ html {
   background-color: rgb(67 0 86);
   color: white;
 }
-/* contact */
+.custom-container {
+  padding-left: 5px !important;
+  padding-right: 5px !important;
+}
