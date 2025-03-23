@@ -38,7 +38,6 @@ $refunds = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </head>
 <body>
 <?php include '../navbar.php'; ?>
-
 <div class="container">
     <h2 class="text-center mb-4">Refund Requests</h2>
 
