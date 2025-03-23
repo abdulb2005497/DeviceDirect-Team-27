@@ -52,7 +52,10 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Wishlist</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assests/css/style.css?v=<?php echo time(); ?>">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">    <link rel="stylesheet" href=".css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -87,8 +90,17 @@ try {
 }
 
 .card .btn {
-  width: 100%; 
+
+  width: 92%;
   margin-top: auto;
+}
+.row {
+    margin-left: 0;
+    margin-right: 0;
+}
+.col-md-4 {
+    display: flex;
+    justify-content: center;
 }
 
 </style>

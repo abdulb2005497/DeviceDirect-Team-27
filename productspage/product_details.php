@@ -5,7 +5,7 @@ if (session_status() == PHP_SESSION_NONE) {
 include_once('../navbar.php');
 include('../config/db.php');
 include('../checkoutpage/cart_functions.php');
-include('../wishlist/wishlist_function.php'); // Include wishlist functions
+include('../wishlist/wishlist_function.php');
 
 if (!isset($_GET['variant_id']) || !is_numeric($_GET['variant_id'])) {
     die("Invalid product variant ID.");
@@ -46,7 +46,6 @@ try {
 } catch (PDOException $e) {
     die("Database error: " . $e->getMessage());
 }
-
 $in_wishlist = false;
 if ($user_id) {
     $stmt = $pdo->prepare("SELECT 1 FROM wishlist WHERE user_id = ? AND prod_variant_id = ?");
@@ -140,16 +139,23 @@ if ($user_id) {
     .reviews-section form button:hover {
         background-color: #28a745;
     }
-    .reviews-section .btn-danger {
+        .reviews-section form .btn-danger {
+    background-color: #e9ecef;
+    color: #dc3545;
     border: none;
-    outline: none;
+    padding: 0;
+    margin: 0;
     box-shadow: none;
+    font-size: 0.9rem;
 }
 
+.reviews-section form .btn-danger:hover {
+    background-color: #e9ecef;
+    color: #bd2130;
+}
 </style>
 
 </head>
-
 <body>
 
 <!-- Product Details Container -->
@@ -165,19 +171,21 @@ if ($user_id) {
             <p class="text-muted">Size: <?php echo htmlspecialchars(string: $product['size_name']); ?></p>
             <h4 id="product-price" class="text-success">Price: £<?php echo number_format($product['price'], 2); ?></h4>
             <form method="post">
-                <input type="hidden" name="variant_id" value="<?php echo $product['prod_variant_id']; ?>">
-                <label for="quantity" class="form-label">Quantity:</label>
-                <input type="number" id="quantity" name="quantity" value="1" min="1" class="form-control w-50 mb-3">
-                <button type='submit' name='add_to_cart' class="btn btn-primary w-100">Add to Cart</button>
-            </form>
+                        <input type="hidden" name="variant_id" value="<?php echo $product['prod_variant_id']; ?>">
+                        <label for="quantity" class="form-label">Quantity:</label>
+                        <input type="number" id="quantity" name="quantity" value="1" min="1" max="<?php echo htmlspecialchars($product['quantity']); ?>" class="form-control w-50 mb-3" <?php echo ($product['quantity'] == 0) ? 'disabled' : ''; ?>>
+                        <button type='submit' name='add_to_cart' class="btn btn-primary w-100" <?php echo ($product['quantity'] == 0) ? 'disabled style="background-color: grey; border-color: grey;"' : ''; ?>>Add to Cart</button>
+                    </form>
+                    <?php if ($product['quantity'] == 0): ?>
+                        <p class="text-danger mt-2">Out of stock</p>
+                    <?php endif; ?>
 
-            
-            <form method="post" class="mt-2">
-                <input type="hidden" name="variant_id" value="<?php echo $product['prod_variant_id']; ?>">
-                <button type='submit' name='add_to_wishlist' class="btn btn-warning w-100">
-                    <?php echo $in_wishlist ? "Already in Wishlist" : "Add to Wishlist"; ?>
-                </button>
-            </form>
+                    <form method="post" class="mt-2">
+                        <input type="hidden" name="variant_id" value="<?php echo $product['prod_variant_id']; ?>">
+                        <button type='submit' name='add_to_wishlist' class="btn btn-warning w-100">
+                            <?php echo $in_wishlist ? "Already in Wishlist" : "Add to Wishlist"; ?>
+                        </button>
+                    </form>
             <br><h4 id="product-info" class="product-description">Product Details <br><br><?php echo htmlspecialchars(string: $product['prod_desc']) ?></h4>
 
         </div>
@@ -190,6 +198,7 @@ if ($user_id) {
                 $variant_id = $_POST['variant_id'] ?? null;
                 $quantity = $_POST['quantity'] ?? 1;
 
+
                 if ($user_id && $variant_id && $quantity) {
                     $result = addToCart($pdo, $user_id, $variant_id, $quantity);
                     if ($result) {
@@ -199,6 +208,28 @@ if ($user_id) {
                     }
                 } else {
                     echo "<p class='text-danger mt-3'>Error: Missing required fields.</p>";
+                }
+
+
+                if ((int) $quantity > (int) $product['quantity']) {
+                    echo "<p class='text-danger mt-3'>Error: You cannot order more than the available stock ("
+                         . htmlspecialchars((int) $product['quantity']) . ").</p>";
+                } else {
+                    echo "<p class='text-success mt-3'>Your order has been added successfully.</p>";
+                }
+
+
+            }
+            if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_wishlist'])) {
+                $variant_id = $_POST['variant_id'] ?? null;
+                if ($user_id && $variant_id) {
+                    $result = addToWishlist($pdo, $user_id, $variant_id);
+                    if ($result) {
+                        echo "<script>location.reload();</script>"; 
+                        exit();
+                    } else {
+                        echo "<p class='text-danger mt-3'>Failed to add product to wishlist.</p>";
+                    }
                 }
             }
 
@@ -250,7 +281,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit_review'])) {
     } else {
             echo "<p class = 'text-danger'>Please provide a rating and a comment for the product.</p>";
         }
-    
+
 
 }
 
@@ -281,16 +312,41 @@ $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     </span>
                     <p class="mt-2"><?= htmlspecialchars($review['comment']) ?></p>
                     <small class = "text-muted"><?= htmlspecialchars($review['created_at']) ?></small>
-                    </div>
+                    <?php if ($user_id && $user_id == $review['user_id']): ?>
+                        <form method="POST" class="d-inline-block">
+                        <input type="hidden" name="review_id" value="<?= $review['review_id'] ?>">
+                        <button type="submit" name="delete_review" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                    <button onclick="showEditForm(<?= $review['review_id'] ?>, '<?= htmlspecialchars($review['comment'], ENT_QUOTES) ?>', <?= $review['rating'] ?>)" class="btn btn-warning btn-sm">Edit</button>
+                <?php endif; ?>
+                </div>
+
+                <form id="edit-form-<?= $review['review_id'] ?>" method="POST" class="mt-3 d-none">
+                <input type="hidden" name="review_id" value="<?= $review['review_id'] ?>">
+                <div class="mb-3">
+                    <label for="rating-<?= $review['review_id'] ?>" class="form-label">Rating:</label>
+                    <select name="rating" id="rating-<?= $review['review_id'] ?>" class="form-control w-50">
+                        <?php for ($i = 1; $i <= 5; $i++): ?>
+                            <option value="<?= $i ?>" <?= $i == $review['rating'] ? 'selected' : '' ?>><?= $i ?></option>
+                        <?php endfor; ?>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="comment-<?= $review['review_id'] ?>" class="form-label">Your Review:</label>
+                    <textarea name="comment" id="comment-<?= $review['review_id'] ?>" rows="5" class="form-control"><?= htmlspecialchars($review['comment']) ?></textarea>
+                </div>
+                <button type="submit" name="edit_review" class="btn btn-success">Update Review</button>
+            </form>
                     <?php endforeach; ?>
                     <?php else: ?>
                         <p>No reviews yet. Be the first to review our AMAZING product!</p>
                         <?php endif; ?>
                     </div>
+<!--Displaying Reviews on each page-->
 
 <!--Form to submit reviews-->
 <?php if (isset($_SESSION['user_id'])): ?>
-    <h4 class = "mt-5">Leave a Review<h4>
+    <h4 class = "mt-5">Leave a Review</h4>
         <form method = "POST" class = "mt-3">
              <div class = "mb-3">
                 <label for = "rating" class = "form-label">Rating:</label>
@@ -312,13 +368,61 @@ $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <?php else: ?>
                         <p class = "mt-3">You need to <a href= "../Login_page/login.php">log in to our website</a>to leave a review.</p>
                         <?php endif; ?>
+<!--Form to submit reviews-->
 
+<!--deleting reviews-->
+<?php if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_review'])) {
+    $review_id = intval($_POST['review_id']);
+
+    $delete_query = "
+        DELETE FROM prod_reviews
+        WHERE review_id = :review_id AND user_id = :user_id
+    ";
+
+    $stmt = $pdo->prepare($delete_query);
+    $stmt->execute([':review_id' => $review_id, ':user_id' => $user_id]);
+
+    echo "<meta http-equiv='refresh' content='0'>";
+}
+?>
+<!--deleting reviews-->
+
+<!--editing reviews-->
+<?php if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_review'])) {
+    $review_id = intval($_POST['review_id']);
+    $new_rating = intval($_POST['rating']);
+    $new_comment = trim($_POST['comment']);
+
+    if ($new_rating >= 1 && $new_rating <= 5 && !empty($new_comment)) {
+        $update_query = "
+            UPDATE prod_reviews
+            SET rating = :rating, comment = :comment, created_at = NOW()
+            WHERE review_id = :review_id AND user_id = :user_id
+        ";
+
+        $stmt = $pdo->prepare($update_query);
+        $stmt->execute([
+            ':rating' => $new_rating,
+            ':comment' => $new_comment,
+            ':review_id' => $review_id,
+            ':user_id' => $user_id
+        ]);
+
+        echo "<meta http-equiv='refresh' content='0'>";
+    } else {
+        echo "<p class='text-danger'>Please provide a valid rating and comment.</p>";
+    }
+}
+?>
+<!--editing reviews-->
 
 <?php include_once'../footer.php';  ?>
 
 <script src="imgchange.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 
+
+<!--Javascript for the star rating-->
 <script>
     const stars = document.querySelectorAll('.star');
     const ratingInput = document.getElementById('rating');
@@ -334,7 +438,19 @@ for (let i = 0; i< value; i++){
 });
     });
 </script>
+<!--Javascript for the star rating-->
 
+<!--Javascript for editing-->
+<script>
+ function showEditForm(reviewId, comment, rating) {
+    document.querySelectorAll('[id^="edit-form-"]').forEach(form => form.classList.add('d-none'));
+    const form = document.getElementById('edit-form-' + reviewId);
+    form.classList.remove('d-none');
+    document.getElementById('rating-' + reviewId).value = rating;
+    document.getElementById('comment-' + reviewId).value = comment;
+}
+</script>
+<!--Javascript for editing-->
 
 
 </body>

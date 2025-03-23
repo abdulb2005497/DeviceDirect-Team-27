@@ -2,40 +2,28 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
+include('../config/db.php');
 
-include('../config/db.php'); 
-
-function addToWishlist($pdo, $user_id, $prod_variant_id) {
+function addToWishlist($pdo, $user_id, $variant_id) {
     try {
-        if (!$user_id || !$prod_variant_id) {
-            die("Error: Missing required values - User ID: $user_id, Variant ID: $prod_variant_id");
+        $stmt = $pdo->prepare("SELECT 1 FROM wishlist WHERE user_id = ? AND prod_variant_id = ?");
+        $stmt->execute([$user_id, $variant_id]);
+
+        if ($stmt->fetch()) {
+            echo "Item already exists in wishlist";
+            return false;
         }
 
-        // Check if the item already exists in the wishlist
-        $query = "SELECT prod_variant_id FROM wishlist WHERE user_id = ? AND prod_variant_id = ?";
-        $stmt = $pdo->prepare($query);
-        $stmt->execute([$user_id, $prod_variant_id]);
-        $existingItem = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if ($existingItem) {
-            // Item is already in the wishlist
-            echo "This item is already in your wishlist!";
+        $stmt = $pdo->prepare("INSERT INTO wishlist (user_id, prod_variant_id) VALUES (?, ?)");
+        if ($stmt->execute([$user_id, $variant_id])) {
+            echo "Item successfully added to wishlist!";
+            return true;
         } else {
-            // Insert new item into wishlist
-            $query = "INSERT INTO wishlist (user_id, prod_variant_id) VALUES (?, ?)";
-            $stmt = $pdo->prepare($query);
-            $success = $stmt->execute([$user_id, $prod_variant_id]);
-
-            if ($success) {
-                echo "Item added to your wishlist!";
-            } else {
-                die("Error adding item to wishlist.");
-            }
+            echo "Failed to insert into wishlist.";
+            return false;
         }
-
-        return true;
     } catch (PDOException $e) {
-        die("Database error: " . $e->getMessage());
+        echo "Database error: " . $e->getMessage();
+        return false;
     }
 }
-?>
