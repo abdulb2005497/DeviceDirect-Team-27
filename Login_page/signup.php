@@ -10,6 +10,7 @@ if (empty($_SESSION['csrf_token'])) {
 }
 
 $email_error = false;
+$error_message = ""; // Initialize error message variable
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (!hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
@@ -26,20 +27,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $password = $_POST['password'];
         $confirm_password = $_POST['confirm_password'];
 
-        if ($password !== $confirm_password) {
-            $error_message = "Passwords do not match.";
-        } else {
-            $hashed_password = password_hash($password, PASSWORD_BCRYPT);
+        try {
+            $stmt = $pdo->prepare("SELECT 1 FROM users WHERE LOWER(email) = LOWER(?) LIMIT 1");
+            $stmt->execute([$email]);
 
-            try {
-                $stmt = $pdo->prepare("SELECT 1 FROM users WHERE LOWER(email) = LOWER(?) LIMIT 1");
-                $stmt->execute([$email]);
-                
-                if ($stmt->fetch()) {
-                    $email_error = true;
-                    $error_message = "This email is already registered. Please use another email.";
+            if ($stmt->fetch()) {
+                $email_error = true;
+                $error_message = "This email is already registered. Please use another email.";
+            } else {
+                if (!preg_match('/^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/', $password)) {
+                    $error_message = "Password must be at least 8 characters long, include an uppercase letter, and a number.";
+                } elseif ($password !== $confirm_password) {
+                    $error_message = "Passwords do not match.";
                 } else {
-                    // Insert new user
+                    $hashed_password = password_hash($password, PASSWORD_BCRYPT);
                     $stmt = $pdo->prepare("INSERT INTO users (first_name, last_name, email, phone, address, city, post_code, password, role)
                                            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
                     $stmt->execute([$first_name, $last_name, $email, $phone, $address, $city, $postcode, $hashed_password, $role]);
@@ -47,13 +48,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     header("Location: login.php");
                     exit();
                 }
-            } catch (PDOException $e) {
-                if ($e->getCode() == 23000) {
-                    $email_error = true;
-                    $error_message = "This email is already registered.";
-                } else {
-                    $error_message = "Error. Please try again.";
-                }
+            }
+        } catch (PDOException $e) {
+            if ($e->getCode() == 23000) {
+                $email_error = true;
+                $error_message = "This email is already registered.";
+            } else {
+                $error_message = "Error. Please try again.";
             }
         }
     }
@@ -73,8 +74,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <div class="form-box">
             <h1>Sign Up</h1>
             <h4>It's free</h4>
-            <form method="POST" action="">
 
+            <?php if (!empty($error_message)): ?>
+                <p class="error-message" style="color: red;"><?php echo $error_message; ?></p>
+            <?php endif; ?>
+
+            <form method="POST" action="">
                 <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>">
 
                 <label for="first-name">First Name</label>
@@ -107,6 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                 <input type="submit" value="Sign Up">
             </form>
+
             <p>
                 By clicking the Sign Up button, you agree to our
                 <br>
