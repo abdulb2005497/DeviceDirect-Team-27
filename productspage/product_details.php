@@ -135,20 +135,12 @@ try {
     .reviews-section form button:hover {
         background-color: #28a745;
     }
-        .reviews-section form .btn-danger {
-    background-color: #e9ecef;
-    color: #dc3545;
+    .reviews-section .btn-danger {
     border: none;
-    padding: 0;
-    margin: 0;
+    outline: none;
     box-shadow: none;
-    font-size: 0.9rem;
 }
 
-.reviews-section form .btn-danger:hover {
-    background-color: #e9ecef;
-    color: #bd2130;
-}
 </style>
 
 </head>
