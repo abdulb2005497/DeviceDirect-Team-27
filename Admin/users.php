@@ -20,7 +20,6 @@ $query = "SELECT * FROM users WHERE role != 'admin'";
 $stmt = $pdo->prepare($query);
 $stmt->execute();
 $customers = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
     $user_id = intval($_POST['user_id']);
     $first_name = trim($_POST['first_name']);
