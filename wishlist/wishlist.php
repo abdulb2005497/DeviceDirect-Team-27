@@ -4,16 +4,19 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 include_once('../navbar.php');
 include('../config/db.php');
-include('../checkoutpage/cart_functions.php');
-include('../wishlist/wishlist_function.php');
+include ('../checkoutpage/cart_functions.php');
+include ('wishlist_function.php');
 
-if (!isset($_GET['variant_id']) || !is_numeric($_GET['variant_id'])) {
-    die("Invalid product variant ID.");
+
+if (!isset($_SESSION['user_id'])) {
+    echo "<p class='text-danger mt-3'>You need to log in to view your wishlist.</p>";
+    exit;
 }
 
-$variant_id = intval($_GET['variant_id']);
-$user_id = $_SESSION['user_id'] ?? null;
+$user_id = $_SESSION['user_id'];
+
 try {
+    // Fetch products in the wishlist
     $query = "
         SELECT
             p.product_title,
@@ -21,37 +24,26 @@ try {
             co.colour_name,
             s.size_name,
             pv.prod_variant_id,
-            p.prod_desc,
-            pv.quantity,
             pv.image,
             pv.price
-        FROM product_variants pv
+        FROM wishlist w
+        JOIN product_variants pv ON w.prod_variant_id = pv.prod_variant_id
         JOIN products p ON pv.product_id = p.product_id
         JOIN product_categories ca ON pv.category_id = ca.category_id
         JOIN product_colours co ON pv.colour_id = co.colour_id
         JOIN product_sizes s ON pv.size_id = s.size_id
-        WHERE pv.prod_variant_id = :variant_id
-        LIMIT 1
+        WHERE w.user_id = :user_id
     ";
     $stmt = $pdo->prepare($query);
-    $stmt->bindParam(':variant_id', $variant_id, PDO::PARAM_INT);
+    $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
     $stmt->execute();
 
-    $product = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if (!$product) {
-        die("Product variant not found.");
-    }
+    $wishlist_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 } catch (PDOException $e) {
-    die("Database error: " . $e->getMessage());
+    echo "<p class='text-danger mt-3'>Database error: " . $e->getMessage() . "</p>";
 }
-$in_wishlist = false;
-if ($user_id) {
-    $stmt = $pdo->prepare("SELECT 1 FROM wishlist WHERE user_id = ? AND prod_variant_id = ?");
-    $stmt->execute([$user_id, $variant_id]);
-    $in_wishlist = $stmt->fetch() ? true : false;
-}
+
 ?>
 
 <!DOCTYPE html>
@@ -59,183 +51,126 @@ if ($user_id) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo htmlspecialchars($product['product_title']); ?> - Product Details</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>Your Wishlist</title>
+    <link rel="stylesheet" href="../assests/css/style.css?v=<?php echo time(); ?>">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
-
-
-    <!--CSS styling for Reviews section-->
-
-<style>
-.reviews-section {
-        background-color: #f8f9fa;
-        padding: 20px 0;
-    }
-
-    .reviews-section .mb-3 {
-        background-color: #e9ecef;
-        padding: 15px;
-        border-radius: 8px;
-        border: 1px solid #ddd;
-    }
-
-    .reviews-section .text-muted {
-        color: #6c757d !important;
-    }
-
-    .reviews-section .text-warning {
-        color: #ffc107 !important;
-    }
-
-    .reviews-section strong {
-        font-size: 1.1em;
-        color: #343a40;
-    }
-
-    .reviews-section p.mt-2 {
-        font-size: 1rem;
-        color: #495057;
-    }
-
-    .reviews-section small {
-        font-size: 0.8rem;
-        color: #6c757d;
-    }
-
-    .reviews-section .text-muted a {
-        color: #007bff;
-        text-decoration: none;
-    }
-
-    .reviews-section .text-muted a:hover {
-        text-decoration: underline;
-    }
-
-    .reviews-section form {
-        margin-top: 30px;
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 8px;
-        border: 1px solid #ddd;
-    }
-
-    .reviews-section form .form-label {
-        font-weight: bold;
-    }
-
-    .reviews-section form .star {
-        font-size: 1.5em;
-        cursor: pointer;
-    }
-
-    .reviews-section form button {
-        margin-top: 15px;
-    }
-
-    .reviews-section form button:hover {
-        background-color: #28a745;
-    }
-        .reviews-section form .btn-danger {
-    background-color: #e9ecef;
-    color: #dc3545;
-    border: none;
-    padding: 0;
-    margin: 0;
-    box-shadow: none;
-    font-size: 0.9rem;
-}
-
-.reviews-section form .btn-danger:hover {
-    background-color: #e9ecef;
-    color: #bd2130;
-}
-</style>
-
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">    <link rel="stylesheet" href=".css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- Product Details Container -->
-<div class="container mt-5 product-container">
-    <div class="row">
-        <div class="col-md-6">
-            <img id="product-image" src="../productspage/images/<?php echo htmlspecialchars($product['image']); ?>" class="img-fluid product-image" alt="<?php echo htmlspecialchars($product['product_title']); ?>">
-        </div>
-        <div class="col-md-6">
-            <h2><?php echo htmlspecialchars($product['product_title']); ?></h2>
-            <p class="text-muted">Category: <?php echo htmlspecialchars($product['category_name']); ?></p>
-            <p class="text-muted">Colour: <?php echo htmlspecialchars($product['colour_name']); ?></p>
-            <p class="text-muted">Size: <?php echo htmlspecialchars(string: $product['size_name']); ?></p>
-            <h4 id="product-price" class="text-success">Price: £<?php echo number_format($product['price'], 2); ?></h4>
-            <form method="post">
-                        <input type="hidden" name="variant_id" value="<?php echo $product['prod_variant_id']; ?>">
-                        <label for="quantity" class="form-label">Quantity:</label>
-                        <input type="number" id="quantity" name="quantity" value="1" min="1" max="<?php echo htmlspecialchars($product['quantity']); ?>" class="form-control w-50 mb-3" <?php echo ($product['quantity'] == 0) ? 'disabled' : ''; ?>>
-                        <button type='submit' name='add_to_cart' class="btn btn-primary w-100" <?php echo ($product['quantity'] == 0) ? 'disabled style="background-color: grey; border-color: grey;"' : ''; ?>>Add to Cart</button>
-                    </form>
-                    <?php if ($product['quantity'] == 0): ?>
-                        <p class="text-danger mt-2">Out of stock</p>
-                    <?php endif; ?>
 
-                    <form method="post" class="mt-2">
-                        <input type="hidden" name="variant_id" value="<?php echo $product['prod_variant_id']; ?>">
-                        <button type='submit' name='add_to_wishlist' class="btn btn-warning w-100">
-                            <?php echo $in_wishlist ? "Already in Wishlist" : "Add to Wishlist"; ?>
-                        </button>
-                    </form>
-            <br><h4 id="product-info" class="product-description">Product Details <br><br><?php echo htmlspecialchars(string: $product['prod_desc']) ?></h4>
+<style>
+.card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
 
+.card-img-top {
+  height: 300px;
+  object-fit: contain;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+
+.card-title {
+  font-size: 20;
+  font-weight: bold;
+}
+
+.card p {
+  margin-bottom: 5px;
+}
+
+.card .btn {
+
+  width: 92%;
+  margin-top: auto;
+}
+.row {
+    margin-left: 0;
+    margin-right: 0;
+}
+.col-md-4 {
+    display: flex;
+    justify-content: center;
+}
+
+</style>
+<div class="container mt-5">
+    <h2>Your Wishlist</h2>
+
+    <?php if (empty($wishlist_items)): ?>
+        <p>Your wishlist is empty. Add items to your wishlist to see them here.</p>
+    <?php else: ?>
+        <div class="row">
+            <?php foreach ($wishlist_items as $item): ?>
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <img src="../productspage/images/<?php echo htmlspecialchars($item['image']); ?>" class="card-img-top" alt="<?php echo htmlspecialchars($item['product_title']); ?>">
+                        <div class="card-body">
+                            <h5 class="card-title"><?php echo htmlspecialchars($item['product_title']); ?></h5>
+                            <p class="text-muted">Category: <?php echo htmlspecialchars($item['category_name']); ?></p>
+                            <p class="text-muted">Colour: <?php echo htmlspecialchars($item['colour_name']); ?></p>
+                            <p class="text-muted">Size: <?php echo htmlspecialchars($item['size_name']); ?></p>
+                            <h5 class="text-success">Price: £<?php echo number_format($item['price'], 2); ?></h5>
+                            <form method="POST" class="d-inline">
+                                <input type="hidden" name="variant_id" value="<?php echo $item['prod_variant_id']; ?>">
+                                <button type="submit" name="add_to_cart" class="btn btn-primary">Add to Cart</button>
+                            </form>
+                            <form method="POST" class="d-inline">
+                                <input type="hidden" name="variant_id" value="<?php echo $item['prod_variant_id']; ?>">
+                                <button type="submit" name="remove_from_wishlist" class="btn btn-danger">Remove from Wishlist</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
         </div>
-    </div>
+    <?php endif; ?>
 </div>
 
-            <?php
-            if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
-                $user_id = $_SESSION['user_id'] ?? null;
-                $variant_id = $_POST['variant_id'] ?? null;
-                $quantity = $_POST['quantity'] ?? 1;
+<?php
+// Handling add to cart from wishlist
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
+    $variant_id = $_POST['variant_id'] ?? null;
+    $quantity = 1; // Assuming 1 quantity per add to cart for simplicity
+    $user_id = $_SESSION['user_id'];
 
+    if ($variant_id) {
+        $result = addToCart($pdo, $user_id, $variant_id, $quantity);
+        if ($result) {
+            echo "<p class='text-success mt-3'>Product added to cart successfully!</p>";
+        } else {
+            echo "<p class='text-danger mt-3'>Failed to add product to cart.</p>";
+        }
+    }
+}
 
-                if ($user_id && $variant_id && $quantity) {
-                    $result = addToCart($pdo, $user_id, $variant_id, $quantity);
-                    if ($result) {
-                        echo "<p class='text-success mt-3'>Product added to cart successfully!</p>";
-                    } else {
-                        echo "<p class='text-danger mt-3'>Failed to add product to cart.</p>";
-                    }
-                } else {
-                    echo "<p class='text-danger mt-3'>Error: Missing required fields.</p>";
-                }
+// Handling remove from wishlist
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['remove_from_wishlist'])) {
+    $variant_id = $_POST['variant_id'] ?? null;
 
+    if ($variant_id) {
+        $remove_query = "
+            DELETE FROM wishlist
+            WHERE user_id = :user_id AND prod_variant_id = :variant_id
+        ";
+        $stmt = $pdo->prepare($remove_query);
+        $stmt->execute([':user_id' => $user_id, ':variant_id' => $variant_id]);
 
-                if ((int) $quantity > (int) $product['quantity']) {
-                    echo "<p class='text-danger mt-3'>Error: You cannot order more than the available stock ("
-                         . htmlspecialchars((int) $product['quantity']) . ").</p>";
-                } else {
-                    echo "<p class='text-success mt-3'>Your order has been added successfully.</p>";
-                }
+        echo "<meta http-equiv='refresh' content='0'>";
+    }
+}
+?>
 
-
-            }
-            if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_wishlist'])) {
-                $variant_id = $_POST['variant_id'] ?? null;
-                if ($user_id && $variant_id) {
-                    $result = addToWishlist($pdo, $user_id, $variant_id);
-                    if ($result) {
-                        echo "<script>location.reload();</script>"; // Refresh the page automatically
-                        exit();
-                    } else {
-                        echo "<p class='text-danger mt-3'>Failed to add product to wishlist.</p>";
-                    }
-                }
-            }
-            ?>
-        </div>
-    </div>
-</div>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
