@@ -20,7 +20,6 @@ $status = $action === 'approve' ? 'approved' : 'declined';
 try {
     $stmt = $pdo->prepare("UPDATE refund_requests SET status = ?, reviewed_at = NOW() WHERE refund_id = ?");
     $stmt->execute([$status, $refund_id]);
-
     $message = ucfirst($status) . " refund successfully.";
     header("Location: refund_requests_admin.php?msg=" . urlencode($message));
     exit();
