@@ -285,7 +285,7 @@ $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <!--Form to submit reviews-->
 <?php if (isset($_SESSION['user_id'])): ?>
-    <h4 class = "mt-5">Leave a Review<h4>
+    <h4 class = "mt-5">Leave a Review</h4>
         <form method = "POST" class = "mt-3">
              <div class = "mb-3">
                 <label for = "rating" class = "form-label">Rating:</label>
